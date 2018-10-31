@@ -1,8 +1,7 @@
-import { InputMaker } from "./InputMaker";
-import uuid4 from "uuid4";
+import { InputMaker } from './InputMaker';
+import uuid4 from 'uuid4';
 
 export class InputManager {
-
   static generateDefaultVaidationRule(type) {
     return [];
   }
@@ -11,40 +10,40 @@ export class InputManager {
     const name = input.properties.name;
     const type = input.type;
     switch (type) {
-      case "multiChoice":
+      case 'multiChoice':
         return InputMaker.makeCheckBoxes(name, input.children);
 
-      case "dropDown":
+      case 'dropDown':
         return InputMaker.makeDropDown(name, input.children);
 
-      case "email":
-        return InputMaker.makeTextInput(name, "email");
+      case 'email':
+        return InputMaker.makeTextInput(name, 'email');
 
-      case "number":
-        return InputMaker.makeTextInput(name, "number");
+      case 'number':
+        return InputMaker.makeTextInput(name, 'number');
 
-      case "date":
-        return InputMaker.makeTextInput(name, "date");
+      case 'date':
+        return InputMaker.makeTextInput(name, 'date');
 
-      case "bvn":
-        return InputMaker.makeTextInput(name, "number");
+      case 'bvn':
+        return InputMaker.makeTextInput(name, 'number');
 
-      case "title":
+      case 'title':
         return InputMaker.makeHeaderInput(name);
 
-      case "shortText":
+      case 'shortText':
         return InputMaker.makeTextInput(name);
 
-      case "pasport":
+      case 'pasport':
         return InputMaker.makeFileInput(name);
 
-      case "signature":
+      case 'signature':
         return InputMaker.makeFileInput(name);
 
-      case "yesOrNo":
+      case 'yesOrNo':
         return InputMaker.makeRadioInput(name);
 
-      case "longText":
+      case 'longText':
         return InputMaker.makeTextArea(name);
 
       default:
@@ -54,7 +53,7 @@ export class InputManager {
 }
 
 const constructMultiValueInput = type => {
-  const child = { id: uuid4(), text: "..Option1" };
+  const child = { id: uuid4(), text: '..Option1' };
   const html = `
     Type Your Question Here
     <div id="${child.id}">${child.text}</div>

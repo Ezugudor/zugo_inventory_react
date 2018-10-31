@@ -1,5 +1,4 @@
-
-import React from "react";
+import React from 'react';
 
 export const AnswerUI = props => (
   <div className="answers">
@@ -7,7 +6,7 @@ export const AnswerUI = props => (
       <div className="answer__decoration-box">
         <div className="answer__decoration">
           <div className="answer__question-type">
-            <span className="question__dropdown-type"></span>
+            <span className="question__dropdown-type" />
           </div>
           <div className="answer__qustion-position">1</div>
         </div>
@@ -18,4 +17,4 @@ export const AnswerUI = props => (
       </div>
     </div>
   </div>
-)
+);

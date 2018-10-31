@@ -1,0 +1,22 @@
+@value variables: "./Variables.css";
+@value defaultFont, secondary-color, white-color from variables;
+
+.btn {
+  text-decoration: none;
+  font-size: defaultFont;
+  border-radius: 10rem;
+  padding: 0.6rem 2rem;
+  display: inline-block;
+  transition: transform 0.2s;
+  cursor: pointer;
+  outline: none;
+}
+
+.btn-primary {
+  background-color: secondary-color;
+  color: white-color;
+}
+
+.action__btn:hover {
+  opacity: 0.8;
+}

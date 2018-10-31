@@ -1,5 +1,5 @@
-import {AuthLayout} from "../../Hoc/Layouts";
-import React, {Component} from "react";
+import { AuthLayout } from '../../Hoc/Layouts';
+import React, { Component } from 'react';
 
 export class Login extends Component {
   render() {
@@ -8,13 +8,21 @@ export class Login extends Component {
         <div className="auth-card">
           <form className="form">
             <div className="form__group">
-              
-              <input className="form__input" type="text" id="email" placeholder="Enter Your Email"></input>
-              <label className="form__label" htmlFor="email">Enter Your Email</label>
+              <input
+                className="form__input"
+                type="text"
+                id="email"
+                placeholder="Enter Your Email"
+              />
+              <label className="form__label" htmlFor="email">
+                Enter Your Email
+              </label>
             </div>
             <div className="form__group">
-              <input className="form__input" type="password" id="password"></input>
-              <label className="form__label" htmlFor="password">Enter Your Password</label>
+              <input className="form__input" type="password" id="password" />
+              <label className="form__label" htmlFor="password">
+                Enter Your Password
+              </label>
             </div>
             <div className="form__group">
               <button className="btn form__button">Take me in!</button>
@@ -22,6 +30,6 @@ export class Login extends Component {
           </form>
         </div>
       </AuthLayout>
-    )
+    );
   }
-} 
+}

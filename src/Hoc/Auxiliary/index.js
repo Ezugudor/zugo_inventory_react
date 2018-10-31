@@ -1,1 +1,1 @@
-export * from "./Auxiliary";
+export * from './Auxiliary';

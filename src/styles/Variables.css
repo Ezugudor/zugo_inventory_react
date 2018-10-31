@@ -1,0 +1,18 @@
+/* Colors */
+@value primary-color: #38003C;
+@value secondary-color:  #EB1761;
+@value tertiary-color: #FCE4EC;
+@value tertiary-color-light: #FEEDF3;
+@value white-color: #fff;
+
+/* Distance */
+
+@value big-bottom-gutter: 6rem;
+@value medium-bottom-gutter: 4rem;
+@value small-bottom-gutter: 2rem;
+@value thin-bottom-gutter: 1rem;
+
+@value small-right-gutter: 2rem;
+
+/* Fonts  */
+@value defaultFont: 1.6rem;

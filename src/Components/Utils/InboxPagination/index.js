@@ -1,1 +1,1 @@
-export * from "./InboxPagination";
+export * from './InboxPagination';

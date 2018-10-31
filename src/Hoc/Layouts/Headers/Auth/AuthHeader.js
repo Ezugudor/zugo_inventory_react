@@ -1,8 +1,8 @@
-import React from "react";
-export const AuthHeader = (props) => (
+import React from 'react';
+export const AuthHeader = props => (
   <header className="header">
     <div className="logo_box">
-      <img className="logo"></img>
+      <img className="logo" />
     </div>
     {/* <nav className="navigation">
     <ul className="navigation__list">
@@ -10,4 +10,4 @@ export const AuthHeader = (props) => (
     </ul>
   </nav> */}
   </header>
-)
+);

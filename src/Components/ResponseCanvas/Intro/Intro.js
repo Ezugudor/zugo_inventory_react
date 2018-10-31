@@ -1,38 +1,98 @@
-import styles from   "./intro.css";
-import React from "react";
+import signatureIcon from '../../../img/signature.svg';
+import passportIcon from '../../../img/passport.svg';
+import idCardIcon from '../../../img/id-card.svg';
+import letterIcon from '../../../img/letter.svg';
+import Style from './Intro.module.css';
+import React from 'react';
 
-console.log(styles);
 export const Intro = props => (
-  <section className="IntroSection">
-    <div className="Intro">
-      <div className="info">
-        <h1 className="heading-primary">Account Opening</h1>
-        <p className="info__text">Account type descriptiion</p>
+  <section className={Style.IntroSection}>
+    <div className={Style.Intro}>
+      <div className={Style.Info}>
+        <h1 className="heading-primary">GTBank Account Opening</h1>
+        <p className={Style.InfoText}>
+          BT Account allow you to conduct transaction with pleasure, you can
+          transfer unlimited amount of money to all banks in Nigeria
+        </p>
       </div>
-      <div className="instruction">
-        <span className="instruction__warning">You need the following below to fill this form</span>
-        <span className="instruction__icon">
-          <i className="fa fa-point-down"></i>
+      <div className={Style.Instruction}>
+        <span className={Style.InstructionWarning}>
+          You need the following below to fill this form
+        </span>
+        <span className={Style.InstructionIcon}>
+          <i className="far fa-hand-point-down" />
         </span>
       </div>
-      <div className="icons">
-        <div className="icon__wrapper">
-          <img className="icon"></img>
+      <div className={Style.Requirements}>
+        <div className={Style.Requirement}>
+          <div className={Style.Icon}>
+            <img
+              className={Style.IconImage}
+              src={passportIcon}
+              alt="Passport Icon"
+            />
+          </div>
+          <div className={Style.RequirementTextWrapper}>
+            <h3 className={Style.RequirementText}>
+              A Passport In White Background
+            </h3>
+          </div>
         </div>
-        <div className="icon__wrapper">
-          <img className="icon"></img>
+
+        <div className={Style.Requirement}>
+          <div className={Style.Icon}>
+            <img
+              className={Style.IconImage}
+              src={idCardIcon}
+              alt="ID Card Icon"
+            />
+          </div>
+          <div className={Style.RequirementTextWrapper}>
+            <h3 className={Style.RequirementText}>A valid ID Card</h3>
+          </div>
         </div>
-        <div className="icon__wrapper">
-          <img className="icon"></img>
+
+        <div className={Style.Requirement}>
+          <div className={Style.Icon}>
+            <img
+              className={Style.IconImage}
+              src={signatureIcon}
+              alt="Signature Icon"
+            />
+          </div>
+          <div className={Style.RequirementTextWrapper}>
+            <h3 className={Style.RequirementText}>
+              A digital Copy of your signature
+            </h3>
+          </div>
         </div>
-        <div className="icon__wrapper">
-          <img className="icon"></img>
+
+        <div className={Style.Requirement}>
+          <div className={Style.Icon}>
+            <img
+              className={Style.IconImage}
+              src={letterIcon}
+              alt="Letter Icon"
+            />
+          </div>
+          <div className={Style.RequirementTextWrapper}>
+            <h3 className={Style.RequirementText}>Reference Latter</h3>
+          </div>
         </div>
       </div>
-      <div className="action">
-        <button className="btn btn-primary action__btn">I am Ready</button>
-        <span className="action__instruction">Press <strong>Enter</strong></span>
+      <div className={Style.Action}>
+        <div className={Style.ActionBtnWrapper}>
+          <button
+            className="btn btn-primary action__btn"
+            onClick={props.toggleCanvas}
+          >
+            I am Ready
+          </button>
+        </div>
+        <span className={Style.ActonInstruction}>
+          Press <strong>Enter</strong>
+        </span>
       </div>
     </div>
   </section>
-)
+);

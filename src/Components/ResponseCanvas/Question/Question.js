@@ -1,5 +1,5 @@
-import {InputManager } from "../../../core";
-import React from "react";
+import { InputManager } from '../../../core';
+import React from 'react';
 
 export const Question = props => (
   <section className="question">
@@ -11,18 +11,18 @@ export const Question = props => (
               <span className="decoration">
                 <div className="question__position">1</div>
                 <div className="question__icon">
-                  <i className="fa fa-arrow-right"></i>
+                  <i className="fa fa-arrow-right" />
                 </div>
               </span>
             </div>
             <div className="question__text">
-              <label className="question__lable" htmlFor="ddd"></label>
+              <label className="question__lable" htmlFor="ddd" />
             </div>
           </div>
         </div>
-        <div className="error-msg"></div>
+        <div className="error-msg" />
         {InputManager.constructInput(props.input)}
       </div>
     </div>
   </section>
-)
+);

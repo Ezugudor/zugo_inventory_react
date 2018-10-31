@@ -17,15 +17,15 @@ export const Members = props => (
           <td>
             <a className="member__control">
               <span className="member__tooltip">Change Branch</span>
-              <span className="member__icon member__icon--edit"></span>
+              <span className="member__icon member__icon--edit" />
             </a>
             <a className="member__control">
               <span className="member__tooltip">Delete</span>
-              <span className="member__icon member__icon--delete"></span>
+              <span className="member__icon member__icon--delete" />
             </a>
           </td>
         </tr>
       </tbody>
     </table>
   </section>
-)
+);

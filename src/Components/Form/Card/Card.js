@@ -9,4 +9,4 @@ export const FormCard = props => (
       </div>
     </div>
   </div>
-)
+);

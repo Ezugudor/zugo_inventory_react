@@ -5,4 +5,4 @@ export const Controls = props => (
       <a className="btn control__text">Corporate</a>
     </div>
   </section>
-)
+);

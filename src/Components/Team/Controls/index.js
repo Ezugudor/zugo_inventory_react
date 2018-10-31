@@ -1,1 +1,1 @@
-export * from "./TeamControls";
+export * from './TeamControls';

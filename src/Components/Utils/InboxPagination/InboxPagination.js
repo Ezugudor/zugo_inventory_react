@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export const InboxPagination = props => (
   <div className="pagination">
@@ -12,4 +12,4 @@ export const InboxPagination = props => (
       </a>
     </div>
   </div>
-)
+);

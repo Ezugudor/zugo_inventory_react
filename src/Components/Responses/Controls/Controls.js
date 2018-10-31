@@ -1,5 +1,5 @@
-import { DatePicker } from "../../Utils";
-import React from "react";
+import { DatePicker } from '../../Utils';
+import React from 'react';
 
 export const Controls = props => (
   <div className="control">
@@ -10,11 +10,11 @@ export const Controls = props => (
     </div>
     <div className="control__rightbox">
       <div className="control__datepickerbox">
-        <DatePicker></DatePicker>
+        <DatePicker />
       </div>
       <div className="control__searchbox">
-        <input type="search" placeholder="Search Responses"></input>
+        <input type="search" placeholder="Search Responses" />
       </div>
     </div>
   </div>
-)
+);

@@ -1,72 +1,63 @@
-import React from "react";
-
-
+import React from 'react';
 
 export class InputMaker {
   static makeTextInput(input) {
     return (
       <div className="question__input">
         <div className="question__input__wrapper">
-          <input id="ddd" className="question__input" ></input>
+          <input id="ddd" className="question__input" />
         </div>
         {control()}
       </div>
     );
   }
-
 
   static makeTextArea(input) {
     return (
       <div className="question__input">
         <div className="question__input-box">
           <textarea id="ddd" className="question__input" />
-          <p className="question__input-instruction"></p>
+          <p className="question__input-instruction" />
         </div>
         {control()}
       </div>
     );
   }
 
-
   static makeOptionInputs(input) {
     return (
-     <div className="question__input">
-      <div className="input__box">
-        <div className="input__content">
-          <div className="input__options">
-            {makeOption()}
+      <div className="question__input">
+        <div className="input__box">
+          <div className="input__content">
+            <div className="input__options">{makeOption()}</div>
           </div>
         </div>
       </div>
-     </div>
     );
   }
 
   static makeDropdown(input) {
     return (
-     <div className="question__input">
-      <div className="question__input__wrapper">
-        <input id="ddd" className="question__input"></input>
-        <div className="input__decoration-wrapper">
-          <div className="input__decoration">
-            <span className="input__icon"></span>
+      <div className="question__input">
+        <div className="question__input__wrapper">
+          <input id="ddd" className="question__input" />
+          <div className="input__decoration-wrapper">
+            <div className="input__decoration">
+              <span className="input__icon" />
+            </div>
+          </div>
+        </div>
+        <div className="options__wrapper">
+          <div className="options">
+            <div className="options__content">{makeSelectItem()}</div>
           </div>
         </div>
       </div>
-      <div className="options__wrapper">
-        <div className="options">
-          <div className="options__content">
-            {makeSelectItem()}
-          </div>
-        </div>
-      </div>
-     </div>
     );
   }
-
 }
 
-const makeOption= option => (
+const makeOption = option => (
   <div className="option__wrapper">
     <div className="option">
       <div className="option__contents">
@@ -81,14 +72,14 @@ const makeOption= option => (
         <div className="option__decoration">
           <div className="decoration__wrapper">
             <span className="decoration">
-              <i className="fa fa-good"></i>
+              <i className="fa fa-good" />
             </span>
           </div>
         </div>
       </div>
     </div>
   </div>
-)
+);
 
 const makeSelectItem = option => (
   <div className="item__wrapper">
@@ -100,22 +91,21 @@ const makeSelectItem = option => (
         <div className="item__deoration">
           <div className="item__decoration-wrapper">
             <span className="item__decoration">
-              <i className="fa fa-good"></i>
+              <i className="fa fa-good" />
             </span>
           </div>
         </div>
       </div>
     </div>
   </div>
-)
-
+);
 
 const control = () => (
   <div className="question__control">
     <button className="move-next">
       <span className="move-next__label">Ok</span>
       <span className="move-next__icon">
-        <i className="fa fa-good"></i>
+        <i className="fa fa-good" />
       </span>
     </button>
     <div className="nav-instruction">
@@ -124,4 +114,4 @@ const control = () => (
       </p>
     </div>
   </div>
-)
+);

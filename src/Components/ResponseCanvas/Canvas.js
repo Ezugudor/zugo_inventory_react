@@ -1,25 +1,24 @@
+import Style from "./Canvas.module.css";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
 import React from "react";
 
 export const Canvas = props => (
-  <section className="canvas__section">
-      <section  className="header__section">
-        <Header></Header>
-      </section>
-    <section className="main-content__section">
+  <section className="CanvasSection">
+    <section className={Style.HeaderSection}>
+      <Header />
+    </section>
+    <section className={Style.InterectionSection}>
       <div className="canvas__wrapper">
         <div className="canvas">
           <div className="canvas__content">
-            <main>
-              
-            </main>
+            <main />
           </div>
         </div>
       </div>
     </section>
-    <section className="footer__section">
-      <Footer></Footer>
+    <section className={Style.FooterSection}>
+      <Footer />
     </section>
   </section>
-)
+);

@@ -1,1 +1,1 @@
-export * from "./InputManager";
+export * from './InputManager';
