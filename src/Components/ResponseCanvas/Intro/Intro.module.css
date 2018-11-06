@@ -3,13 +3,18 @@
 @value primary-color, white-color, tertiary-color-light, secondary-color from variables;
 
 .IntroSection {
-  opacity: 1;
   z-index: 20;
+  opacity: 1;
   width: 100%;
   height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
+}
+
+.IntroSectionVisible {
+  opacity: 0;
+  width: 0;
 }
 
 .Intro {
@@ -91,7 +96,7 @@
 }
 
 .ActionBtnWrapper {
-  width: 15%;
+  width: 19%;
   margin: 0 auto;
 }
 

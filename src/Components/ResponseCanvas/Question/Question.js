@@ -1,5 +1,5 @@
-import { InputManager } from '../../../core';
-import React from 'react';
+import { InputManager } from "../../../core";
+import React from "react";
 
 export const Question = props => (
   <section className="question">

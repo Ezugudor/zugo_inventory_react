@@ -1,2 +1,2 @@
-export * from './Canvas';
-export * from './Intro';
+export * from "./Canvas";
+export * from "./Intro";

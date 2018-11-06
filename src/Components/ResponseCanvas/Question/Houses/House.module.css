@@ -1,0 +1,124 @@
+.ElementWrapper {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.ActivteElement {
+  width: 100%;
+  opacity: 1;
+  position: relative;
+  animation: none 0s ease 0s 1 normal none running;
+}
+
+.InactiveElement {
+  width: 100%;
+  opacity: 0.2;
+  position: relative;
+  animation: none 0s ease 0s 1 normal none running;
+}
+
+.InactiveElementParent {
+  pointer-events: none;
+  user-select: none;
+}
+
+.ElementParent {
+  width: 100%;
+  max-width: 840px;
+  padding-left: 70px;
+  padding-right: 70px;
+  margin: 0px auto;
+}
+
+.ElementHouse {
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+.ElementInFieldSet {
+  border: 0;
+  padding: 0.01em 0 0;
+  margin: 0;
+  min-width: 0;
+}
+
+.ElementQuestionWrapper {
+  font-family: inherit;
+  box-sizing: border-box;
+  color: rgb(68, 68, 68);
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.ElementQuestionContents {
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  transition: all 0.4s ease 0s;
+}
+
+.QuestionDecorationWrapper {
+  position: absolute;
+  right: 100%;
+  padding-right: 8px;
+  height: 32px;
+}
+
+.QuestionDecorationWrapper::after {
+  -webkit-font-smoothing: antialiased;
+}
+
+.QuestionDecoration {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  color: rgb(79, 176, 174);
+  font-size: 14px;
+  line-height: 20px;
+  height: 100%;
+}
+
+.QuestionPosition {
+  font-weight: unset;
+  font-size: 16px;
+  line-height: 24px;
+  margin: 0px;
+}
+
+.QuestionIcon {
+  margin-left: 4px;
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+}
+
+.QuestionTextWrapper {
+  font-weight: unset;
+  font-size: 24px;
+  line-height: 32px;
+  color: rgb(61, 61, 61);
+  margin: 0px;
+}
+
+.FieldSetLegend {
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.QuestionTextWrapper {
+  font-weight: unset;
+  font-size: 24px;
+  line-height: 32px;
+  color: rgb(61, 61, 61);
+  margin: 0px;
+}
+
+.RequiredQuestion {
+  font-weight: unset;
+  display: inline;
+  font-size: 24px;
+  line-height: 32px;
+  margin: 0px;
+}

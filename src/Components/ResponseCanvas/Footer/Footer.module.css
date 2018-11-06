@@ -1,0 +1,49 @@
+@value variables: "../../../styles/Variables.css";
+@value primary-color, secondary-color, tertiary-color from variables;
+
+.Footer {
+  background-color: tertiary-color;
+
+  width: 100%;
+}
+
+.FooterContent {
+  margin-left: 20rem;
+  width: 100%;
+  display: inline-flex;
+}
+
+.FooterProgress {
+  width: 81%;
+  color: secondary-color;
+}
+
+.FooterNavigiation {
+  width: 10%;
+}
+
+progress[value] {
+  width: 25rem;
+  height: 0.5rem;
+  margin-bottom: 2rem;
+  background-size: 35px 20px, 100% 100%, 100% 100%;
+}
+
+progress::-webkit-progress-bar {
+  background: linear-gradient(primary-color, primary-color);
+  border-radius: 3rem;
+}
+progress::-webkit-progress-value {
+  background-image: linear-gradient(secondary-color, secondary-color);
+  border-radius: 3rem;
+}
+
+progress::-moz-progress-bar {
+  background: linear-gradient(primary-color, primary-color);
+  border-radius: 3rem;
+}
+
+progress::-moz-progress-value {
+  background-image: linear-gradient(secondary-color, secondary-color);
+  border-radius: 3rem;
+}

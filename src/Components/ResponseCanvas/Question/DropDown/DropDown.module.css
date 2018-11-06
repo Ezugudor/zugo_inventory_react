@@ -1,0 +1,140 @@
+.AnswerWrapper {
+  margin-top: 32px;
+}
+
+.AnswerContents {
+  outline: none;
+}
+
+.AnswerBox {
+  position: relative;
+}
+
+.AnswerText {
+  position: relative;
+}
+
+.Answer {
+  display: block;
+  width: 100%;
+  font-family: inherit;
+  color: rgb(79, 176, 174);
+  -webkit-appearance: none;
+  font-size: 30px;
+  line-height: 38px;
+  -webkit-font-smoothing: antialiased;
+  padding: 0px 24px 8px 0px;
+  border-width: initial;
+  border-style: none;
+  border-color: initial;
+  border-image: initial;
+  outline: none;
+  border-radius: 0px;
+  transition: box-shadow 0.2s ease 0s;
+  background: none;
+}
+
+.Answer:not(:focus) {
+  box-shadow: rgba(79, 176, 174, 0.3) 0px 1px;
+}
+
+.AnswerDecorationWrapper {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  cursor: pointer;
+  width: 24px;
+  -webkit-box-pack: end;
+  justify-content: flex-end;
+}
+
+.AnswerDecoration {
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+}
+
+.AnswerOptionsWrapper {
+  transition: all 200ms ease 0ms;
+}
+
+.InactiveWrapper {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-8px);
+}
+
+.ActiveWrapper {
+  opacity: 1;
+}
+
+.OptionsBox {
+  z-index: 30;
+  position: absolute;
+  width: 100%;
+}
+
+.Options {
+  max-height: 434px;
+  margin-top: 8px;
+  padding-bottom: 16px;
+  overflow: auto;
+}
+
+.OptionWrapper {
+  margin-bottom: 4px;
+}
+
+.OptionContents {
+  height: 100%;
+  width: auto;
+}
+
+.OptionBox {
+  position: relative;
+  min-width: 75px;
+  height: auto;
+}
+
+.Option {
+  min-height: 40px;
+  color: rgb(79, 176, 174);
+  background-color: rgb(237, 247, 247);
+  box-shadow: rgba(79, 176, 174, 0.6) 0px 0px 0px 1px inset;
+  cursor: pointer;
+  opacity: 1;
+  height: auto;
+  border-radius: 4px;
+}
+
+.OptionTextWrapper {
+  display: inline-flex;
+  -webkit-box-align: center;
+  align-items: center;
+  width: 100%;
+}
+
+.OptionBox {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  width: 100%;
+  min-width: 75px;
+  min-height: 40px;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  padding: 4px 12px;
+}
+
+.OtionText {
+  font-weight: unset;
+  font-size: 20px;
+  line-height: 28px;
+  margin: 0px;
+}

@@ -1,0 +1,10 @@
+@value variables: "../../../styles/Variables.css";
+@value tertiary-color-light from variables;
+
+.Header {
+  border-bottom: 3px solid tertiary-color-light;
+}
+
+.SectionTitle {
+  padding: 1.3rem 20rem;
+}

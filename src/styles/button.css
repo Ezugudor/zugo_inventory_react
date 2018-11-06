@@ -4,7 +4,6 @@
 .btn {
   text-decoration: none;
   font-size: defaultFont;
-  border-radius: 10rem;
   padding: 0.6rem 2rem;
   display: inline-block;
   transition: transform 0.2s;
@@ -12,11 +11,24 @@
   outline: none;
 }
 
-.btn-primary {
+.btn--primary {
   background-color: secondary-color;
   color: white-color;
 }
 
-.action__btn:hover {
+.btn--action {
+  border-radius: 10rem;
+}
+
+.btn--action:hover {
   opacity: 0.8;
+}
+
+.btn--navigation {
+  padding: 0.8rem 1.2rem;
+  margin-top: 1rem;
+}
+
+.btn--navigation:first-child {
+  margin-right: 0.5rem;
 }

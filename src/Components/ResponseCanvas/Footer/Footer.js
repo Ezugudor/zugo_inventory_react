@@ -1,23 +1,18 @@
-import React from 'react';
+import Styles from "./Footer.module.css";
+import React from "react";
+
 export const Footer = props => (
-  <div className="canvas-footer">
-    <div className="canvas-footer__content">
-      <div className="progress">
-        <p className="progress__text">
-          {' '}
-          {props.answered} of {props.total}{' '}
-        </p>
-        <progress
-          value={props.percentCompleted}
-          max="100"
-          className="progress__progress"
-        />
+  <div className={Styles.Footer}>
+    <div className={Styles.FooterContent}>
+      <div className={Styles.FooterProgress}>
+        <p className="progress__text">2 of 10 Answered</p>
+        <progress value=".2" className="progress__progress" />
       </div>
-      <div className="canvas__navigation">
-        <button>
+      <div className={Styles.FooterNavigiation}>
+        <button className="btn btn--primary btn--navigation">
           <i className="fa fa-angle-up" />
         </button>
-        <button>
+        <button className="btn btn--primary btn--navigation">
           <i className="fa fa-angle-down" />
         </button>
       </div>

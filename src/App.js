@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
-import { ResponseCanvas } from './Containers/ResponseCanvas/ResponseCanvas';
+import React, { Component } from "react";
+import { ResponseCanvas } from "./Containers/ResponseCanvas/ResponseCanvas";
+
 class App extends Component {
   render() {
     return (

@@ -1,12 +1,19 @@
-import signatureIcon from '../../../img/signature.svg';
-import passportIcon from '../../../img/passport.svg';
-import idCardIcon from '../../../img/id-card.svg';
-import letterIcon from '../../../img/letter.svg';
-import Style from './Intro.module.css';
-import React from 'react';
+import signatureIcon from "../../../img/signature.svg";
+import passportIcon from "../../../img/passport.svg";
+import idCardIcon from "../../../img/id-card.svg";
+import letterIcon from "../../../img/letter.svg";
+import Style from "./Intro.module.css";
+import classNames from "classnames";
+import React from "react";
+
+const getSectionClassName = props => {
+  const conditionalClasses = {};
+  conditionalClasses[Style.IntroSectionVisible] = props.showCanvas;
+  return classNames(Style.IntroSection, conditionalClasses);
+};
 
 export const Intro = props => (
-  <section className={Style.IntroSection}>
+  <section className={getSectionClassName(props)}>
     <div className={Style.Intro}>
       <div className={Style.Info}>
         <h1 className="heading-primary">GTBank Account Opening</h1>
@@ -83,7 +90,7 @@ export const Intro = props => (
       <div className={Style.Action}>
         <div className={Style.ActionBtnWrapper}>
           <button
-            className="btn btn-primary action__btn"
+            className="btn btn--primary btn--action"
             onClick={props.toggleCanvas}
           >
             I am Ready
