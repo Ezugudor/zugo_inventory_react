@@ -1,0 +1,19 @@
+.Cards {
+  margin-top: 3rem;
+  margin-left: 3rem;
+  margin-right: 7rem;
+}
+
+.Row {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.Col3 {
+  width: calc((100% - 9rem) / 4);
+}
+
+.Col3:not(:last-child) {
+  margin-right: 3rem;
+}

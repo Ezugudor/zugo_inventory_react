@@ -1,0 +1,47 @@
+@value variables: "../../../../styles/Variables.css";
+@value primary-color, white-color, medium-right-gutter from variables;
+@value small-right-gutter from variables;
+
+.Header {
+  background-color: primary-color;
+  color: white-color;
+}
+
+.Header::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.LogoBox {
+  float: left;
+}
+
+.Logo {
+  height: 4rem;
+  margin-top: small-right-gutter;
+}
+
+.Navigation {
+  float: right;
+  margin-top: small-right-gutter;
+  margin-right: medium-right-gutter;
+}
+
+.NavList {
+  list-style: none;
+}
+
+.NavItem {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.NavItem:not(:last-child) {
+  margin-right: small-right-gutter;
+}
+
+.NavLink:link,
+.NavLink:visited {
+  color: white-color;
+}

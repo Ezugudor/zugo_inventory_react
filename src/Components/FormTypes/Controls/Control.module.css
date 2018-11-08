@@ -1,0 +1,29 @@
+.Control {
+  margin-top: 5rem;
+}
+
+.ControlBox {
+  width: 100%;
+
+  border-bottom: 3px solid black;
+}
+
+.ControlText {
+  text-decoration: none;
+  font-size: defaultFont;
+  display: inline-block;
+  transition: transform 0.2s;
+  cursor: pointer;
+  outline: none;
+  opacity: 0.2;
+}
+
+.ControlTextActive {
+  opacity: 1;
+  background-color: aqua;
+  padding: 0.5rem 2rem;
+}
+
+.ControlText:not(:last-child) {
+  margin-right: 2rem;
+}

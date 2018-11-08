@@ -1,0 +1,9 @@
+.AdminLayout {
+  display: flex;
+  height: 100%;
+}
+
+.MainComponentContent {
+  width: 84%;
+  margin-left: 3rem;
+}

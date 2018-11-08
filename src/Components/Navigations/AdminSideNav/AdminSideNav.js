@@ -1,17 +1,30 @@
-import React from 'react';
+import Style from "./AdminSideNav.module.css";
+import React from "react";
 
 export const AdminSideNav = prop => (
-  <aside className="navigation-aside aside">
-    <nav className="aside__nav">
-      <ul className="navigation__list">
-        <li className="navigation__item navigation__item--active">
-          <a className="navigation__link">Dashboard</a>
+  <aside className={Style.AdminSidebar}>
+    <nav className={Style.Nav}>
+      <ul className={Style.NavList}>
+        <li className={Style.NavItem}>
+          <a
+            className={`${Style.NavLink} ${Style.InactiveLink}`}
+            href="/dashboard"
+          >
+            Dashboard
+          </a>
         </li>
-        <li className="navigation__item">
-          <a className="navigation__link">Team</a>
+        <li className={Style.NavItem}>
+          <a className={`${Style.NavLink} ${Style.InactiveLink}`} href="/team">
+            Team
+          </a>
         </li>
-        <li className="navigation__item">
-          <a className="navigation__link">Form Types</a>
+        <li className={Style.NavItem}>
+          <a
+            className={`${Style.NavLink} ${Style.ActiveLink}`}
+            href="/formtypes"
+          >
+            Form Types
+          </a>
         </li>
       </ul>
     </nav>

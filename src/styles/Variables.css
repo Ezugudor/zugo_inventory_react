@@ -4,6 +4,10 @@
 @value tertiary-color: #FCE4EC;
 @value tertiary-color-light: #FEEDF3;
 @value white-color: #fff;
+@value border-color: #979292;
+@value canvas-header-color: #E6E0E0;
+@value canvas-footer: #EEEEEF;
+@value progress-back: #EEC2D2
 
 /* Distance */
 
@@ -13,6 +17,7 @@
 @value thin-bottom-gutter: 1rem;
 
 @value small-right-gutter: 2rem;
+@value medium-right-gutter: 4rem;
 
 /* Fonts  */
 @value defaultFont: 1.6rem;

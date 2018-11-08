@@ -1,0 +1,16 @@
+.AuthLayout {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  background-image: url("../../../img/auth-back.png");
+}
+
+.MainContent {
+  width: 30%;
+  height: 55vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0.5rem 2rem rgba(14, 14, 14, 0.1);
+}

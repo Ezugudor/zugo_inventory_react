@@ -1,10 +1,20 @@
-import { Card } from '../Card';
+import Style from "./Cards.module.css";
+import { Card } from "../Card";
+import React from "react";
 
-import React from 'react';
 export const Cards = props => (
-  <section className="section__cards">
-    <div className="row">
-      <div className="col-3">
+  <section className={Style.Cards}>
+    <div className={Style.Row}>
+      <div className={Style.Col3}>
+        <Card />
+      </div>
+      <div className={Style.Col3}>
+        <Card />
+      </div>
+      <div className={Style.Col3}>
+        <Card />
+      </div>
+      <div className={Style.Col3}>
         <Card />
       </div>
     </div>

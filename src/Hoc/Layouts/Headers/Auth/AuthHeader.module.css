@@ -1,0 +1,21 @@
+@value variables: "../../../../styles/Variables.css";
+@value primary-color, white-color, small-right-gutter  from variables;
+
+.Header {
+  color: white-color;
+}
+
+.Header::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.LogoBox {
+  float: left;
+}
+
+.Logo {
+  height: 4rem;
+  margin-top: small-right-gutter;
+}

@@ -1,0 +1,42 @@
+@value variables: "../../../styles/Variables.css";
+@value secondary-color, tertiary-color from variables;
+.AdminSidebar {
+  width: 16%;
+  height: 100%;
+  border-right: 2px solid black;
+}
+
+.Nav {
+  width: 70%;
+  margin: 0 auto;
+  padding-top: 6rem;
+}
+
+.NavList {
+  list-style: none;
+}
+
+.NavItem {
+  /* padding-left: 1rem 0; */
+}
+
+.NavLink:link,
+.NavLink:visited {
+  color: black;
+}
+
+.NavItem:not(:last-child) {
+  padding-bottom: 2rem;
+}
+
+.InactiveLink {
+  padding-left: 2.2rem;
+}
+
+.ActiveLink:link,
+.ActiveLink:visited {
+  background-color: tertiary-color;
+  color: secondary-color;
+  padding: 0.5rem 2.2rem;
+  border-radius: 10rem;
+}

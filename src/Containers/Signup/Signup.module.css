@@ -1,0 +1,77 @@
+@value variables: "../../styles/Variables.css";
+@value white-color, canvas-header-color, border-colorfrom variables;
+@value border-color, defaultFont, secondary-color from variables;
+.Group :not(:last-child) {
+  margin-bottom: 1.5rem;
+}
+
+.Signup {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.ManagerInfoBox {
+  margin-bottom: 2rem;
+}
+.Form {
+  margin-top: 3rem;
+  margin-left: 3rem;
+}
+
+.Input {
+  font-size: 1.5rem;
+  padding: 0.5rem 2rem;
+  font-family: inherit;
+  color: inherit;
+  border: 0;
+  border-bottom: 1px solid black;
+  width: 90%;
+  display: block;
+  transition: all 0.3s;
+}
+
+.Input:focus {
+  outline: none;
+  border-bottom: 2px solid canvas-header-color;
+  box-shadow: 0 1rem 2rem rgba(border-color, 0.1);
+}
+
+.Input:focus:invalid {
+  border-bottom: 3px solid canvas-header-color;
+}
+
+.Input::-webkit-input-placeholder {
+  color: border-color;
+  padding-left: -2rem;
+}
+
+.FormLabel {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-left: 2rem;
+  margin-top: 0.4rem;
+  display: block;
+  transition: all 0.3s;
+}
+
+input:placeholder-shown + .FormLabel {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4rem);
+  margin-top: -0.5rem;
+}
+
+.Button {
+  text-decoration: none;
+  font-size: defaultFont;
+  padding: 0.8rem 2rem;
+  display: inline-block;
+  transition: transform 0.2s;
+  cursor: pointer;
+  outline: none;
+  width: 70%;
+  margin: 0 auto;
+  background-color: secondary-color;
+  color: white;
+  border-radius: 17px;
+}

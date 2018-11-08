@@ -1,31 +1,37 @@
-import { AuthLayout } from '../../Hoc/Layouts';
-import React, { Component } from 'react';
+import { AuthLayout } from "../../Hoc/Layouts";
+import React, { Component } from "react";
+import Style from "./Login.module.css";
 
 export class Login extends Component {
   render() {
     return (
       <AuthLayout>
-        <div className="auth-card">
-          <form className="form">
-            <div className="form__group">
+        <div className={Style.Login}>
+          <form className={Style.Form}>
+            <div className={Style.Group}>
               <input
-                className="form__input"
+                className={Style.Input}
                 type="text"
                 id="email"
                 placeholder="Enter Your Email"
               />
-              <label className="form__label" htmlFor="email">
+              <label className={Style.FormLabel} htmlFor="email">
                 Enter Your Email
               </label>
             </div>
-            <div className="form__group">
-              <input className="form__input" type="password" id="password" />
-              <label className="form__label" htmlFor="password">
+            <div className={Style.Group}>
+              <input
+                className={Style.Input}
+                type="password"
+                id="password"
+                placeholder="Password"
+              />
+              <label className={Style.FormLabel} htmlFor="password">
                 Enter Your Password
               </label>
             </div>
-            <div className="form__group">
-              <button className="btn form__button">Take me in!</button>
+            <div className={Style.Group}>
+              <button className={Style.Button}>Take me in!</button>
             </div>
           </form>
         </div>

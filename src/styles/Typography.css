@@ -2,7 +2,7 @@
 @value defaultFont from variables;
 
 body {
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   font-weight: 400;
   line-height: 1.7;
   font-size: defaultFont;
@@ -12,4 +12,8 @@ body {
   font-size: 3rem;
   font-weight: 400;
   text-align: center;
+}
+
+.heading-tertairy {
+  font-size: defaultFont;
 }

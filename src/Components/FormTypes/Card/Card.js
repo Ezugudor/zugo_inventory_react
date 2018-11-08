@@ -1,12 +1,14 @@
-import React from 'react';
+import Style from "./Card.module.css";
+import React from "react";
+import img from "../../../img/registration.svg";
 
 export const Card = props => (
-  <div className="card">
-    <div className="card__box">
-      <div className="card__imagebox">
-        <img className="card__image" />
+  <div className={Style.Card}>
+    <div className={Style.Box}>
+      <div className={Style.ImageBox}>
+        <img className={Style.Image} src={img} alt="Card logo" />
       </div>
-      <div className="card__textbox">
+      <div className={Style.TextBox}>
         <p>Registration</p>
       </div>
     </div>

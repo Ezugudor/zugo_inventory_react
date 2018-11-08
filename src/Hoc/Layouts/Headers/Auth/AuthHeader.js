@@ -1,13 +1,11 @@
-import React from 'react';
+import Logo from "../../../../img/logo.png";
+import Style from "./AuthHeader.module.css";
+import React from "react";
+
 export const AuthHeader = props => (
-  <header className="header">
-    <div className="logo_box">
-      <img className="logo" />
+  <header className={Style.Header}>
+    <div className={Style.LogoBox}>
+      <img className={Style.Logo} src={Logo} alt="Swyp Logo" />
     </div>
-    {/* <nav className="navigation">
-    <ul className="navigation__list">
-      <li className="navigation__item"></li>
-    </ul>
-  </nav> */}
   </header>
 );

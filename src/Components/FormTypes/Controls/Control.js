@@ -1,8 +1,13 @@
+import Style from "./Control.module.css";
+
+import React from "react";
 export const Controls = props => (
-  <section className="section__controls">
-    <div className="control__box">
-      <a className="btn control__text">Individual</a>
-      <a className="btn control__text">Corporate</a>
+  <section className={Style.Control}>
+    <div className={Style.ControlBox}>
+      <a className={`${Style.ControlText} ${Style.ControlTextActive} `}>
+        Individual
+      </a>
+      <a className={Style.ControlText}>Corporate</a>
     </div>
   </section>
 );

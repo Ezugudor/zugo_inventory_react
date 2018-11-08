@@ -1,10 +1,11 @@
-import { AuthHeader } from '../Headers';
-import { Aux } from '../../Auxiliary';
-import React from 'react';
+import Style from "./AuthLayout.module.css";
+import { AuthHeader } from "../Headers";
+
+import React from "react";
 
 export const AuthLayout = props => (
-  <Aux>
+  <div className={Style.AuthLayout}>
     <AuthHeader />
-    <main className="auth">{props.children}</main>
-  </Aux>
+    <main className={Style.MainContent}>{props.children}</main>
+  </div>
 );

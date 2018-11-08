@@ -1,0 +1,35 @@
+.Card {
+  border: 0.5px solid black;
+  height: 23vh;
+  position: relative;
+  border-radius: 8px;
+  opacity: 0.2;
+}
+
+.Card:hover {
+  opacity: 1;
+  cursor: pointer;
+  border: 0;
+  box-shadow: 0 0.5rem 2rem rgba(14, 14, 14, 0.1);
+}
+
+.Box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.ImageBox {
+  width: 42%;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+}
+
+.Image {
+  width: 100%;
+}
+
+.TextBox {
+  text-align: center;
+}

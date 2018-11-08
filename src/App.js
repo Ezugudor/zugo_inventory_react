@@ -1,11 +1,14 @@
+import Style from "./App.module.css";
+import { FormTypes, Signup, Login } from "./Containers";
 import React, { Component } from "react";
-import { ResponseCanvas } from "./Containers/ResponseCanvas/ResponseCanvas";
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <ResponseCanvas />
+      <div className={Style.App}>
+        <Login />
+        {/* <Signup /> */}
+        {/* <FormTypes /> */}
       </div>
     );
   }
