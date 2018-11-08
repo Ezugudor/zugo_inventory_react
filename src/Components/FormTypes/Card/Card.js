@@ -1,15 +1,20 @@
-import Style from "./Card.module.css";
-import React from "react";
 import img from "../../../img/registration.svg";
+import Style from "./Card.module.css";
+import { slugName } from "../../../utils";
+import React from "react";
 
 export const Card = props => (
   <div className={Style.Card}>
     <div className={Style.Box}>
       <div className={Style.ImageBox}>
-        <img className={Style.Image} src={img} alt="Card logo" />
+        <img
+          className={Style.Image}
+          src={`../../../img/${slugName(props.formtype.name)}.svg`}
+          alt="Card logo"
+        />
       </div>
       <div className={Style.TextBox}>
-        <p>Registration</p>
+        <p>{props.formtype.name}</p>
       </div>
     </div>
   </div>

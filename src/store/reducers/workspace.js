@@ -6,7 +6,7 @@ import {
 } from "../actions";
 
 const initialState = {
-  all: []
+  all: { Individual: [], Corporate: [] }
 };
 export const workspace = (state = initialState, action) => {
   switch (action.type) {
