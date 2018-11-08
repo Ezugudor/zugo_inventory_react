@@ -1,4 +1,5 @@
 import { Provider as StoreBinder } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
 import ReactDOM from "react-dom";
 import "../src/styles/index.css";
 import Store from "./store";
@@ -9,7 +10,9 @@ import registerServiceWorker from "./registerServiceWorker";
 
 ReactDOM.render(
   <StoreBinder store={Store}>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </StoreBinder>,
   document.getElementById("root")
 );

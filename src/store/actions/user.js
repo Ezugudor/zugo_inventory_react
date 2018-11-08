@@ -12,7 +12,7 @@ const deleteUser = user => ({ type: DELETE_USER, user });
 const saveStats = stats => ({ type: SAVE_STATS, stats });
 const saveUser = data => ({ type: SAVE_USER, data });
 
-export const loginUser = loginDetails => {
+export const loginUser = (loginDetails, history) => {
   return dispatch => {
     dispatch(startNetworkRequest());
     SwypPartnerApi.post("businesses/loginuser", loginDetails)
@@ -25,6 +25,7 @@ export const loginUser = loginDetails => {
             "success"
           )
         );
+        history.push("/formtypes");
       })
       .catch(err => handleError(err, dispatch));
   };

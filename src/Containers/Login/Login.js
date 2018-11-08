@@ -1,41 +1,43 @@
-import { AuthLayout } from "../../Hoc/Layouts";
+import { Login as View } from "../../Components/Auth";
 import React, { Component } from "react";
-import Style from "./Login.module.css";
+import { connect } from "react-redux";
+import { loginUser } from "../../store/actions";
 
-export class Login extends Component {
+class Class extends Component {
+  state = {
+    email: "",
+    password: ""
+  };
+
+  handleInputChange = e => {
+    this.setState({ [e.target.id]: e.target.value });
+  };
+
+  handleLogin = e => {
+    e.preventDefault();
+
+    const details = {
+      email: this.state.email,
+      password: this.state.password
+    };
+    const history = this.props.history;
+    this.props.loginUser(details, history);
+    this.setState({ email: "", password: "" });
+  };
+
   render() {
     return (
-      <AuthLayout>
-        <div className={Style.Login}>
-          <form className={Style.Form}>
-            <div className={Style.Group}>
-              <input
-                className={Style.Input}
-                type="text"
-                id="email"
-                placeholder="Enter Your Email"
-              />
-              <label className={Style.FormLabel} htmlFor="email">
-                Enter Your Email
-              </label>
-            </div>
-            <div className={Style.Group}>
-              <input
-                className={Style.Input}
-                type="password"
-                id="password"
-                placeholder="Password"
-              />
-              <label className={Style.FormLabel} htmlFor="password">
-                Enter Your Password
-              </label>
-            </div>
-            <div className={Style.Group}>
-              <button className={Style.Button}>Take me in!</button>
-            </div>
-          </form>
-        </div>
-      </AuthLayout>
+      <View
+        changeInput={this.handleInputChange}
+        password={this.state.password}
+        login={this.handleLogin}
+        email={this.state.email}
+      />
     );
   }
 }
+
+export const Login = connect(
+  null,
+  { loginUser }
+)(Class);

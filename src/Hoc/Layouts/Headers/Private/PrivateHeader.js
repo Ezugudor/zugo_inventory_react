@@ -1,3 +1,4 @@
+import { logoutUser } from "../../../../store/actions";
 import Style from "./PrivateHeader.module.css";
 import Logo from "../../../../img/logo.png";
 import React from "react";
@@ -10,15 +11,12 @@ export const PrivateHeader = props => (
     <nav className={Style.Navigation}>
       <ul className={Style.NavList}>
         <li className={Style.NavItem}>
-          <a className={Style.NavLink} href="#">
-            <span className="navigation__icon" />d
-          </a>
+          <span className="navigation__icon" />
+          <span className={Style.NavLink}>d</span>
         </li>
-        <li className={Style.NavItem}>
-          <a className={Style.NavLink}>
-            <span className="navigation__icon" />
-            Logout
-          </a>
+        <li className={Style.NavItem} onClick={logoutUser}>
+          <span className="navigation__icon" />
+          <span className={Style.NavLink}>Logout</span>
         </li>
       </ul>
     </nav>
