@@ -4,10 +4,11 @@
 @value tertiary-color: #FCE4EC;
 @value tertiary-color-light: #FEEDF3;
 @value white-color: #fff;
+@value black-color: black;
 @value border-color: #979292;
 @value canvas-header-color: #E6E0E0;
-@value canvas-footer: #EEEEEF;
-@value progress-back: #EEC2D2
+@value canvas-footer-color: #EEEEEF;
+@value progress-back-color: #EEC2D2
 
 /* Distance */
 

@@ -1,6 +1,6 @@
+import { FormTypes, Login, Signup, Form } from "./Containers";
 import { Redirect, Switch, Route } from "react-router-dom";
-import { FormTypes } from "./Containers/FormType";
-import { Login } from "./Containers/Login";
+
 import { SwypPartnerApi } from "./core";
 import Store from "./store";
 import React from "react";
@@ -49,6 +49,8 @@ const ManagerRoute = ({ component: Component, ...rest }) => (
 export default () => (
   <Switch>
     <PrivateRoute exact path="/formtypes" component={FormTypes} />
+    <PrivateRoute exact path="/formtypes/:parent/:child" component={Form} />
+    <QuestRoute exact path="/signup" component={Signup} />
     <QuestRoute exact path="/login" component={Login} />
     <QuestRoute exact path="/" component={Login} />
   </Switch>

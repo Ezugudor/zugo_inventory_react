@@ -1,0 +1,27 @@
+@value Variables: "../../../styles/Variables.css";
+@value defaultFont, secondary-color, white-color from Variables;
+
+.Controls {
+  margin-top: 5rem;
+}
+
+.ControlBox {
+  width: 100%;
+  border-bottom: 3px solid black;
+}
+
+.Button {
+  font-size: defaultFont;
+  margin-right: 2rem;
+  margin-bottom: 0.5rem;
+  padding: 0.8rem 2rem;
+  background-color: secondary-color;
+  color: white-color;
+  border-radius: 13px;
+  cursor: pointer;
+  outline: none;
+}
+
+.Text {
+  font-size: 1.9rem;
+}

@@ -1,0 +1,48 @@
+@value Variables: "../../../styles/Variables.css";
+@value defaultFont, black-color, tertiary-color from Variables;
+.Card {
+  height: 23vh;
+  overflow: auto;
+  border-radius: 8px;
+  box-shadow: 0 0.5rem 2rem rgba(14, 14, 14, 0.1);
+  position: relative;
+}
+
+.Card:hover {
+  cursor: pointer;
+}
+
+.Body {
+  width: 100%;
+  height: 19vh;
+}
+
+.Text {
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.Footer {
+  height: 4vh;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  border-top: 1px solid black-color;
+}
+
+.FooterText {
+  font-size: 1.3rem;
+  background-color: tertiary-color;
+  color: black-color;
+  border-radius: 9px;
+  cursor: pointer;
+  outline: none;
+  display: inline-block;
+  padding: 0.2rem 1.2rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}

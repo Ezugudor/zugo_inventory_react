@@ -1,12 +1,12 @@
-export const FormCard = props => (
-  <div className="card">
-    <div className="card__box">
-      <div className="card__body">
-        <span>{props.type.name}</span>
-      </div>
-      <div className="card__footer">
-        <a className="btn btn-text">100 Response</a>
-      </div>
+import Style from "./Card.module.css";
+import React from "react";
+export const Card = props => (
+  <div className={Style.Card}>
+    <div className={Style.Body}>
+      <div className={Style.Text}>Account Opening</div>
+    </div>
+    <div className={Style.Footer}>
+      <span className={Style.FooterText}>100 Response</span>
     </div>
   </div>
 );

@@ -1,10 +1,12 @@
+@value Variables: "../../../styles/Variables.css";
+@value defaultFont from Variables;
+
 .Control {
   margin-top: 5rem;
 }
 
 .ControlBox {
   width: 100%;
-
   border-bottom: 3px solid black;
 }
 

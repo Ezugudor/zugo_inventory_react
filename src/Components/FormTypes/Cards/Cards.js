@@ -1,21 +1,25 @@
 import Style from "./Cards.module.css";
+import PropTypes from "prop-types";
 import { Card } from "../Card";
 import React from "react";
 
-export const Cards = props => {
+const view = props => {
   return (
     <section className={Style.Cards}>
-      {props.formTypes.map((batch, index) => {
-        return (
-          <div className={Style.Row} key={index}>
-            {batch.map(formtype => (
-              <div className={Style.Col3} key={formtype.name}>
-                <Card formtype={formtype} />
-              </div>
-            ))}
-          </div>
-        );
-      })}
+      {props.formTypes.map((batch, index) => (
+        <div className={Style.Row} key={index}>
+          {batch.map(formType => (
+            <div className={Style.Col3} key={formType.name}>
+              <Card formType={formType} {...props} />
+            </div>
+          ))}
+        </div>
+      ))}
     </section>
   );
 };
+
+view.propTypes = {
+  formTypes: PropTypes.array.isRequired
+};
+export const Cards = view;
