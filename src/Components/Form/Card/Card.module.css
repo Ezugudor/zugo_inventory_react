@@ -1,7 +1,8 @@
 @value Variables: "../../../styles/Variables.css";
 @value defaultFont, black-color, tertiary-color from Variables;
 .Card {
-  height: 23vh;
+  height: 26vh;
+  width: 100%;
   overflow: auto;
   border-radius: 8px;
   box-shadow: 0 0.5rem 2rem rgba(14, 14, 14, 0.1);
@@ -29,7 +30,7 @@
   height: 4vh;
   width: 100%;
   position: absolute;
-  bottom: 0;
+  bottom: 0.4rem;
   text-align: center;
   border-top: 1px solid black-color;
 }
@@ -44,5 +45,4 @@
   display: inline-block;
   padding: 0.2rem 1.2rem;
   margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
 }

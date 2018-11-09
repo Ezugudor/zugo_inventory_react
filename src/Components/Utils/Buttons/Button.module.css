@@ -1,0 +1,13 @@
+@value Variables: "../../../styles/Variables.css";
+@value defaultFont from Variables;
+.Button {
+  font-size: defaultFont;
+  padding: 1.1rem 2.9rem;
+  border-radius: 20px;
+  cursor: pointer;
+  outline: none;
+}
+
+.Button:not(:last-child) {
+  margin-right: 2rem;
+}

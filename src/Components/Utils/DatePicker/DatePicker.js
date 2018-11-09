@@ -1,4 +1,5 @@
-import React from 'react';
+import React from "react";
+
 export const DatePicker = props => (
   <div className="swyp-date-picker">
     <div className="swyp-date-picker__group">

@@ -1,0 +1,7 @@
+@value Variables: "../../../../styles/Variables.css";
+@value secondary-color,  white-color from Variables;
+
+.Red {
+  background-color: secondary-color;
+  color: white-color;
+}
