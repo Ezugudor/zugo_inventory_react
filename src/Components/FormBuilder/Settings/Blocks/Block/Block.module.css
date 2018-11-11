@@ -1,0 +1,117 @@
+.Block {
+  display: flex;
+  border-radius: 2px;
+  margin: 0.5rem;
+  cursor: pointer;
+  box-shadow: 0 0.5rem 2rem rgba(14, 14, 14, 0.1);
+}
+
+.Block:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+.IconBox {
+  height: 3rem;
+  width: 3rem;
+  margin: 0.8rem;
+  border-radius: 2px;
+  margin-right: 1.5rem;
+  position: relative;
+}
+
+.IconHolder {
+  position: absolute;
+  height: 2rem;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.Icon {
+  width: 100%;
+  height: 100%;
+}
+
+.Text {
+  padding-top: 0.8rem;
+}
+
+.introduction {
+  background-color: #f15c90;
+}
+
+.sign {
+  background-color: #286107;
+}
+
+.default {
+  background-color: #67e5fc;
+}
+
+.shorttext {
+  background-color: #e4c601;
+}
+
+.longtext {
+  background-color: #707070;
+}
+
+.address {
+  background-color: #4199f5;
+}
+
+.mobile {
+  background-color: #ada7fa;
+}
+
+.tel {
+  background-color: #5631e9;
+}
+
+.creditcards {
+  background-color: #11a089;
+}
+
+.section {
+  background-color: #4a1a3f;
+}
+
+.date {
+  background-color: #201266;
+}
+
+.dob {
+  background-color: #f34247;
+}
+
+.state {
+  background-color: #124766;
+}
+
+.country {
+  background-color: #d59540;
+}
+
+.email {
+  background-color: #38003c;
+}
+
+.yesorno {
+  background-color: #e96d31;
+}
+
+.picture {
+  background-color: #409fd5;
+}
+
+.firstname {
+  background-color: #ee55da;
+}
+
+.bvn {
+  background-color: #118da0;
+}
+
+.lastname {
+  background-color: #6d1361;
+}

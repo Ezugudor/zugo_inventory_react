@@ -1,0 +1,11 @@
+@value Variables: "../../../../styles/Variables.css";
+@value small-gutter from Variables;
+
+.Item {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.Item:not(:last-child) {
+  margin-right: small-gutter;
+}

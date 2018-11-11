@@ -1,0 +1,63 @@
+@value Variables: "../../../styles/Variables.css";
+@value thin-gutter, tertiary-color-light, small-gutter from Variables;
+.settings {
+  border-right: 1px solid rgba(0, 0, 0, 0.07);
+  height: 100%;
+}
+
+.openSection {
+  width: 220px;
+}
+
+.HeadWrapper {
+  width: 100%;
+  height: 12%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+  padding-bottom: small-gutter;
+  padding-top: thin-gutter;
+}
+
+.Head {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: thin-gutter;
+}
+
+.Head::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.OperationName {
+  float: left;
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-top: 0.4rem;
+}
+
+.CloseBox {
+  float: right;
+  cursor: pointer;
+  height: 3rem;
+  width: 3rem;
+  position: relative;
+}
+
+.CloseBox:hover {
+  background-color: tertiary-color-light;
+}
+
+.Close {
+  position: absolute;
+  display: inline-block;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.contentWrapper {
+  height: 88%;
+  overflow: scroll;
+}

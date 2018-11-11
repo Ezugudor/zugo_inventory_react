@@ -1,10 +1,9 @@
-.AdminLayout {
+.Main {
   display: flex;
   height: calc(100vh - 9vh);
-  width: 100%;
 }
 
 .ChildContent {
-  width: 89%;
-  margin-left: 3rem;
+  width: 95%;
+  height: 100%;
 }

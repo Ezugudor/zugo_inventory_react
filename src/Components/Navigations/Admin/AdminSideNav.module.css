@@ -1,7 +1,7 @@
 @value variables: "../../../styles/Variables.css";
 @value secondary-color, tertiary-color from variables;
 .AdminSidebar {
-  width: 16%;
+  width: 11%;
   height: 100%;
   border-right: 2px solid black;
 }
@@ -14,15 +14,14 @@
 
 .NavList {
   list-style: none;
-}
-
-.NavItem {
-  /* padding-left: 1rem 0; */
+  width: 100%;
 }
 
 .NavLink:link,
 .NavLink:visited {
   color: black;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .NavItem:not(:last-child) {

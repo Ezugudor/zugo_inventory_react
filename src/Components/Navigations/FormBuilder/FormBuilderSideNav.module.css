@@ -1,0 +1,44 @@
+@value Variables: "../../../styles/Variables.css";
+@value black-color, small-gutter from Variables;
+@value tertiary-color-light from Variables;
+
+.Aside {
+  height: 100%;
+  width: 5%;
+  padding-top: 2rem;
+  padding-left: 1rem;
+  border-right: 1px black-color solid;
+}
+
+.SideNav {
+  height: 100%;
+}
+
+.ImgBox {
+  height: 5rem;
+  width: 5rem;
+  border-radius: 4px;
+  position: relative;
+  cursor: pointer;
+}
+
+.ActiveImgBox {
+  background-color: tertiary-color-light;
+}
+
+.ImgBox:not(:last-child) {
+  margin-bottom: small-gutter;
+}
+
+.ImgHolder {
+  position: absolute;
+  height: 4rem;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.Img {
+  width: 100%;
+  height: 100%;
+}

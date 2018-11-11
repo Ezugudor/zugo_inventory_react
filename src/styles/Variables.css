@@ -8,17 +8,14 @@
 @value border-color: #979292;
 @value canvas-header-color: #E6E0E0;
 @value canvas-footer-color: #EEEEEF;
-@value progress-back-color: #EEC2D2
+@value progress-back-color: #EEC2D2;
 
 /* Distance */
 
-@value big-bottom-gutter: 6rem;
-@value medium-bottom-gutter: 4rem;
-@value small-bottom-gutter: 2rem;
-@value thin-bottom-gutter: 1rem;
-
-@value small-right-gutter: 2rem;
-@value medium-right-gutter: 4rem;
+@value big-gutter: 6rem;
+@value medium-gutter: 4rem;
+@value small-gutter: 2rem;
+@value thin-gutter: 1rem;
 
 /* Fonts  */
 @value defaultFont: 1.6rem;

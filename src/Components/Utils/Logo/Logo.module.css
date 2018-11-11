@@ -1,0 +1,7 @@
+@value Variables: "../../../styles/Variables.css";
+@value small-right-gutter from Variables;
+
+.Logo {
+  height: 4rem;
+  margin-top: small-right-gutter;
+}

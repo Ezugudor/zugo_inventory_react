@@ -9,7 +9,7 @@ export const Adminlayout = props => (
     <PrivateHeader />
     <main className={Style.AdminLayout}>
       <AdminSideNav />
-      <section className={Style.MainComponentContent}>{props.children}</section>
+      <div className={Style.ChildContent}>{props.children}</div>
     </main>
   </Aux>
 );

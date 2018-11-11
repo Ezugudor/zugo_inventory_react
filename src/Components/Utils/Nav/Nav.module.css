@@ -1,0 +1,11 @@
+@value Variables: "../../../styles/Variables.css";
+@value small-gutter, medium-gutter from Variables;
+
+.Nav {
+  margin-top: small-gutter;
+  margin-right: medium-gutter;
+}
+
+.NavList {
+  list-style: none;
+}
