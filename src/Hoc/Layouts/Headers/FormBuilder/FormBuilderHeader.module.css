@@ -1,5 +1,6 @@
 @value Variables: "../../../../styles/Variables.css";
-@value primary-color, white-color, medium-gutter, small-gutter from Variables;
+@value small-gutterfrom,  medium-gutter Variables;
+@value primary-color, white-color from Variables;
 
 .Header {
   background-color: primary-color;

@@ -1,0 +1,16 @@
+@value Variables: "../../../styles/Variables.css";
+@value typeform-border-color, small-gutter, thin-gutter from Variables;
+
+.editorPresenter {
+  z-index: 100;
+  position: relative;
+  width: 35%;
+  height: 100%;
+  border-right: 2px solid typeform-border-color;
+}
+.editorsContainer {
+  min-height: 100%;
+  padding-bottom: 100%;
+  position: relative;
+  padding-top: thin-gutter;
+}

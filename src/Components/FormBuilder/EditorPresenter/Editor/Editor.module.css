@@ -1,0 +1,66 @@
+.editorWrapper {
+  position: relative;
+}
+
+.editorWrapper:not(:last-child) {
+  margin-bottom: 2rem;
+}
+
+.editor {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+}
+
+.iconWrapper {
+  cursor: move;
+  position: relative;
+  z-index: 1;
+  padding: 24px 0 40px 24px;
+  display: flex;
+  -webkit-box-flex: 0;
+  -ms-flex: none;
+  flex: none;
+}
+
+.iconContents {
+  background-color: pink;
+  cursor: pointer;
+  height: 3.5rem;
+  width: 6rem;
+  position: relative;
+  display: flex;
+}
+
+.iconHolder {
+  position: absolute;
+  height: 4rem;
+  left: 50%;
+  top: 50%;
+  display: flex;
+  transform: translate(-50%, -50%);
+}
+
+.icon {
+  width: 70%;
+  height: 100%;
+  margin-left: -0.5rem;
+}
+
+.question {
+  width: calc(100% - 76px);
+  padding: 26px 24px 40px 16px;
+  font-size: 15px;
+  line-height: 26px;
+  font-family: "Gt America mono Web", monospace;
+  letter-spacing: -0.5px;
+}
+.position {
+  padding: 0.5rem 1rem 0 1rem;
+  color: white;
+  border-radius: 2px;
+}
+
+.questionBox span[contenteditable="false"] {
+  float: left;
+}
