@@ -1,36 +1,144 @@
-import PlainSerializer from "slate-plain-serializer";
+import { ditorDefaultValue } from "../../../../utils";
 import { Editor as SlateEditor } from "slate-react";
-import Style from "./Editor.module.css";
+import Plain from "slate-plain-serializer";
 import React, { Component } from "react";
-import { InitialValue } from "./Value";
+import { EditorView } from "./View";
+import PropTypes from "prop-types";
 
-export class Editor extends Component {
-  state = {
-    value: InitialValue
+class Class extends Component {
+  constructor(props) {
+    super(props);
+    this.editorPointer = React.createRef();
+    this.childPointer = React.createRef();
+    const text = this.props.element.name;
+    const children = this.props.element.children.join("\n");
+    this.state = {
+      value: text ? Plain.deserialize(text) : ditorDefaultValue(),
+      childValue: children ? Plain.deserialize(children) : ditorDefaultValue
+    };
+  }
+
+  componentDidMount() {
+    if (this.props.setCurrentEditor) {
+      this.props.setCurrentEditor(this.editorPointer);
+    }
+  }
+
+  onChange = ({ value }) => {
+    this.setState({ value });
+    const editorContent = Plain.serialize(value);
+    if (this.editorPointer.current) {
+      const { id } = this.editorPointer.current.props;
+      this.props.setElementName(id, editorContent);
+    }
+  };
+
+  onKeyDown = (event, change, next) => {
+    const { type } = this.editorPointer.current.props;
+    if (event.key === "Enter" && type === "multichoice") {
+      event.preventDefault();
+      this.childPointer.current.focus();
+      return true;
+    }
+
+    if (event.key === "Enter" && type !== "multichoice") {
+      event.preventDefault();
+      this.props.addNextEditor();
+      return true;
+    }
+    return next();
+  };
+
+  getChildContent = ({ value }) => {
+    const { id } = this.editorPointer.current.props;
+    const content = Plain.serialize(value).split("\n");
+    this.props.setElementChildren(id, content);
+    this.setState({ childValue: value });
+  };
+
+  onChildKeyDown = (event, change, next) => {
+    if (event.key !== "Enter") return next();
+    change.insertBlock("hello");
+  };
+
+  renderPlaceholder = (props, next) => {
+    const { node } = props;
+    if (node.object !== "block") return next();
+    if (node.text !== "") return next();
+
+    return (
+      <span
+        contentEditable={false}
+        style={{
+          display: "inline-block",
+          width: "0",
+          whiteSpace: "nowrap",
+          opacity: "0.33"
+        }}
+      >
+        - Choice
+      </span>
+    );
+  };
+
+  renderEditor = type => {
+    switch (type) {
+      case "multichoice":
+      case "dropdown":
+        return (
+          <div>
+            <SlateEditor
+              id={this.props.element.id}
+              type={this.props.element.type}
+              value={this.state.value}
+              onChange={this.onChange}
+              placeholder="Type your question here"
+              ref={this.editorPointer}
+              spellCheck={true}
+              onKeyDown={this.onKeyDown}
+            />
+            <SlateEditor
+              id={this.props.element.id}
+              type={this.props.element.type}
+              value={this.state.childValue}
+              placeholder="- Choice"
+              onChange={this.getChildContent}
+              ref={this.childPointer}
+              onKeyDown={this.keyDownOnChild}
+              spellCheck={true}
+              renderPlaceholder={this.renderPlaceholder}
+            />
+          </div>
+        );
+      default:
+        return (
+          <SlateEditor
+            id={this.props.element.id}
+            type={this.props.element.type}
+            value={this.state.value}
+            placeholder="Type your question here"
+            onKeyDown={this.onKeyDown}
+            ref={this.editorPointer}
+            onChange={this.onChange}
+            spellCheck={true}
+          />
+        );
+    }
   };
 
   render() {
     return (
-      <div className={Style.editorWrapper} tabIndex="-1">
-        <div data-q-type="ddd" className={Style.editor}>
-          <div className={Style.iconWrapper} draggable={true}>
-            <div className={Style.iconContents}>
-              <div className={Style.iconHolder}>
-                <img className={Style.icon} src="/img/sign.svg" alt="sign" />
-                <div className={Style.position}>1</div>
-              </div>
-            </div>
-          </div>
-          <div className={Style.question}>
-            <div className={Style.questionBox}>
-              <SlateEditor
-                placeholder="Type your question here"
-                value={this.state.value}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
+      <EditorView {...this.props}>
+        {this.renderEditor(this.props.element.type)}
+      </EditorView>
     );
   }
 }
+
+Class.propTypes = {
+  addNextEditor: PropTypes.func.isRequired,
+  element: PropTypes.object.isRequired,
+  setCurrentEditor: PropTypes.func
+};
+
+export const Editor = Class;

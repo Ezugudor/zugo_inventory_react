@@ -24,7 +24,6 @@
 }
 
 .iconContents {
-  background-color: pink;
   cursor: pointer;
   height: 3.5rem;
   width: 6rem;
@@ -35,6 +34,7 @@
 .iconHolder {
   position: absolute;
   height: 4rem;
+  padding-right: 1rem;
   left: 50%;
   top: 50%;
   display: flex;
@@ -43,7 +43,8 @@
 
 .icon {
   width: 70%;
-  height: 100%;
+  height: 2rem;
+  margin-top: 1rem;
   margin-left: -0.5rem;
 }
 

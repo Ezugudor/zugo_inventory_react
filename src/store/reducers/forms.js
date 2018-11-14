@@ -8,7 +8,8 @@ import {
 } from "../actions";
 
 const initialState = {
-  all: [],
+  synched: [],
+  unsynched: [],
   newForm: {
     elements: [],
     workspace: "",
@@ -28,6 +29,7 @@ export const form = (state = initialState, action) => {
       return updateState(state, { all: action.collection });
 
     case PRESERVE_FOR_PREVIEW:
+      // preserve unsaved forms for subsequent saving
       const newForm = { ...state.newForm };
       newForm.elements = action.elements;
       return updateState(state, { newForm: newForm });

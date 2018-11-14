@@ -1,4 +1,5 @@
 import Style from "./Settings.module.css";
+import PropsTypes from "prop-types";
 import { Blocks } from "./Blocks";
 import React from "react";
 
@@ -13,9 +14,13 @@ const view = props => (
       </div>
     </div>
     <div className={Style.contentWrapper}>
-      <Blocks />
+      <Blocks {...props} />
     </div>
   </section>
 );
+
+view.proptypes = {
+  addElement: PropsTypes.func.isRequired
+};
 
 export const Setting = view;

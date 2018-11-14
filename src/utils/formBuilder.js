@@ -1,4 +1,45 @@
-export const BlockTypes = [
+import { Value } from "slate";
+import uuid4 from "uuid4";
+export const ditorDefaultValue = () =>
+  Value.fromJSON({
+    document: {
+      nodes: [
+        {
+          object: "block",
+          type: "paragraph"
+        }
+      ]
+    }
+  });
+
+export const getDefaultElement = () => ({
+  validationRules: [],
+  type: "default",
+  children: [],
+  position: 1,
+  id: uuid4(),
+  name: ""
+});
+
+const generateDefaultVaidationRule = type => [];
+
+export const generateNewElement = (type, position) => {
+  const rules = generateDefaultVaidationRule(type);
+  const id = uuid4();
+  let children = [];
+  return {
+    formElement: {
+      validationRule: rules,
+      position,
+      name: "",
+      children,
+      type,
+      id
+    }
+  };
+};
+
+export const blockTypes = [
   { name: "Introduction Section", type: "introduction" },
   // { name: "Multiple Choice", type: "multichoice" },
   { name: "Passport Photo", type: "picture" },
