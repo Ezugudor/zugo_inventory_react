@@ -40,9 +40,9 @@ class Class extends Component {
   };
 
   setCurrentEditor = editoRef => {
-    setTimeout(() => {
-      editoRef.current.focus();
-    }, 2000);
+    // setTimeout(() => {
+    //   editoRef.current.focus();
+    // }, 1000);
   };
 
   addNextEditor = () => {

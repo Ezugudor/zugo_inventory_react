@@ -3,13 +3,6 @@
   padding-bottom: 12px;
 }
 
-.ActivteElement {
-  width: 100%;
-  opacity: 1;
-  position: relative;
-  animation: none 0s ease 0s 1 normal none running;
-}
-
 .InactiveElement {
   width: 100%;
   opacity: 0.2;

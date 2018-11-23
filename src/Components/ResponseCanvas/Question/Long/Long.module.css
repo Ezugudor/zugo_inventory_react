@@ -48,35 +48,16 @@
   padding: 0;
 }
 
-.NextButtonWrapper {
+.inactiveWrapper {
+  visibility: hidden;
+}
+
+.nextButtonWrapper {
   display: flex;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-  opacity: 0;
+  opacity: 1;
   align-items: center;
-  visibility: hidden;
   margin-top: 15px;
-}
-
-.NextButton {
-  padding: 7px 8px 7px;
-  min-width: 40px;
-  margin: 0;
-  height: 40px;
-  display: inline-block;
-  border: 1px solid;
-  position: relative;
-  font-family: inherit;
-}
-
-.ButtonInstruction {
-  color: #4fb0ae;
-  font-size: 12px;
-  letter-spacing: 0.3px;
-  line-height: 17px;
-  font-weight: 400;
-  margin-left: 10px;
-  display: inline-block;
-  white-space: nowrap;
 }
 
 .ValidationWrapper {
