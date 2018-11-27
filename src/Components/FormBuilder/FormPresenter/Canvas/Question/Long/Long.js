@@ -1,11 +1,11 @@
 import { NextButton } from "../NextButton";
 import React, { Component } from "react";
-import Style from "./Simple.module.css";
 import { NormalHouse } from "../Houses";
+import Style from "./Long.module.css";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 
-export class Simple extends Component {
+export class Long extends Component {
   state = {
     notInteracting: true
   };
@@ -31,18 +31,21 @@ export class Simple extends Component {
 
   render() {
     return (
-      <NormalHouse {...this.props}>
+      <NormalHouse el={this.props.el}>
         <div className={Style.ElementAnswer}>
-          <input
-            data-q-position={this.props.position}
+          <textarea
+            data-q-position={this.props.el.position}
             placeholder="Enter Your Answer Here"
             onChange={this.startInteraction}
             className={Style.Answer}
             data-input="true"
           />
         </div>
+        <p className={Style.AnwerHint}>
+          <strong>SHIFT</strong> + <strong>ENTER</strong> To make a new line
+        </p>
         <div className={this.wrapperClass()}>
-          <NextButton completeQuestion={this.completeQuestion} />
+          <NextButton completeQuestion={this.props.handleClick} />
         </div>
         <div className={Style.ValidationWrapper}>
           <div className={Style.Validation}>
@@ -54,7 +57,7 @@ export class Simple extends Component {
   }
 }
 
-Simple.propTypes = {
-  position: PropTypes.number.isRequired,
-  increaseCompletedQuestion: PropTypes.func.isRequired
+Long.propTypes = {
+  el: PropTypes.object.isRequired,
+  handleClick: PropTypes.func.isRequired
 };

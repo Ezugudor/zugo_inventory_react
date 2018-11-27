@@ -61,4 +61,5 @@
 .contentWrapper {
   height: 88%;
   overflow: scroll;
+  outline: none;
 }

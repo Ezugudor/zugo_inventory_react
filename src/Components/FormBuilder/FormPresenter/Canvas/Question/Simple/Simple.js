@@ -1,11 +1,12 @@
 import { NextButton } from "../NextButton";
+import { InputManager } from "../../../../../../core";
 import React, { Component } from "react";
+import Style from "./Simple.module.css";
 import { NormalHouse } from "../Houses";
-import Style from "./Long.module.css";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 
-export class Long extends Component {
+export class Simple extends Component {
   state = {
     notInteracting: true
   };
@@ -25,27 +26,21 @@ export class Long extends Component {
     }
   };
 
-  completeQuestion = () => {
-    this.props.increaseCompletedQuestion();
-  };
-
   render() {
     return (
-      <NormalHouse {...this.props}>
+      <NormalHouse el={this.props.el}>
         <div className={Style.ElementAnswer}>
-          <textarea
-            data-q-position={this.props.position}
-            placeholder="Enter Your Answer Here"
+          <input
+            placeholder={InputManager.generatePlaceholder(this.props.el)}
+            type={InputManager.generateType(this.props.el)}
+            data-q-position={this.props.el.position}
             onChange={this.startInteraction}
             className={Style.Answer}
             data-input="true"
           />
         </div>
-        <p className={Style.AnwerHint}>
-          <strong>SHIFT</strong> + <strong>ENTER</strong> To make a new line
-        </p>
         <div className={this.wrapperClass()}>
-          <NextButton completeQuestion={this.completeQuestion} />
+          <NextButton completeQuestion={this.props.handleClick} />
         </div>
         <div className={Style.ValidationWrapper}>
           <div className={Style.Validation}>
@@ -57,7 +52,7 @@ export class Long extends Component {
   }
 }
 
-Long.propTypes = {
-  position: PropTypes.number.isRequired,
-  increaseCompletedQuestion: PropTypes.func.isRequired
+Simple.propTypes = {
+  el: PropTypes.object.isRequired,
+  handleClick: PropTypes.func.isRequired
 };

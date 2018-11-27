@@ -9,6 +9,8 @@ const view = props => {
     <section className={Style.editorPresenter}>
       <div className={Style.editorsContainer}>
         {props.formElements.map((ele, index) => {
+          //  don't show an editor for introduction
+          if (ele.type === "introduction") return;
           if (lastIndex === index) {
             return (
               <Editor

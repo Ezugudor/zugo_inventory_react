@@ -13,6 +13,7 @@
 
 .Col3 {
   width: calc((70% - 9rem) / 4);
+  min-width: 20.1rem;
 }
 
 .Col3:not(:last-child) {

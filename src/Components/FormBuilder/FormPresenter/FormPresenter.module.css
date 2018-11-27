@@ -1,0 +1,17 @@
+.formPresenter {
+  width: 52%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.introSection {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.canvasSection {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}

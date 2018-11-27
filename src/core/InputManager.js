@@ -1,52 +1,45 @@
-import { InputMaker } from "./InputMaker";
-
 export class InputManager {
   static generateDefaultVaidationRule(type) {
     return [];
   }
 
-  static constructInput(input) {
-    const name = input.properties.name;
-    const type = input.type;
-    switch (type) {
-      case "multiChoice":
-        return InputMaker.makeCheckBoxes(name, input.children);
-
-      case "dropDown":
-        return InputMaker.makeDropDown(name, input.children);
-
-      case "email":
-        return InputMaker.makeTextInput(name, "email");
-
-      case "number":
-        return InputMaker.makeTextInput(name, "number");
-
+  static generateType(el) {
+    switch (el.type) {
+      case "shorttext":
+      case "firstname":
+      case "lastname":
+      case "address":
+        return "text";
+      case "mobile":
+        return "tel";
       case "date":
-        return InputMaker.makeTextInput(name, "date");
-
+      case "dob":
+        return "date";
+      case "tel":
+        return "tel";
+      case "email":
+        return "email";
       case "bvn":
-        return InputMaker.makeTextInput(name, "number");
-
-      case "title":
-        return InputMaker.makeHeaderInput(name);
-
-      case "shortText":
-        return InputMaker.makeTextInput(name);
-
-      case "pasport":
-        return InputMaker.makeFileInput(name);
-
-      case "signature":
-        return InputMaker.makeFileInput(name);
-
-      case "yesOrNo":
-        return InputMaker.makeRadioInput(name);
-
-      case "longText":
-        return InputMaker.makeTextArea(name);
-
+        return "number";
       default:
-        return null;
+        return "text";
+    }
+  }
+
+  static generatePlaceholder(el) {
+    switch (el.type) {
+      case "address":
+        return "Like 16 Karimu Ikotun VI, Lagos";
+      case "mobile":
+        return "Like 08136868448";
+      case "tel":
+        return "Like 01729011";
+      case "email":
+        return "Like jendoe@cool.com";
+      case "bvn":
+        return "Like 22123803000";
+      default:
+        return "Enter Your Answer Here";
     }
   }
 }

@@ -25,12 +25,12 @@ export class YesOrNo extends Component {
       return modifiedOption;
     });
     this.setState({ options: modifiedOptions });
-    this.props.increaseCompletedQuestion();
+    this.props.handleClick();
   };
 
   render() {
     return (
-      <FieldSetHouse {...this.props}>
+      <FieldSetHouse el={this.props.el}>
         <div className={Style.FieldSetAnswerWrapper}>
           <div className={Style.FieldSetAnswerContents}>
             <div className={Style.Wrapper}>
@@ -58,6 +58,6 @@ export class YesOrNo extends Component {
 }
 
 YesOrNo.propTypes = {
-  position: PropTypes.number.isRequired,
-  increaseCompletedQuestion: PropTypes.func.isRequired
+  handleClick: PropTypes.func.isRequired,
+  el: PropTypes.object.isRequired
 };

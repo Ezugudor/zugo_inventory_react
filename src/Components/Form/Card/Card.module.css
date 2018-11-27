@@ -2,6 +2,7 @@
 @value defaultFont, black-color, tertiary-color from Variables;
 .Card {
   height: 26vh;
+  min-height: 22rem;
   width: 100%;
   overflow: auto;
   border-radius: 8px;

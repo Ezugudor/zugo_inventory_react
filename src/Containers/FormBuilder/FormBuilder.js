@@ -9,8 +9,6 @@ class Class extends Component {
     formElements: [getDefaultElement()]
   };
 
-  componentDidUpdate() {}
-
   addElement = type => {
     const position = this.state.formElements.length + 1;
     const { formElement } = generateNewElement(type, position);

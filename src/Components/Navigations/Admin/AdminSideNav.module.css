@@ -2,6 +2,7 @@
 @value secondary-color, tertiary-color from variables;
 .AdminSidebar {
   width: 11%;
+  min-width: 15rem;
   height: 100%;
   border-right: 2px solid black;
 }

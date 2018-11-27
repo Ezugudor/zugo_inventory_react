@@ -1,14 +1,13 @@
-@value variables: "../../../styles/Variables.css";
+@value variables: "../../../../../styles/Variables.css";
 @value primary-color, secondary-color, tertiary-color from variables;
 
 .Footer {
   background-color: tertiary-color;
-
   width: 100%;
 }
 
 .FooterContent {
-  margin-left: 20rem;
+  margin: 0 2rem;
   width: 100%;
   display: inline-flex;
 }
@@ -20,6 +19,8 @@
 
 .FooterNavigiation {
   width: 10%;
+  display: flex;
+  padding-bottom: 1rem;
 }
 
 progress[value] {

@@ -1,4 +1,5 @@
 import { EditorPresenter } from "./EditorPresenter";
+import { FormPresenter } from "./FormPresenter";
 import { Aux } from "../../Hoc/Auxiliary";
 import { Setting } from "./Settings";
 import PropTypes from "prop-types";
@@ -8,6 +9,7 @@ const view = props => (
   <Aux>
     <Setting {...props} />
     <EditorPresenter {...props} />
+    <FormPresenter elements={props.formElements} />
   </Aux>
 );
 

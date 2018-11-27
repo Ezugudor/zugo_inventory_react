@@ -1,13 +1,12 @@
+import { NavItem, Nav } from "../../../../Components/Utils";
 import { logoutUser } from "../../../../store/actions";
 import { Logo } from "../../../../Components/Utils";
-import { NavItem, Nav } from "../../../../Components/Utils";
 import Style from "./FormBuilderHeader.module.css";
 import BlockIcon from "../../../../img/block.svg";
 import { NavLink } from "react-router-dom";
-import PropTypes from "prop-types";
 import React from "react";
 
-const view = props => (
+export const FormBuilder = props => (
   <header className={Style.Header}>
     <div className={Style.LeftSide}>
       <div className={Style.LogoBox}>
@@ -33,13 +32,9 @@ const view = props => (
         </NavItem>
         <NavItem>
           <span className="navigation__icon" />
-          <span>Preview</span>
-        </NavItem>
-        <NavItem>
-          <span className="navigation__icon" />
           <span>d</span>
         </NavItem>
-        <NavItem>
+        <NavItem onClick={logoutUser}>
           <span className="navigation__icon" />
           <span>Logout</span>
         </NavItem>
@@ -47,10 +42,3 @@ const view = props => (
     </div>
   </header>
 );
-
-// view.propTypes = {
-//   linkToParent: PropTypes.string.isRequired,
-//   text: PropTypes.string.isRequired
-// };
-
-export const FormBuilder = view;

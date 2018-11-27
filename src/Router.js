@@ -1,11 +1,4 @@
-import {
-  FormBuilder,
-  FormTypes,
-  Login,
-  Signup,
-  Form,
-  ResponseCanvas
-} from "./Containers";
+import { FormBuilder, FormTypes, Login, Signup, Form } from "./Containers";
 import { Redirect, Switch, Route } from "react-router-dom";
 import { SwypPartnerApi } from "./core";
 import Store from "./store";
@@ -55,7 +48,6 @@ const ManagerRoute = ({ component: Component, ...rest }) => (
 export default () => (
   <Switch>
     <PrivateRoute exact path="/formtypes/:parent/:child" component={Form} />
-    <PrivateRoute exact path="/responsecanvas" component={ResponseCanvas} />
     <PrivateRoute exact path="/formbuilder" component={FormBuilder} />
     <PrivateRoute exact path="/formtypes" component={FormTypes} />
     <PrivateRoute exact path="/signup" component={Signup} />

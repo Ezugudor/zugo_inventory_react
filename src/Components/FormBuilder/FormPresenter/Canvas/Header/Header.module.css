@@ -1,4 +1,4 @@
-@value variables: "../../../styles/Variables.css";
+@value variables: "../../../../../styles/Variables.css";
 @value tertiary-color-light from variables;
 
 .Header {
