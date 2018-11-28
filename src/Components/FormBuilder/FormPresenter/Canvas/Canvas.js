@@ -1,4 +1,5 @@
 import { ResponseCanvas } from "../../../../core/responseCanvas";
+import { calculateElementCount } from "../../../../utils";
 import { renderFormFor } from "./Question";
 import React, { Component } from "react";
 import Style from "./Canvas.module.css";
@@ -84,9 +85,9 @@ export class Canvas extends Component {
         </section>
         <section className={Style.FooterSection}>
           <Footer
+            totalQuestion={calculateElementCount(this.props.elements)}
             completedQuestion={this.state.completedQuestion}
             goToNextQuestion={this.goToNextQuestion}
-            totalQuestion={this.props.elements.length}
           />
         </section>
       </div>

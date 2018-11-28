@@ -34,5 +34,6 @@ export const Footer = props => (
 );
 
 Footer.propTypes = {
+  totalQuestion: PropTypes.number.isRequired,
   goToNextQuestion: PropTypes.func.isRequired
 };

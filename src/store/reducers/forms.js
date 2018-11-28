@@ -1,18 +1,19 @@
 import { updateState } from "../../utils";
 import {
-  UNPRESERVE_FOR_PREVIEW,
-  PRESERVE_FOR_PREVIEW,
+  UNPRESERVE_NEW_FORM,
+  PRESERVE_NEW_FORM,
   START_NEW_FORM,
   UPDATE_FORMS,
   SAVE_FORMS
 } from "../actions";
 
 const initialState = {
+  all: {},
   synched: [],
   unsynched: [],
   newForm: {
+    formType: { id: "", parent: "", name: "" },
     elements: [],
-    workspace: "",
     name: ""
   }
 };
@@ -20,23 +21,30 @@ const initialState = {
 export const form = (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_FORMS:
-      return updateState(state, { all: state.all.concat(action.form) });
+      let all = { ...state.all };
+      if (all[action.id]) {
+        all[action.id].push(action.form);
+      } else {
+        all[action.id] = [action.form];
+      }
+      return updateState(state, { all });
 
-    case UNPRESERVE_FOR_PREVIEW:
+    case UNPRESERVE_NEW_FORM:
       return updateState(state, { newForm: initialState.newForm });
 
     case SAVE_FORMS:
-      return updateState(state, { all: action.collection });
+      all = { ...state.all };
+      all[action.id] = action.collection;
+      return updateState(state, { all });
 
-    case PRESERVE_FOR_PREVIEW:
-      // preserve unsaved forms for subsequent saving
+    case PRESERVE_NEW_FORM:
       const newForm = { ...state.newForm };
       newForm.elements = action.elements;
       return updateState(state, { newForm: newForm });
 
     case START_NEW_FORM:
       const form = { ...state.newForm };
-      form.workspace = action.data.workspace;
+      form.formType = action.data.formType;
       form.name = action.data.name;
       return updateState(state, { newForm: form });
 

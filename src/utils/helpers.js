@@ -12,11 +12,13 @@ export const handleError = (err, dispatch) => {
 };
 
 export const calculateElementCount = formInputs => {
-  return formInputs.filter(element => element.type !== "section").length;
+  return formInputs.filter(
+    element => element.type !== "section" && element.type !== "introduction"
+  ).length;
 };
 
 export const chunkData = (arr, amount) => {
-  if (!Array.isArray(arr)) throw Error("Value given is not an array");
+  if (!Array.isArray(arr)) return [];
   const result = [];
   let currentChunk = [];
   arr.forEach(item => {

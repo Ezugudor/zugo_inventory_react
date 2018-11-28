@@ -4,9 +4,10 @@ import { Logo } from "../../../../Components/Utils";
 import Style from "./FormBuilderHeader.module.css";
 import BlockIcon from "../../../../img/block.svg";
 import { NavLink } from "react-router-dom";
+import PropTypes from "prop-types";
 import React from "react";
 
-export const FormBuilder = props => (
+export const FormBuilderHeader = props => (
   <header className={Style.Header}>
     <div className={Style.LeftSide}>
       <div className={Style.LogoBox}>
@@ -26,7 +27,7 @@ export const FormBuilder = props => (
     </div>
     <div className={Style.RightSide}>
       <Nav>
-        <NavItem>
+        <NavItem onClick={props.save}>
           <span className="navigation__icon" />
           <span>Save</span>
         </NavItem>
@@ -42,3 +43,7 @@ export const FormBuilder = props => (
     </div>
   </header>
 );
+
+FormBuilderHeader.propTypes = {
+  save: PropTypes.func.isRequired
+};

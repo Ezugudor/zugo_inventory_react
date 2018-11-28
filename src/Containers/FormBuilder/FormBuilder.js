@@ -1,12 +1,35 @@
 import { getDefaultElement, generateNewElement } from "../../utils";
+import { preserveNewForm, createForm } from "../../store/actions";
 import { FormBuilderView } from "../../Components/FormBuilder";
 import { FormBuiderLayout } from "../../Hoc/Layouts";
+import { getNewForm } from "../../store/selectors";
+import { slugName } from "../../utils";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 class Class extends Component {
   state = {
-    currentEditor: null,
+    showSettingsWindow: false,
+    settingsWindowName: "",
     formElements: [getDefaultElement()]
+  };
+
+  componentDidMount() {
+    if (this.props.newForm.elements.length) {
+      this.setState({ formElements: this.props.newForm.elements });
+    }
+  }
+
+  changeConfigWindow = name => {
+    this.setState({
+      showSettingsWindow: true,
+      settingsWindowName: name
+    });
+  };
+
+  toggleConfigWindow = () => {
+    this.setState(prevState => ({
+      showSettingsWindow: !prevState.showSettingsWindow
+    }));
   };
 
   addElement = type => {
@@ -24,6 +47,7 @@ class Class extends Component {
     const element = elements[elementIdex];
     element.name = name;
     elements[elementIdex] = element;
+    this.props.preserveNewForm(elements);
     this.setState({ formElements: elements });
   };
 
@@ -34,6 +58,7 @@ class Class extends Component {
     const element = elements[elementIdex];
     element.children = content;
     elements[elementIdex] = element;
+    this.props.preserveNewForm(elements);
     this.setState({ formElements: elements });
   };
 
@@ -51,14 +76,36 @@ class Class extends Component {
     this.setState({ formElements: elements });
   };
 
+  createForm = () => {
+    const { name, parent } = this.props.newForm.formType;
+
+    const details = {
+      formTypeId: this.props.newForm.formType.id,
+      elements: this.props.newForm.elements,
+      name: this.props.newForm.name
+    };
+
+    const to = `/formtypes/${slugName(parent)}/${slugName(name)}`;
+    const request = {
+      to,
+      params: this.props.newForm.formType
+    };
+    const { history } = this.props;
+    this.props.createForm(details, history, request);
+  };
+
   render() {
     return (
-      <FormBuiderLayout>
+      <FormBuiderLayout
+        changeConfigWindow={this.changeConfigWindow}
+        save={this.createForm}
+      >
         <FormBuilderView
+          toggleConfigWindow={this.toggleConfigWindow}
           setElementChildren={this.setElementChildren}
-          setElementName={this.setElementName}
           setCurrentEditor={this.setCurrentEditor}
           formElements={this.state.formElements}
+          setElementName={this.setElementName}
           addNextEditor={this.addNextEditor}
           addElement={this.addElement}
         />
@@ -67,7 +114,8 @@ class Class extends Component {
   }
 }
 
+const mapStateToProps = state => ({ newForm: getNewForm(state) });
 export const FormBuilder = connect(
-  null,
-  null
+  mapStateToProps,
+  { preserveNewForm, createForm }
 )(Class);

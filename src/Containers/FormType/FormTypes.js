@@ -2,20 +2,20 @@ import { Cards, Controls } from "../../Components/FormTypes";
 import { fetchWorkspaces } from "../../store/actions";
 import { Adminlayout } from "../../Hoc/Layouts";
 import React, { Component } from "react";
-import { slugName } from "../../utils";
-
-import { connect } from "react-redux";
 import { chunkData } from "../../utils";
+import { slugName } from "../../utils";
+import { connect } from "react-redux";
 class Class extends Component {
   componentDidMount() {
     const business = this.props.business;
     this.props.fetchWorkspaces(business.id);
   }
 
-  goToForms = ({ name, parent }) => {
+  goToForms = formType => {
+    const { parent, name } = formType;
     const path = this.props.match.path;
     const url = `${path}/${slugName(parent)}/${slugName(name)}`;
-    this.props.history.push(url);
+    this.props.history.push(url, { params: formType });
   };
 
   render() {

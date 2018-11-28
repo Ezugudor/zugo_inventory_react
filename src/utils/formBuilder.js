@@ -21,9 +21,8 @@ export const getDefaultElement = () => ({
   name: ""
 });
 
-const generateDefaultVaidationRule = type => [];
-
 export const generateNewElement = (type, position) => {
+  if (type === "introduction") position = 0;
   const rules = generateDefaultVaidationRule(type);
   const id = uuid4();
   let children = [];
@@ -38,6 +37,8 @@ export const generateNewElement = (type, position) => {
     }
   };
 };
+
+const generateDefaultVaidationRule = type => [];
 
 export const blockTypes = [
   { name: "Introduction Section", type: "introduction" },

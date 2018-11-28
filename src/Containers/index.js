@@ -1,4 +1,3 @@
-export * from "./ResponseCanvas";
 export * from "./FormBuilder";
 export * from "./FormType";
 export * from "./Signup";

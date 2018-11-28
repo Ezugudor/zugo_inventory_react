@@ -47,7 +47,7 @@ const ManagerRoute = ({ component: Component, ...rest }) => (
 
 export default () => (
   <Switch>
-    <PrivateRoute exact path="/formtypes/:parent/:child" component={Form} />
+    <PrivateRoute exact path="/formtypes/:parent/:name" component={Form} />
     <PrivateRoute exact path="/formbuilder" component={FormBuilder} />
     <PrivateRoute exact path="/formtypes" component={FormTypes} />
     <PrivateRoute exact path="/signup" component={Signup} />

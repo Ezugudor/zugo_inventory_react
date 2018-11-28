@@ -1,12 +1,13 @@
 import { FormBuilderSideNav } from "../../../Components/Navigations";
 import Style from "./FormBuilderLayout.module.css";
-import { FormBuilder } from "../Headers";
+import { FormBuilderHeader } from "../Headers";
 import { Aux } from "../../Auxiliary";
+import PropTypes from "prop-types";
 import React from "react";
 
-const view = props => (
+export const FormBuiderLayout = props => (
   <Aux>
-    <FormBuilder />
+    <FormBuilderHeader save={props.save} />
     <main className={Style.Main}>
       <FormBuilderSideNav />
       <div className={Style.ChildContent}>{props.children}</div>
@@ -14,4 +15,7 @@ const view = props => (
   </Aux>
 );
 
-export const FormBuiderLayout = view;
+FormBuiderLayout.propTypes = {
+  changeConfigWindow: PropTypes.func.isRequired,
+  save: PropTypes.func.isRequired
+};

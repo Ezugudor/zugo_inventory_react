@@ -1,39 +1,27 @@
+import { setNotificationMessage, startNetworkRequest } from "./app";
+import { START_NEW_FORM, UPDATE_FORMS, SAVE_FORMS } from "./types";
+import { UNPRESERVE_NEW_FORM, PRESERVE_NEW_FORM } from "./types";
 import { SwypPartnerApi } from "../../core/api";
-import {
-  UNPRESERVE_FOR_PREVIEW,
-  PRESERVE_FOR_PREVIEW,
-  START_NEW_FORM,
-  UPDATE_FORMS,
-  SAVE_FORMS
-} from "./types";
-import {
-  setNotificationMessage,
-  startNetworkRequest,
-  stopNetworkRequest
-} from "./app";
+import { stopNetworkRequest } from "./app";
+import { handleError } from "../../utils";
 
-const saveForms = collection => ({ type: SAVE_FORMS, collection });
-const updateForms = form => ({ type: UPDATE_FORMS, form });
-const unpreserveFormForPreview = () => ({
-  type: UNPRESERVE_FOR_PREVIEW
+const saveForms = (collection, id) => ({ type: SAVE_FORMS, collection, id });
+const updateForms = (form, id) => ({ type: UPDATE_FORMS, form, id });
+const unpreserveNewForm = () => ({
+  type: UNPRESERVE_NEW_FORM
 });
 
-export const preserveFormForPreview = elements => ({
-  type: PRESERVE_FOR_PREVIEW,
-  elements
-});
-export const startNewForm = data => ({
-  type: START_NEW_FORM,
-  data
-});
+export const preserveNewForm = elements => dispatach =>
+  dispatach({
+    type: PRESERVE_NEW_FORM,
+    elements
+  });
 
-const handleError = (err, dispatch) => {
-  if (err.response) {
-    const error = err.response.data;
-    return dispatch(setNotificationMessage(error.details, error.type, "error"));
-  }
-  dispatch(setNotificationMessage("Bad Network", "error"));
-};
+export const startNewForm = data => dispatach =>
+  dispatach({
+    type: START_NEW_FORM,
+    data
+  });
 
 export const fetchForms = workspaceId => {
   return dispatch => {
@@ -41,7 +29,7 @@ export const fetchForms = workspaceId => {
     SwypPartnerApi.get(`forms/workspaces/${workspaceId}`)
       .then(res => {
         dispatch(stopNetworkRequest());
-        dispatch(saveForms(res.data));
+        dispatch(saveForms(res.data, workspaceId));
       })
       .catch(err => {
         handleError(err, dispatch);
@@ -49,22 +37,22 @@ export const fetchForms = workspaceId => {
   };
 };
 
-export const createForm = (details, history, to) => {
+export const createForm = (details, history, { to, params }) => {
   return dispatch => {
     dispatch(startNetworkRequest());
     SwypPartnerApi.post("forms", details)
       .then(res => {
         dispatch(stopNetworkRequest());
-        dispatch(updateForms(res.data));
-        dispatch(unpreserveFormForPreview());
-        history.push(to);
-
+        const { formTypeId } = details;
+        dispatch(updateForms(res.data), formTypeId);
+        dispatch(unpreserveNewForm());
         dispatch(
           setNotificationMessage(
             `${res.data.name} Form was created successfully`,
             "success"
           )
         );
+        history.push(to, { params });
       })
       .catch(err => {
         handleError(err, dispatch);

@@ -3,7 +3,7 @@ import Style from "./Card.module.css";
 import PropTypes from "prop-types";
 import React from "react";
 
-const view = props => (
+export const Card = props => (
   <div className={Style.Card} onClick={() => props.viewForms(props.formType)}>
     <div className={Style.Box}>
       <div className={Style.ImageBox}>
@@ -20,9 +20,7 @@ const view = props => (
   </div>
 );
 
-view.propTypes = {
+Card.propTypes = {
   formType: PropTypes.object.isRequired,
   viewForms: PropTypes.func.isRequired
 };
-
-export const Card = view;
