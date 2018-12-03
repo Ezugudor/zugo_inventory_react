@@ -73,7 +73,8 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "prepush": "yarn build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -130,5 +131,14 @@
       "prettier --write",
       "git add"
     ]
+  },
+  "devDependencies": {
+    "cz-conventional-changelog": "^2.1.0",
+    "lint-staged": "^8.1.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
