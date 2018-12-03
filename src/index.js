@@ -6,8 +6,6 @@ import Store from "./store";
 import React from "react";
 import App from "./App";
 
-import registerServiceWorker from "./registerServiceWorker";
-
 ReactDOM.render(
   <StoreBinder store={Store}>
     <BrowserRouter>
@@ -16,4 +14,3 @@ ReactDOM.render(
   </StoreBinder>,
   document.getElementById("root")
 );
-registerServiceWorker();
