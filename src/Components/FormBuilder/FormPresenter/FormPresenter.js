@@ -10,11 +10,9 @@ export class FormPresenter extends Component {
   };
 
   toggleIntro = () => {
-    this.setState(prevState => {
-      return {
-        showIntro: !prevState.showIntro
-      };
-    });
+    return this.setState(prevState => ({
+      showIntro: !prevState.showIntro
+    }));
   };
 
   containsIntro = () => {
