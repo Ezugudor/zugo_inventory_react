@@ -4,7 +4,7 @@ import BlockImg from "../../../img/block.svg";
 import PropTypes from "prop-types";
 import React from "react";
 
-const view = props => (
+export const FormBuilderSideNav = props => (
   <aside className={Style.Aside}>
     <div
       className={`${Style.ImgBox} ${Style.ActiveImgBox}`}
@@ -25,8 +25,6 @@ const view = props => (
   </aside>
 );
 
-// view.propTypes = {
-//   changeSettings: PropTypes.func.isRequired
-// };
-
-export const FormBuilderSideNav = view;
+FormBuilderSideNav.propTypes = {
+  changeSettings: PropTypes.func.isRequired
+};
