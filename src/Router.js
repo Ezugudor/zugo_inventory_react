@@ -27,23 +27,23 @@ const QuestRoute = ({ component: Component, ...rest }) => (
   />
 );
 
-const ManagerRoute = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={props => {
-      const state = Store.getState();
-      const currentUser = state.user.currentUser;
-      const token = state.user.token;
-      SwypPartnerApi.defaults.headers.common["Authorization"] = token;
-      return currentUser &&
-        (currentUser.role === "manager" || currentUser.role === "admin") ? (
-        <Component {...props} />
-      ) : (
-        <Redirect to="/dashboard" />
-      );
-    }}
-  />
-);
+// const ManagerRoute = ({ component: Component, ...rest }) => (
+//   <Route
+//     {...rest}
+//     render={props => {
+//       const state = Store.getState();
+//       const currentUser = state.user.currentUser;
+//       const token = state.user.token;
+//       SwypPartnerApi.defaults.headers.common["Authorization"] = token;
+//       return currentUser &&
+//         (currentUser.role === "manager" || currentUser.role === "admin") ? (
+//         <Component {...props} />
+//       ) : (
+//         <Redirect to="/dashboard" />
+//       );
+//     }}
+//   />
+// );
 
 export default () => (
   <Switch>
