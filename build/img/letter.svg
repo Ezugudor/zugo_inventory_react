@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 61.105 69.592">
+  <defs>
+    <style>
+      .cls-1 {
+        opacity: 0.45;
+      }
+
+      .cls-2 {
+        fill: #eb1761;
+      }
+
+      .cls-3 {
+        fill: #b90b2a;
+      }
+
+      .cls-4 {
+        fill: #a2001d;
+      }
+
+      .cls-5 {
+        fill: #dedde0;
+      }
+
+      .cls-6 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <g id="email" class="cls-1" transform="translate(-25)">
+    <path id="XMLID_1257_" class="cls-2" d="M266.127,176.411h0L250,191.641l22.914,19.1V170Z" transform="translate(-186.809 -141.145)"/>
+    <path id="XMLID_1258_" class="cls-2" d="M25,170v40.737l22.914-19.1Z" transform="translate(0 -141.145)"/>
+    <path id="XMLID_1259_" class="cls-2" d="M47.914,297.5,25,316.6H55.553V304.714Z" transform="translate(0 -247.003)"/>
+    <path id="XMLID_1260_" class="cls-2" d="M205,304.714V316.6h30.553l-22.914-19.1Z" transform="translate(-149.447 -247.003)"/>
+    <path id="XMLID_1261_" class="cls-3" d="M31.788,132.229,25,138.64h6.788Z" transform="translate(0 -109.785)"/>
+    <path id="XMLID_1262_" class="cls-3" d="M351.794,138.638l-6.789-6.411v6.411Z" transform="translate(-265.689 -109.783)"/>
+    <path id="XMLID_1263_" class="cls-3" d="M152.04,0,141.213,10.225,162.84,10.2Z" transform="translate(-96.487)"/>
+    <path id="XMLID_1264_" class="cls-4" d="M345.008,176.411,351.8,170h-6.788Z" transform="translate(-265.691 -141.145)"/>
+    <path id="XMLID_1265_" class="cls-4" d="M55.553,198.855,31.787,176.41V170H25l22.914,21.641Z" transform="translate(0 -141.145)"/>
+    <path id="XMLID_1266_" class="cls-5" d="M64.986,85.081l23.765,22.445,7.638-7.214,16.127-15.23h0V60l-12.963.016-21.627.026-12.936.015V85.081Zm8.489-4.713h30.553V85.46H73.475Zm0-5.092V70.184h30.553v5.092Z" transform="translate(-33.199 -49.816)"/>
+    <rect id="XMLID_1270_" class="cls-6" width="30.553" height="5.092" transform="translate(40.276 20.368)"/>
+    <rect id="XMLID_1271_" class="cls-6" width="30.553" height="5.092" transform="translate(40.276 30.553)"/>
+  </g>
+</svg>

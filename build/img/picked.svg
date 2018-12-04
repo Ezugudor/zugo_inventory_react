@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 257.365 189.004">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #f15c90;
+      }
+    </style>
+  </defs>
+  <g id="tick_pink" transform="translate(0.001 -67.998)">
+    <g id="Group_955" data-name="Group 955" transform="translate(0 67.997)">
+      <path id="Path_875" data-name="Path 875" class="cls-1" d="M253.595,71.767a12.868,12.868,0,0,0-18.2,0L81.227,225.937l-59.26-59.26a12.868,12.868,0,1,0-18.2,18.2l68.359,68.358a12.872,12.872,0,0,0,18.2,0L253.595,89.965A12.868,12.868,0,0,0,253.595,71.767Z" transform="translate(0 -67.997)"/>
+    </g>
+  </g>
+</svg>
