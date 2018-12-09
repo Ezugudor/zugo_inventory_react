@@ -16,7 +16,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   />
 );
 
-const QuestRoute = ({ component: Component, ...rest }) => (
+const GuestRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props => {
@@ -50,8 +50,8 @@ export default () => (
     <PrivateRoute exact path="/formtypes/:parent/:name" component={Form} />
     <PrivateRoute exact path="/formbuilder" component={FormBuilder} />
     <PrivateRoute exact path="/formtypes" component={FormTypes} />
-    <PrivateRoute exact path="/signup" component={Signup} />
-    <QuestRoute exact path="/login" component={Login} />
-    <QuestRoute exact path="/" component={Login} />
+    <GuestRoute exact path="/signup" component={Signup} />
+    <GuestRoute exact path="/login" component={Login} />
+    <GuestRoute exact path="/" component={Login} />
   </Switch>
 );
