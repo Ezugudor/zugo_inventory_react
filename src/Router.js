@@ -1,4 +1,11 @@
-import { FormBuilder, FormTypes, Login, Signup, Form } from "./Containers";
+import {
+  FormBuilder,
+  Dashboard,
+  FormTypes,
+  Login,
+  Signup,
+  Form
+} from "./Containers";
 import { Redirect, Switch, Route } from "react-router-dom";
 import { SwypPartnerApi } from "./core";
 import Store from "./store";
@@ -22,7 +29,7 @@ const GuestRoute = ({ component: Component, ...rest }) => (
     render={props => {
       const state = Store.getState();
       const token = state.user.token;
-      return token ? <Redirect to="/formtypes" /> : <Component {...props} />;
+      return token ? <Redirect to="/dashboard" /> : <Component {...props} />;
     }}
   />
 );
@@ -50,6 +57,7 @@ export default () => (
     <PrivateRoute exact path="/formtypes/:parent/:name" component={Form} />
     <PrivateRoute exact path="/formbuilder" component={FormBuilder} />
     <PrivateRoute exact path="/formtypes" component={FormTypes} />
+    <PrivateRoute exact path="/dashboard" component={Dashboard} />
     <GuestRoute exact path="/signup" component={Signup} />
     <GuestRoute exact path="/login" component={Login} />
     <GuestRoute exact path="/" component={Login} />

@@ -1,5 +1,6 @@
-import { DatePicker, InboxPagination } from '../Utils';
-import React from 'react';
+import { DatePicker, InboxPagination } from "../../Utils";
+import React from "react";
+
 export const Inbox = props => (
   <div className="inbox">
     <section className="inbox__header">
