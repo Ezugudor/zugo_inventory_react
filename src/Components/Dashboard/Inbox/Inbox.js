@@ -1,18 +1,49 @@
 import { InboxHeader } from "./Header";
+import PropTypes from "prop-types";
 import { InboxItem } from "./Item";
 import React from "react";
 
 export const Inbox = props => (
-  <section className="inbox__body">
-    <InboxHeader />
-    <InboxItem
-      formName="Account Opening - Individual"
-      date="10:22am April 12, 2018"
+  <section>
+    <InboxHeader
+      unreadCount={props.unread.count}
+      selectedTab={props.tabToShow}
+      switchTab={props.switchTab}
     />
-    <InboxItem
-      formName="GTBusiness Account - Corporate"
-      note="Email is missing"
-      date="10:22am April 12, 2018"
-    />
+    {showResponse(props)}
   </section>
 );
+
+const showResponse = props => {
+  switch (props.tabToShow) {
+    case "processed":
+      const { processed } = props;
+      return processed.result.map(res => (
+        <InboxItem
+          formName={res.form.name}
+          date={res.createdAt}
+          key={res._id}
+        />
+      ));
+
+    case "unread":
+      const { unread } = props;
+      return unread.result.map(res => (
+        <InboxItem
+          formName={res.form.name}
+          date={res.createdAt}
+          key={res._id}
+        />
+      ));
+
+    default:
+      return null;
+  }
+};
+
+Inbox.ropTypes = {
+  tabToShow: PropTypes.string.isRequired,
+  processed: PropTypes.object.isRequired,
+  switchTab: PropTypes.func.isRequired,
+  unread: PropTypes.object.isRequired
+};

@@ -25,7 +25,7 @@ export const loginUser = (loginDetails, history) => {
             "success"
           )
         );
-        history.push("/formtypes");
+        history.push("/dashboard");
       })
       .catch(err => handleError(err, dispatch));
   };
