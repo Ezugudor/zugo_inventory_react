@@ -1,16 +1,13 @@
-import { Notes, ResponseUi, ResponseControls } from '../../Components/Response';
-import { Adminlayout } from '../../Hoc/Layouts';
-import React, { Component } from 'react';
+import { ResponseView } from "../../Components/Response";
+import React, { Component } from "react";
+
 export class Response extends Component {
+  componentWillMount() {
+    const { id } = this.props.match.params;
+    this.id = id;
+  }
+
   render() {
-    return (
-      <Adminlayout pageTitle="Account Opening">
-        <div className="response">
-          <ResponseControls />
-          <Notes />
-          <ResponseUi />
-        </div>
-      </Adminlayout>
-    );
+    return <ResponseView />;
   }
 }

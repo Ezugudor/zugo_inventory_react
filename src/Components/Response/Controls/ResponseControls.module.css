@@ -1,0 +1,31 @@
+.controlSection {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+
+.info {
+  font-size: 2.1rem;
+  font-weight: 400;
+}
+
+.button {
+  font-size: 1.5rem;
+  padding: 0.9rem 2.7rem;
+  border-radius: 20px;
+  cursor: pointer;
+  outline: none;
+}
+
+.button:not(:last-child) {
+  margin-right: 0.4rem;
+}
+
+.buttonIcon {
+  margin-right: 0.6rem;
+}
+
+.iconImage {
+  height: 1.5rem;
+  width: 1rem;
+}

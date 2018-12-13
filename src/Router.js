@@ -2,6 +2,7 @@ import {
   FormBuilder,
   Dashboard,
   FormTypes,
+  Response,
   Login,
   Signup,
   Form
@@ -56,6 +57,7 @@ export default () => (
   <Switch>
     <PrivateRoute exact path="/formtypes/:parent/:name" component={Form} />
     <PrivateRoute exact path="/formbuilder" component={FormBuilder} />
+    <PrivateRoute exact path="/responses/:id" component={Response} />
     <PrivateRoute exact path="/formtypes" component={FormTypes} />
     <PrivateRoute exact path="/dashboard" component={Dashboard} />
     <GuestRoute exact path="/signup" component={Signup} />

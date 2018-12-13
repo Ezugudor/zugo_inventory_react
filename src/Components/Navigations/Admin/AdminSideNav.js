@@ -20,13 +20,13 @@ export const AdminSideNav = props => (
           </a>
         </li>
         <li className={Style.NavItem}>
-          <a className={getClassName(props, "team")} href="/team">
-            Team
+          <a className={getClassName(props, "formType")} href="/formtypes">
+            Form Types
           </a>
         </li>
         <li className={Style.NavItem}>
-          <a className={getClassName(props, "formType")} href="/formtypes">
-            Form Types
+          <a className={getClassName(props, "team")} href="/team">
+            Team
           </a>
         </li>
       </ul>
