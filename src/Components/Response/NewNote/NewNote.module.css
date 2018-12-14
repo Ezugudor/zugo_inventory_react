@@ -1,0 +1,33 @@
+@value Variables: "../../../styles/Variables.css";
+@value typeform-border-color from Variables;
+
+.Text {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.InputBox {
+  width: 89%;
+  margin: 0 auto;
+}
+
+.Input {
+  width: 100%;
+  height: 6rem;
+  margin-top: 3.4rem;
+  border: 1px solid typeform-border-color;
+  border-radius: 4px;
+  outline: none;
+  padding-top: 2rem;
+  font-size: 1.7rem;
+  font-weight: 400;
+}
+
+.Input::-webkit-input-placeholder {
+  padding-left: 0.1rem;
+}
+
+.Controls {
+  margin-top: 3.5rem;
+  text-align: center;
+}

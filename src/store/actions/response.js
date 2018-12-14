@@ -23,14 +23,14 @@ export const filterByDate = (id, from, to) => {
   return multipleRequest([processedRequest, pendingRequest]);
 };
 
-export const createNote = (responseId, note, history) => {
+export const createNote = (responseId, note) => {
   return dispatch => {
     dispatch(startNetworkRequest());
     SwypPartnerApi.post(`responses/addnote/${responseId}`, { note })
       .then(res => {
         dispatch(stopNetworkRequest());
         if (res.data.updated) {
-          history.push("/dashboard");
+          console.log(res.data);
           return dispatch(
             dispatch(setNotificationMessage("Note added", "success"))
           );

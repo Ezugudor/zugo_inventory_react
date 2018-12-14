@@ -1,0 +1,36 @@
+@value Variables: "../../../styles/Variables.css";
+@value secondary-color from Variables;
+.answer {
+  box-shadow: -1rem 1rem 3rem rgba(14, 14, 14, 0.2);
+  border-radius: 2px;
+}
+
+.answer:first-child {
+  margin-top: 1rem;
+}
+
+.answer:not(:last-child) {
+  margin-top: 2rem;
+}
+
+.answerHeader {
+  border-bottom: 2px solid typeform-border-color;
+  padding: 0.6rem 3rem;
+  margin-bottom: 1rem;
+}
+
+.answerContent {
+  margin-left: 3rem;
+}
+
+.buttonIcon {
+  background-color: secondary-color;
+  float: right;
+  padding: 0.2rem 1.2rem;
+  cursor: pointer;
+}
+
+.iconImage {
+  height: 1.6rem;
+  width: 1.2rem;
+}
