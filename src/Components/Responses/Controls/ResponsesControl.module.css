@@ -1,0 +1,28 @@
+@value Variables: "../../../styles/Variables.css";
+@value secondary-color from Variables;
+
+.controlSection {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  margin: 1rem 5rem 1rem 2rem;
+}
+
+.info {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+}
+
+.primaryHeading {
+  font-size: 2.1rem;
+  font-weight: 400;
+  margin-right: 3rem;
+}
+
+.secondaryHeading {
+  font-size: 1.8rem;
+  font-weight: 400;
+  margin-top: 0.2rem;
+  color: secondary-color;
+}

@@ -1,0 +1,88 @@
+@value Variables: "../../styles/Variables.css";
+@value typeform-border-color, secondary-color from Variables;
+.responses {
+  height: 100%;
+}
+
+.responseContent {
+  display: flex;
+  flex-flow: row nowrap;
+  margin-right: 3rem;
+}
+
+.aside {
+  width: 40%;
+  border-right: 1px solid typeform-border-color;
+  height: 82vh;
+}
+
+.answers {
+  width: 60%;
+  margin-left: 1rem;
+  margin-top: 1rem;
+  height: 80vh;
+  overflow: scroll;
+}
+
+.tabWrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  padding-right: 4rem;
+}
+
+.tabs {
+  height: 60%;
+  overflow: scroll;
+}
+
+.tab {
+  margin-left: 2rem;
+}
+
+.input {
+  margin-right: 0.5rem;
+}
+
+.responseControl {
+  margin-left: 3rem;
+}
+
+.controlText {
+  margin-right: 1rem;
+}
+
+.answer {
+  box-shadow: -1rem 1rem 3rem rgba(14, 14, 14, 0.2);
+  border-radius: 2px;
+}
+
+.answer:first-child {
+  margin-top: 1rem;
+}
+
+.answer:not(:last-child) {
+  margin-top: 2rem;
+}
+
+.answerHeader {
+  border-bottom: 2px solid typeform-border-color;
+  padding: 0.6rem 3rem;
+  margin-bottom: 1rem;
+}
+
+.answerContent {
+  margin-left: 3rem;
+}
+
+.buttonIcon {
+  background-color: secondary-color;
+  float: right;
+  padding: 0.2rem 1.2rem;
+  cursor: pointer;
+}
+
+.iconImage {
+  height: 1.6rem;
+  width: 1.2rem;
+}

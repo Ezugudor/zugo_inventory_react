@@ -1,6 +1,7 @@
 import {
   FormBuilder,
   Dashboard,
+  Responses,
   FormTypes,
   Response,
   Login,
@@ -55,6 +56,7 @@ const GuestRoute = ({ component: Component, ...rest }) => (
 
 export default () => (
   <Switch>
+    <PrivateRoute exact path="/forms/:id/responses" component={Responses} />
     <PrivateRoute exact path="/formtypes/:parent/:name" component={Form} />
     <PrivateRoute exact path="/formbuilder" component={FormBuilder} />
     <PrivateRoute exact path="/responses/:id" component={Response} />
