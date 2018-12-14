@@ -1,30 +1,36 @@
+import Style from "./DatePicker.module.css";
+import PropTypes from "prop-types";
+import { Red } from "../Buttons";
 import React from "react";
 
 export const DatePicker = props => (
-  <div className="swyp-date-picker">
-    <div className="swyp-date-picker__group">
+  <div className={Style.datePicker}>
+    <div className={Style.dateGroup}>
       <input
+        onInput={props.handleDateChange}
+        className={Style.dateInput}
+        data-date-type="startDate"
         type="date"
-        className="swyp-date-picker__input"
-        id="start_date"
-        placeholder="Start date"
       />
-      <label className="wyp-date-picker__label" htmlFor="start_date" />
     </div>
-    <div className="swyp-date-picker__group">
+    <div className={Style.dateGroup}>
       <input
+        onChange={props.handleDateChange}
+        className={Style.dateInput}
+        data-date-type="endDate"
         type="date"
-        className="swyp-date-picker__input"
-        id="end_date"
-        placeholder="Start date"
       />
-      <label className="wyp-date-picker__label" htmlFor="end_date" />
     </div>
-    <div className="swyp-date-picker__group">
-      <button className="swyp-date-picker__button">
-        <span className="swyp-date-picker__icon" />
+    <div className={Style.dateGroup}>
+      <Red styles={Style.button} onClick={props.filterResponse}>
+        <i className="fas fa-filter" />
         Fiter
-      </button>
+      </Red>
     </div>
   </div>
 );
+
+DatePicker.propTypes = {
+  handleDateChange: PropTypes.func.isRequired,
+  filterResponse: PropTypes.func.isRequired
+};

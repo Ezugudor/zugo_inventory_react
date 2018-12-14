@@ -1,0 +1,35 @@
+@value Variables: "../../../styles/Variables.css";
+@value typeform-border-color from Variables;
+.aside {
+  width: 40%;
+  border-right: 1px solid typeform-border-color;
+  height: 82vh;
+}
+
+.tabs {
+  height: 60%;
+  overflow: scroll;
+}
+
+.tabWrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  padding-right: 4rem;
+}
+
+.tab {
+  margin-left: 2rem;
+}
+
+.input {
+  margin-right: 0.5rem;
+}
+
+.responseControl {
+  margin-left: 3rem;
+}
+
+.controlText {
+  margin-right: 1rem;
+}

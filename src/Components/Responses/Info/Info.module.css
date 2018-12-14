@@ -1,0 +1,12 @@
+@value Variables: "../../../styles/Variables.css";
+@value typeform-border-color from Variables;
+
+.info {
+  border-top: 2px solid typeform-border-color;
+  border-bottom: 2px solid typeform-border-color;
+  padding: 1rem 2rem;
+}
+
+.input {
+  margin-right: 0.5rem;
+}

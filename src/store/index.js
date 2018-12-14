@@ -1,11 +1,11 @@
 import { combineReducers, createStore, applyMiddleware } from "redux";
 import { saveStateToStorage, loadStateFromStorage } from "../utils";
-import { response, workspace, form, user, app } from "./reducers";
+import { responses, workspace, form, user, app } from "./reducers";
 import thunkMiddleware from "redux-thunk";
 
 const reducers = combineReducers({
   workspace,
-  response,
+  responses,
   form,
   user,
   app

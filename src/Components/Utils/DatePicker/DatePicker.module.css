@@ -1,0 +1,40 @@
+@value Variables: "../../../styles/Variables.css";
+@value border-color, secondary-color from Variables;
+
+.datePicker {
+  display: flex;
+  flex-flow: row nowrap;
+  margin-right: 2rem;
+}
+
+.dateGroup:not(:last-child) {
+  margin-right: 0.8rem;
+}
+
+.dateInput {
+  height: 3rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-radius: 19px;
+  color: border-color;
+  outline: none;
+}
+
+.dateInput::-webkit-inner-spin-button {
+  display: none;
+  -webkit-appearance: none;
+}
+
+.dateInput::-webkit-calendar-picker-indicator {
+  color: secondary-color;
+  height: 1.3rem;
+  width: 1.3rem;
+}
+
+.button {
+  font-size: 1.5rem;
+  padding: 0.5rem 1.9rem;
+  border-radius: 20px;
+  cursor: pointer;
+  outline: none;
+}

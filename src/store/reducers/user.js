@@ -1,10 +1,10 @@
+import { updateState } from "../../utils";
 import {
   UPDATE_BUSINESS,
   DELETE_USER,
   SAVE_STATS,
   SAVE_USER
 } from "../actions";
-import { updateState } from "../../utils";
 
 const initialState = {
   currentUser: null,
