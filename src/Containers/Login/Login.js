@@ -1,7 +1,7 @@
 import { Login as View } from "../../Components/Auth";
+import { loginUser } from "../../store/actions";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { loginUser } from "../../store/actions";
 
 class Class extends Component {
   state = {

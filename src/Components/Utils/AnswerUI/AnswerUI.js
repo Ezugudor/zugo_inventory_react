@@ -1,20 +1,18 @@
+import IconStyle from "../../../styles/IconBackground.module.css";
+import Style from "./AnswerUI.module.css";
 import React from "react";
 
 export const AnswerUI = props => (
-  <div className="answers">
-    <div className="answer">
-      <div className="answer__decoration-box">
-        <div className="answer__decoration">
-          <div className="answer__question-type">
-            <span className="question__dropdown-type" />
-          </div>
-          <div className="answer__qustion-position">1</div>
-        </div>
+  <div className={Style.answer}>
+    <div className={`${Style.questionDecoration} ${IconStyle.default}`}>
+      <div className={Style.iconHolder}>
+        <img className={Style.Icon} src={`/img/default.svg`} alt="default" />
       </div>
-      <div className="answer__content">
-        <p className="answer__question">How are you?</p>
-        <p className="answer__text">I am super fine</p>
-      </div>
+      <div className={Style.questionPosition}>1</div>
+    </div>
+    <div>
+      <p className={Style.questionText}>How are you?</p>
+      <p className={Style.answerText}>I am super fine</p>
     </div>
   </div>
 );

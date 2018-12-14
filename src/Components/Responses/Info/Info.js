@@ -1,10 +1,13 @@
-import React from 'react';
+import Style from "./Info.module.css";
+import React from "react";
 
 export const Info = props => (
-  <div className="info">
-    <span>
-      <input type="checkbox" />
-    </span>
-    <span> 2 Responses in total</span>
-  </div>
+  <section className="section__info">
+    <div className={Style.info}>
+      <span>
+        <input className={Style.input} type="checkbox" />
+      </span>
+      <span> 2 Responses in total</span>
+    </div>
+  </section>
 );

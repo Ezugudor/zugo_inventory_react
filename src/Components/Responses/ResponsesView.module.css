@@ -1,0 +1,17 @@
+.responses {
+  height: 100%;
+}
+
+.responseContent {
+  display: flex;
+  flex-flow: row nowrap;
+  margin-right: 3rem;
+}
+
+.answers {
+  width: 60%;
+  margin-left: 1rem;
+  margin-top: 1rem;
+  height: 80vh;
+  overflow: scroll;
+}

@@ -1,6 +1,6 @@
 import { Cards, Controls } from "../../Components/FormTypes";
 import { fetchWorkspaces } from "../../store/actions";
-import { Adminlayout } from "../../Hoc/Layouts";
+import { AdminLayout } from "../../Hoc/Layouts";
 import React, { Component } from "react";
 import { chunkData } from "../../utils";
 import { slugName } from "../../utils";
@@ -20,7 +20,7 @@ class Class extends Component {
 
   render() {
     return (
-      <Adminlayout pageName="formType">
+      <AdminLayout pageName="formType">
         <div className="formType">
           <Controls />
           <Cards
@@ -28,7 +28,7 @@ class Class extends Component {
             viewForms={this.goToForms}
           />
         </div>
-      </Adminlayout>
+      </AdminLayout>
     );
   }
 }

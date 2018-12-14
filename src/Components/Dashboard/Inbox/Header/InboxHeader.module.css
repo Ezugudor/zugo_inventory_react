@@ -1,0 +1,38 @@
+@value variables:  "../../../../styles/Variables.css";
+@value typeform-border-color, secondary-color, white-color from variables;
+
+.inboxHeader {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  border-bottom: 1px solid typeform-border-color;
+  padding-left: 10rem;
+}
+
+.inboxTab {
+  height: 4rem;
+  width: 20rem;
+  padding-top: 0.5rem;
+  text-align: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.activeTab {
+  border-bottom: 3px solid secondary-color;
+}
+
+.inboxTabIcon {
+  margin-left: 0.6rem;
+  border-radius: 9px;
+  padding: 0.2rem 0.5rem;
+  color: white-color;
+}
+
+.unreadIcon {
+  background-color: secondary-color;
+}
+
+.revisionIcon {
+  composes: default from "../../../../styles/IconBackground.module.css";
+}

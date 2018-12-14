@@ -1,1 +1,1 @@
-export * from './Responses';
+export * from "./ResponsesView";

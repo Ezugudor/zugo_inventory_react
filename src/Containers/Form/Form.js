@@ -1,7 +1,7 @@
 import { Controls, NewForm, Cards } from "../../Components/Form";
 import { startNewForm, fetchForms } from "../../store/actions";
 import { getAllForms } from "../../store/selectors";
-import { Adminlayout } from "../../Hoc/Layouts";
+import { AdminLayout } from "../../Hoc/Layouts";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { chunkData } from "../../utils";
@@ -40,8 +40,8 @@ export class Class extends Component {
   render() {
     const forms = this.props.forms[this.formType.id];
     return (
-      <Adminlayout>
-        <div className="form">
+      <AdminLayout>
+        <div className="formType">
           <Controls toggleNewForm={this.toggleNewForm} />
           <Cards forms={chunkData(forms, 4)} />
           <NewForm
@@ -52,7 +52,7 @@ export class Class extends Component {
             name={this.state.newFormName}
           />
         </div>
-      </Adminlayout>
+      </AdminLayout>
     );
   }
 }

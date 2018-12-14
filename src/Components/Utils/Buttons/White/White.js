@@ -1,10 +1,16 @@
 import BaseStyle from "../Button.module.css";
 import Style from "./White.module.css";
+import PropTypes from "prop-types";
 import React from "react";
-const View = props => (
-  <button className={`${BaseStyle.Button} ${Style.White}`} {...props}>
+export const White = props => (
+  <button
+    className={`${BaseStyle.Button} ${Style.White}`}
+    onClick={props.handleClick}
+  >
     {props.children}
   </button>
 );
 
-export const White = View;
+White.propTypes = {
+  handleClick: PropTypes.func.isRequired
+};

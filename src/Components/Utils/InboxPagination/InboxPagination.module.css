@@ -1,0 +1,23 @@
+@value Variables: "../../../styles/Variables.css";
+@value border-color from Variables;
+
+.pagination {
+  display: flex;
+  flex-flow: row nowrap;
+  color: border-color;
+}
+
+.paginationInfo {
+  margin-right: 0.8rem;
+  margin-top: 0.3rem;
+  font-size: 1.3rem;
+}
+
+.paginationControls {
+  margin-top: -0.4rem;
+  font-size: 2rem;
+}
+
+.paginationIcon:not(:last-child) {
+  margin-right: 0.5rem;
+}

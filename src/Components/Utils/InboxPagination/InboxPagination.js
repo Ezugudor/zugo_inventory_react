@@ -1,15 +1,29 @@
+import Style from "./InboxPagination.module.css";
+import PropTypes from "prop-types";
 import React from "react";
 
 export const InboxPagination = props => (
-  <div className="pagination">
-    <p className="pagination__page-info">1 - 25 of 1000</p>
-    <div className="pagination__links">
-      <a className="pagination__link" href="#d">
-        <span className="pagination_icon">&lt;</span>
-      </a>
-      <a className="pagination__link" href="#d">
-        <span className="pagination_icon">&gt;</span>
-      </a>
+  <div className={Style.pagination}>
+    <p className={Style.paginationInfo}>{getInfo(props)}</p>
+    <div className={Style.paginationControls}>
+      <span className={Style.paginationIcon}>&lt;</span>
+      <span className={Style.paginationIcon}>&gt;</span>
     </div>
   </div>
 );
+
+const getInfo = props => {
+  switch (props.tabToShow) {
+    case "processed":
+      const { processed } = props;
+      return `1 - ${processed.count} of ${processed.count}`;
+    case "unread":
+      const { unread } = props;
+      return `1 - ${unread.count} of ${unread.count}`;
+    default:
+      return "0 of 0";
+  }
+};
+InboxPagination.propTypes = {
+  tabToShow: PropTypes.string.isRequired
+};

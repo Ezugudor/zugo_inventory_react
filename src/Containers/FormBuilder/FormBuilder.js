@@ -115,6 +115,7 @@ class Class extends Component {
 }
 
 const mapStateToProps = state => ({ newForm: getNewForm(state) });
+
 export const FormBuilder = connect(
   mapStateToProps,
   { preserveNewForm, createForm }
