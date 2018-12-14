@@ -2,7 +2,7 @@ import { AdminLayout } from "../../Hoc/Layouts";
 import { ResponsesControls } from "./Controls";
 import Style from "./ResponsesView.module.css";
 import { ResponseAside } from "./Aside";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import { Ansewer } from "./Answer";
 import { Info } from "./Info";
 import React from "react";
