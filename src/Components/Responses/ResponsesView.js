@@ -21,7 +21,6 @@ export const ResponsesView = props => (
     </div>
   </AdminLayout>
 );
-
 // ResponsesView.propTypes = {
 //   toggleNoteView: PropTypes.func.isRequired,
 //   setNewNoteText: PropTypes.func.isRequired,

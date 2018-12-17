@@ -10,7 +10,10 @@ import React from "react";
 export const ResponseView = props => (
   <AdminLayout pageName="Account Opening">
     <div className={Style.response}>
-      <ResponseControls handleNewNote={props.toggleNoteView} />
+      <ResponseControls
+        deliverMessage={props.deliverMessage}
+        handleNewNote={props.toggleNoteView}
+      />
       <Notes />
       <Answers />
       <NewNote {...props} />
@@ -21,6 +24,7 @@ export const ResponseView = props => (
 ResponseView.propTypes = {
   toggleNoteView: PropTypes.func.isRequired,
   setNewNoteText: PropTypes.func.isRequired,
+  deliverMessage: PropTypes.func.isRequired,
   newNoteText: PropTypes.string.isRequired,
   showNewNote: PropTypes.bool.isRequired,
   createNote: PropTypes.func.isRequired

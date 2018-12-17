@@ -59,7 +59,7 @@ export default () => (
     <PrivateRoute exact path="/forms/:id/responses" component={Responses} />
     <PrivateRoute exact path="/formtypes/:parent/:name" component={Form} />
     <PrivateRoute exact path="/formbuilder" component={FormBuilder} />
-    <PrivateRoute exact path="/responses/:id" component={Response} />
+    <PrivateRoute exact path="/response/:type/:id" component={Response} />
     <PrivateRoute exact path="/formtypes" component={FormTypes} />
     <PrivateRoute exact path="/dashboard" component={Dashboard} />
     <GuestRoute exact path="/signup" component={Signup} />

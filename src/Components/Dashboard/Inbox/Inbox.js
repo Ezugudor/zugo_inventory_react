@@ -1,6 +1,5 @@
 import { getNote } from "../../../utils";
 import { InboxHeader } from "./Header";
-
 import PropTypes from "prop-types";
 import { InboxItem } from "./Item";
 import React from "react";
@@ -25,8 +24,9 @@ const showResponse = props => {
           formName={res.form.name}
           date={res.createdAt}
           note={getNote(res)}
-          key={res._id}
-          id={res._id}
+          type="processed"
+          key={res.id}
+          id={res.id}
         />
       ));
 
@@ -37,8 +37,9 @@ const showResponse = props => {
           formName={res.form.name}
           date={res.createdAt}
           note={getNote(res)}
-          key={res._id}
-          id={res._id}
+          type="unread"
+          key={res.id}
+          id={res.id}
         />
       ));
 

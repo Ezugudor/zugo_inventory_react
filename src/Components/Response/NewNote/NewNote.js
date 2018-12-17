@@ -18,8 +18,8 @@ export const NewNote = props => (
         />
       </div>
       <div className={Style.Controls}>
-        <White handleClick={props.toggleNoteView}>Cancel</White>
-        <Red onClick={props.createNote}>Create Note</Red>
+        <White click={props.toggleNoteView}>Cancel</White>
+        <Red click={props.createNote}>Create Note</Red>
       </div>
     </section>
   </Modal>

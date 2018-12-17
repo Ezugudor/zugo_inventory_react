@@ -22,7 +22,7 @@ export const DatePicker = props => (
       />
     </div>
     <div className={Style.dateGroup}>
-      <Red styles={Style.button} onClick={props.filterResponse}>
+      <Red styles={Style.button} click={props.filterResponse}>
         <i className="fas fa-filter" />
         Fiter
       </Red>
