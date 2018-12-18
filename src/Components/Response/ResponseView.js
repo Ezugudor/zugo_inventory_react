@@ -14,8 +14,8 @@ export const ResponseView = props => (
         deliverMessage={props.deliverMessage}
         handleNewNote={props.toggleNoteView}
       />
-      <Notes />
-      <Answers />
+      <Notes notes={props.response.notes} currentUser={props.currentUser} />
+      <Answers answers={props.response.content} />
       <NewNote {...props} />
     </div>
   </AdminLayout>
@@ -26,6 +26,8 @@ ResponseView.propTypes = {
   setNewNoteText: PropTypes.func.isRequired,
   deliverMessage: PropTypes.func.isRequired,
   newNoteText: PropTypes.string.isRequired,
+  currentUser: PropTypes.object.isRequired,
   showNewNote: PropTypes.bool.isRequired,
-  createNote: PropTypes.func.isRequired
+  createNote: PropTypes.func.isRequired,
+  response: PropTypes.object.isRequired
 };

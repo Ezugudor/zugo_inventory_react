@@ -1,16 +1,20 @@
 @value Variables: "../../../styles/Variables.css";
-@value defaultFont from Variables;
+@value defaultFont, typeform-border-color from Variables;
 
-.Control {
+.control {
   margin-top: 5rem;
 }
 
-.ControlBox {
+.controlBox {
   width: 100%;
-  border-bottom: 3px solid black;
+  border-bottom: 2px solid typeform-border-color;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  padding-left: 3rem;
 }
 
-.ControlText {
+.controlText {
   text-decoration: none;
   font-size: defaultFont;
   display: inline-block;
@@ -20,12 +24,12 @@
   opacity: 0.2;
 }
 
-.ControlTextActive {
+.controlTextActive {
   opacity: 1;
   background-color: aqua;
   padding: 0.5rem 2rem;
 }
 
-.ControlText:not(:last-child) {
+.controlText:not(:last-child) {
   margin-right: 2rem;
 }

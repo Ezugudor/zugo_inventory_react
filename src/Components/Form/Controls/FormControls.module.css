@@ -1,13 +1,18 @@
 @value Variables: "../../../styles/Variables.css";
-@value defaultFont, secondary-color, white-color from Variables;
+@value defaultFont, secondary-color, white-color, typeform-border-color from Variables;
 
 .Controls {
   margin-top: 5rem;
+  padding-left: 2rem;
+  border-bottom: 2px solid typeform-border-color;
 }
 
 .ControlBox {
   width: 100%;
-  border-bottom: 3px solid black;
+}
+
+.ControlBox button {
+  margin-bottom: 1rem;
 }
 
 .Button {
@@ -24,6 +29,5 @@
 
 .Text {
   font-size: 1.9rem;
-  margin-bottom: 0.4rem;
   display: inline-block;
 }

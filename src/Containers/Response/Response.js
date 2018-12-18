@@ -1,6 +1,7 @@
 import { getResponse, getCurrentUser } from "../../store/selectors";
 import { createNote, processResponse } from "../../store/actions";
 import { ResponseView } from "../../Components/Response";
+import { sortNotes } from "../../utils";
 import { connect } from "react-redux";
 import React, { Component } from "react";
 
@@ -41,15 +42,15 @@ export class Class extends Component {
   };
 
   render() {
-    console.log(this.props.response);
-    console.log(this.props.currentUser);
     return (
       <ResponseView
         setNewNoteText={this.setNewNoteText}
+        currentUser={this.props.currentUser}
         showNewNote={this.state.showNewNote}
         deliverMessage={this.deliverMessage}
         toggleNoteView={this.toggleNewNote}
         newNoteText={this.state.newNote}
+        response={this.props.response}
         createNote={this.createNote}
       />
     );

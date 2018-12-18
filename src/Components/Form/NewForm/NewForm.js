@@ -18,8 +18,8 @@ const View = props => (
         />
       </div>
       <div className={Style.Controls}>
-        <White onClick={props.toggleNewForm}>Cancel</White>
-        <Red onClick={props.showBuilder}>Build Form</Red>
+        <White click={props.toggleNewForm}>Cancel</White>
+        <Red click={props.showBuilder}>Build Form</Red>
       </div>
     </section>
   </Modal>
