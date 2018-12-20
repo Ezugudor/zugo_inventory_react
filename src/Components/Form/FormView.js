@@ -11,11 +11,11 @@ export const FormView = props => (
     <FormControls toggleNewForm={props.toggleNewForm} />
     <Cards forms={chunkData(props.forms, 4)} />
     <NewForm
+      toggleNewForm={props.toggleNewForm}
+      handleInput={props.handleInput}
       showNewForm={props.showNewForm}
       showBuilder={props.showBuilder}
-      toggleNewForm={props.toggleNewForm}
-      onChange={props.setNewFormName}
-      name={props.newFormName}
+      name={props.name}
     />
   </AdminLayout>
 );
@@ -24,7 +24,7 @@ FormView.propTypes = {
   toggleNewForm: PropTypes.func.isRequired,
   showNewForm: PropTypes.bool.isRequired,
   showBuilder: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
+  handleInput: PropTypes.func.isRequired,
   forms: PropTypes.array,
   name: PropTypes.string.isRequired
 };

@@ -4,7 +4,7 @@ import { Modal } from "../../Utils";
 import PropTypes from "prop-types";
 import React from "react";
 
-const View = props => (
+export const NewForm = props => (
   <Modal show={props.showNewForm} click={props.toggleNewForm}>
     <section>
       <h3 className={Style.Text}>New Form</h3>
@@ -14,7 +14,7 @@ const View = props => (
           type="text"
           placeholder="Form Name"
           value={props.name}
-          onChange={props.onChange}
+          onChange={props.handleInput}
         />
       </div>
       <div className={Style.Controls}>
@@ -25,12 +25,10 @@ const View = props => (
   </Modal>
 );
 
-View.proptypes = {
-  showNewForm: PropTypes.string.isRequired,
+NewForm.propTypes = {
   toggleNewForm: PropTypes.func.isRequired,
+  showNewForm: PropTypes.bool.isRequired,
   showBuilder: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
+  handleInput: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired
 };
-
-export const NewForm = View;

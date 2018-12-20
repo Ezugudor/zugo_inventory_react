@@ -9,13 +9,17 @@ export const FormBuiderLayout = props => (
   <Aux>
     <FormBuilderHeader save={props.save} />
     <main className={Style.Main}>
-      <FormBuilderSideNav />
+      <FormBuilderSideNav
+        changeConfigWindow={props.changeConfigWindow}
+        settingsWindowName={props.settingsWindowName}
+      />
       <div className={Style.ChildContent}>{props.children}</div>
     </main>
   </Aux>
 );
 
 FormBuiderLayout.propTypes = {
+  settingsWindowName: PropTypes.string.isRequired,
   changeConfigWindow: PropTypes.func.isRequired,
   save: PropTypes.func.isRequired
 };

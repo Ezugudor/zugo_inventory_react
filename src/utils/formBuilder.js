@@ -22,8 +22,7 @@ export const getDefaultElement = () => ({
 });
 
 export const generateNewElement = (type, position) => {
-  if (type === "introduction") position = 0;
-  const rules = generateDefaultVaidationRule(type);
+  const rules = [];
   const id = uuid4();
   let children = [];
   return {
@@ -37,8 +36,12 @@ export const generateNewElement = (type, position) => {
     }
   };
 };
-
-const generateDefaultVaidationRule = type => [];
+export const getNextPosition = formInputs => {
+  const len = formInputs.filter(
+    element => element.type !== "section" && element.type !== "introduction"
+  ).length;
+  return len === 0 ? 1 : len + 1;
+};
 
 export const blockTypes = [
   { name: "Introduction Section", type: "introduction" },

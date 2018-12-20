@@ -15,10 +15,12 @@ export class Canvas extends Component {
 
   setupCanvas = () => {
     const targets = document.querySelectorAll('[data-question="true"]');
-    ResponseCanvas.setUp({ targets, canvasClass: Style.Canvas })
-      .onTargetEnter(this.handleTargetEnter)
-      .onTargetExit(this.handleTargetExit);
-    this.canvas = document.querySelector(`.${Style.Canvas}`);
+    if (targets.length) {
+      ResponseCanvas.setUp({ targets, canvasClass: Style.Canvas })
+        .onTargetEnter(this.handleTargetEnter)
+        .onTargetExit(this.handleTargetExit);
+      this.canvas = document.querySelector(`.${Style.Canvas}`);
+    }
   };
 
   componentDidMount() {

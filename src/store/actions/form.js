@@ -1,6 +1,7 @@
+import { UNPRESERVE_NEW_FORM, UNPRESERVE_FORMBUILDER_STATE } from "./types";
+import { PRESERVE_FORMBUILDER_STATE, PRESERVE_NEW_FORM } from "./types";
 import { setNotificationMessage, startNetworkRequest } from "./app";
 import { START_NEW_FORM, UPDATE_FORMS, SAVE_FORMS } from "./types";
-import { UNPRESERVE_NEW_FORM, PRESERVE_NEW_FORM } from "./types";
 import { SwypPartnerApi } from "../../core/api";
 import { stopNetworkRequest } from "./app";
 import { handleError } from "../../utils";
@@ -10,6 +11,14 @@ const updateForms = (form, id) => ({ type: UPDATE_FORMS, form, id });
 const unpreserveNewForm = () => ({
   type: UNPRESERVE_NEW_FORM
 });
+
+const unpreserveFormBuilderState = () => ({
+  type: UNPRESERVE_FORMBUILDER_STATE
+});
+
+export const preserveFormBuilderState = newState => dispatch => {
+  dispatch({ type: PRESERVE_FORMBUILDER_STATE, newState });
+};
 
 export const preserveNewForm = elements => dispatach =>
   dispatach({
@@ -45,6 +54,7 @@ export const createForm = (details, history, { to, params }) => {
         dispatch(stopNetworkRequest());
         const { formTypeId } = details;
         dispatch(updateForms(res.data), formTypeId);
+        dispatch(unpreserveFormBuilderState());
         dispatch(unpreserveNewForm());
         dispatch(
           setNotificationMessage(

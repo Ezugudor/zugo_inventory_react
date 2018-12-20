@@ -1,5 +1,7 @@
 import { updateState } from "../../utils";
 import {
+  UNPRESERVE_FORMBUILDER_STATE,
+  PRESERVE_FORMBUILDER_STATE,
   UNPRESERVE_NEW_FORM,
   PRESERVE_NEW_FORM,
   START_NEW_FORM,
@@ -11,6 +13,11 @@ const initialState = {
   all: {},
   synched: [],
   unsynched: [],
+  formBuilderState: {
+    settingsWindowName: "",
+    showSettingsWindow: true,
+    currentElementId: ""
+  },
   newForm: {
     formType: { id: "", parent: "", name: "" },
     elements: [],
@@ -31,6 +38,14 @@ export const form = (state = initialState, action) => {
 
     case UNPRESERVE_NEW_FORM:
       return updateState(state, { newForm: initialState.newForm });
+
+    case UNPRESERVE_FORMBUILDER_STATE:
+      return updateState(state, {
+        formBuilderState: initialState.formBuilderState
+      });
+
+    case PRESERVE_FORMBUILDER_STATE:
+      return updateState(state, { formBuilderState: action.newState });
 
     case SAVE_FORMS:
       all = { ...state.all };

@@ -42,7 +42,7 @@ export class Class extends Component {
         showNewForm={this.state.showNewForm}
         showBuilder={this.goToFormBuilder}
         toggleNewForm={this.toggleNewForm}
-        onChange={this.setNewFormName}
+        handleInput={this.setNewFormName}
         name={this.state.newFormName}
         forms={forms}
       />

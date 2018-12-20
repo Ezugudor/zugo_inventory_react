@@ -1,22 +1,31 @@
-import { getDefaultElement, generateNewElement } from "../../utils";
+import { getNewForm, getBuilderState } from "../../store/selectors";
 import { preserveNewForm, createForm } from "../../store/actions";
+import { preserveFormBuilderState } from "../../store/actions";
+import { getNextPosition, getDefaultElement } from "../../utils";
 import { FormBuilderView } from "../../Components/FormBuilder";
-import { FormBuiderLayout } from "../../Hoc/Layouts";
-import { getNewForm } from "../../store/selectors";
-import { slugName } from "../../utils";
+import { generateNewElement } from "../../utils";
 import React, { Component } from "react";
+import { slugName } from "../../utils";
 import { connect } from "react-redux";
+
 class Class extends Component {
   state = {
-    showSettingsWindow: false,
-    settingsWindowName: "",
-    formElements: [getDefaultElement()]
+    settingsWindowName: "build",
+    showSettingsWindow: true,
+    currentElementId: "",
+    formElements: []
   };
 
   componentDidMount() {
+    let stateUpdates = {};
     if (this.props.newForm.elements.length) {
-      this.setState({ formElements: this.props.newForm.elements });
+      stateUpdates.formElements = this.props.newForm.elements;
     }
+
+    if (this.props.builderState.currentElementId) {
+      stateUpdates = { ...stateUpdates, ...this.props.builderState };
+    }
+    this.setState(stateUpdates);
   }
 
   changeConfigWindow = name => {
@@ -33,11 +42,20 @@ class Class extends Component {
   };
 
   addElement = type => {
-    const position = this.state.formElements.length + 1;
+    const position = getNextPosition(this.state.formElements);
     const { formElement } = generateNewElement(type, position);
     const formElements = [...this.state.formElements];
     formElements.push(formElement);
-    this.setState({ formElements });
+    const stateToChange = { currentElementId: formElement.id, formElements };
+    if (type === "introduction" || type === "section") {
+      return this.setState(stateToChange);
+    }
+    this.setState({
+      settingsWindowName: "configuration",
+      currentElementId: formElement.id,
+      showSettingsWindow: true,
+      formElements
+    });
   };
 
   setElementName = (id, name) => {
@@ -47,7 +65,13 @@ class Class extends Component {
     const element = elements[elementIdex];
     element.name = name;
     elements[elementIdex] = element;
+
+    const stateToPreserve = { ...this.state };
+    delete stateToPreserve.formElements;
+
     this.props.preserveNewForm(elements);
+    this.props.preserveFormBuilderState(stateToPreserve);
+
     this.setState({ formElements: elements });
   };
 
@@ -60,6 +84,11 @@ class Class extends Component {
     elements[elementIdex] = element;
     this.props.preserveNewForm(elements);
     this.setState({ formElements: elements });
+  };
+
+  addValidationRule = (name, e) => {
+    // prevent user from add rules that invalidate account and BvN, numbers
+    console.log(name);
   };
 
   setCurrentEditor = editoRef => {
@@ -96,27 +125,30 @@ class Class extends Component {
 
   render() {
     return (
-      <FormBuiderLayout
+      <FormBuilderView
+        showSettingsWindow={this.state.showSettingsWindow}
+        settingsWindowName={this.state.settingsWindowName}
+        handleRequirementInput={this.addValidationRule}
         changeConfigWindow={this.changeConfigWindow}
+        toggleConfigWindow={this.toggleConfigWindow}
+        setElementChildren={this.setElementChildren}
+        setCurrentEditor={this.setCurrentEditor}
+        formElements={this.state.formElements}
+        setElementName={this.setElementName}
+        addNextEditor={this.addNextEditor}
+        addElement={this.addElement}
         save={this.createForm}
-      >
-        <FormBuilderView
-          toggleConfigWindow={this.toggleConfigWindow}
-          setElementChildren={this.setElementChildren}
-          setCurrentEditor={this.setCurrentEditor}
-          formElements={this.state.formElements}
-          setElementName={this.setElementName}
-          addNextEditor={this.addNextEditor}
-          addElement={this.addElement}
-        />
-      </FormBuiderLayout>
+      />
     );
   }
 }
 
-const mapStateToProps = state => ({ newForm: getNewForm(state) });
+const mapStateToProps = state => ({
+  builderState: getBuilderState(state),
+  newForm: getNewForm(state)
+});
 
 export const FormBuilder = connect(
   mapStateToProps,
-  { preserveNewForm, createForm }
+  { preserveNewForm, createForm, preserveFormBuilderState }
 )(Class);
