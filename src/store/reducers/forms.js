@@ -14,8 +14,9 @@ const initialState = {
   synched: [],
   unsynched: [],
   formBuilderState: {
-    settingsWindowName: "",
     showSettingsWindow: true,
+    settingsWindowName: "",
+    currentElementType: "",
     currentElementId: ""
   },
   newForm: {

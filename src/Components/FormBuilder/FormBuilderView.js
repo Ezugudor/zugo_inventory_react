@@ -13,6 +13,7 @@ export const FormBuilderView = props => (
   >
     <Setting
       handleRequirementInput={props.handleRequirementInput}
+      currentElementType={props.currentElementType}
       settingsWindowName={props.settingsWindowName}
       toggleConfigWindow={props.toggleConfigWindow}
       showSettingsWindow={props.showSettingsWindow}
@@ -25,6 +26,7 @@ export const FormBuilderView = props => (
 
 FormBuilderView.propTypes = {
   handleRequirementInput: PropTypes.func.isRequired,
+  currentElementType: PropTypes.string.isRequired,
   settingsWindowName: PropTypes.string.isRequired,
   showSettingsWindow: PropTypes.bool.isRequired,
   toggleConfigWindow: PropTypes.func.isRequired,

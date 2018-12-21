@@ -1,3 +1,4 @@
+import { ValidationRuleBuilder } from "../core";
 import { Value } from "slate";
 import uuid4 from "uuid4";
 export const ditorDefaultValue = () =>
@@ -22,12 +23,12 @@ export const getDefaultElement = () => ({
 });
 
 export const generateNewElement = (type, position) => {
-  const rules = [];
+  const rules = buildValidationRule(type);
   const id = uuid4();
   let children = [];
   return {
     formElement: {
-      validationRule: rules,
+      validationRules: rules,
       position,
       name: "",
       children,
@@ -36,11 +37,27 @@ export const generateNewElement = (type, position) => {
     }
   };
 };
+
 export const getNextPosition = formInputs => {
   const len = formInputs.filter(
     element => element.type !== "section" && element.type !== "introduction"
   ).length;
   return len === 0 ? 1 : len + 1;
+};
+
+const buildValidationRule = elementType => {
+  switch (elementType) {
+    case "account":
+      return ValidationRuleBuilder.buildAccountNumberRule();
+    case "mobile":
+      return ValidationRuleBuilder.buildMobileNumberRule();
+    case "tel":
+      return ValidationRuleBuilder.buildOfficePhoneRule();
+    case "bvn":
+      return ValidationRuleBuilder.buildBvnNumberRule();
+    default:
+      return ValidationRuleBuilder.buildDefaultRule();
+  }
 };
 
 export const blockTypes = [

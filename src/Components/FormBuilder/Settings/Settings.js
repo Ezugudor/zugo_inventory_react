@@ -29,6 +29,7 @@ export const Setting = props =>
         ) : (
           <ItemConfiguration
             handleRequirementInput={props.handleRequirementInput}
+            currentElementType={props.currentElementType}
           />
         )}
       </div>
@@ -37,6 +38,7 @@ export const Setting = props =>
 
 Setting.propTypes = {
   handleRequirementInput: PropTypes.func.isRequired,
+  currentElementType: PropTypes.string.isRequired,
   settingsWindowName: PropTypes.string.isRequired,
   showSettingsWindow: PropTypes.bool.isRequired,
   toggleConfigWindow: PropTypes.func.isRequired,

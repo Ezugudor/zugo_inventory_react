@@ -12,6 +12,7 @@ class Class extends Component {
   state = {
     settingsWindowName: "build",
     showSettingsWindow: true,
+    currentElementType: "",
     currentElementId: "",
     formElements: []
   };
@@ -52,6 +53,7 @@ class Class extends Component {
     }
     this.setState({
       settingsWindowName: "configuration",
+      currentElementType: formElement.type,
       currentElementId: formElement.id,
       showSettingsWindow: true,
       formElements
@@ -67,12 +69,18 @@ class Class extends Component {
     elements[elementIdex] = element;
 
     const stateToPreserve = { ...this.state };
+    stateToPreserve.currentElementType = element.type;
+    stateToPreserve.currentElementId = id;
     delete stateToPreserve.formElements;
 
     this.props.preserveNewForm(elements);
     this.props.preserveFormBuilderState(stateToPreserve);
 
-    this.setState({ formElements: elements });
+    this.setState({
+      currentElementType: element.type,
+      formElements: elements,
+      currentElementId: id
+    });
   };
 
   setElementChildren = (id, content) => {
@@ -86,9 +94,37 @@ class Class extends Component {
     this.setState({ formElements: elements });
   };
 
+  /**
+   * Add valiation rules to a form element being build by a user
+   * @param name // name of rule
+   * @param e // e object representing user action
+   */
   addValidationRule = (name, e) => {
-    // prevent user from add rules that invalidate account and BvN, numbers
-    console.log(name);
+    const { currentElementId } = this.state;
+    const elements = [...this.state.formElements];
+    const elementIdex = elements.findIndex(el => el.id === currentElementId);
+    if (elementIdex === -1) return;
+    const element = elements[elementIdex];
+    const value =
+      e.target.type === "checkbox" ? e.target.checked : e.target.value;
+
+    const rules = [...element.validationRules];
+    const ruleIndex = rules.findIndex(rule => rule.name === name);
+    if (ruleIndex !== -1) {
+      rules[ruleIndex] = { name, value };
+    } else {
+      rules.push({ name, value });
+    }
+
+    element.validationRules = rules;
+    elements[elementIdex] = element;
+
+    const stateToPreserve = { ...this.state };
+    delete stateToPreserve.formElements;
+
+    this.props.preserveNewForm(elements);
+    this.props.preserveFormBuilderState(stateToPreserve);
+    this.setState({ formElements: elements });
   };
 
   setCurrentEditor = editoRef => {
@@ -128,6 +164,7 @@ class Class extends Component {
       <FormBuilderView
         showSettingsWindow={this.state.showSettingsWindow}
         settingsWindowName={this.state.settingsWindowName}
+        currentElementType={this.state.currentElementType}
         handleRequirementInput={this.addValidationRule}
         changeConfigWindow={this.changeConfigWindow}
         toggleConfigWindow={this.toggleConfigWindow}

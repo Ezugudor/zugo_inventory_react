@@ -1,6 +1,11 @@
 import Style from "./ItemConfiguration.module.css";
 import PropTypes from "prop-types";
 import React from "react";
+const minMaxException = ["account", "tel", "bvn", "mobile"];
+
+const showMinMax = props => {
+  return !minMaxException.includes(props.currentElementType);
+};
 
 export const ItemConfiguration = props => (
   <div className={Style.configuration}>
@@ -16,6 +21,17 @@ export const ItemConfiguration = props => (
         <span htmlFor="required" className={Style.toggleButton} />
       </label>
     </div>
+    {showMinMax(props) ? <MinMaxSetting /> : null}
+  </div>
+);
+
+ItemConfiguration.propTypes = {
+  handleRequirementInput: PropTypes.func.isRequired,
+  currentElementType: PropTypes.string.isRequired
+};
+
+const MinMaxSetting = props => (
+  <div>
     <div className={Style.minRuleBox}>
       <span className={Style.ruleText}>Minimum Character</span>
       <input
@@ -34,7 +50,3 @@ export const ItemConfiguration = props => (
     </div>
   </div>
 );
-
-ItemConfiguration.propTypes = {
-  handleRequirementInput: PropTypes.func.isRequired
-};

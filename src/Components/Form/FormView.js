@@ -25,6 +25,6 @@ FormView.propTypes = {
   showNewForm: PropTypes.bool.isRequired,
   showBuilder: PropTypes.func.isRequired,
   handleInput: PropTypes.func.isRequired,
-  forms: PropTypes.array,
-  name: PropTypes.string.isRequired
+  name: PropTypes.string.isRequired,
+  forms: PropTypes.array
 };
