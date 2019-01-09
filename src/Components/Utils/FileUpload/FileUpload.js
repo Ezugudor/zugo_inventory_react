@@ -25,7 +25,7 @@ export const FileUpload = props => {
         />
         {showUploadIndicator(props.uploadStatus)}
         <label htmlFor="logo" className={style.inputLabel}>
-          Pick a file
+          Or pick a file
         </label>
       </div>
     </div>

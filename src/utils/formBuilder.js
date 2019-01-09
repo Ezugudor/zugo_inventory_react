@@ -1,6 +1,7 @@
 import { ValidationRuleBuilder } from "../core";
 import { Value } from "slate";
 import uuid4 from "uuid4";
+
 export const ditorDefaultValue = () =>
   Value.fromJSON({
     document: {
@@ -63,7 +64,7 @@ const buildValidationRule = elementType => {
 export const blockTypes = [
   { name: "Introduction Section", type: "introduction" },
   // { name: "Multiple Choice", type: "multichoice" },
-  // { name: "Passport Photo", type: "picture" },
+  { name: "Passport Photo", type: "picture" },
   // { name: "Account Number", type: "account" },
   { name: "Section Title", type: "section" },
   { name: "Short Text", type: "shorttext" },
@@ -79,7 +80,7 @@ export const blockTypes = [
   { name: "Address", type: "address" },
   // { name: "Countries", type: "country" },
   // { name: "States", type: "state" },
-  // { name: "Signature", type: "sign" },
+  { name: "Signature", type: "sign" },
   // { name: "Number", type: "number" },
   { name: "Email", type: "email" },
   { name: "Date", type: "date" },

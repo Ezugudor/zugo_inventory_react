@@ -1,7 +1,8 @@
 import Style from "./ItemConfiguration.module.css";
 import PropTypes from "prop-types";
 import React from "react";
-const minMaxException = ["account", "tel", "bvn", "mobile"];
+
+const minMaxException = ["account", "tel", "bvn", "mobile", "picture"];
 
 const showMinMax = props => {
   return !minMaxException.includes(props.currentElementType);
