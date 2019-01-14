@@ -1,3 +1,3 @@
-export * from "./validationRuleBuilder";
+export * from "./ValidationRuleBuilder";
 export * from "./InputManager";
 export * from "./api";
