@@ -7,7 +7,7 @@ import React from "react";
 const view = props => (
   <div className={Style.Blocks}>
     {blockTypes.map(block => (
-      <Block {...block} key={block.type} {...props} />
+      <Block {...block} key={block.type} addElement={props.addElement} />
     ))}
   </div>
 );

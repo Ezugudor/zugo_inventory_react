@@ -18,12 +18,6 @@ class Class extends Component {
     };
   }
 
-  componentDidMount() {
-    if (this.props.setCurrentEditor) {
-      this.props.setCurrentEditor(this.editorPointer);
-    }
-  }
-
   onChange = ({ value }) => {
     this.setState({ value });
     const editorContent = Plain.serialize(value);
@@ -34,7 +28,8 @@ class Class extends Component {
   };
 
   onKeyDown = (event, change, next) => {
-    const { type } = this.editorPointer.current.props;
+    const { type, id } = this.editorPointer.current.props;
+    const editorContent = Plain.serialize(change.value);
     if (event.key === "Enter" && type === "multichoice") {
       event.preventDefault();
       this.childPointer.current.focus();
@@ -46,6 +41,10 @@ class Class extends Component {
       this.props.addNextEditor();
       return true;
     }
+    if (event.key === "Backspace" && !editorContent) {
+      this.props.deleteQuestion(id);
+    }
+
     return next();
   };
 
@@ -136,6 +135,7 @@ class Class extends Component {
 }
 
 Class.propTypes = {
+  deleteQuestion: PropTypes.func.isRequired,
   addNextEditor: PropTypes.func.isRequired,
   element: PropTypes.object.isRequired,
   setCurrentEditor: PropTypes.func

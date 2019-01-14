@@ -1,5 +1,6 @@
 import BaseStyle from "../Button.module.css";
 import Style from "./SkyBlue.module.css";
+import PropTypes from "prop-types";
 import ClassName from "classnames";
 import React from "react";
 
@@ -11,7 +12,11 @@ const getStyle = props => {
 };
 
 export const SkyBlue = props => (
-  <button className={getStyle(props)} {...props}>
+  <button className={getStyle(props)} onClick={props.click}>
     {props.children}
   </button>
 );
+
+SkyBlue.propTypes = {
+  click: PropTypes.func.isRequired
+};

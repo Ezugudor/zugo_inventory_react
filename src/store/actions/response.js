@@ -1,6 +1,10 @@
-import { SAVE_PROCESSED_RESPONSES, SAVE_PENDING_RESPONSES } from "./types";
 import { SwypPartnerApi } from "../../core/api";
 import { handleError } from "../../utils";
+import {
+  SAVE_PROCESSED_RESPONSES,
+  SAVE_PENDING_RESPONSES,
+  UPDATE_RESPONSE_NOTE
+} from "./types";
 import {
   setNotificationMessage,
   startNetworkRequest,
@@ -10,33 +14,30 @@ import {
 export const fetchResponseByStatus = businessId => {
   const processedUrl = `responses/bystatus/processed?business=${businessId}`;
   const pendingUrl = `responses/bystatus/pending?business=${businessId}`;
-  const processedRequest = SwypPartnerApi.get(processedUrl);
-  const pendingRequest = SwypPartnerApi.get(pendingUrl);
-  return multipleRequest([processedRequest, pendingRequest]);
+  return multipleRequest([
+    SwypPartnerApi.get(processedUrl),
+    SwypPartnerApi.get(pendingUrl)
+  ]);
 };
 
 export const filterByDate = (id, from, to) => {
   const processedUrl = `responses/bystatus/processed?business=${id}&from=${from}&to=${to}`;
   const pendingUrl = `responses/bystatus/pending?business=${id}&from=${from}&to=${to}`;
-  const processedRequest = SwypPartnerApi.get(processedUrl);
-  const pendingRequest = SwypPartnerApi.get(pendingUrl);
-  return multipleRequest([processedRequest, pendingRequest]);
+  return multipleRequest([
+    SwypPartnerApi.get(processedUrl),
+    SwypPartnerApi.get(pendingUrl)
+  ]);
 };
 
-export const createNote = (responseId, note) => {
+export const createNote = (responseId, note, type) => {
   return dispatch => {
     dispatch(startNetworkRequest());
     SwypPartnerApi.post(`responses/addnote/${responseId}`, { note })
       .then(res => {
         dispatch(stopNetworkRequest());
-        if (res.data.updated) {
-          console.log(res.data);
-          return dispatch(
-            dispatch(setNotificationMessage("Note added", "success"))
-          );
-        }
-        dispatch(
-          setNotificationMessage("We are unable to process response", "error")
+        dispatch(updateResponse(res.data, type));
+        return dispatch(
+          dispatch(setNotificationMessage("Note added", "success"))
         );
       })
       .catch(err => handleError(err, dispatch));
@@ -67,7 +68,7 @@ const multipleRequest = (urls = []) => {
   return dispatch => {
     dispatch(startNetworkRequest());
     Promise.all(urls)
-      .then(([pro, pen, not]) => {
+      .then(([pro, pen]) => {
         dispatch(stopNetworkRequest());
         dispatch(saveProcessedResponses(pro.data));
         dispatch(savePendingResponse(pen.data));
@@ -81,6 +82,12 @@ const multipleRequest = (urls = []) => {
 const saveProcessedResponses = data => ({
   type: SAVE_PROCESSED_RESPONSES,
   data
+});
+
+const updateResponse = (data, type) => ({
+  type: UPDATE_RESPONSE_NOTE,
+  data,
+  stateType: type
 });
 
 const savePendingResponse = data => ({

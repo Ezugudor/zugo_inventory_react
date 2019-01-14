@@ -16,6 +16,7 @@ const View = props => (
             placeholder="Enter Your Email"
             value={props.email}
             onChange={props.changeInput}
+            required
           />
           <label className={BaseStyle.FormLabel} htmlFor="email">
             Enter Your Email
@@ -29,6 +30,7 @@ const View = props => (
             placeholder="Password"
             value={props.password}
             onChange={props.changeInput}
+            required
           />
           <label className={BaseStyle.FormLabel} htmlFor="password">
             Enter Your Password

@@ -2,21 +2,28 @@ import Style from "./FormBuilderSideNav.module.css";
 import SettingImg from "../../../img/settings.svg";
 import BlockImg from "../../../img/block.svg";
 import PropTypes from "prop-types";
+import className from "classnames";
 import React from "react";
+
+const buildStyle = (props, tab) => {
+  const conditionalStyle = {};
+  conditionalStyle[Style.ActiveImgBox] = props.settingsWindowName === tab;
+  return className(Style.ImgBox, conditionalStyle);
+};
 
 export const FormBuilderSideNav = props => (
   <aside className={Style.Aside}>
     <div
-      className={`${Style.ImgBox} ${Style.ActiveImgBox}`}
-      onClick={() => props.changeSettings("build")}
+      className={buildStyle(props, "build")}
+      onClick={() => props.changeConfigWindow("build")}
     >
       <div className={Style.ImgHolder}>
         <img className={Style.Img} src={BlockImg} alt="Block" />
       </div>
     </div>
     <div
-      className={Style.ImgBox}
-      onClick={() => props.changeSettings("configure")}
+      className={buildStyle(props, "configuration")}
+      onClick={() => props.changeConfigWindow("configuration")}
     >
       <div className={Style.ImgHolder}>
         <img className={Style.Img} src={SettingImg} alt="Settings" />
@@ -26,5 +33,6 @@ export const FormBuilderSideNav = props => (
 );
 
 FormBuilderSideNav.propTypes = {
-  changeSettings: PropTypes.func.isRequired
+  settingsWindowName: PropTypes.string.isRequired,
+  changeConfigWindow: PropTypes.func.isRequired
 };

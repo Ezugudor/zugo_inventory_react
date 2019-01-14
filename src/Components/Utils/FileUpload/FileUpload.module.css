@@ -1,0 +1,43 @@
+@value Variables: "../../../styles/Variables.css";
+@value border-color, secondary-color, white-color from Variables;
+
+.uploadSection {
+  margin-bottom: 2rem;
+}
+
+.dropArea {
+  position: relative;
+  height: 24vh;
+  width: 58%;
+  border: 4px dashed border-color;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.highlight {
+  border-color: secondary-color;
+}
+
+.dropAreaContent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.uploadInstruction {
+  margin-bottom: 1rem;
+}
+
+.logo {
+  display: none;
+}
+
+.inputLabel {
+  padding: 1.1rem 2.9rem;
+  border-radius: 20px;
+  cursor: pointer;
+  outline: none;
+  background-color: secondary-color;
+  color: white-color;
+}

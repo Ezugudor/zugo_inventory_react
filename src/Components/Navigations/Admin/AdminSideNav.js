@@ -29,6 +29,11 @@ export const AdminSideNav = props => (
             Team
           </a>
         </li>
+        <li className={Style.NavItem}>
+          <a className={getClassName(props, "settings")} href="/settings">
+            Settings
+          </a>
+        </li>
       </ul>
     </nav>
   </aside>

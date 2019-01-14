@@ -5,12 +5,12 @@ import React from "react";
 export const White = props => (
   <button
     className={`${BaseStyle.Button} ${Style.White}`}
-    onClick={props.handleClick}
+    onClick={props.click}
   >
     {props.children}
   </button>
 );
 
 White.propTypes = {
-  handleClick: PropTypes.func.isRequired
+  click: PropTypes.func.isRequired
 };

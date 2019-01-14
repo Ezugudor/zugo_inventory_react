@@ -1,20 +1,24 @@
 import { AuthLayout } from "../../../Hoc/Layouts";
 import BaseStyle from "../Base.module.css";
 import Style from "./Signup.module.css";
+import PropTypes from "prop-types";
 import React from "react";
 
-export const Signup = props => (
+export const SignupView = props => (
   <AuthLayout>
     <div className={BaseStyle.base}>
-      <form className={Style.Form}>
+      <form className={Style.Form} onSubmit={props.register}>
         <div className="bank-info-box">
           <h3 className="heading-tertairy">Bank Information</h3>
           <div className={BaseStyle.Group}>
             <input
               className={BaseStyle.Input}
               type="text"
-              id="b_name"
+              id="businessname"
               placeholder="Bank Name"
+              value={props.businessname}
+              onChange={props.changeInput}
+              required
             />
             <label className={BaseStyle.FormLabel} htmlFor="b_name">
               Bank Name
@@ -27,8 +31,11 @@ export const Signup = props => (
             <input
               className={BaseStyle.Input}
               type="text"
-              id="first_name"
+              id="firstname"
               placeholder="Enter Your Firstname"
+              value={props.firstname}
+              onChange={props.changeInput}
+              required
             />
             <label className={BaseStyle.FormLabel} htmlFor="first_name">
               Enter Your Firstname
@@ -38,8 +45,11 @@ export const Signup = props => (
             <input
               className={BaseStyle.Input}
               type="text"
-              id="last_name"
+              id="lastname"
               placeholder="Enter Your Lastname"
+              value={props.lastname}
+              onChange={props.changeInput}
+              required
             />
             <label className={BaseStyle.FormLabel} htmlFor="last_name">
               Enter Your Lastname
@@ -51,6 +61,9 @@ export const Signup = props => (
               type="text"
               id="email"
               placeholder="Enter Your Work Email"
+              value={props.email}
+              onChange={props.changeInput}
+              required
             />
             <label className={BaseStyle.FormLabel} htmlFor="email">
               Enter Your Work Email
@@ -62,6 +75,9 @@ export const Signup = props => (
               type="password"
               id="password"
               placeholder="Password"
+              value={props.password}
+              onChange={props.changeInput}
+              required
             />
             <label className={BaseStyle.FormLabel} htmlFor="password">
               Enter Your Password
@@ -75,3 +91,13 @@ export const Signup = props => (
     </div>
   </AuthLayout>
 );
+
+SignupView.propTypes = {
+  businessname: PropTypes.string.isRequired,
+  changeInput: PropTypes.func.isRequired,
+  password: PropTypes.string.isRequired,
+  register: PropTypes.func.isRequired,
+  phone: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired
+};

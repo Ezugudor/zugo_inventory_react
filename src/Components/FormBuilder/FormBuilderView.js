@@ -1,24 +1,48 @@
+import { FormBuiderLayout } from "../../Hoc/Layouts";
 import { EditorPresenter } from "./EditorPresenter";
 import { FormPresenter } from "./FormPresenter";
-import { Aux } from "../../Hoc/Auxiliary";
 import { Setting } from "./Settings";
 import PropTypes from "prop-types";
 import React from "react";
 
-const view = props => (
-  <Aux>
-    <Setting {...props} />
-    <EditorPresenter {...props} />
+export const FormBuilderView = props => (
+  <FormBuiderLayout
+    changeConfigWindow={props.changeConfigWindow}
+    settingsWindowName={props.settingsWindowName}
+    save={props.save}
+  >
+    <Setting
+      handleRequirementInput={props.handleRequirementInput}
+      currentElementType={props.currentElementType}
+      settingsWindowName={props.settingsWindowName}
+      toggleConfigWindow={props.toggleConfigWindow}
+      showSettingsWindow={props.showSettingsWindow}
+      addElement={props.addElement}
+    />
+    <EditorPresenter
+      setElementChildren={props.setElementChildren}
+      setElementName={props.setElementName}
+      deleteQuestion={props.deleteQuestion}
+      addNextEditor={props.addNextEditor}
+      formElements={props.formElements}
+    />
     <FormPresenter elements={props.formElements} />
-  </Aux>
+  </FormBuiderLayout>
 );
 
-view.propTypes = {
+FormBuilderView.propTypes = {
+  handleRequirementInput: PropTypes.func.isRequired,
+  currentElementType: PropTypes.string.isRequired,
+  settingsWindowName: PropTypes.string.isRequired,
+  showSettingsWindow: PropTypes.bool.isRequired,
+  toggleConfigWindow: PropTypes.func.isRequired,
   setElementChildren: PropTypes.func.isRequired,
+  changeConfigWindow: PropTypes.func.isRequired,
+  deleteQuestion: PropTypes.func.isRequired,
   setElementName: PropTypes.func.isRequired,
   formElements: PropTypes.array.isRequired,
   addNextEditor: PropTypes.func.isRequired,
   addElement: PropTypes.func.isRequired,
-  setCurrentEditor: PropTypes.func
+  setCurrentEditor: PropTypes.func,
+  save: PropTypes.func.isRequired
 };
-export const FormBuilderView = view;
