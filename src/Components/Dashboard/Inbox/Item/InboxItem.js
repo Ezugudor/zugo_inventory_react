@@ -3,7 +3,10 @@ import PropTypes from "prop-types";
 import React from "react";
 
 export const InboxItem = props => (
-  <a href={`/responses/${props.id}`} className={Style.responseLink}>
+  <a
+    href={`/response/${props.type}/${props.id}`}
+    className={Style.responseLink}
+  >
     <div className={Style.inboxItem}>
       <div className={Style.response}>{props.formName}</div>
       <div className={Style.response}>{props.note}</div>
@@ -15,6 +18,7 @@ export const InboxItem = props => (
 InboxItem.propTypes = {
   formName: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   note: PropTypes.string
 };

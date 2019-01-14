@@ -1,3 +1,4 @@
+import { getResponse, getCurrentUser } from "../../store/selectors";
 import { createNote, processResponse } from "../../store/actions";
 import { ResponseView } from "../../Components/Response";
 import { connect } from "react-redux";
@@ -23,10 +24,14 @@ export class Class extends Component {
     if (!this.state.newNote) {
       return alert("OOps! You have not left any note for the respondent");
     }
-    const { id } = this.props.match.params;
+    const { id, type } = this.props.match.params;
     const note = this.state.newNote;
-    this.props.createNote(id, note);
-    this.setState({ noteText: "", showNewNote: false });
+    this.props.createNote(id, note, type);
+    this.setState({ newNote: "", showNewNote: false });
+  };
+
+  deliverMessage = () => {
+    alert("Functionality comming soon!");
   };
 
   process = () => {
@@ -39,16 +44,27 @@ export class Class extends Component {
     return (
       <ResponseView
         setNewNoteText={this.setNewNoteText}
+        currentUser={this.props.currentUser}
         showNewNote={this.state.showNewNote}
+        deliverMessage={this.deliverMessage}
         toggleNoteView={this.toggleNewNote}
         newNoteText={this.state.newNote}
+        response={this.props.response}
         createNote={this.createNote}
       />
     );
   }
 }
 
-export const Response = connect(
-  null,
+const mapStateToProps = (state, props) => {
+  const { id, type } = props.match.params;
+  return {
+    currentUser: getCurrentUser(state),
+    response: getResponse(state, { id, type })
+  };
+};
+
+export const UserResponse = connect(
+  mapStateToProps,
   { createNote, processResponse }
 )(Class);

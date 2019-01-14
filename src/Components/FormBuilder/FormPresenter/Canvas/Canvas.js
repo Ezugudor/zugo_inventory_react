@@ -15,10 +15,12 @@ export class Canvas extends Component {
 
   setupCanvas = () => {
     const targets = document.querySelectorAll('[data-question="true"]');
-    ResponseCanvas.setUp({ targets, canvasClass: Style.Canvas })
-      .onTargetEnter(this.handleTargetEnter)
-      .onTargetExit(this.handleTargetExit);
-    this.canvas = document.querySelector(`.${Style.Canvas}`);
+    if (targets.length) {
+      ResponseCanvas.setUp({ targets, canvasClass: Style.Canvas })
+        .onTargetEnter(this.handleTargetEnter)
+        .onTargetExit(this.handleTargetExit);
+      this.canvas = document.querySelector(`.${Style.Canvas}`);
+    }
   };
 
   componentDidMount() {
@@ -38,12 +40,6 @@ export class Canvas extends Component {
     console.log(response);
     element.classList.remove("InactiveElement");
     element.classList.add("ActivteElement");
-    //  Need to understand focus and focus management
-
-    // const input = element.querySelector('[data-input="true"]');
-    // if (input) {
-    //   input.focus();
-    // }
   };
 
   handleTargetExit = response => {
@@ -59,9 +55,9 @@ export class Canvas extends Component {
 
   goToNextQuestion = (direction = "down") => {
     if (direction === "down") {
-      this.canvas.scrollBy(0, 270);
+      this.canvas.scrollBy(0, 280);
     } else if (direction === "up") {
-      this.canvas.scrollBy(0, -270);
+      this.canvas.scrollBy(0, -280);
     }
   };
 

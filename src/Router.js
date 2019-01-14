@@ -1,9 +1,10 @@
 import {
+  BusinessSettings,
+  UserResponse,
   FormBuilder,
   Dashboard,
   Responses,
   FormTypes,
-  Response,
   Login,
   Signup,
   Form
@@ -36,30 +37,31 @@ const GuestRoute = ({ component: Component, ...rest }) => (
   />
 );
 
-// const ManagerRoute = ({ component: Component, ...rest }) => (
-//   <Route
-//     {...rest}
-//     render={props => {
-//       const state = Store.getState();
-//       const currentUser = state.user.currentUser;
-//       const token = state.user.token;
-//       SwypPartnerApi.defaults.headers.common["Authorization"] = token;
-//       return currentUser &&
-//         (currentUser.role === "manager" || currentUser.role === "admin") ? (
-//         <Component {...props} />
-//       ) : (
-//         <Redirect to="/dashboard" />
-//       );
-//     }}
-//   />
-// );
+const ManagerRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={props => {
+      const state = Store.getState();
+      const currentUser = state.user.currentUser;
+      const token = state.user.token;
+      SwypPartnerApi.defaults.headers.common["Authorization"] = token;
+      return currentUser &&
+        (currentUser.role === "manager" || currentUser.role === "admin") ? (
+        <Component {...props} />
+      ) : (
+        <Redirect to="/dashboard" />
+      );
+    }}
+  />
+);
 
 export default () => (
   <Switch>
+    <PrivateRoute exact path="/response/:type/:id" component={UserResponse} />
     <PrivateRoute exact path="/forms/:id/responses" component={Responses} />
     <PrivateRoute exact path="/formtypes/:parent/:name" component={Form} />
+    <ManagerRoute exact path="/settings" component={BusinessSettings} />
     <PrivateRoute exact path="/formbuilder" component={FormBuilder} />
-    <PrivateRoute exact path="/responses/:id" component={Response} />
     <PrivateRoute exact path="/formtypes" component={FormTypes} />
     <PrivateRoute exact path="/dashboard" component={Dashboard} />
     <GuestRoute exact path="/signup" component={Signup} />

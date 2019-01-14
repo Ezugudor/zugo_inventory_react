@@ -6,9 +6,11 @@ export const Card = props => (
     <div className={Style.Body}>
       <div className={Style.Text}>{props.form.name}</div>
     </div>
-    <div className={Style.Footer}>
-      <span className={Style.FooterText}>100 Response</span>
-    </div>
+    <a href={`/forms/${props.form.id}/responses`}>
+      <div className={Style.Footer}>
+        <span className={Style.FooterText}>View Responses</span>
+      </div>
+    </a>
   </div>
 );
 

@@ -11,20 +11,20 @@ export const ResponseControls = props => (
     <div>
       <h1 className={Style.info}>Account Opening - #98da8da9e9dd9d</h1>
     </div>
-    <div onClick={props.handleNewNote}>
-      <Red styles={Style.button}>
+    <div className={Style.controls}>
+      <Red styles={Style.button} click={props.handleNewNote}>
         <span className={Style.buttonIcon}>
           <img className={Style.iconImage} src={addIcon} alt="add" />
         </span>
         Add Note
       </Red>
-      <Red styles={Style.button}>
+      <Red styles={Style.button} click={props.deliverMessage}>
         <span className={Style.buttonIcon}>
           <img className={Style.iconImage} src={downloadIcon} alt="download" />
         </span>
         Download
       </Red>
-      <SkyBlue styles={Style.button}>
+      <SkyBlue styles={Style.button} click={props.deliverMessage}>
         <span className={Style.buttonIcon}>
           <img
             className={Style.iconImage}
@@ -39,5 +39,6 @@ export const ResponseControls = props => (
 );
 
 ResponseControls.propTypes = {
+  deliverMessage: PropTypes.func.isRequired,
   handleNewNote: PropTypes.func.isRequired
 };

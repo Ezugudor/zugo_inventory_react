@@ -9,10 +9,6 @@
   margin-top: 1rem;
 }
 
-.answer:not(:last-child) {
-  margin-top: 2rem;
-}
-
 .answerHeader {
   border-bottom: 2px solid typeform-border-color;
   padding: 0.6rem 3rem;

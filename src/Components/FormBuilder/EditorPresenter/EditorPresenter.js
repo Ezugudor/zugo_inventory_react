@@ -3,29 +3,17 @@ import PropTypes from "prop-types";
 import { Editor } from "./Editor";
 import React from "react";
 
-const view = props => {
-  const lastIndex = props.formElements.length - 1;
+export const EditorPresenter = props => {
   return (
     <section className={Style.editorPresenter}>
       <div className={Style.editorsContainer}>
-        {props.formElements.map((ele, index) => {
+        {props.formElements.map(ele => {
           //  don't show an editor for introduction
           if (ele.type === "introduction") return null;
-          if (lastIndex === index) {
-            return (
-              <Editor
-                setElementChildren={props.setElementChildren}
-                setCurrentEditor={props.setCurrentEditor}
-                setElementName={props.setElementName}
-                addNextEditor={props.addNextEditor}
-                element={ele}
-                key={ele.id}
-              />
-            );
-          }
           return (
             <Editor
               setElementChildren={props.setElementChildren}
+              deleteQuestion={props.deleteQuestion}
               setElementName={props.setElementName}
               addNextEditor={props.addNextEditor}
               element={ele}
@@ -38,11 +26,10 @@ const view = props => {
   );
 };
 
-view.propTypes = {
+EditorPresenter.propTypes = {
   setElementChildren: PropTypes.func.isRequired,
   setElementName: PropTypes.func.isRequired,
+  deleteQuestion: PropTypes.func.isRequired,
   formElements: PropTypes.array.isRequired,
-  addNextEditor: PropTypes.func.isRequired,
-  setCurrentEditor: PropTypes.func
+  addNextEditor: PropTypes.func.isRequired
 };
-export const EditorPresenter = view;

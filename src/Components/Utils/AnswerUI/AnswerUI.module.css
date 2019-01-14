@@ -6,6 +6,10 @@
   justify-content: flex-start;
 }
 
+.answer:not(:last-child) {
+  margin-bottom: 2rem;
+}
+
 .questionDecoration {
   display: flex;
   flex-flow: row nowrap;

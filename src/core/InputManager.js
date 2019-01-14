@@ -1,8 +1,4 @@
 export class InputManager {
-  static generateDefaultVaidationRule(type) {
-    return [];
-  }
-
   static generateType(el) {
     switch (el.type) {
       case "shorttext":

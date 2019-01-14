@@ -1,0 +1,19 @@
+@value Variables: "../../styles/Variables.css";
+@value secondary-color from Variables;
+
+.BusinessSettings {
+  padding-top: 5rem;
+  padding-left: 3rem;
+}
+
+.textArea {
+  height: 15vh;
+  width: 58%;
+  border-radius: 3px;
+  padding-top: 1rem;
+  padding-left: 1rem;
+  font-family: inherit;
+  font-size: inherit;
+  border: 1px solid secondary-color;
+  outline: none;
+}
