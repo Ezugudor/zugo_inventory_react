@@ -19,7 +19,13 @@ export const FormBuilderView = props => (
       showSettingsWindow={props.showSettingsWindow}
       addElement={props.addElement}
     />
-    <EditorPresenter {...props} />
+    <EditorPresenter
+      setElementChildren={props.setElementChildren}
+      setElementName={props.setElementName}
+      deleteQuestion={props.deleteQuestion}
+      addNextEditor={props.addNextEditor}
+      formElements={props.formElements}
+    />
     <FormPresenter elements={props.formElements} />
   </FormBuiderLayout>
 );
@@ -32,6 +38,7 @@ FormBuilderView.propTypes = {
   toggleConfigWindow: PropTypes.func.isRequired,
   setElementChildren: PropTypes.func.isRequired,
   changeConfigWindow: PropTypes.func.isRequired,
+  deleteQuestion: PropTypes.func.isRequired,
   setElementName: PropTypes.func.isRequired,
   formElements: PropTypes.array.isRequired,
   addNextEditor: PropTypes.func.isRequired,

@@ -1,7 +1,7 @@
 import { getNewForm, getBuilderState } from "../../store/selectors";
 import { preserveNewForm, createForm } from "../../store/actions";
-import { preserveFormBuilderState } from "../../store/actions";
 import { getNextPosition, getDefaultElement } from "../../utils";
+import { preserveFormBuilderState } from "../../store/actions";
 import { FormBuilderView } from "../../Components/FormBuilder";
 import { generateNewElement } from "../../utils";
 import React, { Component } from "react";
@@ -67,22 +67,19 @@ class Class extends Component {
     const element = elements[elementIdex];
     element.name = name;
     elements[elementIdex] = element;
-
-    const stateToPreserve = { ...this.state };
-    stateToPreserve.currentElementType = element.type;
-    stateToPreserve.currentElementId = id;
-    delete stateToPreserve.formElements;
-
-    this.props.preserveNewForm(elements);
-    this.props.preserveFormBuilderState(stateToPreserve);
-
     this.setState({
       currentElementType: element.type,
       formElements: elements,
       currentElementId: id
     });
+    this.preserveState(element, elements);
   };
 
+  /**
+   * set the question text for form question with the given id
+   * @param {string} id
+   * @param {content} content the question text
+   */
   setElementChildren = (id, content) => {
     const elements = [...this.state.formElements];
     const elementIdex = elements.findIndex(el => el.id === id);
@@ -90,8 +87,8 @@ class Class extends Component {
     const element = elements[elementIdex];
     element.children = content;
     elements[elementIdex] = element;
-    this.props.preserveNewForm(elements);
     this.setState({ formElements: elements });
+    this.preserveState(element, elements);
   };
 
   /**
@@ -127,12 +124,40 @@ class Class extends Component {
     this.setState({ formElements: elements });
   };
 
-  setCurrentEditor = editoRef => {
-    // setTimeout(() => {
-    //   editoRef.current.focus();
-    // }, 1000);
+  /**
+   * Delete a question from form elements
+   * @param {string} questionId
+   */
+  deleteQuestion = questionId => {
+    const questions = [...this.state.formElements];
+    const questionIndex = questions.findIndex(el => el.id === questionId);
+    if (questionIndex === -1) return;
+    const question = questions.splice(questionIndex, 1);
+    this.preserveState(question, questions);
+    this.setState({
+      formElements: questions,
+      settingsWindowName: "build"
+    });
   };
 
+  /**
+   * save state to local storage
+   * @param {object} currentQuestion question beign edited
+   * @param {array} questions form questions
+   */
+  preserveState = (currentQuestion, questions) => {
+    const stateToPreserve = { ...this.state };
+    stateToPreserve.currentElementType = currentQuestion.type;
+    stateToPreserve.currentElementId = currentQuestion.id;
+    delete stateToPreserve.formElements;
+
+    this.props.preserveNewForm(questions);
+    this.props.preserveFormBuilderState(stateToPreserve);
+  };
+
+  /**
+   * Add another editor to the UI for collecting more questions
+   */
   addNextEditor = () => {
     const elements = [...this.state.formElements];
     const element = getDefaultElement();
@@ -141,6 +166,9 @@ class Class extends Component {
     this.setState({ formElements: elements });
   };
 
+  /**
+   * send the questions user want to ask to the backend server
+   */
   createForm = () => {
     const { name, parent } = this.props.newForm.formType;
 
@@ -171,6 +199,7 @@ class Class extends Component {
         setElementChildren={this.setElementChildren}
         setCurrentEditor={this.setCurrentEditor}
         formElements={this.state.formElements}
+        deleteQuestion={this.deleteQuestion}
         setElementName={this.setElementName}
         addNextEditor={this.addNextEditor}
         addElement={this.addElement}

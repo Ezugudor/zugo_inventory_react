@@ -1,4 +1,4 @@
-import { Passport } from "./Passport";
+import { Picture } from "./Picture";
 import { YesOrNo } from "./YesOrNo";
 import { Simple } from "./Simple";
 import { Cards } from "./Cards";
@@ -14,10 +14,10 @@ export const renderFormFor = ({ el, handleClick }) => {
       return null;
 
     case "sign":
-      return <Passport el={el} handleClick={handleClick} key={el.position} />;
+      return <Picture el={el} handleClick={handleClick} key={el.position} />;
 
     case "picture":
-      return <Passport el={el} handleClick={handleClick} key={el.position} />;
+      return <Picture el={el} handleClick={handleClick} key={el.position} />;
 
     case "creditcards":
       return <Cards el={el} handleClick={handleClick} key={el.position} />;
