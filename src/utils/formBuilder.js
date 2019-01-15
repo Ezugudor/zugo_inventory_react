@@ -39,10 +39,9 @@ export const generateNewElement = (type, position) => {
   };
 };
 
-export const getNextPosition = formInputs => {
-  const len = formInputs.filter(
-    element => element.type !== "section" && element.type !== "introduction"
-  ).length;
+export const getNextPosition = questions => {
+  const len = questions.filter(element => element.type !== "introduction")
+    .length;
   return len === 0 ? 1 : len + 1;
 };
 
@@ -62,6 +61,7 @@ const buildValidationRule = elementType => {
 };
 
 export const blockTypes = [
+  { name: "Official Use Section", type: "official-section" },
   { name: "Introduction Section", type: "introduction" },
   // { name: "Multiple Choice", type: "multichoice" },
   { name: "Passport Photo", type: "picture" },

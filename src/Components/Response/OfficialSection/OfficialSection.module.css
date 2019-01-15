@@ -1,0 +1,59 @@
+@value Variables: "../../../styles/Variables.css";
+@value white-color, typeform-border-color from Variables;
+
+.officialSection {
+  height: 45vh;
+  width: 70%;
+  margin: 0 auto;
+  background-color: white-color;
+  border-radius: 9px;
+}
+
+.sectionWrapper {
+  height: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  margin-left: 3rem;
+}
+
+.secondaryHeading {
+  padding-top: 1rem;
+}
+
+.inputWrapper {
+  margin-bottom: 2rem;
+}
+
+.inputLabel {
+  font-size: 2.5rem;
+  margin-right: 1rem;
+}
+
+.inputs {
+  height: 3rem;
+  width: 60%;
+}
+
+.workerSection,
+.managerSection {
+  width: 50%;
+}
+
+.workerSection {
+  border-right: 2px solid typeform-border-color;
+}
+
+.managerSection {
+  margin-left: 3rem;
+}
+
+.fileUploaderWrapper {
+  width: 66%;
+  margin-left: 5rem;
+  margin-bottom: 2rem;
+}
+
+.Controls {
+  width: 70%;
+  margin: 0 auto;
+}

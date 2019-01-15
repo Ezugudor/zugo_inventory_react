@@ -1,25 +1,46 @@
 import { getResponse, getCurrentUser } from "../../store/selectors";
 import { createNote, processResponse } from "../../store/actions";
 import { ResponseView } from "../../Components/Response";
-import { connect } from "react-redux";
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 export class Class extends Component {
   state = {
+    showOfficialSectionUI: false,
     showNewNote: false,
     newNote: ""
   };
 
+  /**
+   * show model for a user to add note on a user
+   * response
+   */
   toggleNewNote = () => {
     this.setState(prevState => ({
       showNewNote: !prevState.showNewNote
     }));
   };
 
+  /**
+   * Show modal for collecting official signatures
+   * for a user response
+   */
+  toggleOfficialSection = () => {
+    this.setState(prevState => ({
+      showOfficialSectionUI: !prevState.showOfficialSectionUI
+    }));
+  };
+
+  /**
+   * collect text user enters as note
+   */
   setNewNoteText = e => {
     this.setState({ newNote: e.target.value });
   };
 
+  /**
+   * push note text to upstream server
+   */
   createNote = () => {
     if (!this.state.newNote) {
       return alert("OOps! You have not left any note for the respondent");
@@ -30,19 +51,21 @@ export class Class extends Component {
     this.setState({ newNote: "", showNewNote: false });
   };
 
+  /**
+   * placeholder for unimplemented feature
+   */
   deliverMessage = () => {
     alert("Functionality comming soon!");
   };
 
-  process = () => {
-    const { id } = this.props.match.params;
-    const { history } = this.props;
-    this.props.process(id, history);
-  };
-
+  /**
+   * render UI on the screen
+   */
   render() {
     return (
       <ResponseView
+        showOfficialSectionUI={this.state.showOfficialSectionUI}
+        toggleOfficialSectionUI={this.toggleOfficialSection}
         setNewNoteText={this.setNewNoteText}
         currentUser={this.props.currentUser}
         showNewNote={this.state.showNewNote}
@@ -56,6 +79,11 @@ export class Class extends Component {
   }
 }
 
+/**
+ * connection component to state
+ * @param {*} state
+ * @param {*} props
+ */
 const mapStateToProps = (state, props) => {
   const { id, type } = props.match.params;
   return {

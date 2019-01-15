@@ -1,6 +1,6 @@
 import { ResponseCanvas } from "../../../../core/responseCanvas";
 import { calculateElementCount } from "../../../../utils";
-import { renderFormFor } from "./Question";
+import { renderQuestionFor } from "./Question";
 import React, { Component } from "react";
 import Style from "./Canvas.module.css";
 import PropTypes from "prop-types";
@@ -71,7 +71,7 @@ export class Canvas extends Component {
           <div className={Style.Canvas}>
             <main>
               {this.props.elements.map(el =>
-                renderFormFor({
+                renderQuestionFor({
                   el,
                   handleClick: this.increaseCompletedQuestion
                 })

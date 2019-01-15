@@ -5,11 +5,12 @@ import { Cards } from "./Cards";
 import { Long } from "./Long";
 import React from "react";
 
-export const renderFormFor = ({ el, handleClick }) => {
+export const renderQuestionFor = ({ el, handleClick }) => {
   switch (el.type) {
     case "introduction":
       return null;
 
+    case "official-section":
     case "section":
       return null;
 

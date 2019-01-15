@@ -6,7 +6,7 @@ import React from "react";
 
 export const NewForm = props => (
   <Modal show={props.showNewForm} click={props.toggleNewForm}>
-    <section>
+    <section className={Style.newForm}>
       <h3 className={Style.Text}>New Form</h3>
       <div className={Style.InputBox}>
         <input
