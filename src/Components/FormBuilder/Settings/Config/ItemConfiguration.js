@@ -12,14 +12,14 @@ export const ItemConfiguration = props => (
   <div className={Style.configuration}>
     <div className={Style.requiredRuleWrapper}>
       <span>Required</span>
-      <label className={Style.inputLabel}>
+      <label className={Style.inputLabel} htmlFor="required">
         <input
           type="checkbox"
           id="required"
           className={Style.input}
-          onChange={e => props.handleRequirementInput("required", e)}
+          onChange={e => props.addValidationRule("required", e)}
         />
-        <span htmlFor="required" className={Style.toggleButton} />
+        <span className={Style.toggleButton} />
       </label>
     </div>
     {showMinMax(props) ? <MinMaxSetting /> : null}
@@ -27,8 +27,8 @@ export const ItemConfiguration = props => (
 );
 
 ItemConfiguration.propTypes = {
-  handleRequirementInput: PropTypes.func.isRequired,
-  currentElementType: PropTypes.string.isRequired
+  currentElementType: PropTypes.string.isRequired,
+  addValidationRule: PropTypes.func.isRequired
 };
 
 const MinMaxSetting = props => (
@@ -38,7 +38,7 @@ const MinMaxSetting = props => (
       <input
         type="number"
         className={Style.inputValue}
-        onChange={e => props.handleRequirementInput("min", e)}
+        onChange={e => props.addValidationRule("min", e)}
       />
     </div>
     <div className={Style.maxRuleBox}>
@@ -46,7 +46,7 @@ const MinMaxSetting = props => (
       <input
         type="number"
         className={Style.inputValue}
-        onChange={e => props.handleRequirementInput("max", e)}
+        onChange={e => props.addValidationRule("max", e)}
       />
     </div>
   </div>

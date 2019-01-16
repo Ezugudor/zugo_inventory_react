@@ -1,4 +1,4 @@
-import { ditorDefaultValue } from "../../../../utils";
+import { editorDefaultValue } from "../../../../utils";
 import { Editor as SlateEditor } from "slate-react";
 import Plain from "slate-plain-serializer";
 import React, { Component } from "react";
@@ -13,8 +13,8 @@ class Class extends Component {
     const text = this.props.element.name;
     const children = this.props.element.children.join("\n");
     this.state = {
-      value: text ? Plain.deserialize(text) : ditorDefaultValue(),
-      childValue: children ? Plain.deserialize(children) : ditorDefaultValue
+      value: text ? Plain.deserialize(text) : editorDefaultValue(),
+      childValue: children ? Plain.deserialize(children) : editorDefaultValue
     };
   }
 

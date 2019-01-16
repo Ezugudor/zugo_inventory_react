@@ -4,6 +4,7 @@
 .configuration {
   padding: 0 2rem;
 }
+
 .requiredRuleWrapper {
   display: flex;
   flex-flow: row nowrap;

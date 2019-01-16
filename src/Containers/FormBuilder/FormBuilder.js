@@ -1,9 +1,9 @@
+import { getNextPosition, getDefaultElement, getChildIndex } from "../../utils";
+import { generateNewElement, getIntroIndex, hasChild } from "../../utils";
 import { getNewForm, getBuilderState } from "../../store/selectors";
 import { preserveNewForm, createForm } from "../../store/actions";
-import { getNextPosition, getDefaultElement } from "../../utils";
 import { preserveFormBuilderState } from "../../store/actions";
 import { FormBuilderView } from "../../Components/FormBuilder";
-import { generateNewElement } from "../../utils";
 import React, { Component } from "react";
 import { slugName } from "../../utils";
 import { connect } from "react-redux";
@@ -42,30 +42,54 @@ class Class extends Component {
     }));
   };
 
+  /**
+   * Add a new question to the list of questions for users to answer
+   * @param {string} type type of question to ask
+   */
   addElement = type => {
     const position = getNextPosition(this.state.formElements);
     const { formElement } = generateNewElement(type, position);
-    const formElements = [...this.state.formElements];
-    formElements.push(formElement);
-    const stateToChange = { currentElementId: formElement.id, formElements };
-    if (type === "introduction" || type === "section") {
-      return this.setState(stateToChange);
+    const questions = [...this.state.formElements];
+    const introIndex = getIntroIndex(questions);
+
+    if (type === "introduction" && introIndex !== -1) {
+      return this.setState({
+        settingsWindowName: "configuration",
+        currentElementType: formElement.type,
+        currentElementId: formElement.id,
+        showSettingsWindow: true
+      });
     }
+
+    questions.push(formElement);
+
+    if (type === "introduction") {
+      return this.setState({
+        settingsWindowName: "configuration",
+        currentElementType: formElement.type,
+        currentElementId: formElement.id,
+        showSettingsWindow: true,
+        formElements: questions
+      });
+    }
+
     this.setState({
-      settingsWindowName: "configuration",
-      currentElementType: formElement.type,
       currentElementId: formElement.id,
-      showSettingsWindow: true,
-      formElements
+      formElements: questions
     });
   };
 
-  setElementName = (id, name) => {
+  /**
+   * Set the text of the question to ask
+   * @param {string} id id of the question whose text/name property is to be set
+   * @param {string} text the question text to set
+   */
+  setElementName = (id, text) => {
     const elements = [...this.state.formElements];
     const elementIdex = elements.findIndex(el => el.id === id);
     if (elementIdex === -1) return;
     const element = elements[elementIdex];
-    element.name = name;
+    element.name = text;
     elements[elementIdex] = element;
     this.setState({
       currentElementType: element.type,
@@ -89,6 +113,24 @@ class Class extends Component {
     elements[elementIdex] = element;
     this.setState({ formElements: elements });
     this.preserveState(element, elements);
+  };
+
+  /**
+   * Add new intro section component like ID Cards
+   * @param {object} child
+   */
+  addQuestionIntroChild = child => {
+    const questions = [...this.state.formElements];
+    const introIndex = getIntroIndex(questions);
+    const questionIntro = questions[introIndex];
+    if (hasChild(questionIntro, child.slug)) {
+      const childIndex = getChildIndex(questionIntro, child.slug);
+      questionIntro.children.splice(childIndex, 1);
+    } else {
+      questionIntro.children.push(child);
+    }
+    this.setState({ formElements: questions });
+    this.preserveState(questionIntro, questions);
   };
 
   /**
@@ -193,14 +235,16 @@ class Class extends Component {
         showSettingsWindow={this.state.showSettingsWindow}
         settingsWindowName={this.state.settingsWindowName}
         currentElementType={this.state.currentElementType}
-        handleRequirementInput={this.addValidationRule}
+        addQuestionIntroChild={this.addQuestionIntroChild}
         changeConfigWindow={this.changeConfigWindow}
         toggleConfigWindow={this.toggleConfigWindow}
         setElementChildren={this.setElementChildren}
+        addValidationRule={this.addValidationRule}
         setCurrentEditor={this.setCurrentEditor}
         formElements={this.state.formElements}
         deleteQuestion={this.deleteQuestion}
         setElementName={this.setElementName}
+        formName={this.props.newForm.name}
         addNextEditor={this.addNextEditor}
         addElement={this.addElement}
         save={this.createForm}

@@ -2,7 +2,7 @@ import { ValidationRuleBuilder } from "../core";
 import { Value } from "slate";
 import uuid4 from "uuid4";
 
-export const ditorDefaultValue = () =>
+export const editorDefaultValue = () =>
   Value.fromJSON({
     document: {
       nodes: [
@@ -43,6 +43,10 @@ export const getNextPosition = questions => {
   const len = questions.filter(element => element.type !== "introduction")
     .length;
   return len === 0 ? 1 : len + 1;
+};
+
+export const getIntroIndex = questions => {
+  return questions.findIndex(question => question.type === "introduction");
 };
 
 const buildValidationRule = elementType => {
