@@ -9,7 +9,8 @@ export const EditorPresenter = props => {
       <div className={Style.editorsContainer}>
         {props.formElements.map(ele => {
           //  don't show an editor for introduction
-          if (ele.type === "introduction") return null;
+          if (ele.type === "introduction" || ele.type === "official-section")
+            return null;
           return (
             <Editor
               setElementChildren={props.setElementChildren}
