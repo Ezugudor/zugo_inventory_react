@@ -28,4 +28,4 @@ export class ValidationRuleBuilder {
   }
 }
 
-const baseRule = [{ required: true }];
+const baseRule = [{ name: "required", value: 10 }];
