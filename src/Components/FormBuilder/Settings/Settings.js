@@ -1,4 +1,4 @@
-import { ItemConfiguration } from "./Config";
+import { ItemConfiguration, IntroConfiguration } from "./Config";
 import Style from "./Settings.module.css";
 import className from "classnames";
 import PropTypes from "prop-types";
@@ -26,21 +26,30 @@ export const Setting = props =>
       <div className={Style.contentWrapper}>
         {props.settingsWindowName === "build" ? (
           <Blocks {...props} />
-        ) : (
-          <ItemConfiguration
-            handleRequirementInput={props.handleRequirementInput}
-            currentElementType={props.currentElementType}
+        ) : props.currentElement.type === "introduction" ? (
+          <IntroConfiguration
+            addQuestionIntroChild={props.addQuestionIntroChild}
           />
+        ) : props.currentElement.type ? (
+          <ItemConfiguration
+            setQuestionProperty={props.setQuestionProperty}
+            addValidationRule={props.addValidationRule}
+            currentElement={props.currentElement}
+          />
+        ) : (
+          <p>You have no question to configure</p>
         )}
       </div>
     </section>
   ) : null;
 
 Setting.propTypes = {
-  handleRequirementInput: PropTypes.func.isRequired,
-  currentElementType: PropTypes.string.isRequired,
+  addQuestionIntroChild: PropTypes.func.isRequired,
   settingsWindowName: PropTypes.string.isRequired,
+  setQuestionProperty: PropTypes.func.isRequired,
   showSettingsWindow: PropTypes.bool.isRequired,
   toggleConfigWindow: PropTypes.func.isRequired,
+  addValidationRule: PropTypes.func.isRequired,
+  currentElement: PropTypes.object.isRequired,
   addElement: PropTypes.func.isRequired
 };

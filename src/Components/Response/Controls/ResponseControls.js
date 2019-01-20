@@ -12,6 +12,16 @@ export const ResponseControls = props => (
       <h1 className={Style.info}>Account Opening - #98da8da9e9dd9d</h1>
     </div>
     <div className={Style.controls}>
+      <SkyBlue styles={Style.button} click={props.toggleOfficialSectionUI}>
+        <span className={Style.buttonIcon}>
+          <img
+            className={Style.iconImage}
+            src={processingIcon}
+            alt="Sign Off"
+          />
+        </span>
+        Sign Off
+      </SkyBlue>
       <Red styles={Style.button} click={props.handleNewNote}>
         <span className={Style.buttonIcon}>
           <img className={Style.iconImage} src={addIcon} alt="add" />
@@ -24,21 +34,12 @@ export const ResponseControls = props => (
         </span>
         Download
       </Red>
-      <SkyBlue styles={Style.button} click={props.deliverMessage}>
-        <span className={Style.buttonIcon}>
-          <img
-            className={Style.iconImage}
-            src={processingIcon}
-            alt="proccesing"
-          />
-        </span>
-        Process
-      </SkyBlue>
     </div>
   </section>
 );
 
 ResponseControls.propTypes = {
+  toggleOfficialSectionUI: PropTypes.func.isRequired,
   deliverMessage: PropTypes.func.isRequired,
   handleNewNote: PropTypes.func.isRequired
 };

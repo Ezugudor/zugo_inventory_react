@@ -6,7 +6,7 @@ import React from "react";
 
 export const NewNote = props => (
   <Modal show={props.showNewNote} click={props.toggleNoteView}>
-    <section>
+    <section className={Style.newNote}>
       <h3 className={Style.Text}>Add New Note</h3>
       <div className={Style.InputBox}>
         <textarea

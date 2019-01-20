@@ -9,7 +9,7 @@ const View = props => (
     <div
       className={Style.Modal}
       style={{
-        transform: props.show ? "translateY(0)" : "translateY(-100vh)",
+        visibility: props.show ? "visible" : "hidden",
         opacity: props.show ? 1 : 0
       }}
     >

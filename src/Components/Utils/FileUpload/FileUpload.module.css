@@ -8,7 +8,7 @@
 .dropArea {
   position: relative;
   height: 24vh;
-  width: 58%;
+  width: 100%;
   border: 4px dashed border-color;
   border-radius: 8px;
   text-align: center;
@@ -36,6 +36,7 @@
 .inputLabel {
   padding: 1.1rem 2.9rem;
   border-radius: 20px;
+  white-space: nowrap;
   cursor: pointer;
   outline: none;
   background-color: secondary-color;
