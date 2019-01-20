@@ -16,8 +16,7 @@ const initialState = {
   formBuilderState: {
     showSettingsWindow: true,
     settingsWindowName: "",
-    currentElementType: "",
-    currentElementId: ""
+    currentElement: {}
   },
   newForm: {
     formType: { id: "", parent: "", name: "" },

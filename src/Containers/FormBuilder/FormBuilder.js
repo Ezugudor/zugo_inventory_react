@@ -12,23 +12,28 @@ class Class extends Component {
   state = {
     settingsWindowName: "build",
     showSettingsWindow: true,
-    currentElementType: "",
-    currentElementId: "",
+    currentElement: {},
     formElements: []
   };
 
+  /**
+   * hidrate state from local storage
+   */
   componentDidMount() {
     let stateUpdates = {};
     if (this.props.newForm.elements.length) {
       stateUpdates.formElements = this.props.newForm.elements;
     }
 
-    if (this.props.builderState.currentElementId) {
+    if (this.props.builderState.currentElement.type) {
       stateUpdates = { ...stateUpdates, ...this.props.builderState };
     }
     this.setState(stateUpdates);
   }
 
+  /**
+   * change the setting UI from design to configuration mode
+   */
   changeConfigWindow = name => {
     this.setState({
       showSettingsWindow: true,
@@ -36,6 +41,9 @@ class Class extends Component {
     });
   };
 
+  /**
+   * open and close the settings UI
+   */
   toggleConfigWindow = () => {
     this.setState(prevState => ({
       showSettingsWindow: !prevState.showSettingsWindow
@@ -55,8 +63,7 @@ class Class extends Component {
     if (type === "introduction" && introIndex !== -1) {
       return this.setState({
         settingsWindowName: "configuration",
-        currentElementType: formElement.type,
-        currentElementId: formElement.id,
+        currentElement: formElement,
         showSettingsWindow: true
       });
     }
@@ -66,15 +73,14 @@ class Class extends Component {
     if (type === "introduction") {
       return this.setState({
         settingsWindowName: "configuration",
-        currentElementType: formElement.type,
-        currentElementId: formElement.id,
+        currentElement: formElement,
         showSettingsWindow: true,
         formElements: questions
       });
     }
 
     this.setState({
-      currentElementId: formElement.id,
+      currentElement: formElement,
       formElements: questions
     });
   };
@@ -84,19 +90,18 @@ class Class extends Component {
    * @param {string} id id of the question whose text/name property is to be set
    * @param {string} text the question text to set
    */
-  setElementName = (id, text) => {
-    const elements = [...this.state.formElements];
-    const elementIdex = elements.findIndex(el => el.id === id);
-    if (elementIdex === -1) return;
-    const element = elements[elementIdex];
-    element.name = text;
-    elements[elementIdex] = element;
+  setQuestionProperty = (name, id, text) => {
+    const questions = [...this.state.formElements];
+    const questionIdex = questions.findIndex(el => el.id === id);
+    if (questionIdex === -1) return;
+    const question = questions[questionIdex];
+    question[name] = text;
+    questions[questionIdex] = question;
+    this.preserveState(question, questions);
     this.setState({
-      currentElementType: element.type,
-      formElements: elements,
-      currentElementId: id
+      currentElement: question,
+      formElements: questions
     });
-    this.preserveState(element, elements);
   };
 
   /**
@@ -139,9 +144,11 @@ class Class extends Component {
    * @param e // e object representing user action
    */
   addValidationRule = (name, e) => {
-    const { currentElementId } = this.state;
+    const { currentElement } = this.state;
+    if (!currentElement.type) return; // no question to configure
+
     const elements = [...this.state.formElements];
-    const elementIdex = elements.findIndex(el => el.id === currentElementId);
+    const elementIdex = elements.findIndex(el => el.id === currentElement.id);
     if (elementIdex === -1) return;
     const element = elements[elementIdex];
     const value =
@@ -157,12 +164,7 @@ class Class extends Component {
 
     element.validationRules = rules;
     elements[elementIdex] = element;
-
-    const stateToPreserve = { ...this.state };
-    delete stateToPreserve.formElements;
-
-    this.props.preserveNewForm(elements);
-    this.props.preserveFormBuilderState(stateToPreserve);
+    this.preserveState(element, elements);
     this.setState({ formElements: elements });
   };
 
@@ -189,8 +191,7 @@ class Class extends Component {
    */
   preserveState = (currentQuestion, questions) => {
     const stateToPreserve = { ...this.state };
-    stateToPreserve.currentElementType = currentQuestion.type;
-    stateToPreserve.currentElementId = currentQuestion.id;
+    stateToPreserve.currentElement = currentQuestion;
     delete stateToPreserve.formElements;
 
     this.props.preserveNewForm(questions);
@@ -234,16 +235,16 @@ class Class extends Component {
       <FormBuilderView
         showSettingsWindow={this.state.showSettingsWindow}
         settingsWindowName={this.state.settingsWindowName}
-        currentElementType={this.state.currentElementType}
         addQuestionIntroChild={this.addQuestionIntroChild}
+        setQuestionProperty={this.setQuestionProperty}
         changeConfigWindow={this.changeConfigWindow}
         toggleConfigWindow={this.toggleConfigWindow}
         setElementChildren={this.setElementChildren}
         addValidationRule={this.addValidationRule}
+        currentElement={this.state.currentElement}
         setCurrentEditor={this.setCurrentEditor}
         formElements={this.state.formElements}
         deleteQuestion={this.deleteQuestion}
-        setElementName={this.setElementName}
         formName={this.props.newForm.name}
         addNextEditor={this.addNextEditor}
         addElement={this.addElement}

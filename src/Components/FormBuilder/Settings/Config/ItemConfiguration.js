@@ -5,7 +5,7 @@ import React from "react";
 const minMaxException = ["account", "tel", "bvn", "mobile", "picture"];
 
 const showMinMax = props => {
-  return !minMaxException.includes(props.currentElementType);
+  return !minMaxException.includes(props.currentElement.type);
 };
 
 export const ItemConfiguration = props => (
@@ -23,16 +23,31 @@ export const ItemConfiguration = props => (
       </label>
     </div>
     {showMinMax(props) ? <MinMaxSetting /> : null}
+    <label htmlFor="description">Question Description</label>
+    <textarea
+      id="description"
+      className={Style.textarea}
+      value={props.currentElement.description}
+      rows={4}
+      onChange={e =>
+        props.setQuestionProperty(
+          "description",
+          props.currentElement.id,
+          e.target.value
+        )
+      }
+    />
   </div>
 );
 
 ItemConfiguration.propTypes = {
-  currentElementType: PropTypes.string.isRequired,
-  addValidationRule: PropTypes.func.isRequired
+  setQuestionProperty: PropTypes.func.isRequired,
+  addValidationRule: PropTypes.func.isRequired,
+  currentElement: PropTypes.object.isRequired
 };
 
 const MinMaxSetting = props => (
-  <div>
+  <div className={Style.minMaxRule}>
     <div className={Style.minRuleBox}>
       <span className={Style.ruleText}>Minimum Character</span>
       <input

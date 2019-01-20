@@ -26,15 +26,18 @@ export const Setting = props =>
       <div className={Style.contentWrapper}>
         {props.settingsWindowName === "build" ? (
           <Blocks {...props} />
-        ) : props.currentElementType === "introduction" ? (
+        ) : props.currentElement.type === "introduction" ? (
           <IntroConfiguration
             addQuestionIntroChild={props.addQuestionIntroChild}
           />
-        ) : (
+        ) : props.currentElement.type ? (
           <ItemConfiguration
+            setQuestionProperty={props.setQuestionProperty}
             addValidationRule={props.addValidationRule}
-            currentElementType={props.currentElementType}
+            currentElement={props.currentElement}
           />
+        ) : (
+          <p>You have no question to configure</p>
         )}
       </div>
     </section>
@@ -42,10 +45,11 @@ export const Setting = props =>
 
 Setting.propTypes = {
   addQuestionIntroChild: PropTypes.func.isRequired,
-  currentElementType: PropTypes.string.isRequired,
   settingsWindowName: PropTypes.string.isRequired,
+  setQuestionProperty: PropTypes.func.isRequired,
   showSettingsWindow: PropTypes.bool.isRequired,
   toggleConfigWindow: PropTypes.func.isRequired,
   addValidationRule: PropTypes.func.isRequired,
+  currentElement: PropTypes.object.isRequired,
   addElement: PropTypes.func.isRequired
 };

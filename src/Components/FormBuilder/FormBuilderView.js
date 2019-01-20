@@ -13,16 +13,17 @@ export const FormBuilderView = props => (
   >
     <Setting
       addQuestionIntroChild={props.addQuestionIntroChild}
-      currentElementType={props.currentElementType}
+      setQuestionProperty={props.setQuestionProperty}
       settingsWindowName={props.settingsWindowName}
       toggleConfigWindow={props.toggleConfigWindow}
       showSettingsWindow={props.showSettingsWindow}
       addValidationRule={props.addValidationRule}
+      currentElement={props.currentElement}
       addElement={props.addElement}
     />
     <EditorPresenter
+      setQuestionProperty={props.setQuestionProperty}
       setElementChildren={props.setElementChildren}
-      setElementName={props.setElementName}
       deleteQuestion={props.deleteQuestion}
       addNextEditor={props.addNextEditor}
       formElements={props.formElements}
@@ -32,16 +33,16 @@ export const FormBuilderView = props => (
 );
 
 FormBuilderView.propTypes = {
-  currentElementType: PropTypes.string.isRequired,
-  settingsWindowName: PropTypes.string.isRequired,
   addQuestionIntroChild: PropTypes.func.isRequired,
+  settingsWindowName: PropTypes.string.isRequired,
+  setQuestionProperty: PropTypes.func.isRequired,
   showSettingsWindow: PropTypes.bool.isRequired,
   toggleConfigWindow: PropTypes.func.isRequired,
   setElementChildren: PropTypes.func.isRequired,
   changeConfigWindow: PropTypes.func.isRequired,
   addValidationRule: PropTypes.func.isRequired,
+  currentElement: PropTypes.object.isRequired,
   deleteQuestion: PropTypes.func.isRequired,
-  setElementName: PropTypes.func.isRequired,
   formElements: PropTypes.array.isRequired,
   addNextEditor: PropTypes.func.isRequired,
   formName: PropTypes.string.isRequired,

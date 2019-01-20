@@ -16,6 +16,7 @@ export const editorDefaultValue = () =>
 
 export const getDefaultElement = () => ({
   validationRules: [],
+  description: "",
   type: "default",
   children: [],
   position: 1,
@@ -30,6 +31,7 @@ export const generateNewElement = (type, position) => {
   return {
     formElement: {
       validationRules: rules,
+      description: "",
       position,
       name: "",
       children,
@@ -65,18 +67,17 @@ const buildValidationRule = elementType => {
 };
 
 export const blockTypes = [
-  { name: "Official Use Section", type: "official-section" },
   { name: "Introduction Section", type: "introduction" },
-  // { name: "Multiple Choice", type: "multichoice" },
+  { name: "Multiple Choice", type: "multichoice" },
   { name: "Passport Photo", type: "picture" },
-  // { name: "Account Number", type: "account" },
+  { name: "Account Number", type: "account" },
   { name: "Section Title", type: "section" },
   { name: "Short Text", type: "shorttext" },
   { name: "Mobile Number", type: "mobile" },
   { name: "Office Number", type: "tel" },
   { name: "Firstnane", type: "firstname" },
   { name: "lastnane", type: "lastname" },
-  // { name: "Drop Down", type: "dropdown" },
+  { name: "Drop Down", type: "dropdown" },
   { name: "Long Text", type: "longtext" },
   { name: "Date Of Birth", type: "dob" },
   { name: "Cards", type: "creditcards" },
@@ -85,7 +86,7 @@ export const blockTypes = [
   // { name: "Countries", type: "country" },
   // { name: "States", type: "state" },
   { name: "Signature", type: "sign" },
-  // { name: "Number", type: "number" },
+  { name: "Number", type: "number" },
   { name: "Email", type: "email" },
   { name: "Date", type: "date" },
   { name: "BVN", type: "bvn" }

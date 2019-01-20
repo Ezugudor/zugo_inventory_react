@@ -10,7 +10,6 @@ export const renderQuestionFor = ({ el, handleClick }) => {
     case "introduction":
       return null;
 
-    case "official-section":
     case "section":
       return null;
 

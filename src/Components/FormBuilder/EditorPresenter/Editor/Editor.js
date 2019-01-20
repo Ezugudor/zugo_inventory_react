@@ -23,7 +23,7 @@ class Class extends Component {
     const editorContent = Plain.serialize(value);
     if (this.editorPointer.current) {
       const { id } = this.editorPointer.current.props;
-      this.props.setElementName(id, editorContent);
+      this.props.setQuestionProperty("name", id, editorContent);
     }
   };
 
@@ -135,6 +135,7 @@ class Class extends Component {
 }
 
 Class.propTypes = {
+  setQuestionProperty: PropTypes.func.isRequired,
   deleteQuestion: PropTypes.func.isRequired,
   addNextEditor: PropTypes.func.isRequired,
   element: PropTypes.object.isRequired,
