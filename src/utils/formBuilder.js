@@ -2,7 +2,7 @@ import { ValidationRuleBuilder } from "../core";
 import { Value } from "slate";
 import uuid4 from "uuid4";
 
-export const ditorDefaultValue = () =>
+export const editorDefaultValue = () =>
   Value.fromJSON({
     document: {
       nodes: [
@@ -16,6 +16,7 @@ export const ditorDefaultValue = () =>
 
 export const getDefaultElement = () => ({
   validationRules: [],
+  description: "",
   type: "default",
   children: [],
   position: 1,
@@ -30,6 +31,7 @@ export const generateNewElement = (type, position) => {
   return {
     formElement: {
       validationRules: rules,
+      description: "",
       position,
       name: "",
       children,
@@ -39,11 +41,14 @@ export const generateNewElement = (type, position) => {
   };
 };
 
-export const getNextPosition = formInputs => {
-  const len = formInputs.filter(
-    element => element.type !== "section" && element.type !== "introduction"
-  ).length;
+export const getNextPosition = questions => {
+  const len = questions.filter(element => element.type !== "introduction")
+    .length;
   return len === 0 ? 1 : len + 1;
+};
+
+export const getIntroIndex = questions => {
+  return questions.findIndex(question => question.type === "introduction");
 };
 
 const buildValidationRule = elementType => {
@@ -63,16 +68,16 @@ const buildValidationRule = elementType => {
 
 export const blockTypes = [
   { name: "Introduction Section", type: "introduction" },
-  // { name: "Multiple Choice", type: "multichoice" },
+  { name: "Multiple Choice", type: "multichoice" },
   { name: "Passport Photo", type: "picture" },
-  // { name: "Account Number", type: "account" },
+  { name: "Account Number", type: "account" },
   { name: "Section Title", type: "section" },
   { name: "Short Text", type: "shorttext" },
   { name: "Mobile Number", type: "mobile" },
   { name: "Office Number", type: "tel" },
   { name: "Firstnane", type: "firstname" },
   { name: "lastnane", type: "lastname" },
-  // { name: "Drop Down", type: "dropdown" },
+  { name: "Drop Down", type: "dropdown" },
   { name: "Long Text", type: "longtext" },
   { name: "Date Of Birth", type: "dob" },
   { name: "Cards", type: "creditcards" },
@@ -81,7 +86,7 @@ export const blockTypes = [
   // { name: "Countries", type: "country" },
   // { name: "States", type: "state" },
   { name: "Signature", type: "sign" },
-  // { name: "Number", type: "number" },
+  { name: "Number", type: "number" },
   { name: "Email", type: "email" },
   { name: "Date", type: "date" },
   { name: "BVN", type: "bvn" }

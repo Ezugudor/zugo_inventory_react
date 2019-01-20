@@ -12,9 +12,9 @@ export const EditorPresenter = props => {
           if (ele.type === "introduction") return null;
           return (
             <Editor
+              setQuestionProperty={props.setQuestionProperty}
               setElementChildren={props.setElementChildren}
               deleteQuestion={props.deleteQuestion}
-              setElementName={props.setElementName}
               addNextEditor={props.addNextEditor}
               element={ele}
               key={ele.id}
@@ -27,8 +27,8 @@ export const EditorPresenter = props => {
 };
 
 EditorPresenter.propTypes = {
+  setQuestionProperty: PropTypes.func.isRequired,
   setElementChildren: PropTypes.func.isRequired,
-  setElementName: PropTypes.func.isRequired,
   deleteQuestion: PropTypes.func.isRequired,
   formElements: PropTypes.array.isRequired,
   addNextEditor: PropTypes.func.isRequired

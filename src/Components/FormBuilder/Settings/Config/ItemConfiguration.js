@@ -5,40 +5,55 @@ import React from "react";
 const minMaxException = ["account", "tel", "bvn", "mobile", "picture"];
 
 const showMinMax = props => {
-  return !minMaxException.includes(props.currentElementType);
+  return !minMaxException.includes(props.currentElement.type);
 };
 
 export const ItemConfiguration = props => (
   <div className={Style.configuration}>
     <div className={Style.requiredRuleWrapper}>
       <span>Required</span>
-      <label className={Style.inputLabel}>
+      <label className={Style.inputLabel} htmlFor="required">
         <input
           type="checkbox"
           id="required"
           className={Style.input}
-          onChange={e => props.handleRequirementInput("required", e)}
+          onChange={e => props.addValidationRule("required", e)}
         />
-        <span htmlFor="required" className={Style.toggleButton} />
+        <span className={Style.toggleButton} />
       </label>
     </div>
     {showMinMax(props) ? <MinMaxSetting /> : null}
+    <label htmlFor="description">Question Description</label>
+    <textarea
+      id="description"
+      className={Style.textarea}
+      value={props.currentElement.description}
+      rows={4}
+      onChange={e =>
+        props.setQuestionProperty(
+          "description",
+          props.currentElement.id,
+          e.target.value
+        )
+      }
+    />
   </div>
 );
 
 ItemConfiguration.propTypes = {
-  handleRequirementInput: PropTypes.func.isRequired,
-  currentElementType: PropTypes.string.isRequired
+  setQuestionProperty: PropTypes.func.isRequired,
+  addValidationRule: PropTypes.func.isRequired,
+  currentElement: PropTypes.object.isRequired
 };
 
 const MinMaxSetting = props => (
-  <div>
+  <div className={Style.minMaxRule}>
     <div className={Style.minRuleBox}>
       <span className={Style.ruleText}>Minimum Character</span>
       <input
         type="number"
         className={Style.inputValue}
-        onChange={e => props.handleRequirementInput("min", e)}
+        onChange={e => props.addValidationRule("min", e)}
       />
     </div>
     <div className={Style.maxRuleBox}>
@@ -46,7 +61,7 @@ const MinMaxSetting = props => (
       <input
         type="number"
         className={Style.inputValue}
-        onChange={e => props.handleRequirementInput("max", e)}
+        onChange={e => props.addValidationRule("max", e)}
       />
     </div>
   </div>

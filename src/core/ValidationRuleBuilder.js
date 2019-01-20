@@ -1,18 +1,26 @@
 export class ValidationRuleBuilder {
   static buildAccountNumberRule() {
-    return [{ name: "min", value: 10 }, { name: "max", value: 10 }];
+    return [{ name: "min", value: 10 }, { name: "max", value: 10 }].concat(
+      baseRule
+    );
   }
 
   static buildBvnNumberRule() {
-    return [{ name: "min", value: 11 }, { name: "max", value: 11 }];
+    return [{ name: "min", value: 11 }, { name: "max", value: 11 }].concat(
+      baseRule
+    );
   }
 
   static buildMobileNumberRule() {
-    return [{ name: "min", value: 11 }, { name: "max", value: 11 }];
+    return [{ name: "min", value: 11 }, { name: "max", value: 11 }].concat(
+      baseRule
+    );
   }
 
   static buildOfficePhoneRule() {
-    return [{ name: "min", value: 7 }, { name: "max", value: 10 }];
+    return [{ name: "min", value: 7 }, { name: "max", value: 10 }].concat(
+      baseRule
+    );
   }
 
   static buildDefaultRule() {
@@ -20,4 +28,4 @@ export class ValidationRuleBuilder {
   }
 }
 
-const baseRule = [];
+const baseRule = [{ name: "required", value: 10 }];

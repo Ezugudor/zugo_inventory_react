@@ -1,4 +1,5 @@
 export * from "./InboxPagination";
+export * from "./FileUpload";
 export * from "./DatePicker";
 export * from "./AnswerUI";
 export * from "./Backdrop";

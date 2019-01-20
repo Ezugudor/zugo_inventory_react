@@ -1,8 +1,8 @@
 @value variables: "../../../../styles/Variables.css";
-@value small-bottom-gutter, small-right-gutter, medium-bottom-gutter from variables;
 @value primary-color, white-color, tertiary-color-light, secondary-color from variables;
 
 .Intro {
+  width: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -10,7 +10,7 @@
 }
 
 .Info {
-  margin-bottom: small-bottom-gutter;
+  margin-bottom: 2rem;
 }
 
 .InfoText {
@@ -19,8 +19,8 @@
 
 .Instruction {
   margin: 0 auto;
-  margin-bottom: medium-bottom-gutter;
-  width: 64%;
+  margin-bottom: 2rem;
+  width: 70%;
   color: white-color;
   background-color: secondary-color;
   text-align: center;
@@ -33,7 +33,9 @@
 .InstructionIcon {
   display: inline-block;
 }
+
 .InstructionWarning {
+  white-space: nowrap;
   margin-right: 0.8rem;
 }
 
@@ -45,17 +47,20 @@
 }
 
 .Requirements {
+  width: 90%;
   display: flex;
   flex-direction: row;
+  margin: 0 auto;
+  margin-bottom: 2rem;
 }
 
 .Requirement {
   width: calc((100% - 6rem) / 4);
-  margin-bottom: medium-bottom-gutter;
+  margin-bottom: 4rem;
 }
 
 .Requirement:not(:last-child) {
-  margin-right: small-right-gutter;
+  margin-right: 2rem;
 }
 
 .Icon {

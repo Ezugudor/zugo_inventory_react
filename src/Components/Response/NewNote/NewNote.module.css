@@ -1,9 +1,17 @@
 @value Variables: "../../../styles/Variables.css";
-@value typeform-border-color from Variables;
+@value typeform-border-color, white-color from Variables;
+
+.newNote {
+  background-color: white-color;
+  border-radius: 9px;
+  width: 40%;
+  margin: 0 auto;
+  height: 24vh;
+}
 
 .Text {
   text-align: center;
-  margin-top: 2rem;
+  padding-top: 1rem;
 }
 
 .InputBox {

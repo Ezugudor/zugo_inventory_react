@@ -3,7 +3,11 @@ import React from "react";
 
 export const FieldSetHouse = props => (
   <div className={Style.ElementWrapper}>
-    <section className="InactiveElement" data-question="true">
+    <section
+      data-question-id={props.el.id}
+      className="InactiveElement"
+      data-question="true"
+    >
       <div className={Style.ActiveElementParent}>
         <div className={Style.ElementParent}>
           <div className={Style.ElementHouse}>

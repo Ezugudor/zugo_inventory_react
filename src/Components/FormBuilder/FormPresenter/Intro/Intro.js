@@ -1,7 +1,3 @@
-import signatureIcon from "../../../../img/signature.svg";
-import passportIcon from "../../../../img/passport.svg";
-import idCardIcon from "../../../../img/id-card.svg";
-import letterIcon from "../../../../img/letter.svg";
 import Style from "./Intro.module.css";
 import PropTypes from "prop-types";
 import React from "react";
@@ -9,11 +5,11 @@ import React from "react";
 export const Intro = props => (
   <div className={Style.Intro}>
     <div className={Style.Info}>
-      <h1 className="heading-primary">GTBank Account Opening</h1>
-      <p className={Style.InfoText}>
+      <h1 className="heading-primary">{props.formName}</h1>
+      {/* <p className={Style.InfoText}>
         BT Account allow you to conduct transaction with pleasure, you can
         transfer unlimited amount of money to all banks in Nigeria
-      </p>
+      </p> */}
     </div>
     <div className={Style.Instruction}>
       <span className={Style.InstructionWarning}>
@@ -24,57 +20,20 @@ export const Intro = props => (
       </span>
     </div>
     <div className={Style.Requirements}>
-      <div className={Style.Requirement}>
-        <div className={Style.Icon}>
-          <img
-            className={Style.IconImage}
-            src={passportIcon}
-            alt="Passport Icon"
-          />
+      {props.questionIntro.children.map(child => (
+        <div className={Style.Requirement} key={child.name}>
+          <div className={Style.Icon}>
+            <img
+              className={Style.IconImage}
+              src={`/img/${child.name}.svg`}
+              alt={child.name}
+            />
+          </div>
+          <div className={Style.RequirementTextWrapper}>
+            <h3 className={Style.RequirementText}>{child.description}</h3>
+          </div>
         </div>
-        <div className={Style.RequirementTextWrapper}>
-          <h3 className={Style.RequirementText}>
-            A Passport In White Background
-          </h3>
-        </div>
-      </div>
-
-      <div className={Style.Requirement}>
-        <div className={Style.Icon}>
-          <img
-            className={Style.IconImage}
-            src={idCardIcon}
-            alt="ID Card Icon"
-          />
-        </div>
-        <div className={Style.RequirementTextWrapper}>
-          <h3 className={Style.RequirementText}>A valid ID Card</h3>
-        </div>
-      </div>
-
-      <div className={Style.Requirement}>
-        <div className={Style.Icon}>
-          <img
-            className={Style.IconImage}
-            src={signatureIcon}
-            alt="Signature Icon"
-          />
-        </div>
-        <div className={Style.RequirementTextWrapper}>
-          <h3 className={Style.RequirementText}>
-            A digital Copy of your signature
-          </h3>
-        </div>
-      </div>
-
-      <div className={Style.Requirement}>
-        <div className={Style.Icon}>
-          <img className={Style.IconImage} src={letterIcon} alt="Letter Icon" />
-        </div>
-        <div className={Style.RequirementTextWrapper}>
-          <h3 className={Style.RequirementText}>Reference Latter</h3>
-        </div>
-      </div>
+      ))}
     </div>
     <div className={Style.Action}>
       <div className={Style.ActionBtnWrapper}>
@@ -93,5 +52,7 @@ export const Intro = props => (
 );
 
 Intro.propTypes = {
-  toggleIntro: PropTypes.func.isRequired
+  questionIntro: PropTypes.object.isRequired,
+  toggleIntro: PropTypes.func.isRequired,
+  formName: PropTypes.string.isRequired
 };

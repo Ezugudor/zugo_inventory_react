@@ -1,3 +1,14 @@
+@value Variables: "../../../styles/Variables.css";
+@value white-color from Variables;
+
+.newForm {
+  background-color: white-color;
+  border-radius: 9px;
+  width: 40%;
+  margin: 0 auto;
+  height: 24vh;
+}
+
 .Text {
   text-align: center;
   margin-top: 2rem;

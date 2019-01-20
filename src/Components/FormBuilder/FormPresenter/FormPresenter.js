@@ -15,16 +15,21 @@ export class FormPresenter extends Component {
     }));
   };
 
-  containsIntro = () => {
+  getIntro = () => {
     return this.props.elements.find(el => el.type === "introduction");
   };
 
   render() {
+    const questionIntro = this.getIntro();
     return (
       <section className={Style.formPresenter}>
-        {this.state.showIntro && this.containsIntro() ? (
+        {this.state.showIntro && questionIntro ? (
           <section className={Style.introSection}>
-            <Intro toggleIntro={this.toggleIntro} />
+            <Intro
+              toggleIntro={this.toggleIntro}
+              formName={this.props.formName}
+              questionIntro={questionIntro}
+            />
           </section>
         ) : (
           <section className={Style.canvasSection}>
@@ -37,5 +42,6 @@ export class FormPresenter extends Component {
 }
 
 FormPresenter.propTypes = {
+  formName: PropTypes.string.isRequired,
   elements: PropTypes.array.isRequired
 };
