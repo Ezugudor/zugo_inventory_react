@@ -11,7 +11,7 @@ export class Cards extends Component {
     options: [
       { label: "A", text: "Master", index: 0, picked: false },
       { label: "B", text: "Visa", index: 1, picked: false },
-      { label: "B", text: "Valve", index: 1, picked: false }
+      { label: "B", text: "Valve", index: 2, picked: false }
     ]
   };
   /**
