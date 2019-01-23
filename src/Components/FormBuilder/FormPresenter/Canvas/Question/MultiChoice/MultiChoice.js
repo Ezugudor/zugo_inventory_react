@@ -1,11 +1,11 @@
 import { buildOptionFromArray } from "../../../../../../utils";
-import Style from "./MultiSelect.module.css";
+import Style from "../WithOptions.module.css";
 import { NormalHouse } from "../Houses";
 import React, { Component } from "react";
 import { Option } from "../Option";
 import PropTypes from "prop-types";
 
-export class MultiSelect extends Component {
+export class MultiChoice extends Component {
   /**
    * default state of component
    */
@@ -47,24 +47,19 @@ export class MultiSelect extends Component {
   render() {
     return (
       <NormalHouse {...this.props}>
-        <div className={Style.FieldSetAnswerWrapper}>
-          <div className={Style.FieldSetAnswerContents}>
+        <div className={Style.answerWrapper}>
+          <div className={Style.answerContents}>
             <div className={Style.Wrapper}>
-              <div>
-                <div className={Style.FieldSetAnswerDecoration}>
-                  <div className={Style.DefaultStyle} />
-                </div>
-                {this.getOptions().map(option => (
-                  <Option
-                    picked={option.picked}
-                    pick={this.pickOption}
-                    index={option.index}
-                    label={option.label}
-                    key={option.index}
-                    text={option.text}
-                  />
-                ))}
-              </div>
+              {this.getOptions().map(option => (
+                <Option
+                  picked={option.picked}
+                  pick={this.pickOption}
+                  index={option.index}
+                  label={option.label}
+                  key={option.index}
+                  text={option.text}
+                />
+              ))}
             </div>
           </div>
         </div>
@@ -73,7 +68,7 @@ export class MultiSelect extends Component {
   }
 }
 
-MultiSelect.propTypes = {
+MultiChoice.propTypes = {
   handleClick: PropTypes.func.isRequired,
   el: PropTypes.object.isRequired
 };

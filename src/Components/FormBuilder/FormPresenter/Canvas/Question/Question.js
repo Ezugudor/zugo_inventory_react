@@ -1,4 +1,4 @@
-import { MultiSelect } from "./MultiSelect";
+import { MultiChoice } from "./MultiChoice";
 import { Statement } from "./Statement";
 import { DropDown } from "./DropDown";
 import { Picture } from "./Picture";
@@ -6,6 +6,7 @@ import { YesOrNo } from "./YesOrNo";
 import { Simple } from "./Simple";
 import { Cards } from "./Cards";
 import { Long } from "./Long";
+import { Gender } from "./Gender";
 import React from "react";
 
 export const renderQuestionFor = ({ el, handleClick }) => {
@@ -18,7 +19,7 @@ export const renderQuestionFor = ({ el, handleClick }) => {
 
     case "multichoice":
       return (
-        <MultiSelect handleClick={handleClick} key={el.position} el={el} />
+        <MultiChoice handleClick={handleClick} key={el.position} el={el} />
       );
 
     case "statement":
@@ -35,6 +36,9 @@ export const renderQuestionFor = ({ el, handleClick }) => {
 
     case "creditcards":
       return <Cards el={el} handleClick={handleClick} key={el.position} />;
+
+    case "gender":
+      return <Gender el={el} handleClick={handleClick} key={el.position} />;
 
     case "yesorno":
       return <YesOrNo el={el} handleClick={handleClick} key={el.position} />;
