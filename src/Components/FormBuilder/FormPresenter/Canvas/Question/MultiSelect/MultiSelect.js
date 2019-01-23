@@ -1,6 +1,6 @@
 import { buildOptionFromArray } from "../../../../../../utils";
 import Style from "./MultiSelect.module.css";
-import { FieldSetHouse } from "../Houses";
+import { NormalHouse } from "../Houses";
 import React, { Component } from "react";
 import { Option } from "../Option";
 import PropTypes from "prop-types";
@@ -46,7 +46,7 @@ export class MultiSelect extends Component {
 
   render() {
     return (
-      <FieldSetHouse {...this.props}>
+      <NormalHouse {...this.props}>
         <div className={Style.FieldSetAnswerWrapper}>
           <div className={Style.FieldSetAnswerContents}>
             <div className={Style.Wrapper}>
@@ -68,7 +68,7 @@ export class MultiSelect extends Component {
             </div>
           </div>
         </div>
-      </FieldSetHouse>
+      </NormalHouse>
     );
   }
 }

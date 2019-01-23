@@ -1,4 +1,4 @@
-import { FieldSetHouse } from "../Houses";
+import { NormalHouse } from "../Houses";
 import React, { Component } from "react";
 import Style from "./Cards.module.css";
 import PropTypes from "prop-types";
@@ -7,7 +7,8 @@ export class Cards extends Component {
   state = {
     options: [
       { label: "A", text: "Master", index: 0, picked: false },
-      { label: "B", text: "Visa", index: 1, picked: false }
+      { label: "B", text: "Visa", index: 1, picked: false },
+      { label: "B", text: "Valve", index: 1, picked: false }
     ]
   };
 
@@ -29,7 +30,7 @@ export class Cards extends Component {
 
   render() {
     return (
-      <FieldSetHouse el={this.props.el}>
+      <NormalHouse el={this.props.el}>
         <div className={Style.fieldSetAnswerWrapper}>
           <div className={Style.fieldSetAnswerContents}>
             <div>
@@ -49,7 +50,7 @@ export class Cards extends Component {
             </div>
           </div>
         </div>
-      </FieldSetHouse>
+      </NormalHouse>
     );
   }
 }

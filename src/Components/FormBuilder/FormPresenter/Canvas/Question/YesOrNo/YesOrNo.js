@@ -1,4 +1,4 @@
-import { FieldSetHouse } from "../Houses";
+import { NormalHouse } from "../Houses";
 import Style from "./YesOrNo.module.css";
 import React, { Component } from "react";
 import { Option } from "../Option";
@@ -30,7 +30,7 @@ export class YesOrNo extends Component {
 
   render() {
     return (
-      <FieldSetHouse el={this.props.el}>
+      <NormalHouse el={this.props.el}>
         <div className={Style.FieldSetAnswerWrapper}>
           <div className={Style.FieldSetAnswerContents}>
             <div className={Style.Wrapper}>
@@ -52,7 +52,7 @@ export class YesOrNo extends Component {
             </div>
           </div>
         </div>
-      </FieldSetHouse>
+      </NormalHouse>
     );
   }
 }

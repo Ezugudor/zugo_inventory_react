@@ -1,4 +1,5 @@
 import { MultiSelect } from "./MultiSelect";
+import { Statement } from "./Statement";
 import { DropDown } from "./DropDown";
 import { Picture } from "./Picture";
 import { YesOrNo } from "./YesOrNo";
@@ -14,13 +15,17 @@ export const renderQuestionFor = ({ el, handleClick }) => {
 
     case "section":
       return null;
-    case "dropdown":
-      return <DropDown el={el} handleClick={handleClick} key={el.position} />;
 
     case "multichoice":
       return (
         <MultiSelect handleClick={handleClick} key={el.position} el={el} />
       );
+
+    case "statement":
+      return <Statement el={el} handleClick={handleClick} key={el.position} />;
+
+    case "dropdown":
+      return <DropDown el={el} handleClick={handleClick} key={el.position} />;
 
     case "sign":
       return <Picture el={el} handleClick={handleClick} key={el.position} />;

@@ -32,7 +32,7 @@ class Class extends Component {
     const editorContent = Plain.serialize(change.value);
     if (
       event.key === "Enter" &&
-      (type === "multichoice" || type === "dropdown")
+      (type === "multichoice" || type === "dropdown" || type === "statement")
     ) {
       event.preventDefault();
       this.childPointer.current.focus();
@@ -81,6 +81,7 @@ class Class extends Component {
   renderEditor = type => {
     switch (type) {
       case "multichoice":
+      case "statement":
       case "dropdown":
         return (
           <div>
@@ -117,6 +118,7 @@ class Class extends Component {
             ref={this.editorPointer}
             onChange={this.onChange}
             spellCheck={true}
+            renderPlaceholder={this.renderPlaceholder}
           />
         );
     }

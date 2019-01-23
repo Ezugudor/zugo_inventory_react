@@ -1,6 +1,6 @@
 import { buildOptionFromArray } from "../../../../../../utils";
 import Style from "./DropDown.module.css";
-import { FieldSetHouse } from "../Houses";
+import { NormalHouse } from "../Houses";
 import React, { Component } from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
@@ -74,7 +74,7 @@ export class DropDown extends Component {
 
   render() {
     return (
-      <FieldSetHouse el={this.props.el}>
+      <NormalHouse el={this.props.el}>
         <div className={Style.AnswerWrapper}>
           <div className={Style.AnswerContents} tabIndex="-1">
             <div className={Style.AnswerBox}>
@@ -108,7 +108,7 @@ export class DropDown extends Component {
             </div>
           </div>
         </div>
-      </FieldSetHouse>
+      </NormalHouse>
     );
   }
 }
