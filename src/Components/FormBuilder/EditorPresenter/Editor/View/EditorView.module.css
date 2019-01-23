@@ -56,12 +56,9 @@
   font-family: "Gt America mono Web", monospace;
   letter-spacing: -0.5px;
 }
+
 .position {
   padding: 0.5rem 1rem 0 1rem;
   color: white;
   border-radius: 2px;
-}
-
-.questionBox span[contenteditable="false"] {
-  float: left;
 }

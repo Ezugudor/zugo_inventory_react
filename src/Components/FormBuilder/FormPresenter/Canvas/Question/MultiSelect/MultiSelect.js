@@ -1,3 +1,4 @@
+import { buildOptionFromArray } from "../../../../../../utils";
 import Style from "./MultiSelect.module.css";
 import { FieldSetHouse } from "../Houses";
 import React, { Component } from "react";
@@ -5,28 +6,42 @@ import { Option } from "../Option";
 import PropTypes from "prop-types";
 
 export class MultiSelect extends Component {
+  /**
+   * default state of component
+   */
   state = {
-    options: [
-      { label: "B", text: "Another", index: 1, picked: false },
-      { label: "A", text: "Hello", index: 0, picked: false },
-      { label: "C", text: "Third", index: 2, picked: false }
-    ]
+    showOptions: false,
+    pickedIndex: -1,
+    value: ""
   };
 
-  pickOption = optionIndex => {
-    const options = [...this.state.options];
+  /**
+   * Save index of the selected option
+   */
+  pickOption = pickedIndex => {
+    this.setState({ pickedIndex });
+    this.props.handleClick();
+  };
+
+  /**
+   * transform question children to option object for the UI
+   */
+  getOptions = () => {
+    const options = buildOptionFromArray(this.props.el.children);
+    const { pickedIndex } = this.state;
+    if (pickedIndex === -1) return options;
+
     const modifiedOptions = options.map(option => {
-      if (option.index === optionIndex) {
-        const modifiedOption = { ...option };
+      const modifiedOption = { ...option };
+      if (option.index === pickedIndex) {
         modifiedOption.picked = true;
         return modifiedOption;
       }
-      const modifiedOption = { ...option };
       modifiedOption.picked = false;
       return modifiedOption;
     });
-    this.setState({ options: modifiedOptions });
-    this.props.increaseCompletedQuestion();
+
+    return modifiedOptions;
   };
 
   render() {
@@ -39,7 +54,7 @@ export class MultiSelect extends Component {
                 <div className={Style.FieldSetAnswerDecoration}>
                   <div className={Style.DefaultStyle} />
                 </div>
-                {this.state.options.map(option => (
+                {this.getOptions().map(option => (
                   <Option
                     picked={option.picked}
                     pick={this.pickOption}
@@ -59,5 +74,6 @@ export class MultiSelect extends Component {
 }
 
 MultiSelect.propTypes = {
-  increaseCompletedQuestion: PropTypes.func.isRequired
+  handleClick: PropTypes.func.isRequired,
+  el: PropTypes.object.isRequired
 };

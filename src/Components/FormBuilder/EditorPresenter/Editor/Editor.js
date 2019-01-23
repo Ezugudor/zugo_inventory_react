@@ -14,7 +14,7 @@ class Class extends Component {
     const children = this.props.element.children.join("\n");
     this.state = {
       value: text ? Plain.deserialize(text) : editorDefaultValue(),
-      childValue: children ? Plain.deserialize(children) : editorDefaultValue
+      childValue: children ? Plain.deserialize(children) : editorDefaultValue()
     };
   }
 
@@ -30,15 +30,12 @@ class Class extends Component {
   onKeyDown = (event, change, next) => {
     const { type, id } = this.editorPointer.current.props;
     const editorContent = Plain.serialize(change.value);
-    if (event.key === "Enter" && type === "multichoice") {
+    if (
+      event.key === "Enter" &&
+      (type === "multichoice" || type === "dropdown")
+    ) {
       event.preventDefault();
       this.childPointer.current.focus();
-      return true;
-    }
-
-    if (event.key === "Enter" && type !== "multichoice") {
-      event.preventDefault();
-      this.props.addNextEditor();
       return true;
     }
     if (event.key === "Backspace" && !editorContent) {
@@ -49,15 +46,16 @@ class Class extends Component {
   };
 
   getChildContent = ({ value }) => {
-    const { id } = this.editorPointer.current.props;
+    const { id } = this.childPointer.current.props;
     const content = Plain.serialize(value).split("\n");
+
     this.props.setElementChildren(id, content);
     this.setState({ childValue: value });
   };
 
   onChildKeyDown = (event, change, next) => {
     if (event.key !== "Enter") return next();
-    change.insertBlock("hello");
+    change.insertBlock("");
   };
 
   renderPlaceholder = (props, next) => {
@@ -103,8 +101,7 @@ class Class extends Component {
               placeholder="- Choice"
               onChange={this.getChildContent}
               ref={this.childPointer}
-              onKeyDown={this.keyDownOnChild}
-              spellCheck={true}
+              onKeyDown={this.onChildKeyDown}
               renderPlaceholder={this.renderPlaceholder}
             />
           </div>
