@@ -5,8 +5,9 @@ import {
   Dashboard,
   Responses,
   FormTypes,
-  Login,
   Signup,
+  Login,
+  Team,
   Form
 } from "./Containers";
 import { Redirect, Switch, Route } from "react-router-dom";
@@ -65,6 +66,7 @@ export default () => (
     <PrivateRoute exact path="/formtypes" component={FormTypes} />
     <PrivateRoute exact path="/dashboard" component={Dashboard} />
     <GuestRoute exact path="/signup" component={Signup} />
+    <ManagerRoute exact path="/team" component={Team} />
     <GuestRoute exact path="/login" component={Login} />
     <GuestRoute exact path="/" component={Login} />
   </Switch>

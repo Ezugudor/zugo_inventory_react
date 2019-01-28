@@ -120,6 +120,8 @@ const buildValidationRule = elementType => {
       return ValidationRuleBuilder.buildAccountNumberRule();
     case "mobile":
       return ValidationRuleBuilder.buildMobileNumberRule();
+    case "email":
+      return ValidationRuleBuilder.buildEmailRule();
     case "tel":
       return ValidationRuleBuilder.buildOfficePhoneRule();
     case "bvn":

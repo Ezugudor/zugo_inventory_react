@@ -12,6 +12,11 @@ const deleteUser = user => ({ type: DELETE_USER, user });
 const saveStats = stats => ({ type: SAVE_STATS, stats });
 const saveUser = data => ({ type: SAVE_USER, data });
 
+/**
+ * handle user login interaction with backend service
+ * @param {object} loginDetails user credentails
+ * @param {object} history react router object
+ */
 export const loginUser = (loginDetails, history) => {
   return dispatch => {
     dispatch(startNetworkRequest());
@@ -31,7 +36,12 @@ export const loginUser = (loginDetails, history) => {
   };
 };
 
-export const registerBusiness = details => {
+/**
+ * handle user's business registration interaction with backend service
+ * @param {object} details business and business manager credentials
+ *  * @param {object} history react router object
+ */
+export const registerBusiness = (details, history) => {
   return dispatch => {
     dispatch(startNetworkRequest());
     SwypPartnerApi.post("businesses", details)
@@ -41,11 +51,16 @@ export const registerBusiness = details => {
         dispatch(
           setNotificationMessage(`Your Swyp account has been setup`, "success")
         );
+        history.push("/settings");
       })
       .catch(err => handleError(err, dispatch));
   };
 };
 
+/**
+ * handle business manager's create new team member interaction with bankend service
+ * @param {object} details credentails of new user to be created
+ */
 export const createNewMember = details => {
   return dispatch => {
     dispatch(startNetworkRequest());
@@ -59,6 +74,10 @@ export const createNewMember = details => {
   };
 };
 
+/**
+ * handle business manager's delete new team member interaction with bankend service
+ * @param {object} user credentails of user to be delete
+ */
 export const deleteMember = user => {
   return dispatch => {
     dispatch(startNetworkRequest());

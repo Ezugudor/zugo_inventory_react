@@ -1,4 +1,4 @@
-import { Login as View } from "../../Components/Auth";
+import { LoginView } from "../../Components/Auth";
 import { loginUser } from "../../store/actions";
 import React, { Component } from "react";
 import { connect } from "react-redux";
@@ -27,7 +27,7 @@ class Class extends Component {
 
   render() {
     return (
-      <View
+      <LoginView
         changeInput={this.handleInputChange}
         password={this.state.password}
         login={this.handleLogin}

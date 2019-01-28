@@ -25,7 +25,6 @@ export const FormBuilderView = props => (
       setQuestionProperty={props.setQuestionProperty}
       setElementChildren={props.setElementChildren}
       deleteQuestion={props.deleteQuestion}
-      addNextEditor={props.addNextEditor}
       formElements={props.formElements}
     />
     <FormPresenter elements={props.formElements} formName={props.formName} />
@@ -44,7 +43,6 @@ FormBuilderView.propTypes = {
   currentElement: PropTypes.object.isRequired,
   deleteQuestion: PropTypes.func.isRequired,
   formElements: PropTypes.array.isRequired,
-  addNextEditor: PropTypes.func.isRequired,
   formName: PropTypes.string.isRequired,
   addElement: PropTypes.func.isRequired,
   setCurrentEditor: PropTypes.func,

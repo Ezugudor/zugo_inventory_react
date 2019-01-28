@@ -136,7 +136,6 @@ class Class extends Component {
 Class.propTypes = {
   setQuestionProperty: PropTypes.func.isRequired,
   deleteQuestion: PropTypes.func.isRequired,
-  addNextEditor: PropTypes.func.isRequired,
   element: PropTypes.object.isRequired,
   setCurrentEditor: PropTypes.func
 };
