@@ -10,11 +10,11 @@ export const NewForm = props => (
       <h3 className={Style.Text}>New Form</h3>
       <div className={Style.InputBox}>
         <input
-          className={Style.Input}
-          type="text"
-          placeholder="Form Name"
-          value={props.name}
           onChange={props.handleInput}
+          placeholder="Form Name"
+          className={Style.Input}
+          value={props.name}
+          type="text"
         />
       </div>
       <div className={Style.Controls}>

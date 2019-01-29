@@ -1,40 +1,40 @@
-@value Variables: "../../../styles/Variables.css";
+@value Variables: "../../../../styles/Variables.css";
 @value white-color, typeform-border-color from Variables;
 
-.newForm {
+.section {
   background-color: white-color;
   border-radius: 9px;
-  width: 40%;
+  width: 50%;
   margin: 0 auto;
-  height: 24vh;
+  height: 23vh;
 }
 
-.Text {
+.text {
   text-align: center;
   margin-top: 2rem;
 }
 
-.InputBox {
+.inputBox {
   width: 89%;
   margin: 0 auto;
 }
 
-.Input {
+.input {
   width: 100%;
   height: 4rem;
   margin-top: 3.4rem;
   border: 1px solid typeform-border-color;
   border-radius: 19px;
   outline: none;
+  font-size: 1.5rem;
   padding-left: 2rem;
+}
+
+.input::-webkit-input-placeholder {
   font-size: 1.5rem;
 }
 
-.Input::-webkit-input-placeholder {
-  font-size: 1.5rem;
-}
-
-.Controls {
+.controls {
   margin-top: 3.5rem;
   text-align: center;
 }

@@ -60,7 +60,7 @@ export const SignupView = props => (
               className={BaseStyle.Input}
               type="email"
               id="email"
-              placeholder="Enter Your Phone Number"
+              placeholder="Enter Your Work Email"
               value={props.email}
               onChange={props.changeInput}
               required
@@ -74,7 +74,7 @@ export const SignupView = props => (
               className={BaseStyle.Input}
               type="tel"
               id="phone"
-              placeholder="Enter Your Work Email"
+              placeholder="Enter Your Phone Number"
               value={props.phone}
               onChange={props.changeInput}
               required

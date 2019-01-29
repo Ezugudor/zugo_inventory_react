@@ -97,6 +97,10 @@ export const deleteMember = user => {
   };
 };
 
+/**
+ * Handle business manage's change of user account branche information
+ * @param {object} details payload of info for the server
+ */
 export const changeBranch = details => {
   return dispatch => {
     dispatch(startNetworkRequest());
