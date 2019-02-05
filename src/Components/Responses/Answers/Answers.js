@@ -3,7 +3,7 @@ import Style from "./Answer.module.css";
 import { AnswerUI } from "../../Utils";
 import React from "react";
 
-export const Ansewer = props => (
+export const Ansewers = props => (
   <div className={Style.answer}>
     <div className={Style.answerHeader}>
       <span> Today 12:30pm</span>

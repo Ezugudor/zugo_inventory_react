@@ -21,12 +21,9 @@ export const FileUpload = props => {
           type="file"
           id="logo"
           className={style.logo}
-          onChange={({ target }) => props.handleUpload(target.files)}
+          onChange={({ target }) => props.handleUpload(target.files[0])}
         />
         {showUploadIndicator(props.uploadStatus)}
-        <label htmlFor="logo" className={style.inputLabel}>
-          Or pick a file
-        </label>
       </div>
     </div>
   );
@@ -40,12 +37,15 @@ const buildDropAreaStyle = state => {
 
 const showUploadIndicator = uploadStatus => {
   if (!uploadStatus)
-    return <p className={style.uploadInstruction}>Drag file here to upload</p>;
-  return uploadStatus === "uploading" ? (
-    <UploadingStatus />
-  ) : (
-    <UploadedStatus />
-  );
+    return (
+      <div>
+        <p className={style.uploadInstruction}>Drag file here to upload</p>
+        <label htmlFor="logo" className={style.inputLabel}>
+          Or pick a file
+        </label>
+      </div>
+    );
+  return uploadStatus === "uploaded" ? <UploadedStatus /> : <UploadingStatus />;
 };
 FileUpload.propTypes = {
   unhighlightDropArea: PropTypes.func.isRequired,

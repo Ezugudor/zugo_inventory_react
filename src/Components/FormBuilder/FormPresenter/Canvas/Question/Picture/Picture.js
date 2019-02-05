@@ -26,7 +26,6 @@ export class Picture extends Component {
   };
 
   uploadLogo = files => {
-    console.log(files);
     this.setState({ uploadStatus: "uploading" });
     this.props.handleClick();
   };

@@ -28,10 +28,10 @@ export const renderQuestionFor = ({ el, handleClick }) => {
     case "dropdown":
       return <DropDown el={el} handleClick={handleClick} key={el.position} />;
 
-    case "sign":
+    case "signature":
       return <Picture el={el} handleClick={handleClick} key={el.position} />;
 
-    case "picture":
+    case "passport":
       return <Picture el={el} handleClick={handleClick} key={el.position} />;
 
     case "creditcards":

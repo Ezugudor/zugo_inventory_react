@@ -10,7 +10,7 @@ export const DeleteMember = props => (
       <h3 className={styles.text}>Delete {props.memberToDelete.name}</h3>
       <div className={styles.controls}>
         <White click={props.toggleDeleteMember}>Cancel</White>
-        <Red click={props.deleteMember}>Change Branch!</Red>
+        <Red click={props.deleteMember}>Confirm!</Red>
       </div>
     </section>
   </Modal>

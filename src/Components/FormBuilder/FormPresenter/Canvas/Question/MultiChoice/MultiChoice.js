@@ -48,7 +48,7 @@ export class MultiChoice extends Component {
     return (
       <NormalHouse {...this.props}>
         <div className={Style.answerWrapper}>
-          <div className={Style.answerContents}>
+          <div className={Style.answerContent}>
             <div className={Style.Wrapper}>
               {this.getOptions().map(option => (
                 <Option

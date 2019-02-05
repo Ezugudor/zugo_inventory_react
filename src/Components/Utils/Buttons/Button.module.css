@@ -6,6 +6,7 @@
   border-radius: 24px;
   cursor: pointer;
   outline: none;
+  border: none;
 }
 
 .Button:not(:last-child) {

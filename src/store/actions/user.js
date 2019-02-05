@@ -1,11 +1,9 @@
 import { UPDATE_BUSINESS, DELETE_USER, SAVE_STATS, SAVE_USER } from "./types";
+import { startNetworkRequest, stopNetworkRequest } from "./app";
 import { SwypPartnerApi } from "../../core/api";
+import { setNotificationMessage } from "./app";
+import { dropUploadedFile } from "./file";
 import { handleError } from "../../utils";
-import {
-  setNotificationMessage,
-  startNetworkRequest,
-  stopNetworkRequest
-} from "./app";
 
 const updateBusiness = data => ({ type: UPDATE_BUSINESS, data });
 const deleteUser = user => ({ type: DELETE_USER, user });
@@ -20,7 +18,7 @@ const saveUser = data => ({ type: SAVE_USER, data });
 export const loginUser = (loginDetails, history) => {
   return dispatch => {
     dispatch(startNetworkRequest());
-    SwypPartnerApi.post("businesses/loginuser", loginDetails)
+    SwypPartnerApi.post("user/login", loginDetails)
       .then(res => {
         dispatch(stopNetworkRequest());
         dispatch(saveUser(res.data));
@@ -64,7 +62,7 @@ export const registerBusiness = (details, history) => {
 export const createNewMember = details => {
   return dispatch => {
     dispatch(startNetworkRequest());
-    SwypPartnerApi.post("businesses/adduser", details)
+    SwypPartnerApi.post("user/add", details)
       .then(res => {
         dispatch(stopNetworkRequest());
         dispatch(updateBusiness(res.data));
@@ -81,7 +79,7 @@ export const createNewMember = details => {
 export const deleteMember = user => {
   return dispatch => {
     dispatch(startNetworkRequest());
-    SwypPartnerApi.delete("businesses/deleteuser", {
+    SwypPartnerApi.delete("user/delete", {
       data: { email: user.email }
     })
       .then(res => {
@@ -116,10 +114,30 @@ export const changeBranch = details => {
   };
 };
 
+/**
+ * Handle business manage's change of user account branche information
+ * @param {object} details payload of info for the server
+ */
+export const updateDetails = (details, history) => {
+  return dispatch => {
+    dispatch(startNetworkRequest());
+    SwypPartnerApi.put("businesses/updatedetails", details)
+      .then(res => {
+        dispatch(stopNetworkRequest());
+        dispatch(
+          setNotificationMessage("Branch changed Successfully", "success")
+        );
+        dispatch(dropUploadedFile());
+        history.push("/team");
+      })
+      .catch(err => handleError(err, dispatch));
+  };
+};
+
 export const getStats = () => {
   return dispatch => {
     dispatch(startNetworkRequest());
-    SwypPartnerApi.get("businesses/stats")
+    SwypPartnerApi.get("user/stats")
       .then(res => {
         dispatch(stopNetworkRequest());
         dispatch(saveStats(res.data));
@@ -131,7 +149,7 @@ export const getStats = () => {
 export const requestPasswordReset = details => {
   return dispatch => {
     dispatch(startNetworkRequest());
-    SwypPartnerApi.post("businesses/requestpasswordreset", details)
+    SwypPartnerApi.post("user/requestpasswordreset", details)
       .then(res => {
         dispatch(stopNetworkRequest());
         dispatch(setNotificationMessage(res.data.message, "success"));
@@ -145,7 +163,7 @@ export const requestPasswordReset = details => {
 export const resetPassword = (details, history) => {
   return dispatch => {
     dispatch(startNetworkRequest());
-    SwypPartnerApi.post("businesses/resetpassword", details)
+    SwypPartnerApi.post("user/resetpassword", details)
       .then(res => {
         dispatch(stopNetworkRequest());
         if (res.data.updated) {

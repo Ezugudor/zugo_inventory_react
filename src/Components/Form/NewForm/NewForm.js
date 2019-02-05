@@ -19,7 +19,7 @@ export const NewForm = props => (
       </div>
       <div className={Style.Controls}>
         <White click={props.toggleNewForm}>Cancel</White>
-        <Red click={props.showBuilder}>Build Form</Red>
+        <Red click={props.showBuilder}>Create</Red>
       </div>
     </section>
   </Modal>

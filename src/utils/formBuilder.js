@@ -63,7 +63,7 @@ export const getIntroIndex = questions => {
 };
 
 /**
- * transfer array of text to arry of option object
+ * transform array of text to arry of option object
  * @param {array} array array with text to be transformed into option object
  * @param {string} filterText value by which array element would be filted
  */
@@ -101,8 +101,8 @@ export const blockTypes = [
   // { name: "Countries", type: "country" },
   // { name: "States", type: "state" },
 
-  { name: "Signature", type: "sign" },
-  { name: "Passport Photo", type: "picture" },
+  { name: "Signature", type: "signature" },
+  { name: "Passport Photo", type: "passport" },
 
   { name: "Account Number", type: "account" },
   { name: "Mobile Number", type: "mobile" },
