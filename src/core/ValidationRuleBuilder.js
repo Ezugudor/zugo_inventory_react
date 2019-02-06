@@ -6,7 +6,7 @@ export class ValidationRuleBuilder {
   }
 
   static buildBvnNumberRule() {
-    return [{ name: "min", value: 11 }, { name: "max", value: 11 }].concat(
+    return [{ name: "min", value: 10 }, { name: "max", value: 10 }].concat(
       baseRule
     );
   }
@@ -15,6 +15,10 @@ export class ValidationRuleBuilder {
     return [{ name: "min", value: 11 }, { name: "max", value: 11 }].concat(
       baseRule
     );
+  }
+
+  static buildEmailRule() {
+    return [{ name: "email", value: true }].concat(baseRule);
   }
 
   static buildOfficePhoneRule() {
@@ -28,4 +32,4 @@ export class ValidationRuleBuilder {
   }
 }
 
-const baseRule = [{ name: "required", value: 10 }];
+const baseRule = [{ name: "required", value: true }];

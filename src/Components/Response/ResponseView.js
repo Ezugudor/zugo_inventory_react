@@ -1,6 +1,5 @@
 import { OfficialSection } from "./OfficialSection";
 import { AdminLayout } from "../../Hoc/Layouts";
-
 import { ResponseControls } from "./Controls";
 import Style from "./Response.module.css";
 import { Answers } from "./Answers";
@@ -17,7 +16,10 @@ export const ResponseView = props => (
         deliverMessage={props.deliverMessage}
         handleNewNote={props.toggleNoteView}
       />
-      <Notes notes={props.response.notes} currentUser={props.currentUser} />
+
+      {props.response.notes.length ? (
+        <Notes notes={props.response.notes} currentUser={props.currentUser} />
+      ) : null}
       <Answers answers={props.response.content} />
       <OfficialSection
         toggleOfficialSectionUI={props.toggleOfficialSectionUI}

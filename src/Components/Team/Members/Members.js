@@ -1,31 +1,31 @@
+import styles from "./Members.module.css";
+import PropTypes from "prop-types";
+import { Member } from "./Member";
+import React from "react";
+
 export const Members = props => (
-  <section className="section__members">
-    <table className="members">
-      <thead className="members__head-box">
-        <tr className="members__head">
-          <th>Name</th>
-          <th>User Role</th>
-          <th>Current Branch</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody className="member__body">
-        <tr className="member">
-          <td>Ossaija Thankgod</td>
-          <td>Admin</td>
-          <td>Apapa</td>
-          <td>
-            <a className="member__control">
-              <span className="member__tooltip">Change Branch</span>
-              <span className="member__icon member__icon--edit" />
-            </a>
-            <a className="member__control">
-              <span className="member__tooltip">Delete</span>
-              <span className="member__icon member__icon--delete" />
-            </a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <section className={styles.section}>
+    <div className={styles.members}>
+      <div className={styles.membersHead}>
+        <div>Name</div>
+        <div>User Role</div>
+        <div>Current Branch</div>
+        <div>Action</div>
+      </div>
+      {props.members.map(account => (
+        <Member
+          setNewBranchDetail={props.setNewBranchDetail}
+          setMemberToDelete={props.setMemberToDelete}
+          key={account.email}
+          account={account}
+        />
+      ))}
+    </div>
   </section>
 );
+
+Members.propTypes = {
+  setNewBranchDetail: PropTypes.func.isRequired,
+  setMemberToDelete: PropTypes.func.isRequired,
+  members: PropTypes.array.isRequired
+};

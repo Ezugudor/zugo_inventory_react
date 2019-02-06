@@ -20,7 +20,7 @@ export const SignupView = props => (
               onChange={props.changeInput}
               required
             />
-            <label className={BaseStyle.FormLabel} htmlFor="b_name">
+            <label className={BaseStyle.FormLabel} htmlFor="businessname">
               Bank Name
             </label>
           </div>
@@ -37,7 +37,7 @@ export const SignupView = props => (
               onChange={props.changeInput}
               required
             />
-            <label className={BaseStyle.FormLabel} htmlFor="first_name">
+            <label className={BaseStyle.FormLabel} htmlFor="firstname">
               Enter Your Firstname
             </label>
           </div>
@@ -51,17 +51,31 @@ export const SignupView = props => (
               onChange={props.changeInput}
               required
             />
-            <label className={BaseStyle.FormLabel} htmlFor="last_name">
+            <label className={BaseStyle.FormLabel} htmlFor="lastname">
               Enter Your Lastname
             </label>
           </div>
           <div className={BaseStyle.Group}>
             <input
               className={BaseStyle.Input}
-              type="text"
+              type="email"
               id="email"
               placeholder="Enter Your Work Email"
               value={props.email}
+              onChange={props.changeInput}
+              required
+            />
+            <label className={BaseStyle.FormLabel} htmlFor="email">
+              Enter Your Work Email
+            </label>
+          </div>
+          <div className={BaseStyle.Group}>
+            <input
+              className={BaseStyle.Input}
+              type="tel"
+              id="phone"
+              placeholder="Enter Your Phone Number"
+              value={props.phone}
               onChange={props.changeInput}
               required
             />
@@ -83,6 +97,20 @@ export const SignupView = props => (
               Enter Your Password
             </label>
           </div>
+          <div className={BaseStyle.Group}>
+            <input
+              className={BaseStyle.Input}
+              type="password"
+              id="confirm_password"
+              placeholder="Confirm Password"
+              value={props.confirm_password}
+              onChange={props.changeInput}
+              required
+            />
+            <label className={BaseStyle.FormLabel} htmlFor="confirm_password">
+              Enter Your Password
+            </label>
+          </div>
         </div>
         <div className={BaseStyle.Group}>
           <button className={BaseStyle.Button}>Set me up!</button>
@@ -93,11 +121,13 @@ export const SignupView = props => (
 );
 
 SignupView.propTypes = {
+  confirm_password: PropTypes.string.isRequired,
   businessname: PropTypes.string.isRequired,
   changeInput: PropTypes.func.isRequired,
+  firstname: PropTypes.string.isRequired,
+  lastname: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
   register: PropTypes.func.isRequired,
   phone: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired
+  email: PropTypes.string.isRequired
 };

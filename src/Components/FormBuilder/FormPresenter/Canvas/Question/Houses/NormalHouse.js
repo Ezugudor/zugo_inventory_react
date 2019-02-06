@@ -29,10 +29,10 @@ export const NormalHouse = props => (
                       </span>
                     </div>
                     <div className={Style.QuestionTextWrapper}>
-                      <label> {props.el.name}?</label>
+                      <label> {props.el.name}</label>
                       <div className={Style.RequiredQuestion}>*</div>
                     </div>
-                    <p className="description" />
+                    <p className="description">{props.el.description}</p>
                   </div>
                 </div>
               </div>

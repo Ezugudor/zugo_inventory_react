@@ -1,5 +1,5 @@
 import { startNewForm, fetchForms } from "../../store/actions";
-import { getAllForms } from "../../store/selectors";
+import { getAllForms, getBusinessId } from "../../store/selectors";
 import { FormView } from "../../Components/Form";
 import React, { Component } from "react";
 import { connect } from "react-redux";
@@ -15,7 +15,8 @@ export class Class extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchForms(this.formType.id);
+    const { businessId } = this.props;
+    this.props.fetchForms(this.formType.id, businessId);
   }
 
   setNewFormName = e => {
@@ -50,6 +51,7 @@ export class Class extends Component {
   }
 }
 const mapStateToProps = state => ({
+  businessId: getBusinessId(state),
   forms: getAllForms(state)
 });
 export const Form = connect(

@@ -1,1 +1,2 @@
-export * from './Members';
+export * from "./NewMember";
+export * from "./Members";

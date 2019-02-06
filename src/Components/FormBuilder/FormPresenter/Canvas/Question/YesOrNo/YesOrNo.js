@@ -1,6 +1,6 @@
-import { FieldSetHouse } from "../Houses";
-import Style from "./YesOrNo.module.css";
+import Style from "../WithOptions.module.css";
 import React, { Component } from "react";
+import { NormalHouse } from "../Houses";
 import { Option } from "../Option";
 import PropTypes from "prop-types";
 
@@ -30,29 +30,22 @@ export class YesOrNo extends Component {
 
   render() {
     return (
-      <FieldSetHouse el={this.props.el}>
-        <div className={Style.FieldSetAnswerWrapper}>
-          <div className={Style.FieldSetAnswerContents}>
-            <div className={Style.Wrapper}>
-              <div>
-                <div className={Style.FieldSetAnswerDecoration}>
-                  <div className={Style.DefaultStyle} />
-                </div>
-                {this.state.options.map(option => (
-                  <Option
-                    picked={option.picked}
-                    pick={this.pickOption}
-                    index={option.index}
-                    label={option.label}
-                    key={option.index}
-                    text={option.text}
-                  />
-                ))}
-              </div>
-            </div>
+      <NormalHouse el={this.props.el}>
+        <div className={Style.answerWrapper}>
+          <div className={Style.answerContent}>
+            {this.state.options.map(option => (
+              <Option
+                picked={option.picked}
+                pick={this.pickOption}
+                index={option.index}
+                label={option.label}
+                key={option.index}
+                text={option.text}
+              />
+            ))}
           </div>
         </div>
-      </FieldSetHouse>
+      </NormalHouse>
     );
   }
 }

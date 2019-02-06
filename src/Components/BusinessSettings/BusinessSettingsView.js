@@ -21,17 +21,24 @@ export const BusinessSettingsView = props => (
       </section>
       <section className={Style.textSection}>
         <h3 className={Style.heading}>Tell us about your bank</h3>
-        <textarea className={Style.textArea} />
+        <textarea
+          onChange={props.changeDescription}
+          value={props.businessDescription}
+          className={Style.textArea}
+        />
       </section>
       <section className={Style.textSection}>
-        <Red>Submit Details</Red>
+        <Red click={props.updateBusinessDetails}>Submit Details</Red>
       </section>
     </div>
   </AdminLayout>
 );
 
 BusinessSettingsView.propTypes = {
+  businessDescription: PropTypes.string.isRequired,
+  updateBusinessDetails: PropTypes.func.isRequired,
   unhighlightDropArea: PropTypes.func.isRequired,
+  changeDescription: PropTypes.func.isRequired,
   highlightDropArea: PropTypes.func.isRequired,
   handleFileDrop: PropTypes.func.isRequired,
   uploadStatus: PropTypes.string.isRequired,

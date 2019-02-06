@@ -1,0 +1,21 @@
+@value variables: "../../../styles/Variables.css";
+@value tertiary-color-light, typeform-border-color from variables;
+
+.section {
+  margin-right: 3rem;
+}
+
+.members {
+  background-color: tertiary-color-light;
+}
+
+.membersHead {
+  display: flex;
+  flex-flow: row nowrap;
+  font-weight: bold;
+  justify-content: space-between;
+  padding: 1rem 0;
+  padding-left: 2rem;
+  padding-right: 6rem;
+  border-bottom: 1px solid typeform-border-color;
+}

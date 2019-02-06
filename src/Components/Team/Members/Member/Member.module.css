@@ -1,0 +1,31 @@
+.member {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  padding: 1rem 0;
+  padding-left: 2rem;
+  padding-right: 6rem;
+  border-bottom: 1px solid typeform-border-color;
+}
+
+.memberControls {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+
+.memberControl {
+  cursor: pointer;
+}
+
+.memberControl:first-child {
+  margin-right: 0.5rem;
+}
+
+.iconHolder {
+  height: 2rem;
+}
+
+.icon {
+  height: 100%;
+}

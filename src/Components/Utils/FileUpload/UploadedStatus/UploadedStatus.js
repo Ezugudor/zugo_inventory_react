@@ -1,4 +1,4 @@
-import uploadedImg from "../../../../img/check-mark.svg";
+import uploadedImg from "../../../../img/upload-done.svg";
 import style from "./UploadedStatus.module.css";
 import React from "react";
 
