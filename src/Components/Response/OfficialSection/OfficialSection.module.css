@@ -2,22 +2,24 @@
 @value white-color, typeform-border-color from Variables;
 
 .officialSection {
-  height: 45vh;
+  height: 49vh;
   width: 70%;
   margin: 0 auto;
   background-color: white-color;
   border-radius: 9px;
 }
 
-.sectionWrapper {
-  height: 100%;
-  display: flex;
-  flex-flow: row nowrap;
-  margin-left: 3rem;
+.wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .secondaryHeading {
   padding-top: 1rem;
+  margin-bottom: 2rem;
+  text-align: center;
 }
 
 .inputWrapper {
@@ -25,31 +27,20 @@
 }
 
 .inputLabel {
-  font-size: 2.5rem;
+  font-size: 2rem;
   margin-right: 1rem;
 }
 
 .inputs {
   height: 3rem;
   width: 60%;
-}
-
-.workerSection,
-.managerSection {
-  width: 50%;
-}
-
-.workerSection {
-  border-right: 2px solid typeform-border-color;
-}
-
-.managerSection {
-  margin-left: 3rem;
+  outline: none;
+  font-family: inherit;
+  font-size: inherit;
 }
 
 .fileUploaderWrapper {
-  width: 66%;
-  margin-left: 5rem;
+  width: 87%;
   margin-bottom: 2rem;
 }
 

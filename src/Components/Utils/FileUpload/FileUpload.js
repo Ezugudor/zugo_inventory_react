@@ -1,33 +1,58 @@
+import { getUploadStatus } from "../../../store/selectors";
 import { UploadingStatus } from "./UploadingStatus";
 import { UploadedStatus } from "./UploadedStatus";
 import style from "./FileUpload.module.css";
+import React, { Component } from "react";
 import className from "classnames";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
-import React from "react";
-export const FileUpload = props => {
-  const { dragEnter } = props;
-  const state = dragEnter ? dragEnter : false;
-  return (
-    <div className={buildDropAreaStyle(state)}>
-      <div
-        className={style.dropAreaContent}
-        onDragLeave={props.unhighlightDropArea}
-        onDragEnter={props.highlightDropArea}
-        onDragOver={props.highlightDropArea}
-        onDrop={props.handleFileDrop}
-      >
-        <input
-          type="file"
-          id="logo"
-          className={style.logo}
-          onChange={({ target }) => props.handleUpload(target.files[0])}
-        />
-        {showUploadIndicator(props.uploadStatus)}
+export class Class extends Component {
+  state = {
+    dragEnter: false
+  };
+
+  highlightDropArea = e => {
+    e.preventDefault();
+    this.setState({ dragEnter: true });
+  };
+
+  unhighlightDropArea = e => {
+    e.preventDefault();
+    this.setState({ dragEnter: false });
+  };
+
+  handleFileDrop = e => {
+    e.preventDefault();
+    const dt = e.dataTransfer;
+    this.props.handleUpload(dt.files[0]);
+    this.setState({ dragEnter: false });
+  };
+
+  render() {
+    const { dragEnter } = this.state;
+    const state = dragEnter ? dragEnter : false;
+    return (
+      <div className={buildDropAreaStyle(state)}>
+        <div
+          onDragLeave={this.unhighlightDropArea}
+          onDragEnter={this.highlightDropArea}
+          onDragOver={this.highlightDropArea}
+          className={style.dropAreaContent}
+          onDrop={this.handleFileDrop}
+        >
+          <input
+            type="file"
+            id="logo"
+            className={style.logo}
+            onChange={({ target }) => this.props.handleUpload(target.files[0])}
+          />
+          {showUploadIndicator(this.props.uploadStatus)}
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 const buildDropAreaStyle = state => {
   const conditional = {};
@@ -47,11 +72,16 @@ const showUploadIndicator = uploadStatus => {
     );
   return uploadStatus === "uploaded" ? <UploadedStatus /> : <UploadingStatus />;
 };
+
+const mapStateToProps = state => ({
+  uploadStatus: getUploadStatus(state)
+});
+
+export const FileUpload = connect(
+  mapStateToProps,
+  null
+)(Class);
+
 FileUpload.propTypes = {
-  unhighlightDropArea: PropTypes.func.isRequired,
-  highlightDropArea: PropTypes.func.isRequired,
-  handleFileDrop: PropTypes.func.isRequired,
-  uploadStatus: PropTypes.string.isRequired,
-  handleUpload: PropTypes.func.isRequired,
-  dragEnter: PropTypes.bool.isRequired
+  handleUpload: PropTypes.func.isRequired
 };

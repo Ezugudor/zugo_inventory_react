@@ -2,8 +2,8 @@ import { AdminLayout } from "../../Hoc/Layouts";
 import { ResponsesControls } from "./Controls";
 import Style from "./ResponsesView.module.css";
 import { ResponseAside } from "./Aside";
+import { Ansewers } from "./Answers";
 import PropTypes from "prop-types";
-import { Ansewer } from "./Answer";
 import { Info } from "./Info";
 import React from "react";
 
@@ -15,7 +15,7 @@ export const ResponsesView = props => (
       <section className={Style.responseContent}>
         <ResponseAside />
         <div className={Style.answers}>
-          <Ansewer />
+          <Ansewers />
         </div>
       </section>
     </div>

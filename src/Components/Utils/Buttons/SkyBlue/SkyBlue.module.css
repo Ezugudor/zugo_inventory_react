@@ -1,6 +1,6 @@
 @value Variables: "../../../../styles/Variables.css";
 @value white-color from Variables;
 .skyBlue {
-  composes: default from "../../../../styles/IconBackground.module.css";
+  composes: statement from "../../../../styles/IconBackground.module.css";
   color: white-color;
 }

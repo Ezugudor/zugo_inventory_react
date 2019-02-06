@@ -42,3 +42,12 @@
 .answerText {
   font-weight: 600;
 }
+
+.imgWrapper {
+  height: 30rem;
+  width: 20rem;
+}
+.img {
+  height: 100%;
+  width: 100%;
+}

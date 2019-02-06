@@ -21,7 +21,18 @@ export const AnswerUI = props => (
     </div>
     <div>
       <p className={Style.questionText}>{props.answer.question}?</p>
-      <p className={Style.answerText}>{props.answer.answer}</p>
+      {props.answer.questionType === "signature" ||
+      props.answer.questionType === "passport" ? (
+        <div className={Style.imgWrapper}>
+          <img
+            src={props.answer.answer}
+            alt={props.answer.questionType}
+            className={Style.img}
+          />
+        </div>
+      ) : (
+        <p className={Style.answerText}>{props.answer.answer}</p>
+      )}
     </div>
   </div>
 );
