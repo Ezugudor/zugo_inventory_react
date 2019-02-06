@@ -5,7 +5,9 @@ import React from "react";
 const view = props => (
   <div>
     <button className={Style.nextButton} onClick={props.completeQuestion}>
-      <span className={Style.nextButtonText}>OK</span>
+      <span className={Style.nextButtonText}>
+        {props.children ? props.children : "OK"}
+      </span>
     </button>
     <div className={Style.buttonInstruction} onClick={props.completeQuestion}>
       Press <strong>Enter</strong>

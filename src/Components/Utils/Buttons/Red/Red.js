@@ -11,11 +11,16 @@ const getStyle = props => {
   return ClassName(Style.red, conditionalStyles);
 };
 export const Red = props => (
-  <button className={getStyle(props)} onClick={props.click}>
+  <button
+    className={getStyle(props)}
+    disabled={props.disabled}
+    onClick={props.click}
+  >
     {props.children}
   </button>
 );
 
 Red.propTypes = {
-  click: PropTypes.func.isRequired
+  click: PropTypes.func.isRequired,
+  disabled: PropTypes.bool
 };

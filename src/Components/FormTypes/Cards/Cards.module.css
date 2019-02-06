@@ -12,6 +12,7 @@
 }
 
 .Col3 {
+  max-width: 20rem;
   width: calc((100% - 9rem) / 4);
 }
 

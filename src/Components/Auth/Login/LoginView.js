@@ -4,7 +4,7 @@ import Style from "./Login.module.css";
 import PropTypes from "prop-types";
 import React from "react";
 
-const View = props => (
+export const LoginView = props => (
   <AuthLayout>
     <div className={BaseStyle.base}>
       <form className={Style.Form} onSubmit={props.login}>
@@ -44,11 +44,9 @@ const View = props => (
   </AuthLayout>
 );
 
-View.propTypes = {
+LoginView.propTypes = {
   changeInput: PropTypes.func.isRequired,
   password: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
   login: PropTypes.func.isRequired
 };
-
-export const Login = View;

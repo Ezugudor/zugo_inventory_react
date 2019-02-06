@@ -1,9 +1,9 @@
-import { getNextPosition, getDefaultElement, getChildIndex } from "../../utils";
 import { generateNewElement, getIntroIndex, hasChild } from "../../utils";
 import { getNewForm, getBuilderState } from "../../store/selectors";
 import { preserveNewForm, createForm } from "../../store/actions";
 import { preserveFormBuilderState } from "../../store/actions";
 import { FormBuilderView } from "../../Components/FormBuilder";
+import { getNextPosition, getChildIndex } from "../../utils";
 import React, { Component } from "react";
 import { slugName } from "../../utils";
 import { connect } from "react-redux";
@@ -199,17 +199,6 @@ class Class extends Component {
   };
 
   /**
-   * Add another editor to the UI for collecting more questions
-   */
-  addNextEditor = () => {
-    const elements = [...this.state.formElements];
-    const element = getDefaultElement();
-    element.position = this.state.formElements.length + 1;
-    elements.push(element);
-    this.setState({ formElements: elements });
-  };
-
-  /**
    * send the questions user want to ask to the backend server
    */
   createForm = () => {
@@ -246,7 +235,6 @@ class Class extends Component {
         formElements={this.state.formElements}
         deleteQuestion={this.deleteQuestion}
         formName={this.props.newForm.name}
-        addNextEditor={this.addNextEditor}
         addElement={this.addElement}
         save={this.createForm}
       />

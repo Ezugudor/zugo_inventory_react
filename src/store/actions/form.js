@@ -32,10 +32,10 @@ export const startNewForm = data => dispatach =>
     data
   });
 
-export const fetchForms = workspaceId => {
+export const fetchForms = (workspaceId, businessId) => {
   return dispatch => {
     dispatch(startNetworkRequest());
-    SwypPartnerApi.get(`forms/workspaces/${workspaceId}`)
+    SwypPartnerApi.get(`forms/workspaces/${workspaceId}/${businessId}`)
       .then(res => {
         dispatch(stopNetworkRequest());
         dispatch(saveForms(res.data, workspaceId));

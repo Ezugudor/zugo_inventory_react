@@ -15,7 +15,6 @@ export const EditorPresenter = props => {
               setQuestionProperty={props.setQuestionProperty}
               setElementChildren={props.setElementChildren}
               deleteQuestion={props.deleteQuestion}
-              addNextEditor={props.addNextEditor}
               element={ele}
               key={ele.id}
             />
@@ -30,6 +29,5 @@ EditorPresenter.propTypes = {
   setQuestionProperty: PropTypes.func.isRequired,
   setElementChildren: PropTypes.func.isRequired,
   deleteQuestion: PropTypes.func.isRequired,
-  formElements: PropTypes.array.isRequired,
-  addNextEditor: PropTypes.func.isRequired
+  formElements: PropTypes.array.isRequired
 };

@@ -2,12 +2,20 @@
   background-color: #f15c90;
 }
 
-.sign {
+.signature {
   background-color: #286107;
 }
 
-.default {
+.statement {
   background-color: #67e5fc;
+}
+
+.account {
+  background-color: #b90707;
+}
+
+.gender {
+  background-color: #07b9b9;
 }
 
 .shorttext {
@@ -46,6 +54,10 @@
   background-color: #f34247;
 }
 
+.number {
+  background-color: #e04f78;
+}
+
 .state {
   background-color: #124766;
 }
@@ -62,7 +74,15 @@
   background-color: #e96d31;
 }
 
-.picture {
+.multichoice {
+  background-color: #4fa9b3;
+}
+
+.dropdown {
+  background-color: #58457a;
+}
+
+.passport {
   background-color: #409fd5;
 }
 

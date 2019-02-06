@@ -1,15 +1,11 @@
-.fieldSetAnswerWrapper {
+.answerWrapper {
   margin-top: 16px;
 }
 
-.fieldSetAnswerContents {
+.answerContent {
   min-height: 1px;
   margin-top: -1px;
   outline: none;
-}
-
-.fieldSetAnswerDecoration {
-  margin-bottom: 8px;
 }
 
 .validationWrapper {

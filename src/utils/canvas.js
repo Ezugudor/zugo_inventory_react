@@ -7,5 +7,7 @@ export const getNextSection = (formQuestions, currentQuestionId) => {
     question => question.id === currentQuestionId
   );
   const nextQuestion = formQuestions[currentQuestionIndex + 1];
-  return nextQuestion.type === "section" ? nextQuestion : null;
+  return (nextQuestion && nextQuestion.type) === "section"
+    ? nextQuestion
+    : null;
 };

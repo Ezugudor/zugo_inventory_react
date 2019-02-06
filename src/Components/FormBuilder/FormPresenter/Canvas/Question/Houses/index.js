@@ -1,2 +1,2 @@
+export * from "./StatementHouse";
 export * from "./NormalHouse";
-export * from "./FieldsetHouse";

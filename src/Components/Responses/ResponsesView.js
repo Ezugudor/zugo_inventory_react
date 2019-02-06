@@ -2,8 +2,8 @@ import { AdminLayout } from "../../Hoc/Layouts";
 import { ResponsesControls } from "./Controls";
 import Style from "./ResponsesView.module.css";
 import { ResponseAside } from "./Aside";
-// import PropTypes from "prop-types";
-import { Ansewer } from "./Answer";
+import { Ansewers } from "./Answers";
+import PropTypes from "prop-types";
 import { Info } from "./Info";
 import React from "react";
 
@@ -15,14 +15,14 @@ export const ResponsesView = props => (
       <section className={Style.responseContent}>
         <ResponseAside />
         <div className={Style.answers}>
-          <Ansewer />
+          <Ansewers />
         </div>
       </section>
     </div>
   </AdminLayout>
 );
-// ResponsesView.propTypes = {
-//   toggleNoteView: PropTypes.func.isRequired,
-//   setNewNoteText: PropTypes.func.isRequired,
-//   showNewNote: PropTypes.bool.isRequired
-// };
+ResponsesView.propTypes = {
+  toggleNoteView: PropTypes.func.isRequired,
+  setNewNoteText: PropTypes.func.isRequired,
+  showNewNote: PropTypes.bool.isRequired
+};

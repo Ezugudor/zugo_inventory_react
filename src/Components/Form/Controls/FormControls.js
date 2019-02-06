@@ -6,11 +6,11 @@ import React from "react";
 export const FormControls = props => (
   <section className={Style.Controls}>
     <div className={Style.ControlBox}>
-      <Red click={props.toggleNewForm}>New Form</Red>
+      <Red click={props.toggleNewForm}>Create A New Form</Red>
       <span className={Style.Text}>
         Registion <strong>Forms </strong>
-      </span>
-      | <span>Individual</span>
+      </span>{" "}
+      | <span className={Style.Text}> Individual</span>
     </div>
   </section>
 );

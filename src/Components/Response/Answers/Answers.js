@@ -6,8 +6,8 @@ import React from "react";
 export const Answers = props => (
   <section className={Style.answers}>
     {props.answers.map(answer => (
-      <AnswerUI answer={answer} key={answer.position} />
-    ))}{" "}
+      <AnswerUI answer={answer} key={answer.questionId} />
+    ))}
   </section>
 );
 
