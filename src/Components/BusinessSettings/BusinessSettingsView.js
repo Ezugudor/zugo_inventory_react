@@ -10,14 +10,7 @@ export const BusinessSettingsView = props => (
     <div className={Style.BusinessSettings}>
       <section className={Style.uploadSection}>
         <h3 className={Style.heading}>Upload Logo</h3>
-        <FileUpload
-          unhighlightDropArea={props.unhighlightDropArea}
-          highlightDropArea={props.highlightDropArea}
-          handleFileDrop={props.handleFileDrop}
-          handleUpload={props.handleUpload}
-          uploadStatus={props.uploadStatus}
-          dragEnter={props.dragEnter}
-        />
+        <FileUpload handleUpload={props.handleUpload} />
       </section>
       <section className={Style.textSection}>
         <h3 className={Style.heading}>Tell us about your bank</h3>
@@ -37,11 +30,6 @@ export const BusinessSettingsView = props => (
 BusinessSettingsView.propTypes = {
   businessDescription: PropTypes.string.isRequired,
   updateBusinessDetails: PropTypes.func.isRequired,
-  unhighlightDropArea: PropTypes.func.isRequired,
   changeDescription: PropTypes.func.isRequired,
-  highlightDropArea: PropTypes.func.isRequired,
-  handleFileDrop: PropTypes.func.isRequired,
-  uploadStatus: PropTypes.string.isRequired,
-  handleUpload: PropTypes.func.isRequired,
-  dragEnter: PropTypes.bool.isRequired
+  handleUpload: PropTypes.func.isRequired
 };

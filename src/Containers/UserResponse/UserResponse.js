@@ -1,6 +1,6 @@
 import { getResponse, getCurrentUser } from "../../store/selectors";
-import { createNote, processResponse } from "../../store/actions";
 import { ResponseView } from "../../Components/Response";
+import { createNote } from "../../store/actions";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
@@ -94,5 +94,5 @@ const mapStateToProps = (state, props) => {
 
 export const UserResponse = connect(
   mapStateToProps,
-  { createNote, processResponse }
+  { createNote }
 )(Class);

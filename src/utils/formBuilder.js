@@ -79,6 +79,7 @@ export const buildOptionFromArray = (array, filterText = null) => {
 
 /**
  * Type of questions that can be part of a form
+ * Changing values here may have ripple effect across the system
  */
 export const blockTypes = [
   { name: "Introduction Section", type: "introduction" },

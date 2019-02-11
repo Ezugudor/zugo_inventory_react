@@ -1,15 +1,9 @@
+import { SAVE_PROCESSED_RESPONSES, SAVE_PENDING_RESPONSES } from "./types";
+import { setNotificationMessage, startNetworkRequest } from "./app";
 import { SwypPartnerApi } from "../../core/api";
+import { UPDATE_RESPONSE_NOTE } from "./types";
+import { stopNetworkRequest } from "./app";
 import { handleError } from "../../utils";
-import {
-  SAVE_PROCESSED_RESPONSES,
-  SAVE_PENDING_RESPONSES,
-  UPDATE_RESPONSE_NOTE
-} from "./types";
-import {
-  setNotificationMessage,
-  startNetworkRequest,
-  stopNetworkRequest
-} from "./app";
 
 export const fetchResponseByStatus = businessId => {
   const processedUrl = `responses/bystatus/processed?business=${businessId}`;
@@ -44,14 +38,18 @@ export const createNote = (responseId, note, type) => {
   };
 };
 
-export const processResponse = (id, history) => {
+/**
+ *
+ * @param {string} id id of form response that an official is signing off on
+ * @param {object} details request payload
+ */
+export const signOff = (id, details) => {
   return dispatch => {
     dispatch(startNetworkRequest());
-    SwypPartnerApi.put(`responses/process/${id}`)
+    return SwypPartnerApi.put(`responses/signoff/${id}`, details)
       .then(res => {
         dispatch(stopNetworkRequest());
         if (res.data.updated) {
-          history.push("/dashboard");
           return dispatch(
             setNotificationMessage("Response Processed Successfully", "success")
           );

@@ -18,5 +18,6 @@ export const Controls = props => (
 );
 
 Controls.propTypes = {
-  toggleCreateMember: PropTypes.func.isRequired
+  toggleCreateMember: PropTypes.func.isRequired,
+  currentUser: PropTypes.object.isRequired
 };
