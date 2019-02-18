@@ -1,4 +1,5 @@
 import { FormTypeView } from "../../Components/FormTypes";
+import { getBusinessId } from "../../store/selectors";
 import { fetchWorkspaces } from "../../store/actions";
 import React, { Component } from "react";
 import { chunkData } from "../../utils";
@@ -10,8 +11,8 @@ class Class extends Component {
   };
 
   componentDidMount() {
-    const business = this.props.business;
-    this.props.fetchWorkspaces(business.id);
+    const { businessId } = this.props;
+    this.props.fetchWorkspaces(businessId);
   }
 
   switchTab = e => {
@@ -48,7 +49,7 @@ class Class extends Component {
 
 const mapStateToProps = state => {
   return {
-    business: state.user.business,
+    businessId: getBusinessId(state),
     loading: state.app.loading,
     all: state.workspace.all
   };

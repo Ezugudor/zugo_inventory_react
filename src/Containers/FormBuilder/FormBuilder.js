@@ -1,9 +1,11 @@
-import { generateNewElement, getIntroIndex, hasChild } from "../../utils";
+import { generateNewQuestion, getIntroIndex, hasChild } from "../../utils";
+import { generateBankLocationQuestion, hasQuestion } from "../../utils";
 import { getNewForm, getBuilderState } from "../../store/selectors";
 import { preserveNewForm, createForm } from "../../store/actions";
 import { preserveFormBuilderState } from "../../store/actions";
 import { FormBuilderView } from "../../Components/FormBuilder";
 import { getNextPosition, getChildIndex } from "../../utils";
+import { getBranches } from "../../store/selectors";
 import React, { Component } from "react";
 import { slugName } from "../../utils";
 import { connect } from "react-redux";
@@ -56,46 +58,46 @@ class Class extends Component {
    */
   addElement = type => {
     const position = getNextPosition(this.state.formElements);
-    const { formElement } = generateNewElement(type, position);
+    const question = generateNewQuestion(type, position);
     const questions = [...this.state.formElements];
     const introIndex = getIntroIndex(questions);
 
     if (type === "introduction" && introIndex !== -1) {
       return this.setState({
         settingsWindowName: "configuration",
-        currentElement: formElement,
+        currentElement: question,
         showSettingsWindow: true
       });
     }
 
-    questions.push(formElement);
+    questions.push(question);
 
     if (type === "introduction") {
       return this.setState({
         settingsWindowName: "configuration",
-        currentElement: formElement,
+        currentElement: question,
         showSettingsWindow: true,
         formElements: questions
       });
     }
 
     this.setState({
-      currentElement: formElement,
+      currentElement: question,
       formElements: questions
     });
   };
 
   /**
    * Set the text of the question to ask
-   * @param {string} id id of the question whose text/name property is to be set
-   * @param {string} text the question text to set
+   * @param {string} id id of the question whose property is to be set
+   * @param {string} value the property value to set
    */
-  setQuestionProperty = (name, id, text) => {
+  setQuestionProperty = (name, id, value) => {
     const questions = [...this.state.formElements];
     const questionIdex = questions.findIndex(el => el.id === id);
     if (questionIdex === -1) return;
     const question = questions[questionIdex];
-    question[name] = text;
+    question[name] = value;
     questions[questionIdex] = question;
     this.preserveState(question, questions);
     this.setState({
@@ -202,19 +204,29 @@ class Class extends Component {
    * send the questions user want to ask to the backend server
    */
   createForm = () => {
-    const { name, parent } = this.props.newForm.formType;
+    const { name, parent, id } = this.props.newForm.formType;
+    const questions = this.state.formElements;
+
+    const branchQuestion = generateBankLocationQuestion(
+      getNextPosition(this.state.formElements),
+      this.props.branches
+    );
+    const hasBeenAsked = hasQuestion(questions, branchQuestion.name);
+    if (!hasBeenAsked) {
+      questions.push(branchQuestion);
+    }
 
     const details = {
-      formTypeId: this.props.newForm.formType.id,
-      elements: this.props.newForm.elements,
-      name: this.props.newForm.name
+      name: this.props.newForm.name,
+      elements: questions,
+      formTypeId: id
     };
-
     const to = `/formtypes/${slugName(parent)}/${slugName(name)}`;
     const request = {
       to,
       params: this.props.newForm.formType
     };
+
     const { history } = this.props;
     this.props.createForm(details, history, request);
   };
@@ -244,6 +256,7 @@ class Class extends Component {
 
 const mapStateToProps = state => ({
   builderState: getBuilderState(state),
+  branches: getBranches(state),
   newForm: getNewForm(state)
 });
 
