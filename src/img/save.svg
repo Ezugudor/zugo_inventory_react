@@ -1,0 +1,12 @@
+<svg id="save-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.2 15.2">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <g id="save" transform="translate(0)">
+    <path id="Path_746" data-name="Path 746" class="cls-1" d="M11.822,0H1.689A1.694,1.694,0,0,0,0,1.689V13.511A1.694,1.694,0,0,0,1.689,15.2H13.511A1.694,1.694,0,0,0,15.2,13.511V3.378ZM7.6,13.511a2.533,2.533,0,1,1,0-5.067,2.533,2.533,0,0,1,0,5.067Zm2.533-8.445H1.689V1.689h8.445Z" transform="translate(0)"/>
+  </g>
+</svg>

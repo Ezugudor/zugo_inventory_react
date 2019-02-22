@@ -1,7 +1,25 @@
-import LogoImg from "../../../img/logo.png";
+import { getBusinessLogo } from "../../../store/selectors";
+import { NavLink } from "react-router-dom";
+import React, { Component } from "react";
 import Style from "./Logo.module.css";
-import React from "react";
+import { connect } from "react-redux";
+class Class extends Component {
+  render() {
+    return (
+      <NavLink to="/dashboard">
+        <img className={Style.Logo} src={this.props.logoUrl} alt="Swyp Logo" />
+      </NavLink>
+    );
+  }
+}
 
-export const Logo = props => (
-  <img className={Style.Logo} src={LogoImg} alt="Swyp Logo" />
-);
+const mapStateToProps = state => {
+  return {
+    logoUrl: getBusinessLogo(state)
+  };
+};
+
+export const Logo = connect(
+  mapStateToProps,
+  null
+)(Class);

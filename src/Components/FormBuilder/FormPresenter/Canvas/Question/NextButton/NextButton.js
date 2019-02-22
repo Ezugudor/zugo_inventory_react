@@ -2,7 +2,7 @@ import Style from "./NextButton.module.css";
 import PropsTypes from "prop-types";
 import React from "react";
 
-const view = props => (
+export const NextButton = props => (
   <div>
     <button className={Style.nextButton} onClick={props.completeQuestion}>
       <span className={Style.nextButtonText}>
@@ -15,8 +15,6 @@ const view = props => (
   </div>
 );
 
-view.propTypes = {
+NextButton.propTypes = {
   completeQuestion: PropsTypes.func.isRequired
 };
-
-export const NextButton = view;

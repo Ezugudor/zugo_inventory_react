@@ -27,20 +27,38 @@ export const editorDefaultValue = () =>
  * @param {string} type type of question to be asked
  * @param {number} position the position where the question woulb be put on the form
  */
-export const generateNewElement = (type, position) => {
+export const generateNewQuestion = (type, position) => {
   const rules = buildValidationRule(type);
   const id = uuid4();
   let children = [];
   return {
-    formElement: {
-      validationRules: rules,
-      description: "",
-      position,
-      name: "",
-      children,
-      type,
-      id
-    }
+    validationRules: rules,
+    description: "",
+    position,
+    name: "",
+    children,
+    type,
+    id
+  };
+};
+
+/**
+ * Ask user which of the bank branch they want their form sent for processing
+ * @param {string} position position question would occupy in the list of questions
+ * for the form been created
+ */
+export const generateBankLocationQuestion = (position, branches) => {
+  const type = "branch";
+  const rules = buildValidationRule(type);
+  const id = uuid4();
+  return {
+    name: "What branch do you want us to send your response to",
+    validationRules: rules,
+    children: branches,
+    description: "",
+    position,
+    type,
+    id
   };
 };
 
@@ -71,14 +89,54 @@ export const buildOptionFromArray = (array, filterText = null) => {
   if (filterText) {
     array = array.filter(item => item.indexOf(filterText) !== -1);
   }
-
   return array.map((el, index) => {
     return { label: alphabet[index], text: el, index: index, picked: false };
   });
 };
 
 /**
+ * Extract out form element that need users interaction
+ * @param {array} formInputs form elements
+ */
+export const getQuestions = formInputs => {
+  return formInputs
+    .filter(
+      element => element.type !== "section" && element.type !== "introduction"
+    )
+    .map((question, index) => {
+      question.qPosition = index + 1;
+      return question;
+    });
+};
+
+/**
+ * Find out if a question has been asked already
+ * @param {Array} questions array of question a user is building
+ * @param {string} questionName the name of the question a user want,
+ * it know it it has been asked
+ */
+export const hasQuestion = (questions, questionName) => {
+  const index = questions.findIndex(question => question.name === questionName);
+  return index !== -1;
+};
+
+export const getFirstSection = formQuestions => {
+  return formQuestions.find(question => question.type === "section");
+};
+
+export const getNextSection = (formQuestions, currentQuestionId) => {
+  const currentQuestionIndex = formQuestions.findIndex(
+    question => question.id === currentQuestionId
+  );
+  const nextQuestion = formQuestions[currentQuestionIndex + 1];
+  return (nextQuestion && nextQuestion.type) === "section"
+    ? nextQuestion
+    : null;
+};
+
+/**
  * Type of questions that can be part of a form
+ * Changing values here may have ripple effect across the system
  */
 export const blockTypes = [
   { name: "Introduction Section", type: "introduction" },
@@ -87,8 +145,8 @@ export const blockTypes = [
 
   { name: "Short Text", type: "shorttext" },
   { name: "Long Text", type: "longtext" },
-  { name: "Firstnane", type: "firstname" },
-  { name: "lastnane", type: "lastname" },
+  { name: "First Name", type: "firstname" },
+  { name: "Last Name", type: "lastname" },
   { name: "Email", type: "email" },
 
   { name: "Cards", type: "creditcards" },
@@ -114,8 +172,12 @@ export const blockTypes = [
   { name: "Date", type: "date" }
 ];
 
-const buildValidationRule = elementType => {
-  switch (elementType) {
+/**
+ * Get initial validation rules for a question
+ * @param {string} questionType type of question been asked
+ */
+const buildValidationRule = questionType => {
+  switch (questionType) {
     case "account":
       return ValidationRuleBuilder.buildAccountNumberRule();
     case "mobile":

@@ -1,4 +1,4 @@
-import { OfficialSection } from "./OfficialSection";
+import { OfficialSignoff } from "./OfficialSignoff";
 import { AdminLayout } from "../../Hoc/Layouts";
 import { ResponseControls } from "./Controls";
 import Style from "./Response.module.css";
@@ -15,15 +15,17 @@ export const ResponseView = props => (
         toggleOfficialSectionUI={props.toggleOfficialSectionUI}
         deliverMessage={props.deliverMessage}
         handleNewNote={props.toggleNoteView}
+        response={props.response}
       />
 
       {props.response.notes.length ? (
         <Notes notes={props.response.notes} currentUser={props.currentUser} />
       ) : null}
       <Answers answers={props.response.content} />
-      <OfficialSection
+      <OfficialSignoff
         toggleOfficialSectionUI={props.toggleOfficialSectionUI}
         showOfficialSectionUI={props.showOfficialSectionUI}
+        responseId={props.response.id}
       />
       <NewNote {...props} />
     </div>

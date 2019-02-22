@@ -8,6 +8,8 @@ export const DashboardControls = props => (
     <DatePicker
       handleDateChange={props.handleDateChange}
       filterResponse={props.filterResponse}
+      startDate={props.startDate}
+      endDate={props.endDate}
     />
     <InboxPagination {...props} />
   </section>
@@ -18,5 +20,7 @@ DashboardControls.propTypes = {
   filterResponse: PropTypes.func.isRequired,
   processed: PropTypes.object.isRequired,
   tabToShow: PropTypes.string.isRequired,
-  unread: PropTypes.object.isRequired
+  startDate: PropTypes.string.isRequired,
+  endDate: PropTypes.string.isRequired,
+  pending: PropTypes.object.isRequired
 };

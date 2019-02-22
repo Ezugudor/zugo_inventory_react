@@ -1,31 +1,14 @@
 import { getBusinessSlug, getUploadedFileData } from "../../store/selectors";
 import { BusinessSettingsView } from "../../Components/BusinessSettings";
-import { updateUploadStatus, updateDetails } from "../../store/actions";
 import { getUploadStatus, getBusinessId } from "../../store/selectors";
-import { uploadFile } from "../../store/actions";
+import { updateDetails } from "../../store/actions";
+import { uploadLogo } from "../../store/actions";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
 class Class extends Component {
   state = {
-    dragEnter: false,
     businessDescription: ""
-  };
-
-  highlightDropArea = e => {
-    e.preventDefault();
-    this.setState({ dragEnter: true });
-  };
-
-  unhighlightDropArea = e => {
-    this.setState({ dragEnter: false });
-  };
-
-  handleFileDrop = e => {
-    e.preventDefault();
-    const dt = e.dataTransfer;
-    this.uploadLogo(dt.files);
-    this.setState({ dragEnter: false });
   };
 
   /**
@@ -44,8 +27,7 @@ class Class extends Component {
     const formData = new FormData();
     const fileName = `${this.props.businessSlug}logo`;
     formData.append("logo", file);
-    this.props.updateUploadStatus("uploading");
-    this.props.uploadFile("logo", formData, fileName);
+    this.props.uploadLogo(formData, fileName);
   };
 
   /**
@@ -69,11 +51,6 @@ class Class extends Component {
         businessDescription={this.state.businessDescription}
         updateBusinessDetails={this.updateBusinessDetails}
         changeDescription={this.handleDescriptionChange}
-        unhighlightDropArea={this.unhighlightDropArea}
-        highlightDropArea={this.highlightDropArea}
-        uploadStatus={this.props.uploadStatus}
-        handleFileDrop={this.handleFileDrop}
-        dragEnter={this.state.dragEnter}
         handleUpload={this.uploadLogo}
       />
     );
@@ -89,5 +66,5 @@ const mapStateToProps = state => ({
 
 export const BusinessSettings = connect(
   mapStateToProps,
-  { uploadFile, updateUploadStatus, updateDetails }
+  { uploadLogo, updateDetails }
 )(Class);

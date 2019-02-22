@@ -4,12 +4,12 @@ import PropTypes from "prop-types";
 import React from "react";
 
 export const Statement = props => (
-  <StatementHouse el={props.el}>
+  <StatementHouse question={props.question}>
     <NextButton completeQuestion={props.handleClick}>Continue</NextButton>
   </StatementHouse>
 );
 
 Statement.propTypes = {
-  el: PropTypes.object.isRequired,
+  question: PropTypes.object.isRequired,
   handleClick: PropTypes.func.isRequired
 };

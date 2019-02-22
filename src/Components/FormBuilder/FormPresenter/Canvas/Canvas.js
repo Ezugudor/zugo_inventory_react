@@ -1,6 +1,6 @@
+import { calculateElementCount, getQuestions } from "../../../../utils";
 import { getFirstSection, getNextSection } from "../../../../utils";
 import { ResponseCanvas } from "../../../../core/responseCanvas";
-import { calculateElementCount } from "../../../../utils";
 import { renderQuestionFor } from "./Question";
 import React, { Component } from "react";
 import Style from "./Canvas.module.css";
@@ -78,6 +78,7 @@ export class Canvas extends Component {
   };
 
   render() {
+    const questions = getQuestions(this.props.elements);
     return (
       <div>
         <section className={Style.HeaderSection}>
@@ -86,9 +87,9 @@ export class Canvas extends Component {
         <section className={Style.InterectionSection}>
           <div className={Style.Canvas}>
             <main>
-              {this.props.elements.map(el =>
+              {questions.map(question =>
                 renderQuestionFor({
-                  el,
+                  question,
                   handleClick: this.increaseCompletedQuestion
                 })
               )}

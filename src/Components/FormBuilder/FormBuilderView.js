@@ -9,6 +9,7 @@ export const FormBuilderView = props => (
   <FormBuiderLayout
     changeConfigWindow={props.changeConfigWindow}
     settingsWindowName={props.settingsWindowName}
+    formName={props.formName}
     save={props.save}
   >
     <Setting

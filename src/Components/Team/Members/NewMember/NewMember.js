@@ -41,7 +41,7 @@ export const NewMember = props => (
           className={styles.input}
           placeholder="Phone Number"
           value={props.newMember.phone}
-          type="tel"
+          type="number"
         />
       </div>
       <div className={styles.inputBox}>
@@ -51,8 +51,8 @@ export const NewMember = props => (
           onChange={e => props.setNewMemberDetail("role", e.target.value)}
         >
           <option>Select Role</option>
-          <option value="worker">Worker</option>
-          <option value="manager">Manager</option>
+          <option value="worker">Initiator</option>
+          <option value="manager">Approver</option>
         </select>
       </div>
       <div className={styles.inputBox}>

@@ -37,7 +37,7 @@ export const LoginView = props => (
           </label>
         </div>
         <div className={BaseStyle.Group}>
-          <button className={BaseStyle.Button}>Take me in!</button>
+          <button className={BaseStyle.Button}>Login</button>
         </div>
       </form>
     </div>

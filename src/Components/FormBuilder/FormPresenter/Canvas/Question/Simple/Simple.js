@@ -28,12 +28,12 @@ export class Simple extends Component {
 
   render() {
     return (
-      <NormalHouse el={this.props.el}>
+      <NormalHouse question={this.props.question}>
         <div className={Style.ElementAnswer}>
           <input
-            placeholder={InputManager.generatePlaceholder(this.props.el)}
-            type={InputManager.generateType(this.props.el)}
-            data-q-position={this.props.el.position}
+            placeholder={InputManager.generatePlaceholder(this.props.question)}
+            type={InputManager.generateType(this.props.question)}
+            data-q-position={this.props.question.qPosition}
             onChange={this.startInteraction}
             className={Style.Answer}
             data-input="true"
@@ -53,6 +53,6 @@ export class Simple extends Component {
 }
 
 Simple.propTypes = {
-  el: PropTypes.object.isRequired,
+  question: PropTypes.object.isRequired,
   handleClick: PropTypes.func.isRequired
 };
