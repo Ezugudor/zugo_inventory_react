@@ -95,6 +95,21 @@ export const buildOptionFromArray = (array, filterText = null) => {
 };
 
 /**
+ * Extract out form element that need users interaction
+ * @param {array} formInputs form elements
+ */
+export const getQuestions = formInputs => {
+  return formInputs
+    .filter(
+      element => element.type !== "section" && element.type !== "introduction"
+    )
+    .map((question, index) => {
+      question.qPosition = index + 1;
+      return question;
+    });
+};
+
+/**
  * Find out if a question has been asked already
  * @param {Array} questions array of question a user is building
  * @param {string} questionName the name of the question a user want,
@@ -130,8 +145,8 @@ export const blockTypes = [
 
   { name: "Short Text", type: "shorttext" },
   { name: "Long Text", type: "longtext" },
-  { name: "Firstnane", type: "firstname" },
-  { name: "lastnane", type: "lastname" },
+  { name: "First Name", type: "firstname" },
+  { name: "Last Name", type: "lastname" },
   { name: "Email", type: "email" },
 
   { name: "Cards", type: "creditcards" },

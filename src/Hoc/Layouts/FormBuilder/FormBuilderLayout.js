@@ -7,7 +7,7 @@ import React from "react";
 
 export const FormBuiderLayout = props => (
   <Aux>
-    <FormBuilderHeader save={props.save} />
+    <FormBuilderHeader save={props.save} formName={props.formName} />
     <main className={Style.Main}>
       <FormBuilderSideNav
         changeConfigWindow={props.changeConfigWindow}
@@ -21,5 +21,6 @@ export const FormBuiderLayout = props => (
 FormBuiderLayout.propTypes = {
   settingsWindowName: PropTypes.string.isRequired,
   changeConfigWindow: PropTypes.func.isRequired,
+  formName: PropTypes.string.isRequired,
   save: PropTypes.func.isRequired
 };

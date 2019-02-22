@@ -16,11 +16,23 @@
 
 .LogoBox {
   float: left;
-  margin-top: small-gutter;
+  margin-top: 0.5rem;
+  margin-left: 5rem;
+  height: 7rem;
+  padding-bottom: 0.6rem;
 }
 
 .Logo {
   height: medium-gutter;
+}
+
+.Icon {
+  height: 3rem;
+  width: 2rem;
+}
+
+.LogoutIcon {
+  margin-right: 0.3rem;
 }
 
 .NavBox {

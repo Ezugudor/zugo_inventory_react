@@ -15,6 +15,7 @@ export const ResponseView = props => (
         toggleOfficialSectionUI={props.toggleOfficialSectionUI}
         deliverMessage={props.deliverMessage}
         handleNewNote={props.toggleNoteView}
+        response={props.response}
       />
 
       {props.response.notes.length ? (

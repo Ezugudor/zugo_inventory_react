@@ -7,7 +7,7 @@ import React from "react";
 export const ChangeBranch = props => (
   <Modal show={props.showChangeBranch} click={props.toggleChangeBranch}>
     <section className={styles.section}>
-      <h3 className={styles.text}>Change Members Branch</h3>
+      <h3 className={styles.text}>Change Branch</h3>
       <div className={styles.inputBox}>
         <select
           onChange={e => props.setNewBranchDetail("branch", e.target.value)}
@@ -24,7 +24,7 @@ export const ChangeBranch = props => (
       </div>
       <div className={styles.controls}>
         <White click={props.toggleChangeBranch}>Cancel</White>
-        <Red click={props.changeBranch}>Change Branch!</Red>
+        <Red click={props.changeBranch}>Change Branch</Red>
       </div>
     </section>
   </Modal>

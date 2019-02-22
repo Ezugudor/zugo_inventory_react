@@ -14,12 +14,15 @@ export const FormTypesControls = props => (
     <div className={Style.controlBox}>
       <div
         className={buildStyle(props, "individual")}
-        onClick={props.switchTab}
+        onClick={() => props.switchTab("individual")}
       >
-        Individual
+        Personal Account Forms
       </div>
-      <div className={buildStyle(props, "corporate")} onClick={props.switchTab}>
-        Corporate
+      <div
+        className={buildStyle(props, "corporate")}
+        onClick={() => props.switchTab("corporate")}
+      >
+        Corporate Account Forms
       </div>
     </div>
   </section>

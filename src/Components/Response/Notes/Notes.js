@@ -24,10 +24,10 @@ export const Notes = props => (
           <p className={Style.responseText}>{res.note}</p>
           <p className={Style.responseMeta}>
             <span className="response__duration">
-              {moment.duration(moment(res.date) - moment()).humanize(true)} -
+              {moment(res.date).format("[] h:mm:ss a")} -{" "}
             </span>
             <span className="response__timestamps">
-              {moment(res.date).format("DD/MM/YYYY")}
+              {moment(res.date).format("DD MMM YYYY")}
             </span>
           </p>
         </div>

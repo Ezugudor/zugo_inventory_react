@@ -55,7 +55,10 @@ export class DropDown extends Component {
    */
   getOptions = () => {
     const filterText = this.state.value;
-    const options = buildOptionFromArray(this.props.el.children, filterText);
+    const options = buildOptionFromArray(
+      this.props.question.children,
+      filterText
+    );
     const { pickedIndex } = this.state;
     if (pickedIndex === -1) return options;
 
@@ -74,7 +77,7 @@ export class DropDown extends Component {
 
   render() {
     return (
-      <NormalHouse el={this.props.el}>
+      <NormalHouse question={this.props.question}>
         <div className={Style.AnswerWrapper}>
           <div className={Style.AnswerContents} tabIndex="-1">
             <div className={Style.AnswerBox}>
@@ -94,7 +97,7 @@ export class DropDown extends Component {
               </div>
               <div className={getOptionClass(this.state.showOptions)}>
                 <div className={Style.OptionsBox}>
-                  {this.getOptions(this.props.el.children).map(option => (
+                  {this.getOptions(this.props.question.children).map(option => (
                     <Option
                       pick={this.selectOption}
                       picked={option.picked}
@@ -115,5 +118,5 @@ export class DropDown extends Component {
 
 DropDown.propTypes = {
   handleClick: PropTypes.func.isRequired,
-  el: PropTypes.object.isRequired
+  question: PropTypes.object.isRequired
 };

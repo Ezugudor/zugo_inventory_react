@@ -1,6 +1,6 @@
 import { startNewForm, fetchForms } from "../../store/actions";
 import { getAllForms, getBusinessId } from "../../store/selectors";
-import { FormView } from "../../Components/Form";
+import { FormsView } from "../../Components/Forms";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
@@ -39,12 +39,13 @@ export class Class extends Component {
   render() {
     const forms = this.props.forms[this.formType.id];
     return (
-      <FormView
+      <FormsView
         showNewForm={this.state.showNewForm}
         showBuilder={this.goToFormBuilder}
         toggleNewForm={this.toggleNewForm}
         handleInput={this.setNewFormName}
         name={this.state.newFormName}
+        formType={this.formType}
         forms={forms}
       />
     );

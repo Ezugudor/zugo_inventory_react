@@ -15,9 +15,9 @@ class Class extends Component {
     this.props.fetchWorkspaces(businessId);
   }
 
-  switchTab = e => {
-    const content = e.target.textContent.replace(/\d/g, "").toLowerCase();
-    this.setState({ tabToShow: content });
+  switchTab = text => {
+    text = text.replace(/\d/g, "").toLowerCase();
+    this.setState({ tabToShow: text });
   };
 
   goToForms = formType => {

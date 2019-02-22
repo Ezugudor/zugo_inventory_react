@@ -13,7 +13,7 @@ export const Intro = props => (
     </div>
     <div className={Style.Instruction}>
       <span className={Style.InstructionWarning}>
-        You need the following below to fill this form
+        You'll need this to complete the form
       </span>
       <span className={Style.InstructionIcon}>
         <i className="far fa-hand-point-down" />
@@ -41,7 +41,7 @@ export const Intro = props => (
           className="btn btn--primary btn--action"
           onClick={props.toggleIntro}
         >
-          I am Ready
+          I'm Ready
         </button>
       </div>
       <span className={Style.ActonInstruction}>

@@ -1,5 +1,5 @@
 import processingIcon from "../../../img/process.svg";
-import downloadIcon from "../../../img/download.svg";
+// import downloadIcon from "../../../img/download.svg";
 import { SkyBlue, Red } from "../../Utils/Buttons";
 import Style from "./ResponseControls.module.css";
 import addIcon from "../../../img/add.svg";
@@ -9,7 +9,9 @@ import React from "react";
 export const ResponseControls = props => (
   <section className={Style.controlSection}>
     <div>
-      <h1 className={Style.info}>Account Opening - #98da8da9e9dd9d</h1>
+      <h1 className={Style.info}>
+        {props.response.form.name} - #{props.response.id}
+      </h1>
     </div>
     <div className={Style.controls}>
       <SkyBlue styles={Style.button} click={props.toggleOfficialSectionUI}>
@@ -28,16 +30,15 @@ export const ResponseControls = props => (
         </span>
         Add Note
       </Red>
-      <Red styles={Style.button} click={props.deliverMessage}>
+      {/* <Red styles={Style.button} click={props.deliverMessage}>
         <span className={Style.buttonIcon}>
           <img className={Style.iconImage} src={downloadIcon} alt="download" />
         </span>
         Download
-      </Red>
+      </Red> */}
     </div>
   </section>
 );
-
 ResponseControls.propTypes = {
   toggleOfficialSectionUI: PropTypes.func.isRequired,
   deliverMessage: PropTypes.func.isRequired,

@@ -13,7 +13,7 @@ export const BusinessSettingsView = props => (
         <FileUpload handleUpload={props.handleUpload} />
       </section>
       <section className={Style.textSection}>
-        <h3 className={Style.heading}>Tell us about your bank</h3>
+        <h3 className={Style.heading}>Give a brief summary of your bank</h3>
         <textarea
           onChange={props.changeDescription}
           value={props.businessDescription}
@@ -21,7 +21,7 @@ export const BusinessSettingsView = props => (
         />
       </section>
       <section className={Style.textSection}>
-        <Red click={props.updateBusinessDetails}>Submit Details</Red>
+        <Red click={props.updateBusinessDetails}>Submit</Red>
       </section>
     </div>
   </AdminLayout>

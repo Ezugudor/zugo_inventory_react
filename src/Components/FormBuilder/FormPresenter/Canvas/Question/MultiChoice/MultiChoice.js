@@ -27,7 +27,7 @@ export class MultiChoice extends Component {
    * transform question children to option object for the UI
    */
   getOptions = () => {
-    const options = buildOptionFromArray(this.props.el.children);
+    const options = buildOptionFromArray(this.props.question.children);
     const { pickedIndex } = this.state;
     if (pickedIndex === -1) return options;
 
@@ -46,7 +46,7 @@ export class MultiChoice extends Component {
 
   render() {
     return (
-      <NormalHouse {...this.props}>
+      <NormalHouse question={this.props.question}>
         <div className={Style.answerWrapper}>
           <div className={Style.answerContent}>
             <div className={Style.Wrapper}>
@@ -70,5 +70,5 @@ export class MultiChoice extends Component {
 
 MultiChoice.propTypes = {
   handleClick: PropTypes.func.isRequired,
-  el: PropTypes.object.isRequired
+  question: PropTypes.object.isRequired
 };
