@@ -7,7 +7,7 @@ import {
 
 const initialState = {
   processed: { result: [], count: 0, pages: 0 },
-  unread: { result: [], count: 0, pages: 0 }
+  pending: { result: [], count: 0, pages: 0 }
 };
 
 export const responses = (state = initialState, action) => {
@@ -15,7 +15,7 @@ export const responses = (state = initialState, action) => {
     case SAVE_PROCESSED_RESPONSES:
       return updateState(state, { processed: action.data });
     case SAVE_PENDING_RESPONSES:
-      return updateState(state, { unread: action.data });
+      return updateState(state, { pending: action.data });
     case UPDATE_RESPONSE_NOTE:
       return findAndUpdate(state, action.data, action.stateType);
     default:

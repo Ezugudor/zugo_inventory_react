@@ -5,7 +5,7 @@ import React from "react";
 export const StatementHouse = props => (
   <div className={baseStyle.ElementWrapper}>
     <section
-      data-question-id={props.el.id}
+      data-question-id={props.question.id}
       className="InactiveElement"
       data-question="true"
     >
@@ -27,10 +27,10 @@ export const StatementHouse = props => (
                     </div>
                     <div className={baseStyle.QuestionTextWrapper}>
                       <span>
-                        <strong>{props.el.name}</strong>
+                        <strong>{props.question.name}</strong>
                       </span>
                       <ul>
-                        {props.el.children.map((child, index) => (
+                        {props.question.children.map((child, index) => (
                           <li key={index}>{child}</li>
                         ))}
                       </ul>
@@ -48,5 +48,5 @@ export const StatementHouse = props => (
 );
 
 StatementHouse.propTypes = {
-  el: PropTypes.object.isRequired
+  question: PropTypes.object.isRequired
 };

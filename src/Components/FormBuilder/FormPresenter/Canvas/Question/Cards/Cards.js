@@ -35,7 +35,7 @@ export class Cards extends Component {
 
   render() {
     return (
-      <NormalHouse el={this.props.el}>
+      <NormalHouse question={this.props.question}>
         <div className={Style.answerWrapper}>
           <div className={Style.answerContent}>
             {this.state.options.map(option => (
@@ -57,5 +57,5 @@ export class Cards extends Component {
 
 Cards.propTypes = {
   handleClick: PropTypes.func.isRequired,
-  el: PropTypes.object.isRequired
+  question: PropTypes.object.isRequired
 };

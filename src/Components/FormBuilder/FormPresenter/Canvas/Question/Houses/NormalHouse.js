@@ -5,7 +5,7 @@ import React from "react";
 export const NormalHouse = props => (
   <div className={Style.ElementWrapper}>
     <section
-      data-question-id={props.el.id}
+      data-question-id={props.question.id}
       className="InactiveElement"
       data-question="true"
     >
@@ -19,7 +19,7 @@ export const NormalHouse = props => (
                     <div className={Style.QuestionDecorationWrapper}>
                       <span className={Style.QuestionDecoration}>
                         <div className={Style.QuestionPosition}>
-                          {props.el.position}
+                          {props.question.qPosition}
                         </div>
                         <div className={Style.QuestionIcon}>
                           <span>
@@ -29,10 +29,10 @@ export const NormalHouse = props => (
                       </span>
                     </div>
                     <div className={Style.QuestionTextWrapper}>
-                      <label> {props.el.name}</label>
+                      <label> {props.question.name}</label>
                       <div className={Style.RequiredQuestion}>*</div>
                     </div>
-                    <p className="description">{props.el.description}</p>
+                    <p className="description">{props.question.description}</p>
                   </div>
                 </div>
               </div>
@@ -46,5 +46,5 @@ export const NormalHouse = props => (
 );
 
 NormalHouse.propTypes = {
-  el: PropTypes.object.isRequired
+  question: PropTypes.object.isRequired
 };

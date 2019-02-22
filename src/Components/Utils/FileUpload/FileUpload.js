@@ -64,9 +64,9 @@ const showUploadIndicator = uploadStatus => {
   if (!uploadStatus)
     return (
       <div>
-        <p className={style.uploadInstruction}>Drag file here to upload</p>
+        <p className={style.uploadInstruction}>Drag and drop</p>
         <label htmlFor="logo" className={style.inputLabel}>
-          Or pick a file
+          Or Click to upload
         </label>
       </div>
     );

@@ -31,10 +31,10 @@ export class Long extends Component {
 
   render() {
     return (
-      <NormalHouse el={this.props.el}>
+      <NormalHouse question={this.props.question}>
         <div className={Style.ElementAnswer}>
           <textarea
-            data-q-position={this.props.el.position}
+            data-q-position={this.props.question.qPosition}
             placeholder="Enter Your Answer Here"
             onChange={this.startInteraction}
             className={Style.Answer}
@@ -58,6 +58,6 @@ export class Long extends Component {
 }
 
 Long.propTypes = {
-  el: PropTypes.object.isRequired,
+  question: PropTypes.object.isRequired,
   handleClick: PropTypes.func.isRequired
 };

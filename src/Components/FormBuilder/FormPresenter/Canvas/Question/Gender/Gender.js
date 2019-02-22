@@ -36,7 +36,7 @@ export class Gender extends Component {
 
   render() {
     return (
-      <NormalHouse el={this.props.el}>
+      <NormalHouse question={this.props.question}>
         <div className={Style.answerWrapper}>
           <div className={Style.answerContent}>
             {this.state.options.map(option => (
@@ -58,5 +58,5 @@ export class Gender extends Component {
 
 Gender.propTypes = {
   handleClick: PropTypes.func.isRequired,
-  el: PropTypes.object.isRequired
+  question: PropTypes.object.isRequired
 };

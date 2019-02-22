@@ -1,13 +1,14 @@
 import { getNote } from "../../../utils";
 import { InboxHeader } from "./Header";
-import PropTypes from "prop-types";
 import { InboxItem } from "./Item";
+import PropTypes from "prop-types";
 import React from "react";
 
 export const Inbox = props => (
   <section>
     <InboxHeader
-      unreadCount={props.unread.count}
+      processedCount={props.processed.count}
+      unreadCount={props.pending.count}
       selectedTab={props.tabToShow}
       switchTab={props.switchTab}
     />
@@ -30,14 +31,14 @@ const showResponse = props => {
         />
       ));
 
-    case "unread":
-      const { unread } = props;
-      return unread.result.map(res => (
+    case "pending":
+      const { pending } = props;
+      return pending.result.map(res => (
         <InboxItem
           formName={res.form.name}
           date={res.createdAt}
           note={getNote(res)}
-          type="unread"
+          type="pending"
           key={res.id}
           id={res.id}
         />

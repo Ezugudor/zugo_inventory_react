@@ -2,6 +2,6 @@
 @value small-right-gutter from Variables;
 
 .Logo {
-  height: 4rem;
-  margin-top: small-right-gutter;
+  height: 100%;
+  cursor: pointer;
 }

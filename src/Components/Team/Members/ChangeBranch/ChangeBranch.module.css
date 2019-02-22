@@ -7,11 +7,12 @@
   width: 50%;
   margin: 0 auto;
   height: 23vh;
+  min-height: 21rem;
 }
 
 .text {
   text-align: center;
-  margin-top: 2rem;
+  padding-top: 2rem;
 }
 
 .inputBox {

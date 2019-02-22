@@ -32,7 +32,7 @@ export class Picture extends Component {
 
   render() {
     return (
-      <NormalHouse el={this.props.el}>
+      <NormalHouse question={this.props.question}>
         <FileUpload
           unhighlightDropArea={this.unhighlightDropArea}
           highlightDropArea={this.highlightDropArea}
@@ -47,6 +47,6 @@ export class Picture extends Component {
 }
 
 Picture.propTypes = {
-  el: PropTypes.object.isRequired,
+  question: PropTypes.object.isRequired,
   handleClick: PropTypes.func.isRequired
 };

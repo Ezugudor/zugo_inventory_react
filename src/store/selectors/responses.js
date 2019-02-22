@@ -12,7 +12,7 @@ export const getRevisedResponses = createSelector(responses, resps => {
 });
 
 export const getUnreadResponses = createSelector(responses, resps => {
-  return resps.unread;
+  return resps.pending;
 });
 
 export const getResponse = createSelector(

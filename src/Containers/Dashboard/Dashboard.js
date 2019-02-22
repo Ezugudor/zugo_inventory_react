@@ -34,6 +34,7 @@ class Class extends Component {
     }
     const { businessId } = this.props;
     this.props.filterByDate(businessId, startDate, endDate);
+    this.setState({ endDate: "", startDate: "" });
   };
 
   render() {
@@ -42,7 +43,9 @@ class Class extends Component {
         handleDateChange={this.handleDateChange}
         filterResponse={this.filterResponse}
         processed={this.props.processed}
-        unread={this.props.unread}
+        startDate={this.state.startDate}
+        pending={this.props.pending}
+        endDate={this.state.endDate}
       />
     );
   }
@@ -50,8 +53,8 @@ class Class extends Component {
 
 const mapStateToProps = state => ({
   processed: getProcessedResponses(state),
-  businessId: getBusinessId(state),
-  unread: getUnreadResponses(state)
+  pending: getUnreadResponses(state),
+  businessId: getBusinessId(state)
 });
 
 export const Dashboard = connect(

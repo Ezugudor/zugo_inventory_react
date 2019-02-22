@@ -16,14 +16,16 @@ const getInfo = props => {
   switch (props.tabToShow) {
     case "processed":
       const { processed } = props;
-      return `1 - ${processed.count} of ${processed.count}`;
-    case "unread":
-      const { unread } = props;
-      return `1 - ${unread.count} of ${unread.count}`;
+      return `${processed.count} of ${processed.count}`;
+    case "pending":
+      const { pending } = props;
+      return `${pending.count} of ${pending.count}`;
     default:
       return "0 of 0";
   }
 };
 InboxPagination.propTypes = {
-  tabToShow: PropTypes.string.isRequired
+  tabToShow: PropTypes.string.isRequired,
+  processed: PropTypes.object.isRequired,
+  pending: PropTypes.object.isRequired
 };

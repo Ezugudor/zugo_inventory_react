@@ -7,7 +7,7 @@ import { Inbox } from "./Inbox";
 
 export class DashboardView extends Component {
   state = {
-    responseToShow: "unread"
+    responseToShow: "pending"
   };
 
   switchResponseType = e => {
@@ -20,13 +20,19 @@ export class DashboardView extends Component {
       <AdminLayout pageName="dashboard">
         <div className={Style.dashboard}>
           <DashboardControls
+            handleDateChange={this.props.handleDateChange}
+            filterResponse={this.props.filterResponse}
             tabToShow={this.state.responseToShow}
-            {...this.props}
+            processed={this.props.processed}
+            startDate={this.props.startDate}
+            endDate={this.props.endDate}
+            pending={this.props.pending}
           />
           <Inbox
             tabToShow={this.state.responseToShow}
             switchTab={this.switchResponseType}
-            {...this.props}
+            processed={this.props.processed}
+            pending={this.props.pending}
           />
         </div>
       </AdminLayout>
@@ -38,5 +44,7 @@ DashboardView.propTypes = {
   handleDateChange: PropTypes.func.isRequired,
   filterResponse: PropTypes.func.isRequired,
   processed: PropTypes.object.isRequired,
-  unread: PropTypes.object.isRequired
+  startDate: PropTypes.string.isRequired,
+  endDate: PropTypes.string.isRequired,
+  pending: PropTypes.object.isRequired
 };
