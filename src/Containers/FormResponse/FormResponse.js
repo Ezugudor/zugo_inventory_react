@@ -1,5 +1,5 @@
 import { getResponse, getCurrentUser } from "../../store/selectors";
-import { ResponseView } from "../../Components/Response";
+import { FormResponseView } from "../../Components/FormResponse";
 import { createNote } from "../../store/actions";
 import React, { Component } from "react";
 import { connect } from "react-redux";
@@ -63,7 +63,7 @@ export class Class extends Component {
    */
   render() {
     return (
-      <ResponseView
+      <FormResponseView
         showOfficialSectionUI={this.state.showOfficialSectionUI}
         toggleOfficialSectionUI={this.toggleOfficialSection}
         setNewNoteText={this.setNewNoteText}
@@ -92,7 +92,7 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-export const UserResponse = connect(
+export const FormResponse = connect(
   mapStateToProps,
   { createNote }
 )(Class);

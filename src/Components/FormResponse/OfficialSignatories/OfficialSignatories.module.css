@@ -1,0 +1,10 @@
+.signatories {
+  width: 40%;
+  box-shadow: -0.1rem -0.1rem 0.3rem rgba(14, 14, 14, 0.2);
+  padding-top: 2rem;
+  padding-left: 2rem;
+}
+
+.initiator {
+  margin-bottom: 3rem;
+}

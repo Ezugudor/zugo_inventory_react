@@ -7,7 +7,7 @@ import {
 } from "../actions";
 
 const initialState = {
-  partiallyprocessed: { result: [], count: 0, pages: 0 },
+  partiallyProcessed: { result: [], count: 0, pages: 0 },
   processed: { result: [], count: 0, pages: 0 },
   pending: { result: [], count: 0, pages: 0 }
 };
@@ -15,7 +15,7 @@ const initialState = {
 export const responses = (state = initialState, action) => {
   switch (action.type) {
     case SAVE_PARTIALLYPROCESSED_RESPONSES:
-      return updateState(state, { partiallyprocessed: action.data });
+      return updateState(state, { partiallyProcessed: action.data });
     case SAVE_PROCESSED_RESPONSES:
       return updateState(state, { processed: action.data });
     case SAVE_PENDING_RESPONSES:

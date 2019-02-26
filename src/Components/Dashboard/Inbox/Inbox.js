@@ -26,7 +26,7 @@ const showResponse = props => {
           formName={res.form.name}
           date={res.createdAt}
           note={getNote(res)}
-          type="processed"
+          type="partiallyProcessed"
           key={res.id}
           id={res.id}
         />

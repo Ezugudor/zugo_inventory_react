@@ -18,7 +18,7 @@ export const getUnreadResponses = createSelector(responses, resps => {
 export const getPartiallyProcessedResponses = createSelector(
   responses,
   resps => {
-    return resps.partiallyprocessed;
+    return resps.partiallyProcessed;
   }
 );
 

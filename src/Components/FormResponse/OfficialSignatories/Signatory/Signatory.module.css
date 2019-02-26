@@ -1,0 +1,59 @@
+.item {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+}
+
+.item:not(:last-child) {
+  margin-bottom: 2rem;
+}
+
+.decoration {
+  display: flex;
+  flex-flow: row nowrap;
+  height: 3rem;
+  width: 5rem;
+  border-radius: 3px;
+  margin-right: 1rem;
+  position: relative;
+}
+
+.iconHolder {
+  height: 1.8rem;
+  margin-top: 0.4rem;
+}
+
+.icon {
+  width: 100%;
+  height: 100%;
+}
+
+.name {
+  background-color: #67e5fc;
+}
+
+.email {
+  background-color: #38003c;
+}
+
+.date {
+  background-color: #201266;
+}
+
+.sign {
+  background-color: #118da0;
+}
+
+.text {
+  font-size: 1.5rem;
+}
+
+.signatureWrapper {
+  height: 20rem;
+  width: 20rem;
+}
+
+.signature {
+  height: 100%;
+  width: 100%;
+}
