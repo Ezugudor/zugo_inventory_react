@@ -51,8 +51,8 @@ export const NewMember = props => (
           onChange={e => props.setNewMemberDetail("role", e.target.value)}
         >
           <option>Select Role</option>
-          <option value="worker">Initiator</option>
-          <option value="manager">Approver</option>
+          <option value="initiator">Initiator</option>
+          <option value="approver">Approver</option>
         </select>
       </div>
       <div className={styles.inputBox}>

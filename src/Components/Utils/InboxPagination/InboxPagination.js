@@ -14,17 +14,24 @@ export const InboxPagination = props => (
 
 const getInfo = props => {
   switch (props.tabToShow) {
+    case "partiallyProcessed":
+      const { partiallyProcessed } = props;
+      return `${partiallyProcessed.count} of ${partiallyProcessed.count}`;
+
     case "processed":
       const { processed } = props;
       return `${processed.count} of ${processed.count}`;
+
     case "pending":
       const { pending } = props;
       return `${pending.count} of ${pending.count}`;
+
     default:
       return "0 of 0";
   }
 };
 InboxPagination.propTypes = {
+  partiallyProcessed: PropTypes.object.isRequired,
   tabToShow: PropTypes.string.isRequired,
   processed: PropTypes.object.isRequired,
   pending: PropTypes.object.isRequired

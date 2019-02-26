@@ -3,6 +3,7 @@ import { DashboardView } from "../../Components/Dashboard";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
+  getPartiallyProcessedResponses,
   getProcessedResponses,
   getUnreadResponses,
   getBusinessId
@@ -11,7 +12,12 @@ import {
 class Class extends Component {
   state = {
     endDate: "",
-    startDate: ""
+    startDate: "",
+    responseTabToShow: "pending"
+  };
+
+  switchResponseTab = tabName => {
+    this.setState({ responseTabToShow: tabName });
   };
 
   handleDateChange = e => {
@@ -40,8 +46,11 @@ class Class extends Component {
   render() {
     return (
       <DashboardView
+        partiallyProcessed={this.props.partiallyProcessed}
         handleDateChange={this.handleDateChange}
+        tabToShow={this.state.responseTabToShow}
         filterResponse={this.filterResponse}
+        switchTab={this.switchResponseTab}
         processed={this.props.processed}
         startDate={this.state.startDate}
         pending={this.props.pending}
@@ -52,6 +61,7 @@ class Class extends Component {
 }
 
 const mapStateToProps = state => ({
+  partiallyProcessed: getPartiallyProcessedResponses(state),
   processed: getProcessedResponses(state),
   pending: getUnreadResponses(state),
   businessId: getBusinessId(state)

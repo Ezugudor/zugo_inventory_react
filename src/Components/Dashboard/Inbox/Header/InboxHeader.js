@@ -11,17 +11,28 @@ const buildStyle = (props, tab) => {
 
 export const InboxHeader = props => (
   <div className={Style.inboxHeader}>
-    <div className={buildStyle(props, "pending")} onClick={props.switchTab}>
-      Pending
+    <div
+      className={buildStyle(props, "pending")}
+      onClick={() => props.switchTab("pending")}
+    >
+      Pending for Initiators
       <span className={`${Style.inboxTabIcon} ${Style.unreadIcon}`}>
-        {props.unreadCount}
+        {props.pendingCount}
       </span>
     </div>
-    <div className={buildStyle(props, "revisions")} onClick={props.switchTab}>
-      Revised
-      <span className={`${Style.inboxTabIcon} ${Style.revisionIcon}`}>0</span>
+    <div
+      className={buildStyle(props, "partiallyProcessed")}
+      onClick={() => props.switchTab("partiallyProcessed")}
+    >
+      Pending for Approvers
+      <span className={`${Style.inboxTabIcon} ${Style.unreadIcon}`}>
+        {props.partiallyProcessedCount}
+      </span>
     </div>
-    <div className={buildStyle(props, "processed")} onClick={props.switchTab}>
+    <div
+      className={buildStyle(props, "processed")}
+      onClick={() => props.switchTab("processed")}
+    >
       Processed
       <span className={`${Style.inboxTabIcon} ${Style.unreadIcon}`}>
         {props.processedCount}
@@ -31,8 +42,9 @@ export const InboxHeader = props => (
 );
 
 InboxHeader.propTypes = {
+  partiallyProcessedCount: PropTypes.number.isRequired,
   processedCount: PropTypes.number.isRequired,
-  unreadCount: PropTypes.number.isRequired,
+  pendingCount: PropTypes.number.isRequired,
   selectedTab: PropTypes.string.isRequired,
   switchTab: PropTypes.func.isRequired
 };

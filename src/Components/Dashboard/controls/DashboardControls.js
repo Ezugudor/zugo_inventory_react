@@ -11,11 +11,17 @@ export const DashboardControls = props => (
       startDate={props.startDate}
       endDate={props.endDate}
     />
-    <InboxPagination {...props} />
+    <InboxPagination
+      partiallyProcessed={props.partiallyProcessed}
+      tabToShow={props.tabToShow}
+      processed={props.processed}
+      pending={props.pending}
+    />
   </section>
 );
 
 DashboardControls.propTypes = {
+  partiallyProcessed: PropTypes.object.isRequired,
   handleDateChange: PropTypes.func.isRequired,
   filterResponse: PropTypes.func.isRequired,
   processed: PropTypes.object.isRequired,
