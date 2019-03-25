@@ -162,6 +162,9 @@ export const blockTypes = [
   { name: "Signature", type: "signature" },
   { name: "Passport Photo", type: "passport" },
 
+  { name: "Ask For Picture", type: "picture" },
+  { name: "Ask For Video", type: "video" },
+
   { name: "Account Number", type: "account" },
   { name: "Mobile Number", type: "mobile" },
   { name: "Office Number", type: "tel" },

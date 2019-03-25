@@ -22,7 +22,8 @@ export const AnswerUI = props => (
     <div>
       <p className={Style.questionText}>{props.answer.question}?</p>
       {props.answer.questionType === "signature" ||
-      props.answer.questionType === "passport" ? (
+      props.answer.questionType === "passport" ||
+      props.answer.questionType === "picture" ? (
         <div className={Style.imgWrapper}>
           <img
             src={props.answer.answer}
@@ -30,6 +31,11 @@ export const AnswerUI = props => (
             className={Style.img}
           />
         </div>
+      ) : props.answer.questionType === "video" ? (
+        <video controls className={Style.video}>
+          <source src={props.answer.answer} type="video/webm" />
+          Your browser does not support the video tag.
+        </video>
       ) : (
         <p className={Style.answerText}>{props.answer.answer}</p>
       )}
