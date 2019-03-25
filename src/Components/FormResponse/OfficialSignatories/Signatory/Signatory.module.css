@@ -1,16 +1,14 @@
-@value Variables: "../../../styles/Variables.css";
-@value white-color from Variables;
-.answer {
+.item {
   display: flex;
   flex-flow: row nowrap;
   justify-content: flex-start;
 }
 
-.answer:not(:last-child) {
+.item:not(:last-child) {
   margin-bottom: 2rem;
 }
 
-.questionDecoration {
+.decoration {
   display: flex;
   flex-flow: row nowrap;
   height: 3rem;
@@ -23,37 +21,39 @@
 .iconHolder {
   height: 1.8rem;
   margin-top: 0.4rem;
-  padding-left: 1rem;
 }
 
-.Icon {
+.icon {
   width: 100%;
   height: 100%;
 }
 
-.questionPosition {
-  margin-right: 0.9rem;
-  color: white-color;
+.name {
+  background-color: #67e5fc;
 }
 
-.questionText {
+.email {
+  background-color: #38003c;
+}
+
+.date {
+  background-color: #201266;
+}
+
+.sign {
+  background-color: #118da0;
+}
+
+.text {
   font-size: 1.5rem;
 }
 
-.answerText {
-  font-weight: 600;
-}
-
-.imgWrapper {
+.signatureWrapper {
   height: 20rem;
   width: 20rem;
 }
-.img {
+
+.signature {
   height: 100%;
   width: 100%;
-}
-
-.video {
-  height: 28rem;
-  width: 40%;
 }

@@ -14,6 +14,11 @@
   background-color: #b90707;
 }
 
+.video,
+.picture {
+  background-color: black;
+}
+
 .gender {
   background-color: #07b9b9;
 }

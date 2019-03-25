@@ -1,16 +1,17 @@
+import { OfficailSignatories } from "./OfficialSignatories";
 import { OfficialSignoff } from "./OfficialSignoff";
+import style from "./FormResponseView.module.css";
 import { AdminLayout } from "../../Hoc/Layouts";
 import { ResponseControls } from "./Controls";
-import Style from "./Response.module.css";
 import { Answers } from "./Answers";
 import { NewNote } from "./NewNote";
 import PropTypes from "prop-types";
 import { Notes } from "./Notes";
 import React from "react";
 
-export const ResponseView = props => (
+export const FormResponseView = props => (
   <AdminLayout pageName="Account Opening">
-    <div className={Style.response}>
+    <div className={style.response}>
       <ResponseControls
         toggleOfficialSectionUI={props.toggleOfficialSectionUI}
         deliverMessage={props.deliverMessage}
@@ -21,7 +22,10 @@ export const ResponseView = props => (
       {props.response.notes.length ? (
         <Notes notes={props.response.notes} currentUser={props.currentUser} />
       ) : null}
-      <Answers answers={props.response.content} />
+      <div className={style.mainArea}>
+        <Answers answers={props.response.content} />
+        <OfficailSignatories processors={props.response.processors} />
+      </div>
       <OfficialSignoff
         toggleOfficialSectionUI={props.toggleOfficialSectionUI}
         showOfficialSectionUI={props.showOfficialSectionUI}
@@ -32,7 +36,7 @@ export const ResponseView = props => (
   </AdminLayout>
 );
 
-ResponseView.propTypes = {
+FormResponseView.propTypes = {
   toggleOfficialSectionUI: PropTypes.func.isRequired,
   showOfficialSectionUI: PropTypes.bool.isRequired,
   toggleNoteView: PropTypes.func.isRequired,
