@@ -1,0 +1,9 @@
+.response {
+  margin: 3rem;
+}
+
+.mainArea {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+}

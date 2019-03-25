@@ -15,6 +15,13 @@ export const getUnreadResponses = createSelector(responses, resps => {
   return resps.pending;
 });
 
+export const getPartiallyProcessedResponses = createSelector(
+  responses,
+  resps => {
+    return resps.partiallyProcessed;
+  }
+);
+
 export const getResponse = createSelector(
   [responses, getProps],
   (resps, props) => {
