@@ -29,6 +29,7 @@ export const FormResponseView = props => (
       <OfficialSignoff
         toggleOfficialSectionUI={props.toggleOfficialSectionUI}
         showOfficialSectionUI={props.showOfficialSectionUI}
+        responseType={props.responseType}
         responseId={props.response.id}
       />
       <NewNote {...props} />
@@ -39,9 +40,9 @@ export const FormResponseView = props => (
 FormResponseView.propTypes = {
   toggleOfficialSectionUI: PropTypes.func.isRequired,
   showOfficialSectionUI: PropTypes.bool.isRequired,
+  responseType: PropTypes.string.isRequired,
   toggleNoteView: PropTypes.func.isRequired,
   setNewNoteText: PropTypes.func.isRequired,
-  deliverMessage: PropTypes.func.isRequired,
   newNoteText: PropTypes.string.isRequired,
   currentUser: PropTypes.object.isRequired,
   showNewNote: PropTypes.bool.isRequired,

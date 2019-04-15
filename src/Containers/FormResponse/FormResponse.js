@@ -52,16 +52,10 @@ export class Class extends Component {
   };
 
   /**
-   * placeholder for unimplemented feature
-   */
-  deliverMessage = () => {
-    alert("Functionality comming soon!");
-  };
-
-  /**
    * render UI on the screen
    */
   render() {
+    const { type } = this.props.match.params;
     return (
       <FormResponseView
         showOfficialSectionUI={this.state.showOfficialSectionUI}
@@ -69,11 +63,11 @@ export class Class extends Component {
         setNewNoteText={this.setNewNoteText}
         currentUser={this.props.currentUser}
         showNewNote={this.state.showNewNote}
-        deliverMessage={this.deliverMessage}
         toggleNoteView={this.toggleNewNote}
         newNoteText={this.state.newNote}
         response={this.props.response}
         createNote={this.createNote}
+        responseType={type}
       />
     );
   }
