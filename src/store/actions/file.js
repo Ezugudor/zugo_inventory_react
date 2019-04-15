@@ -62,7 +62,7 @@ const uploadFile = (url, formData, dispatch) => {
     .then(res => {
       dispatch(stopNetworkRequest());
       dispatch(holdFile(res.data));
-      dispatch(updateUploadStatus("uploaded"));
+      dispatch(updateUploadStatus(""));
     })
     .catch(err => {
       dispatch(updateUploadStatus(""));

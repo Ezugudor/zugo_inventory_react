@@ -63,20 +63,17 @@ export const createNote = (responseId, note, type) => {
  *
  * @param {string} id id of form response that an official is signing off on
  * @param {object} details request payload
+ * @param {string} type the category the response belongs to pending/processed/partiallyprocessed
  */
-export const signOff = (id, details) => {
+export const signOff = (id, details, type) => {
   return dispatch => {
     dispatch(startNetworkRequest());
     return SwypPartnerApi.put(`responses/signoff/${id}`, details)
       .then(res => {
         dispatch(stopNetworkRequest());
-        if (res.data.updated) {
-          return dispatch(
-            setNotificationMessage("Response Processed Successfully", "success")
-          );
-        }
-        dispatch(
-          setNotificationMessage("We are unable to process response", "error")
+        dispatch(updateResponse(res.data, type));
+        return dispatch(
+          setNotificationMessage("Response Processed Successfully", "success")
         );
       })
       .catch(err => handleError(err, dispatch));

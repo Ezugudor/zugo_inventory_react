@@ -18,7 +18,7 @@ export const OfficailSignatories = props => {
           />
         ) : (
           <p>
-            <strong>An Initiator has not sign yet.</strong>
+            <strong>Yet to sign.</strong>
           </p>
         )}
       </div>
@@ -34,7 +34,7 @@ export const OfficailSignatories = props => {
           />
         ) : (
           <p>
-            <strong>An Approver has not sign yet.</strong>
+            <strong>Yet to sign.</strong>
           </p>
         )}
       </div>

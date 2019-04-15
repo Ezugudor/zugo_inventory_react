@@ -1,5 +1,4 @@
 import processingIcon from "../../../img/process.svg";
-// import downloadIcon from "../../../img/download.svg";
 import { SkyBlue, Red } from "../../Utils/Buttons";
 import Style from "./ResponseControls.module.css";
 import addIcon from "../../../img/add.svg";
@@ -30,17 +29,10 @@ export const ResponseControls = props => (
         </span>
         Add Note
       </Red>
-      {/* <Red styles={Style.button} click={props.deliverMessage}>
-        <span className={Style.buttonIcon}>
-          <img className={Style.iconImage} src={downloadIcon} alt="download" />
-        </span>
-        Download
-      </Red> */}
     </div>
   </section>
 );
 ResponseControls.propTypes = {
   toggleOfficialSectionUI: PropTypes.func.isRequired,
-  deliverMessage: PropTypes.func.isRequired,
   handleNewNote: PropTypes.func.isRequired
 };
