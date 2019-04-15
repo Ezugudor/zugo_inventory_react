@@ -34,11 +34,12 @@ export class Class extends Component {
     if (!this.props.uploadedFile) {
       return alert("Try again when your signature is done been processed");
     }
+    const { responseType } = this.props;
     const responseId = this.props.responseId;
     const details = {
-      signatureUrl: this.props.uploadedFile.imageUrl
+      signatureUrl: this.props.uploadedFile.assetUrl
     };
-    this.props.signOff(responseId, details).then(() => {
+    this.props.signOff(responseId, details, responseType).then(() => {
       this.props.toggleOfficialSectionUI();
     });
   };
@@ -83,5 +84,6 @@ export const OfficialSignoff = connect(
 OfficialSignoff.propTypes = {
   toggleOfficialSectionUI: PropTypes.func.isRequired,
   showOfficialSectionUI: PropTypes.bool.isRequired,
+  responseType: PropTypes.string.isRequired,
   responseId: PropTypes.string.isRequired
 };
