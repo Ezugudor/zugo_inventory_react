@@ -26,6 +26,17 @@ export class Class extends Component {
    * for a user response
    */
   toggleOfficialSection = () => {
+    const { showOfficialSectionUI } = this.state;
+    const { currentUser, response } = this.props;
+    if (!showOfficialSectionUI) {
+      if (
+        (currentUser.role === "admin" || currentUser.role === "approver") &&
+        !response.processors.initiator.email
+      ) {
+        alert("An initiator need to sign off before you can.");
+        return;
+      }
+    }
     this.setState(prevState => ({
       showOfficialSectionUI: !prevState.showOfficialSectionUI
     }));
