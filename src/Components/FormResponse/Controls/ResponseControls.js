@@ -34,5 +34,6 @@ export const ResponseControls = props => (
 );
 ResponseControls.propTypes = {
   toggleOfficialSectionUI: PropTypes.func.isRequired,
-  handleNewNote: PropTypes.func.isRequired
+  handleNewNote: PropTypes.func.isRequired,
+  response: PropTypes.object.isRequired
 };

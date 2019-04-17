@@ -14,7 +14,7 @@ export const FormResponseView = props => (
     <div className={style.response}>
       <ResponseControls
         toggleOfficialSectionUI={props.toggleOfficialSectionUI}
-        deliverMessage={props.deliverMessage}
+        processors={props.response.processors}
         handleNewNote={props.toggleNoteView}
         response={props.response}
       />
