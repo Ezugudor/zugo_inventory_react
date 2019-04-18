@@ -24,7 +24,7 @@ export const Notes = props => (
           <p className={Style.responseText}>{res.note}</p>
           <p className={Style.responseMeta}>
             <span className="response__duration">
-              {moment(res.date).format("[] h:mm:ss a")} -{" "}
+              {moment(res.date).format("[] h:mm a")} -{" "}
             </span>
             <span className="response__timestamps">
               {moment(res.date).format("DD MMM YYYY")}
