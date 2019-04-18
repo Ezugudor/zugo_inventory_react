@@ -12,7 +12,7 @@ export const InboxItem = props => (
       <div className={Style.response}>{props.formName}</div>
       <div className={Style.response}>{props.note}</div>
       <div className={Style.response}>
-        {moment(props.date).format("[] h:mm:ss a")} {" - "}
+        {moment(props.date).format("[] h:mm a")} {" - "}
         {moment(props.date).format("DD MMM YYYY")}
       </div>
     </div>
