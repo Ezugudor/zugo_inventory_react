@@ -1,4 +1,9 @@
-import { UPDATE_BUSINESS, STORE_USER, STORE_BUSINESS } from "./types";
+import {
+  UPDATE_BUSINESS,
+  STORE_USER,
+  STORE_BUSINESS,
+  DELETE_BUSINESS_BRANCH
+} from "./types";
 import { startNetworkRequest, stopNetworkRequest } from "./app";
 import { SwypPartnerApi } from "../../core/api";
 import { setNotificationMessage } from "./app";
@@ -8,6 +13,7 @@ import { handleError } from "../../utils";
 const storeBusinessrData = data => ({ type: STORE_BUSINESS, data });
 const updateBusiness = data => ({ type: UPDATE_BUSINESS, data });
 const storeUserData = data => ({ type: STORE_USER, data });
+const deleteStoredBranch = data => ({ type: DELETE_BUSINESS_BRANCH, data });
 /**
  * handle user's business registration interaction with backend service
  * @param {object} details business and business manager credentials
@@ -42,6 +48,52 @@ export const createNewMember = details => {
         dispatch(stopNetworkRequest());
         dispatch(updateBusiness(res.data));
         dispatch(setNotificationMessage("User Added Successfully", "success"));
+      })
+      .catch(err => handleError(err, dispatch));
+  };
+};
+
+/**
+ * handle business manager's create new Branch interaction with bankend service
+ * @param {object} details credentails of new branch to be created
+ */
+export const createNewBranch = details => {
+  return dispatch => {
+    dispatch(startNetworkRequest());
+    SwypPartnerApi.post("branch/add", details)
+      .then(res => {
+        dispatch(stopNetworkRequest());
+        dispatch(updateBusiness(res.data));
+        dispatch(
+          setNotificationMessage("Branch Added Successfully", "success")
+        );
+      })
+      .catch(err => handleError(err, dispatch));
+  };
+};
+
+/**
+ * handle business manager's delete branch interaction with bankend service
+ * @param {object} branch credentails of the branch to be delete
+ */
+export const deleteBranch = branch => {
+  return dispatch => {
+    dispatch(startNetworkRequest());
+    SwypPartnerApi.delete("branch/delete", {
+      data: { name: branch.name }
+    })
+      .then(res => {
+        dispatch(stopNetworkRequest());
+        dispatch(deleteStoredBranch(branch));
+        // alert(res.data.deleted);
+        // return;
+        if (res.data.deleted) {
+          dispatch(
+            setNotificationMessage(`${branch.name}, Deleted`, "success")
+          );
+          return;
+        }
+        dispatch(setNotificationMessage("Unable to delete branch", "erro"));
       })
       .catch(err => handleError(err, dispatch));
   };

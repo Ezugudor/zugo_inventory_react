@@ -1,4 +1,9 @@
-import { generateNewQuestion, getIntroIndex, hasChild } from "../../utils";
+import {
+  generateNewQuestion,
+  getIntroIndex,
+  hasChild,
+  resetPosition
+} from "../../utils";
 import { generateBankLocationQuestion, hasQuestion } from "../../utils";
 import { getNewForm, getBuilderState } from "../../store/selectors";
 import { preserveNewForm, createForm } from "../../store/actions";
@@ -14,6 +19,7 @@ class Class extends Component {
   state = {
     settingsWindowName: "build",
     showSettingsWindow: true,
+    showLoading: false,
     currentElement: {},
     formElements: []
   };
@@ -53,12 +59,22 @@ class Class extends Component {
   };
 
   /**
+   * open and close the the progress ui
+   */
+  toggleLoading = () => {
+    this.setState(prevState => ({
+      showLoading: !prevState.showLoading
+    }));
+  };
+  /**
    * Add a new question to the list of questions for users to answer
    * @param {string} type type of question to ask
    */
   addElement = type => {
+    console.dir("getting the states of the elements", this.state);
     const position = getNextPosition(this.state.formElements);
-    const question = generateNewQuestion(type, position);
+    console.dir(this.props.branches);
+    const question = generateNewQuestion(type, position, this.props.branches);
     const questions = [...this.state.formElements];
     const introIndex = getIntroIndex(questions);
 
@@ -179,9 +195,10 @@ class Class extends Component {
     const questionIndex = questions.findIndex(el => el.id === questionId);
     if (questionIndex === -1) return;
     const question = questions.splice(questionIndex, 1);
-    this.preserveState(question, questions);
+    const resetQn = resetPosition(questions);
+    this.preserveState(question, resetQn);
     this.setState({
-      formElements: questions,
+      formElements: resetQn,
       settingsWindowName: "build"
     });
   };
@@ -204,17 +221,20 @@ class Class extends Component {
    * send the questions user want to ask to the backend server
    */
   createForm = () => {
+    //popup the progress indicator
+    this.toggleLoading();
+
     const { name, parent, id } = this.props.newForm.formType;
     const questions = this.state.formElements;
 
-    const branchQuestion = generateBankLocationQuestion(
-      getNextPosition(this.state.formElements),
-      this.props.branches
-    );
-    const hasBeenAsked = hasQuestion(questions, branchQuestion.name);
-    if (!hasBeenAsked) {
-      questions.push(branchQuestion);
-    }
+    // const branchQuestion = generateBankLocationQuestion(
+    //   getNextPosition(this.state.formElements),
+    //   this.props.branches
+    // );
+    // const hasBeenAsked = hasQuestion(questions, branchQuestion.name);
+    // if (!hasBeenAsked) {
+    //   questions.push(branchQuestion);
+    // }
 
     const details = {
       name: this.props.newForm.name,
@@ -249,6 +269,8 @@ class Class extends Component {
         formName={this.props.newForm.name}
         addElement={this.addElement}
         save={this.createForm}
+        showLoading={this.state.showLoading}
+        toggleLoading={this.toggleLoading}
       />
     );
   }

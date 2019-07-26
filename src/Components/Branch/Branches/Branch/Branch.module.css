@@ -1,0 +1,30 @@
+.branch td {
+  padding: 10px 20px;
+}
+
+.branchControls {
+  position: relative;
+  /* background:red; */
+  float: left;
+  /* border-right: 1px solid #fff; */
+  margin-right: 2rem;
+}
+
+.branchControl {
+  cursor: pointer;
+}
+
+.branchControl:first-child {
+  margin-right: 2rem;
+}
+
+.iconHolder {
+  height: 2rem;
+}
+
+.icon {
+  height: 100%;
+}
+.clearFix {
+  clear: both;
+}

@@ -5,13 +5,15 @@ import PropTypes from "prop-types";
 import React from "react";
 
 export const Member = props => (
-  <div className={styles.member}>
-    <div>{props.account.name}</div>
-    <div>{props.account.role}</div>
-    <div>{props.account.branch}</div>
-    <div className={styles.memberControls}>
-      <div className={styles.memberControl}>
-        {/* <span className="member__tooltip">Change Branch</span> */}
+  <tr className={styles.member}>
+    <td>{props.account.name}</td>
+    <td>
+      {props.account.role.charAt(0).toUpperCase() + props.account.role.slice(1)}
+    </td>
+    <td>{props.account.branch}</td>
+    <td>
+      <div className={styles.memberControls}>
+        {/* <span className="branch__tooltip">Change Branch</span> */}
         <div
           onClick={() => props.setNewBranchDetail("user", props.account, true)}
           className={styles.iconHolder}
@@ -19,8 +21,8 @@ export const Member = props => (
           <img src={penImage} className={styles.icon} alt="Edit icon" />
         </div>
       </div>
-      <div className={styles.memberControl}>
-        {/* <span className="member__tooltip">Delete</span> */}
+      <div className={styles.memberControls}>
+        {/* <span className="branch__tooltip">Delete</span> */}
         <div
           onClick={() => props.setMemberToDelete(props.account)}
           className={styles.iconHolder}
@@ -28,8 +30,9 @@ export const Member = props => (
           <img src={trashcanImage} className={styles.icon} alt="Delete icon" />
         </div>
       </div>
-    </div>
-  </div>
+      <div className={styles.clearFix}></div>
+    </td>
+  </tr>
 );
 
 Member.propTypes = {

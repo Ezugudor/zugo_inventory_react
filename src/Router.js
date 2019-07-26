@@ -8,6 +8,7 @@ import {
   Signup,
   Login,
   Team,
+  Branch,
   Form
 } from "./Containers";
 import { Redirect, Switch, Route } from "react-router-dom";
@@ -65,6 +66,7 @@ export default () => (
     <PrivateRoute exact path="/formbuilder" component={FormBuilder} />
     <PrivateRoute exact path="/formtypes" component={FormTypes} />
     <PrivateRoute exact path="/dashboard" component={Dashboard} />
+    <ManagerRoute exact path="/branch" component={Branch} />
     <GuestRoute exact path="/signup" component={Signup} />
     <ManagerRoute exact path="/team" component={Team} />
     <GuestRoute exact path="/login" component={Login} />

@@ -22,6 +22,47 @@ export const ChangeBranch = props => (
           ))}
         </select>
       </div>
+      <div className={styles.inputBox}>
+        <input
+          onChange={e => props.setNewBranchDetail("firstname", e.target.value)}
+          className={[styles.input, "firstname"].join(" ")}
+          placeholder="First Name"
+          value={props.editMember.firstname}
+          type="text"
+          required="required"
+        />
+      </div>
+      <div className={styles.inputBox}>
+        <input
+          onChange={e => props.setNewBranchDetail("lastname", e.target.value)}
+          className={[styles.input, "lastname"].join(" ")}
+          placeholder="Last Name"
+          value={props.editMember.lastname}
+          required="required"
+          type="text"
+        />
+      </div>
+      <div className={styles.inputBox}>
+        <input
+          onChange={e => props.setNewBranchDetail("email", e.target.value)}
+          className={[styles.input, "email"].join(" ")}
+          placeholder="Work Email"
+          required="required"
+          value={props.editMember.email}
+          type="email"
+        />
+      </div>
+      <div className={styles.inputBox}>
+        <input
+          onChange={e => props.setNewBranchDetail("phone", e.target.value)}
+          className={[styles.input, "phone"].join(" ")}
+          placeholder="Phone Number"
+          value={props.editMember.phone}
+          required="required"
+          type="text"
+          maxLength="14"
+        />
+      </div>
       <div className={styles.controls}>
         <White click={props.toggleChangeBranch}>Cancel</White>
         <Red click={props.changeBranch}>Change Branch</Red>

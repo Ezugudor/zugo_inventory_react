@@ -2,12 +2,12 @@
 @value white-color, typeform-border-color from Variables;
 
 .section {
+  height: 63vh;
+  min-height: 59rem;
   background-color: white-color;
   border-radius: 9px;
   width: 50%;
   margin: 0 auto;
-  height: 23vh;
-  min-height: 21rem;
 }
 
 .text {

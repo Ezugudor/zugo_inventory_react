@@ -2,6 +2,7 @@ import { FormBuiderLayout } from "../../Hoc/Layouts";
 import { EditorPresenter } from "./EditorPresenter";
 import { FormPresenter } from "./FormPresenter";
 import { Setting } from "./Settings";
+import { Loading } from "../Utils";
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -27,6 +28,11 @@ export const FormBuilderView = props => (
       setElementChildren={props.setElementChildren}
       deleteQuestion={props.deleteQuestion}
       formElements={props.formElements}
+    />
+
+    <Loading
+      showLoading={props.showLoading}
+      toggleLoading={props.toggleLoading}
     />
     <FormPresenter elements={props.formElements} formName={props.formName} />
   </FormBuiderLayout>

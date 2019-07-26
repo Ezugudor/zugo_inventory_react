@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21.41 22.872">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #f7f5f8;
+      }
+
+      .cls-2 {
+        fill: #ffde04;
+        stroke: #38003c;
+      }
+
+      .cls-3 {
+        stroke: none;
+      }
+
+      .cls-4 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <g id="notify" transform="translate(-1542.59 -21.711)">
+    <g id="notification_3_" data-name="notification (3)" transform="translate(1499.915 21.711)">
+      <g id="Group_941" data-name="Group 941" transform="translate(42.675)">
+        <g id="Group_940" data-name="Group 940" transform="translate(0)">
+          <path id="Path_870" data-name="Path 870" class="cls-1" d="M61.667,19.292l-1.636-2.727A8.1,8.1,0,0,1,58.876,12.4V10.006a6.679,6.679,0,0,0-4.765-6.39V1.906a1.906,1.906,0,0,0-3.812,0V3.617a6.679,6.679,0,0,0-4.765,6.39V12.4a8.107,8.107,0,0,1-1.154,4.167l-1.636,2.727a.477.477,0,0,0,.408.722H61.258a.476.476,0,0,0,.409-.721Z" transform="translate(-42.675 0)"/>
+        </g>
+      </g>
+      <g id="Group_943" data-name="Group 943" transform="translate(49.204 20.966)">
+        <g id="Group_942" data-name="Group 942" transform="translate(0)">
+          <path id="Path_871" data-name="Path 871" class="cls-1" d="M188.815,469.333a3.315,3.315,0,0,0,6,0Z" transform="translate(-188.815 -469.333)"/>
+        </g>
+      </g>
+    </g>
+    <g id="Ellipse_54" data-name="Ellipse 54" class="cls-2" transform="translate(1553 23)">
+      <circle class="cls-3" cx="5.5" cy="5.5" r="5.5"/>
+      <circle class="cls-4" cx="5.5" cy="5.5" r="5"/>
+    </g>
+  </g>
+</svg>

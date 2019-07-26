@@ -79,6 +79,8 @@ export class Canvas extends Component {
 
   render() {
     const questions = getQuestions(this.props.elements);
+    console.log("question elements", this.props.elements);
+    console.log("question ", getQuestions(this.props.elements));
     return (
       <div>
         <section className={Style.HeaderSection}>

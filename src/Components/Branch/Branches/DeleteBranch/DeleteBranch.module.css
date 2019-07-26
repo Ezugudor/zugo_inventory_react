@@ -1,0 +1,20 @@
+@value Variables: "../../../../styles/Variables.css";
+@value white-color, typeform-border-color from Variables;
+
+.section {
+  background-color: white-color;
+  border-radius: 9px;
+  width: 50%;
+  margin: 0 auto;
+  height: 14vh;
+}
+
+.text {
+  text-align: center;
+  padding-top: 1rem;
+}
+
+.controls {
+  margin-top: 3.5rem;
+  text-align: center;
+}

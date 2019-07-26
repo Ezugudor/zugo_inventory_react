@@ -1,0 +1,15 @@
+.section {
+  padding: 3rem 0;
+  margin-right: 3rem;
+  margin-bottom: 2rem;
+}
+
+.controls {
+  float: right;
+}
+
+.controlIcon {
+  display: inline-block;
+  margin-right: 0.4rem;
+  font-size: 1.6rem;
+}

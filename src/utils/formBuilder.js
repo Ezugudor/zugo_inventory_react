@@ -25,12 +25,13 @@ export const editorDefaultValue = () =>
 /**
  * generate new question to add to a new form
  * @param {string} type type of question to be asked
- * @param {number} position the position where the question woulb be put on the form
+ * @param {number} position the position where the question would be put on the form
  */
-export const generateNewQuestion = (type, position) => {
+export const generateNewQuestion = (type, position, branches) => {
   const rules = buildValidationRule(type);
   const id = uuid4();
-  let children = [];
+  console.log("validation rules for a single form element", rules);
+  let children = branchFill(type, branches);
   return {
     validationRules: rules,
     description: "",
@@ -43,6 +44,20 @@ export const generateNewQuestion = (type, position) => {
 };
 
 /**
+ * Populates the element if its a "Branch"
+ * @param {string} Branches The global branches contained in the React Component's props.
+ * Returns empty array otherwise(for all other form elements)
+ */
+//Ezugudor addendum
+export const branchFill = (type, branches) => {
+  if (type == "branch") {
+    return branches;
+  } else {
+    return [];
+  }
+};
+
+/**
  * Ask user which of the bank branch they want their form sent for processing
  * @param {string} position position question would occupy in the list of questions
  * for the form been created
@@ -52,7 +67,7 @@ export const generateBankLocationQuestion = (position, branches) => {
   const rules = buildValidationRule(type);
   const id = uuid4();
   return {
-    name: "What branch do you want us to send your response to",
+    name: "What branch do you want us to send your response to?",
     validationRules: rules,
     children: branches,
     description: "",
@@ -70,6 +85,19 @@ export const getNextPosition = questions => {
   const len = questions.filter(element => element.type !== "introduction")
     .length;
   return len === 0 ? 1 : len + 1;
+};
+
+/**
+ * Reset all position, reassign indexes on element remove
+ * @param {array} questions questions that are already part of the form
+ */
+export const resetPosition = questions => {
+  return questions
+    .filter(element => element.type !== "introduction")
+    .map((question, index) => {
+      question.position = index + 1;
+      return question;
+    });
 };
 
 /**
@@ -156,8 +184,11 @@ export const blockTypes = [
   { name: "Drop Down", type: "dropdown" },
 
   { name: "Address", type: "address" },
-  // { name: "Countries", type: "country" },
-  // { name: "States", type: "state" },
+  { name: "Countries", type: "country" },
+  { name: "Branch", type: "branch" },
+  { name: "States", type: "state" },
+  { name: "Area", type: "lga" },
+  { name: "Landmark/Direction", type: "longtext" },
 
   { name: "Signature", type: "signature" },
   { name: "Passport Photo", type: "passport" },

@@ -15,6 +15,7 @@ export const BusinessSettingsView = props => (
       <section className={Style.textSection}>
         <h3 className={Style.heading}>Give a brief summary of your bank</h3>
         <textarea
+          maxLength={200}
           onChange={props.changeDescription}
           value={props.businessDescription}
           className={Style.textArea}

@@ -60,7 +60,7 @@ export const Signatory = props => (
   </div>
 );
 
-Signatory.proptypes = {
+Signatory.props = {
   signature: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,

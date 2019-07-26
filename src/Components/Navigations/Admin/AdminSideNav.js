@@ -5,6 +5,7 @@ import React from "react";
 
 const getClassName = (props, page) => {
   const conditionalCalss = {};
+  console.log("page nasme", props.pageName);
   conditionalCalss[Style.ActiveLink] = props.pageName === page;
   conditionalCalss[Style.InactiveLink] = props.pageName !== page;
   return className(Style.NavLink, conditionalCalss);
@@ -25,13 +26,18 @@ export const AdminSideNav = props => (
           </a>
         </li>
         <li className={Style.NavItem}>
-          <a className={getClassName(props, "settings")} href="/settings">
-            Settings
+          <a className={getClassName(props, "team")} href="/team">
+            Team
           </a>
         </li>
         <li className={Style.NavItem}>
-          <a className={getClassName(props, "team")} href="/team">
-            Team
+          <a className={getClassName(props, "branch")} href="/branch">
+            Branch
+          </a>
+        </li>
+        <li className={Style.NavItem}>
+          <a className={getClassName(props, "settings")} href="/settings">
+            Settings
           </a>
         </li>
       </ul>

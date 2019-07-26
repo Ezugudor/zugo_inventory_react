@@ -31,6 +31,8 @@ export class Class extends Component {
         branch: "HQ",
         role: "admin",
         name: fullname,
+        firstname: firstname,
+        lastname: lastname,
         email: this.state.email,
         phone: this.state.phone,
         password: this.state.password

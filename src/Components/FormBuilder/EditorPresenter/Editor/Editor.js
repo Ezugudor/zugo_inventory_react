@@ -44,6 +44,12 @@ class Class extends Component {
 
     return next();
   };
+  // Ezugudor Addendum
+  onDeleteBtnClick = event => {
+    event.preventDefault();
+    const { id } = this.editorPointer.current.props;
+    this.props.deleteQuestion(id);
+  };
 
   getChildContent = ({ value }) => {
     const { id } = this.childPointer.current.props;
@@ -85,6 +91,18 @@ class Class extends Component {
       case "dropdown":
         return (
           <div>
+            <a
+              className="remove-elem"
+              onClick={this.onDeleteBtnClick}
+              style={{
+                position: "absolute",
+                top: "10px",
+                right: "6px",
+                cursor: "pointer"
+              }}
+            >
+              <i className="fa fa-times-circle"></i>
+            </a>
             <SlateEditor
               id={this.props.element.id}
               type={this.props.element.type}
@@ -109,17 +127,31 @@ class Class extends Component {
         );
       default:
         return (
-          <SlateEditor
-            id={this.props.element.id}
-            type={this.props.element.type}
-            value={this.state.value}
-            placeholder="Type your question here"
-            onKeyDown={this.onKeyDown}
-            ref={this.editorPointer}
-            onChange={this.onChange}
-            spellCheck={true}
-            renderPlaceholder={this.renderPlaceholder}
-          />
+          <div>
+            <a
+              className="remove-elem"
+              onClick={this.onDeleteBtnClick}
+              style={{
+                position: "absolute",
+                top: "10px",
+                right: "6px",
+                cursor: "pointer"
+              }}
+            >
+              <i className="fa fa-times-circle"></i>
+            </a>
+            <SlateEditor
+              id={this.props.element.id}
+              type={this.props.element.type}
+              value={this.state.value}
+              placeholder="Type your question here"
+              onKeyDown={this.onKeyDown}
+              ref={this.editorPointer}
+              onChange={this.onChange}
+              spellCheck={true}
+              renderPlaceholder={this.renderPlaceholder}
+            />
+          </div>
         );
     }
   };

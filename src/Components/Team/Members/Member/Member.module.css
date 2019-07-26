@@ -1,17 +1,13 @@
-.member {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  padding: 1rem 0;
-  padding-left: 2rem;
-  padding-right: 6rem;
-  border-bottom: 1px solid typeform-border-color;
+.member td {
+  padding: 10px 20px;
 }
 
 .memberControls {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
+  position: relative;
+  /* background:red; */
+  float: left;
+  /* border-right: 1px solid #fff; */
+  margin-right: 2rem;
 }
 
 .memberControl {
@@ -19,7 +15,7 @@
 }
 
 .memberControl:first-child {
-  margin-right: 0.5rem;
+  margin-right: 2rem;
 }
 
 .iconHolder {
@@ -28,4 +24,7 @@
 
 .icon {
   height: 100%;
+}
+.clearFix {
+  clear: both;
 }

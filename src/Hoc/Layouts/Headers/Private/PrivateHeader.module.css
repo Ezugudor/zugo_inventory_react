@@ -5,7 +5,7 @@
 .Header {
   background-color: primary-color;
   color: white-color;
-  height: 9vh;
+  /* height: 9vh; */
 }
 
 .Header::after {

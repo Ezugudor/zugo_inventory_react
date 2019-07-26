@@ -21,6 +21,11 @@ class Class extends Component {
     },
     branchChangeDetails: {
       user: "",
+      role: "worker",
+      firstname: "",
+      lastname: "",
+      email: "",
+      phone: "",
       branch: ""
     }
   };
@@ -39,7 +44,13 @@ class Class extends Component {
    * @param {string} key propterty name to set
    * @param {string} value the value set key to
    */
-  setNewMemberDetail = (key, value) => {
+  setNewMemberDetail = (key, value, elem) => {
+    var regex = /^[0-9]+$/;
+    if (key == "phone" && !value.match(regex) && value.length > 0) {
+      alert("Only integer values are allowed in this field.");
+      return;
+    }
+    elem.classList.remove("invalid");
     const newMember = { ...this.state.newMember };
     newMember[key] = value;
     this.setState({ newMember });
@@ -61,6 +72,29 @@ class Class extends Component {
       !this.state.newMember.branch ||
       !this.state.newMember.phone
     ) {
+      console.log(this.state.newMember);
+      const mInputs = this.state.newMember;
+      for (var aa in mInputs) {
+        if (mInputs[aa].length <= 0) {
+          console.log("fieldname", aa, "field value", mInputs[aa]);
+          let elem = document.querySelector("input.email");
+          if (aa == "email") {
+            elem = document.querySelector("input.email");
+          } else if (aa == "firstname") {
+            elem = document.querySelector("input.firstname");
+          } else if (aa == "lastname") {
+            elem = document.querySelector("input.lastname");
+          } else if (aa == "phone") {
+            elem = document.querySelector("input.phone");
+          } else if (aa == "role") {
+            elem = document.querySelector("select.role");
+          } else if (aa == "branch") {
+            elem = document.querySelector("select.branch");
+          }
+
+          elem.classList.add("invalid");
+        }
+      }
       return alert("Required field is not set");
     }
     const { email, phone, role, branch } = this.state.newMember;
@@ -70,6 +104,8 @@ class Class extends Component {
     const details = {
       email,
       name,
+      firstname,
+      lastname,
       phone,
       role,
       origin,
@@ -134,6 +170,7 @@ class Class extends Component {
    * @param {boolean} toggleModal
    */
   setNewBranchDetail = (key, value, toggleModal = false) => {
+    console.log("props in editelements", this.state);
     const details = { ...this.state.branchChangeDetails };
     details[key] = value;
     this.setState({ branchChangeDetails: details });
@@ -164,6 +201,8 @@ class Class extends Component {
   };
 
   render() {
+    console.log("check the props", this.props);
+    console.log("check the state", this.state);
     return (
       <TeamView
         showChangeBranch={this.state.showChangeBranch}
@@ -180,6 +219,7 @@ class Class extends Component {
         changeBranch={this.changeUserBranch}
         deleteMember={this.deleteMember}
         newMember={this.state.newMember}
+        editMember={this.state.branchChangeDetails.user}
         createMember={this.createMember}
         branches={this.props.branches}
         members={this.props.members}

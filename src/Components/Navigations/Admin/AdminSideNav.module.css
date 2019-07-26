@@ -1,10 +1,12 @@
 @value variables: "../../../styles/Variables.css";
-@value secondary-color, tertiary-color, typeform-border-color from variables;
+@value secondary-color, tertiary-color,tertiary-color-light, typeform-border-color from variables;
 .AdminSidebar {
   width: 11%;
   min-width: 15rem;
   height: 100%;
   border-right: 1px solid typeform-border-color;
+  background: tertiary-color-light;
+  background: #fff;
 }
 
 .Nav {

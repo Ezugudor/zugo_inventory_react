@@ -23,6 +23,7 @@ export class InputManager {
   }
 
   static generatePlaceholder(el) {
+    console.log("text-type", el.type);
     switch (el.type) {
       case "address":
         return "Like 16 Karimu Ikotun VI, Lagos";
@@ -34,6 +35,8 @@ export class InputManager {
         return "Like jendoe@cool.com";
       case "bvn":
         return "Like 22123803000";
+      case "branch":
+        return "Choose Branch";
       default:
         return "Enter Your Answer Here";
     }

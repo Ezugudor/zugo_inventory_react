@@ -2,6 +2,7 @@ export * from ".//BusinessSettings";
 export * from "./FormResponse";
 export * from "./FormBuilder";
 export * from "./Dashboard";
+export * from "./Branch";
 export * from "./Responses";
 export * from "./FormType";
 export * from "./Signup";

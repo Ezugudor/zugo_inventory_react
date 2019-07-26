@@ -5,22 +5,26 @@ import React from "react";
 
 export const Members = props => (
   <section className={styles.section}>
-    <div className={styles.members}>
-      <div className={styles.membersHead}>
-        <div>Name</div>
-        <div>User Role</div>
-        <div>Current Branch</div>
-        <div>Action</div>
-      </div>
-      {props.members.map(account => (
-        <Member
-          setNewBranchDetail={props.setNewBranchDetail}
-          setMemberToDelete={props.setMemberToDelete}
-          key={account.email}
-          account={account}
-        />
-      ))}
-    </div>
+    <table className={styles.table}>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>User Role</th>
+          <th>Current Branch</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {props.members.map(account => (
+          <Member
+            setNewBranchDetail={props.setNewBranchDetail}
+            setMemberToDelete={props.setMemberToDelete}
+            key={account.email}
+            account={account}
+          />
+        ))}
+      </tbody>
+    </table>
   </section>
 );
 

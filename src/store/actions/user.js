@@ -19,6 +19,7 @@ export const loginUser = (loginDetails, history) => {
     SwypPartnerApi.post("user/login", loginDetails)
       .then(res => {
         dispatch(stopNetworkRequest());
+        console.log("on login store user data", res.data);
         dispatch(storeUserData(res.data));
         dispatch(storeBusinessrData(res.data));
         dispatch(
