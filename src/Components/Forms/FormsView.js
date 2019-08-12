@@ -7,12 +7,15 @@ import { Cards } from "./Cards";
 import React from "react";
 
 export const FormsView = props => (
-  <AdminLayout pageName="form">
+  <AdminLayout pageName="form" currentUser={props.currentUser}>
     <FormsControls
       toggleNewForm={props.toggleNewForm}
       formType={props.formType}
     />
-    <Cards forms={chunkData(props.forms, 4)} />
+    <Cards
+      forms={chunkData(props.forms, 4)}
+      showBuilderEdit={props.showBuilderEdit}
+    />
     <NewForm
       toggleNewForm={props.toggleNewForm}
       handleInput={props.handleInput}

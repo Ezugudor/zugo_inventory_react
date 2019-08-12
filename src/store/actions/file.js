@@ -29,10 +29,10 @@ export const updateUploadStatus = status => ({
  * @param {FormData} formData object containing the file to be uploaded
  * @param {string} fileName name of the file to be uploaded
  */
-export const uploadLogo = (formData, filename) => {
+export const uploadLogo = (formData, filename, _this) => {
   return dispatch => {
     const url = `upload/logos/${filename}`;
-    uploadFile(url, formData, dispatch);
+    return uploadFile(url, formData, dispatch, _this);
   };
 };
 
@@ -42,10 +42,10 @@ export const uploadLogo = (formData, filename) => {
  * @param {string} bankName name of bank whose workers signature need to be processed
  * @param {string} fileName name of the file to be uploaded
  */
-export const uploadOfficialSigns = (formData, bankName, filename) => {
+export const uploadOfficialSigns = (formData, bankName, filename, _this) => {
   return dispatch => {
     const url = `upload/official-signatures/${bankName}/${filename}`;
-    return uploadFile(url, formData, dispatch);
+    return uploadFile(url, formData, dispatch, _this);
   };
 };
 
@@ -55,11 +55,33 @@ export const uploadOfficialSigns = (formData, bankName, filename) => {
  * @param {FormData} formData object containing the file to be uploaded
  * @param {reduxEventDispatcher} dispatch
  */
-const uploadFile = (url, formData, dispatch) => {
+const uploadFile = (url, formData, dispatch, _this) => {
   dispatch(startNetworkRequest());
   dispatch(updateUploadStatus("uploading"));
-  return SwypPartnerApi.post(url, formData)
+  return SwypPartnerApi.post(url, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data"
+    },
+    onUploadProgress: eve => {
+      console.log("progress", eve.loaded);
+      console.log("progress event", eve);
+
+      let total = eve.total;
+      let loaded = eve.loaded;
+      let fraction = eve.loaded / eve.total;
+      // let percS = Math.floor(fraction * 100) + "%";
+      let perc = Math.floor(fraction * 100);
+      _this.setState({ loading: perc });
+      var pb = document.querySelector(".pb-cont .pb-inside");
+      if (loaded >= total) {
+        // pb.style.width = "100%";
+      } else {
+        // pb.style.width = perc;
+      }
+    }
+  })
     .then(res => {
+      console.log("uploading info", res);
       dispatch(stopNetworkRequest());
       dispatch(holdFile(res.data));
       dispatch(updateUploadStatus(""));

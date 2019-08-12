@@ -6,6 +6,7 @@ import {
   PRESERVE_NEW_FORM,
   START_NEW_FORM,
   UPDATE_FORMS,
+  EDIT_FORM,
   SAVE_FORMS
 } from "../actions";
 
@@ -19,6 +20,11 @@ const initialState = {
     currentElement: {}
   },
   newForm: {
+    formType: { id: "", parent: "", name: "" },
+    elements: [],
+    name: ""
+  },
+  editForm: {
     formType: { id: "", parent: "", name: "" },
     elements: [],
     name: ""
@@ -62,6 +68,16 @@ export const form = (state = initialState, action) => {
       form.formType = action.data.formType;
       form.name = action.data.name;
       return updateState(state, { newForm: form });
+
+    case EDIT_FORM:
+      // console.log("form mode", action.data);
+      const eForm = { ...state.newForm };
+      eForm.formType = action.data.formType;
+      eForm.name = action.data.name;
+      eForm.elements = action.data.elements;
+      eForm.formId = action.data.formId;
+      eForm.mode = "update";
+      return updateState(state, { newForm: eForm });
 
     default:
       return state;

@@ -8,7 +8,10 @@ export const getNewForm = createSelector(
 );
 export const getAllForms = createSelector(
   getForm,
-  form => form.all
+  form => {
+    console.log("from crate selector", form);
+    return form.all;
+  }
 );
 export const getBuilderState = createSelector(
   getForm,

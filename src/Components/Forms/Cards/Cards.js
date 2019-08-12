@@ -10,7 +10,11 @@ export const Cards = props => (
       <div className={Style.Row} key={index}>
         {batch.map(form => (
           <div className={Style.Col3} key={form.id}>
-            <Card form={form} />
+            <Card
+              form={form}
+              showBuilderEdit={props.showBuilderEdit}
+              formId={form.id}
+            />
           </div>
         ))}
       </div>

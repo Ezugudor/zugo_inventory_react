@@ -7,7 +7,7 @@
 }
 
 .uploadSection {
-  width: 58%;
+  width: 100%;
   margin-bottom: 2rem;
 }
 
@@ -21,4 +21,17 @@
   font-size: inherit;
   border: 1px solid secondary-color;
   outline: none;
+}
+.dzCont,
+.prevCont {
+  float: left;
+  width: 50%;
+}
+.prevContInside {
+  position: relative;
+  /* top:-30px; */
+  left: 50px;
+}
+.clearfix {
+  clear: both;
 }

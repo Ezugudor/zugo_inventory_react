@@ -15,9 +15,22 @@
   padding-top: thin-gutter;
   overflow: scroll;
 }
-.remove-elem {
+.removeElem {
   position: absolute;
-  right: 2px;
-  top: 2px;
-  background: red;
+  right: 6px;
+  top: 22px;
+  color: red;
+  cursor: pointer;
+  z-index: 2000;
+}
+.compactCont {
+  border: 1px solid #ccc;
+  margin: 0px 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  position: relative;
+  background: #fff8bc;
+}
+.compactAllCont {
+  position: relative;
 }

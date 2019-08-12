@@ -34,6 +34,60 @@ export const loginUser = (loginDetails, history) => {
   };
 };
 
+export const verifySignupToken = token => {
+  return dispatch => {
+    // dispatch(startNetworkRequest());
+    SwypPartnerApi.get(`user/completesignup/${token}`)
+      .then(res => {
+        dispatch(stopNetworkRequest());
+        if (res.data.valid) {
+          dispatch(setNotificationMessage(`Token is valid`, "success"));
+          return;
+        }
+        dispatch(setNotificationMessage("Token has expired", "erro"));
+      })
+      .catch(err => handleError(err, dispatch));
+  };
+};
+
+/**
+ * handle user signup verification interaction with backend service
+ * @param {object} loginDetails user credentails(password and confirm password)
+ * @param {object} history react router object
+ */
+export const completeSignup = (loginDetails, history, _this) => {
+  return dispatch => {
+    dispatch(startNetworkRequest());
+    SwypPartnerApi.post(
+      `user/completesignup/${loginDetails.token}`,
+      loginDetails
+    )
+      .then(res => {
+        dispatch(stopNetworkRequest());
+
+        _this.setState({
+          currentComponent: "success"
+        });
+
+        //give some time margin so user can read the success message before redirecting to login
+        setTimeout(function() {
+          // window.location.href = "/login";
+          history.push("/login");
+        }, 5000);
+
+        // dispatch(storeUserData(res.data));
+        // dispatch(storeBusinessrData(res.data));
+        dispatch(
+          setNotificationMessage(
+            `Welcome back ${res.data.user.name}`,
+            "success"
+          )
+        );
+      })
+      .catch(err => handleError(err, dispatch));
+  };
+};
+
 /**
  * handle business manager's delete new team member interaction with bankend service
  * @param {object} member credentails of user to be delete

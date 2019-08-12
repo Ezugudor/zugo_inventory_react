@@ -100,7 +100,31 @@ export const deleteBranch = branch => {
 };
 
 /**
- * Handle business manage's change of user account branche information
+ * Handle business manage's change of user account information
+ * @param {object} details payload of info for the server
+ */
+export const updateUser = details => {
+  return dispatch => {
+    dispatch(startNetworkRequest());
+    SwypPartnerApi.put("businesses/updateuser", details)
+      .then(res => {
+        dispatch(stopNetworkRequest());
+        dispatch(updateBusiness(res.data));
+        // console.log("detail", details);
+        // console.log("res", res);
+        if (res.status == 200) {
+          alert(`user (${details.firstname}) detail changed successfuly`);
+        }
+        dispatch(
+          setNotificationMessage("aBranch changed Successfully", "success")
+        );
+      })
+      .catch(err => handleError(err, dispatch));
+  };
+};
+
+/**
+ * Handle business manage's change of branch information
  * @param {object} details payload of info for the server
  */
 export const changeBranch = details => {
@@ -111,7 +135,7 @@ export const changeBranch = details => {
         dispatch(stopNetworkRequest());
         dispatch(updateBusiness(res.data));
         dispatch(
-          setNotificationMessage("Branch changed Successfully", "success")
+          setNotificationMessage("vBranch changed Successfully", "success")
         );
       })
       .catch(err => handleError(err, dispatch));
@@ -128,11 +152,18 @@ export const updateDetails = (details, history) => {
     SwypPartnerApi.put("businesses/updatedetails", details)
       .then(res => {
         dispatch(stopNetworkRequest());
+        dispatch(updateBusiness(details));
+
+        console.log("dispactch data", details);
         dispatch(
-          setNotificationMessage("Branch changed Successfully", "success")
+          setNotificationMessage(
+            "Settings saved Successfully",
+            "success",
+            "Success !"
+          )
         );
         dispatch(dropUploadedFile());
-        history.push("/team");
+        // history.push("/team");
       })
       .catch(err => handleError(err, dispatch));
   };

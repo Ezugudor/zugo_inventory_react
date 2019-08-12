@@ -1,6 +1,8 @@
 import { ValidationRuleBuilder } from "../core";
 import { Value } from "slate";
 import uuid4 from "uuid4";
+// import { BranchView } from "../../Components/Branch";
+import { countryStates } from "./";
 
 /**
  * used to for building label for question with options
@@ -32,15 +34,160 @@ export const generateNewQuestion = (type, position, branches) => {
   const id = uuid4();
   console.log("validation rules for a single form element", rules);
   let children = branchFill(type, branches);
+
+  children =
+    type == "state"
+      ? getStates()
+      : type == "branch"
+      ? branchFill(type, branches)
+      : [];
+
   return {
     validationRules: rules,
     description: "",
     position,
     name: "",
+    children: [],
+    type,
+    id
+  };
+};
+
+/**
+ * generate new child question to add to a new form element children
+ * @param {string} type type of question to be asked
+ * @param {number} position the position where the question would be put on the form
+ * @param {string} branch incase if there is need to  use the branch (will be removed soon)
+ * @param {object} info information about the new element to be added
+ */
+export const generateNewChildQuestion = (
+  type,
+  position,
+  branches,
+  info,
+  compactType
+) => {
+  const rules = buildValidationRule(compactType);
+  const id = uuid4();
+  let children = branchFill(compactType, branches);
+  console.log("log compactType", compactType);
+  children =
+    compactType == "address"
+      ? getStates()
+      : compactType == "branch"
+      ? branchFill(compactType, branches)
+      : [];
+  console.log("log type", type);
+  console.log("log info", info);
+  console.log("log children", children);
+  console.log("log ggget states", getStates());
+  console.log("log ggget Branches", branchFill(compactType, branches));
+  return {
+    validationRules: rules,
+    description: info.description,
+    position,
+    qPosition: position,
+    isCompact: true,
+    group: `${type}_${position}`,
+    compactRequired: false,
+    name: info.name,
     children,
     type,
     id
   };
+};
+
+export const generateRequiredChildren = (type, parentIndex) => {
+  // const rules = buildValidationRule(type);
+  // const id = uuid4();
+  // type here is compactType
+  let children = [];
+
+  const branchRequirement = [
+    {
+      name: "State",
+      desc: "Which state is the branch located?",
+      type: "dropdown",
+      controlType: "state",
+      position: 1,
+      group: `branch_${parentIndex}`
+    }
+  ];
+  const addressRequirement = [
+    {
+      name: "House Number",
+      desc: "Your house number",
+      type: "shorttext",
+      position: 1,
+      group: `address_${parentIndex}`
+    },
+    {
+      name: "Street Name",
+      desc: "Your street name",
+      type: "longtext",
+      position: 2,
+      group: `address_${parentIndex}`
+    },
+    {
+      name: "State",
+      desc: "Which state is your address?",
+      type: "dropdown",
+      controlType: "state",
+      position: 3,
+      group: `address_${parentIndex}`
+    },
+    {
+      name: "Area / LGA",
+      desc: "Address Area / LGA",
+      type: "dropdown",
+      controlType: "lga",
+      position: 4,
+      group: `address_${parentIndex}`
+    }
+  ];
+
+  if (type == "address") {
+    let addressChildren = [];
+
+    addressRequirement.forEach(elem => {
+      const id = uuid4();
+      const rules = buildValidationRule(elem.type);
+
+      addressChildren.push({
+        validationRules: rules,
+        description: elem.desc,
+        position: elem.position,
+        qPosition: elem.position,
+        name: elem.name,
+        children,
+        isCompact: true,
+        compactRequired: true,
+        type: elem.type,
+        id
+      });
+    });
+    return addressChildren;
+  } else if (type == "branch") {
+    let branchChildren = [];
+    branchRequirement.forEach(elem => {
+      const id = uuid4();
+      const rules = buildValidationRule(elem.type);
+
+      branchChildren.push({
+        validationRules: rules,
+        description: elem.desc,
+        position: elem.position,
+        qPosition: elem.position,
+        name: elem.name,
+        children,
+        isCompact: true,
+        compactRequired: true,
+        type: elem.type,
+        id
+      });
+    });
+    return branchChildren;
+  }
 };
 
 /**
@@ -55,6 +202,13 @@ export const branchFill = (type, branches) => {
   } else {
     return [];
   }
+};
+
+export const getStates = () => {
+  return countryStates.map(state => ({
+    stateName: state.state.name,
+    stateID: state.state.id
+  }));
 };
 
 /**

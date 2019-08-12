@@ -7,8 +7,38 @@ import { Simple } from "./Simple";
 import { Gender } from "./Gender";
 import { Cards } from "./Cards";
 import { Long } from "./Long";
+import { NormalHouse } from "./Houses";
 import React from "react";
 
+const renderCompactChildren = (question, handleClick) => {
+  switch (question.type) {
+    case "dropdown":
+      console.log("dropdown showings child Tree", question);
+      return (
+        <DropDown
+          question={question}
+          handleClick={handleClick}
+          key={question.position}
+        />
+      );
+    case "longtext":
+      return (
+        <Long
+          question={question}
+          handleClick={handleClick}
+          key={question.position}
+        />
+      );
+    default:
+      return (
+        <Simple
+          question={question}
+          handleClick={handleClick}
+          key={question.position}
+        />
+      );
+  }
+};
 export const renderQuestionFor = ({ question, handleClick }) => {
   switch (question.type) {
     case "introduction":
@@ -25,7 +55,20 @@ export const renderQuestionFor = ({ question, handleClick }) => {
           question={question}
         />
       );
-
+    case "address":
+    case "branch":
+      return (
+        <div>
+          <NormalHouse question={question} />
+          <div>
+            {/* dont display any field instead loop through the children and fill */}
+            {console.log("presenter question", question)}
+            {question.children.map(elem => {
+              return renderCompactChildren(elem, handleClick);
+            })}
+          </div>
+        </div>
+      );
     case "statement":
       return (
         <Statement
@@ -36,6 +79,7 @@ export const renderQuestionFor = ({ question, handleClick }) => {
       );
 
     case "dropdown":
+      console.log("dropdown showings Main Tree", question);
       return (
         <DropDown
           question={question}

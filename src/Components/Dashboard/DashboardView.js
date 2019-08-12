@@ -6,7 +6,7 @@ import { Inbox } from "./Inbox";
 import React from "react";
 
 export const DashboardView = props => (
-  <AdminLayout pageName="dashboard">
+  <AdminLayout pageName="dashboard" currentUser={props.currentUser}>
     <div className={Style.dashboard}>
       <DashboardControls
         partiallyProcessed={props.partiallyProcessed}

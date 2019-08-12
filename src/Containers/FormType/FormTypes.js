@@ -1,5 +1,5 @@
 import { FormTypeView } from "../../Components/FormTypes";
-import { getBusinessId } from "../../store/selectors";
+import { getBusinessId, getCurrentUser } from "../../store/selectors";
 import { fetchWorkspaces } from "../../store/actions";
 import React, { Component } from "react";
 import { chunkData } from "../../utils";
@@ -42,6 +42,7 @@ class Class extends Component {
         formTypes={this.getData()}
         switchTab={this.switchTab}
         viewForms={this.goToForms}
+        currentUser={this.props.currentUser}
       />
     );
   }
@@ -50,6 +51,7 @@ class Class extends Component {
 const mapStateToProps = state => {
   return {
     businessId: getBusinessId(state),
+    currentUser: getCurrentUser(state),
     loading: state.app.loading,
     all: state.workspace.all
   };

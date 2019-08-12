@@ -1,16 +1,17 @@
 import { White, Red } from "../../../Utils/Buttons";
-import styles from "./ChangeBranch.module.css";
+import styles from "./ChangeMember.module.css";
 import { Modal } from "../../../Utils";
 import PropTypes from "prop-types";
 import React from "react";
 
-export const ChangeBranch = props => (
-  <Modal show={props.showChangeBranch} click={props.toggleChangeBranch}>
+export const ChangeMember = props => (
+  <Modal show={props.showUpdateUser} click={props.toggleUpdateUser}>
     <section className={styles.section}>
-      <h3 className={styles.text}>Change Branch</h3>
+      <h3 className={styles.text}>Edit User</h3>
       <div className={styles.inputBox}>
         <select
-          onChange={e => props.setNewBranchDetail("branch", e.target.value)}
+          onChange={e => props.setUpdateUserDetail("branch", e.target.value)}
+          value={props.editMember.branch}
           className={styles.input}
           id="branch"
         >
@@ -23,8 +24,24 @@ export const ChangeBranch = props => (
         </select>
       </div>
       <div className={styles.inputBox}>
+        {console.log("checking role", props.editMember.role)}
+        <select
+          id="role"
+          className={[styles.input, "role"].join(" ")}
+          required="required"
+          value={props.editMember.role}
+          onChange={e => props.setUpdateUserDetail("role", e.target.value)}
+        >
+          <option>Select Role</option>
+          <option value="initiator">Initiator</option>
+          <option value="super_initiator">Super Initiator</option>
+          <option value="approver">Approver</option>
+          <option value="super_approver">Super Approver</option>
+        </select>
+      </div>
+      <div className={styles.inputBox}>
         <input
-          onChange={e => props.setNewBranchDetail("firstname", e.target.value)}
+          onChange={e => props.setUpdateUserDetail("firstname", e.target.value)}
           className={[styles.input, "firstname"].join(" ")}
           placeholder="First Name"
           value={props.editMember.firstname}
@@ -34,7 +51,7 @@ export const ChangeBranch = props => (
       </div>
       <div className={styles.inputBox}>
         <input
-          onChange={e => props.setNewBranchDetail("lastname", e.target.value)}
+          onChange={e => props.setUpdateUserDetail("lastname", e.target.value)}
           className={[styles.input, "lastname"].join(" ")}
           placeholder="Last Name"
           value={props.editMember.lastname}
@@ -44,7 +61,7 @@ export const ChangeBranch = props => (
       </div>
       <div className={styles.inputBox}>
         <input
-          onChange={e => props.setNewBranchDetail("email", e.target.value)}
+          onChange={e => props.setUpdateUserDetail("email", e.target.value)}
           className={[styles.input, "email"].join(" ")}
           placeholder="Work Email"
           required="required"
@@ -54,7 +71,7 @@ export const ChangeBranch = props => (
       </div>
       <div className={styles.inputBox}>
         <input
-          onChange={e => props.setNewBranchDetail("phone", e.target.value)}
+          onChange={e => props.setUpdateUserDetail("phone", e.target.value)}
           className={[styles.input, "phone"].join(" ")}
           placeholder="Phone Number"
           value={props.editMember.phone}
@@ -64,17 +81,17 @@ export const ChangeBranch = props => (
         />
       </div>
       <div className={styles.controls}>
-        <White click={props.toggleChangeBranch}>Cancel</White>
-        <Red click={props.changeBranch}>Change Branch</Red>
+        <White click={props.toggleUpdateUser}>Cancel</White>
+        <Red click={props.updateUser}>Update User</Red>
       </div>
     </section>
   </Modal>
 );
 
-ChangeBranch.propTypes = {
-  setNewBranchDetail: PropTypes.func.isRequired,
-  toggleChangeBranch: PropTypes.func.isRequired,
-  showChangeBranch: PropTypes.bool.isRequired,
-  changeBranch: PropTypes.func.isRequired,
+ChangeMember.propTypes = {
+  setUpdateUserDetail: PropTypes.func.isRequired,
+  toggleUpdateUser: PropTypes.func.isRequired,
+  showUpdateUser: PropTypes.bool.isRequired,
+  updateUser: PropTypes.func.isRequired,
   branches: PropTypes.array.isRequired
 };

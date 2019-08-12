@@ -7,6 +7,7 @@ import {
   FormTypes,
   Signup,
   Login,
+  CompleteSignup,
   Team,
   Branch,
   Form
@@ -70,6 +71,11 @@ export default () => (
     <GuestRoute exact path="/signup" component={Signup} />
     <ManagerRoute exact path="/team" component={Team} />
     <GuestRoute exact path="/login" component={Login} />
+    <GuestRoute
+      exact
+      path="/completesignup/:token"
+      component={CompleteSignup}
+    />
     <GuestRoute exact path="/" component={Login} />
   </Switch>
 );

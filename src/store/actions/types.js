@@ -29,6 +29,7 @@ export const UPDATE_FORMS = "UPDATE_FORMS";
 
 export const STORE_BUSINESS = "STORE_BUSINESS";
 export const SAVE_FORMS = "SAVE_FORMS";
+export const EDIT_FORM = "EDIT_FORM";
 export const STORE_USER = "STORE_USER";
 
 export const SAVE_PARTIALLYPROCESSED_RESPONSES =

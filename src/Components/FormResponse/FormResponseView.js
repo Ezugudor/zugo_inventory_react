@@ -10,13 +10,14 @@ import { Notes } from "./Notes";
 import React from "react";
 
 export const FormResponseView = props => (
-  <AdminLayout pageName="Account Opening">
+  <AdminLayout pageName="Account Opening" currentUser={props.currentUser}>
     <div className={style.response}>
       <ResponseControls
         toggleOfficialSectionUI={props.toggleOfficialSectionUI}
         processors={props.response.processors}
         handleNewNote={props.toggleNoteView}
         response={props.response}
+        currentUser={props.currentUser}
       />
 
       {props.response.notes.length ? (

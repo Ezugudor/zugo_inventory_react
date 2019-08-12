@@ -1,5 +1,7 @@
 export const getNote = response => {
-  return response.notes[0] ? response.notes[0].note : null;
+  return response.notes.length
+    ? response.notes[response.notes.length - 1].note
+    : null;
 };
 
 export const sortNotes = notes => {

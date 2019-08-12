@@ -15,6 +15,7 @@ export const FormBuilderView = props => (
   >
     <Setting
       addQuestionIntroChild={props.addQuestionIntroChild}
+      addCompactQuestionChild={props.addCompactQuestionChild}
       setQuestionProperty={props.setQuestionProperty}
       settingsWindowName={props.settingsWindowName}
       toggleConfigWindow={props.toggleConfigWindow}
@@ -40,6 +41,7 @@ export const FormBuilderView = props => (
 
 FormBuilderView.propTypes = {
   addQuestionIntroChild: PropTypes.func.isRequired,
+  addCompactQuestionChild: PropTypes.func.isRequired,
   settingsWindowName: PropTypes.string.isRequired,
   setQuestionProperty: PropTypes.func.isRequired,
   showSettingsWindow: PropTypes.bool.isRequired,

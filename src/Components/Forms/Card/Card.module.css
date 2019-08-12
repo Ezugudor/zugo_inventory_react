@@ -12,6 +12,12 @@
 
 .Card:hover {
   cursor: pointer;
+  /* background:#fafafa; */
+  box-shadow: 0px 0px 10px #aaa;
+}
+.Card:active {
+  cursor: pointer;
+  box-shadow: inset 0px 0px 10px #aaa;
 }
 
 .Body {

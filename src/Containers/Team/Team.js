@@ -1,5 +1,5 @@
 import { getAccounts, getBranches, getBusinessId } from "../../store/selectors";
-import { createNewMember, changeBranch } from "../../store/actions";
+import { createNewMember, updateUser } from "../../store/actions";
 import { getCurrentUser } from "../../store/selectors";
 import { deleteMember } from "../../store/actions";
 import { TeamView } from "../../Components/Team";
@@ -9,7 +9,8 @@ class Class extends Component {
   state = {
     showCreateMember: false,
     showDeleteMember: false,
-    showChangeBranch: false,
+    showUpdateUser: false,
+    showNotification: false,
     memberToDelete: {},
     newMember: {
       role: "worker",
@@ -20,6 +21,12 @@ class Class extends Component {
       branch: ""
     },
     branchChangeDetails: {
+      name: "",
+      state: "",
+      area: "",
+      address: ""
+    },
+    userEditDetails: {
       user: "",
       role: "worker",
       firstname: "",
@@ -28,6 +35,23 @@ class Class extends Component {
       phone: "",
       branch: ""
     }
+  };
+
+  timer = props => {
+    if (props.closeTime) {
+      setTimeout(() => {
+        this.toggleNotification();
+      }, props.closeTime);
+    }
+  };
+
+  /**
+   * open and close the the progress ui
+   */
+  toggleNotification = () => {
+    this.setState(prevState => ({
+      showNotification: !prevState.showNotification
+    }));
   };
 
   /**
@@ -157,9 +181,9 @@ class Class extends Component {
   /**
    * show change a member's branch modal
    */
-  toggleChangeBranch = () => {
+  toggleUpdateUser = () => {
     this.setState(prevState => {
-      return { showChangeBranch: !prevState.showChangeBranch };
+      return { showUpdateUser: !prevState.showUpdateUser };
     });
   };
 
@@ -169,35 +193,71 @@ class Class extends Component {
    * @param {string} value
    * @param {boolean} toggleModal
    */
+
+  setUpdateUserDetail = (key, value, toggleModal = false) => {
+    console.log("detail to populate selected user fields", value);
+    if (key !== "user") {
+      var details = { ...this.state.userEditDetails };
+      details[key] = value;
+    } else {
+      var details = { ...value };
+      details["user"] = value;
+    }
+    console.log("detail after populstion", details);
+    const fewDetails = {
+      ...details,
+      ...{ created: undefined, name: undefined, user: undefined }
+    };
+    this.setState({ userEditDetails: fewDetails });
+
+    if (toggleModal) {
+      this.toggleUpdateUser();
+    }
+  };
   setNewBranchDetail = (key, value, toggleModal = false) => {
     console.log("props in editelements", this.state);
     const details = { ...this.state.branchChangeDetails };
     details[key] = value;
     this.setState({ branchChangeDetails: details });
     if (toggleModal) {
-      this.toggleChangeBranch();
+      this.toggleUpdateUser();
     }
   };
 
   /**
    * change a team member branch
    */
-  changeUserBranch = () => {
+  validateAndUpdateUser = () => {
     const { currentUser } = this.props;
-    const { user, branch } = this.state.branchChangeDetails;
+    const {
+      user,
+      branch,
+      firstname,
+      lastname,
+      email,
+      phone,
+      role
+    } = this.state.userEditDetails;
     if (currentUser.role !== "admin") {
       return alert("You don't have access to perform this operation");
     }
-    if (user.role === "admin") {
+    if (role === "admin") {
       alert("You cannot change an admin branch", "error");
-      return this.toggleChangeBranch();
+      return this.toggleUpdateUser();
     }
-    if (!branch) {
-      return alert("You need to pick new branch", "error");
+    if (
+      !branch &&
+      !firstname &&
+      !lastname &&
+      !email &&
+      !phone &&
+      role == "worker"
+    ) {
+      return alert("You have not changed anything", "error");
     }
-    const details = { userId: user.id, branch };
-    this.toggleChangeBranch();
-    this.props.changeBranch(details);
+    const details = this.state.userEditDetails;
+    this.toggleUpdateUser();
+    this.props.updateUser(details);
   };
 
   render() {
@@ -205,21 +265,25 @@ class Class extends Component {
     console.log("check the state", this.state);
     return (
       <TeamView
-        showChangeBranch={this.state.showChangeBranch}
+        showUpdateUser={this.state.showUpdateUser}
         showCreateMember={this.state.showCreateMember}
+        showNotification={this.state.showNotification}
+        timer={this.timer}
         showDeleteMember={this.state.showDeleteMember}
         setNewBranchDetail={this.setNewBranchDetail}
+        setUpdateUserDetail={this.setUpdateUserDetail}
         setNewMemberDetail={this.setNewMemberDetail}
         toggleCreateMember={this.toggleCreateMember}
-        toggleChangeBranch={this.toggleChangeBranch}
+        toggleUpdateUser={this.toggleUpdateUser}
         toggleDeleteMember={this.toggleDeleteMember}
         setMemberToDelete={this.setMemberToDelete}
         memberToDelete={this.state.memberToDelete}
         currentUser={this.props.currentUser}
-        changeBranch={this.changeUserBranch}
+        updateUser={this.validateAndUpdateUser}
         deleteMember={this.deleteMember}
         newMember={this.state.newMember}
-        editMember={this.state.branchChangeDetails.user}
+        editMember={this.state.userEditDetails}
+        editBranch={this.state.branchChangeDetails.user}
         createMember={this.createMember}
         branches={this.props.branches}
         members={this.props.members}
@@ -237,5 +301,5 @@ const mapStateToProps = state => ({
 
 export const Team = connect(
   mapStateToProps,
-  { createNewMember, changeBranch, deleteMember }
+  { createNewMember, updateUser, deleteMember }
 )(Class);

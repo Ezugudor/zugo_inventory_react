@@ -1,20 +1,21 @@
-import { ChangeBranch } from "./Members/ChangeBranch";
+import { ChangeMember } from "./Members/ChangeMember";
 import { DeleteMember } from "./Members/DeleteMember";
 import { AdminLayout } from "../../Hoc/Layouts";
 import { NewMember } from "./Members/NewMember";
 import styles from "./TeamView.module.css";
 import { Controls } from "./Controls";
-import { Delete, Change } from "./Members/ActionBtns";
+import { ActionBtns } from "./Members/ActionBtns";
 import { MDBDataTable } from "mdbreact";
-import { data } from "../Dashboard/data";
+// import { data } from "../Dashboard/data";
 import { dataStruct } from "./tableDataStructure";
 import PropTypes from "prop-types";
 import React from "react";
 import trashcanImage from "../../img/trash-can.svg";
 import penImage from "../../img/pen.svg";
+import { Notification } from "../Utils";
 
 export const TeamView = props => (
-  <AdminLayout pageName="team">
+  <AdminLayout pageName="team" currentUser={props.currentUser}>
     <div className={styles.team}>
       <Controls
         toggleCreateMember={props.toggleCreateMember}
@@ -29,19 +30,28 @@ export const TeamView = props => (
         newMember={props.newMember}
         branches={props.branches}
       />
-      <ChangeBranch
-        setNewBranchDetail={props.setNewBranchDetail}
-        toggleChangeBranch={props.toggleChangeBranch}
-        showChangeBranch={props.showChangeBranch}
-        changeBranch={props.changeBranch}
+      <ChangeMember
+        setUpdateUserDetail={props.setUpdateUserDetail}
+        toggleUpdateUser={props.toggleUpdateUser}
+        showUpdateUser={props.showUpdateUser}
+        updateUser={props.updateUser}
         branches={props.branches}
         editMember={props.editMember}
+        showNotification={props.showNotification}
       />
       <DeleteMember
         toggleDeleteMember={props.toggleDeleteMember}
         showDeleteMember={props.showDeleteMember}
         memberToDelete={props.memberToDelete}
         deleteMember={props.deleteMember}
+      />
+      <Notification
+        showNotification={props.showNotification}
+        timer={props.timer}
+        toggleLoading={props.toggleNotification}
+        title={"please this title"}
+        message={"message me"}
+        // closeTime={3000}
       />
     </div>
   </AdminLayout>
@@ -51,20 +61,25 @@ const showTeamMembers = props => {
   console.log("show members", props);
   console.log("partially processed", props);
   const { members } = props;
-  const membersD = members.map(res => {
-    const { branch, id, created, role, phone, name, email } = res;
+  const membersD = members.map(account => {
+    const { branch, id, created, role, phone, name, email } = account;
     const rowData = {
-      name,
-      role,
+      name: name.charAt(0).toUpperCase() + name.slice(1),
+      role: role.charAt(0).toUpperCase() + role.slice(1),
       email,
-      branch,
+      branch: branch.charAt(0).toUpperCase() + branch.slice(1),
       phone,
       id,
       created,
       action: (
         <div>
-          <Delete trashcanImage={trashcanImage} />{" "}
-          <Change penImage={penImage} />
+          <ActionBtns
+            trashcanImage={trashcanImage}
+            penImage={penImage}
+            setMemberToDelete={props.setMemberToDelete}
+            setMemberDetail={props.setUpdateUserDetail}
+            account={account}
+          />
         </div>
       )
     };
@@ -91,10 +106,10 @@ TeamView.propTypes = {
   setNewBranchDetail: PropTypes.func.isRequired,
   setNewMemberDetail: PropTypes.func.isRequired,
   toggleCreateMember: PropTypes.func.isRequired,
-  toggleChangeBranch: PropTypes.func.isRequired,
+  toggleUpdateUser: PropTypes.func.isRequired,
   toggleDeleteMember: PropTypes.func.isRequired,
   setMemberToDelete: PropTypes.func.isRequired,
-  showChangeBranch: PropTypes.bool.isRequired,
+  showUpdateUser: PropTypes.bool.isRequired,
   showCreateMember: PropTypes.bool.isRequired,
   showDeleteMember: PropTypes.bool.isRequired,
   memberToDelete: PropTypes.object.isRequired,

@@ -5,10 +5,13 @@ import { updateDetails } from "../../store/actions";
 import { uploadLogo } from "../../store/actions";
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Loading } from "../../Components/Utils";
 
 class Class extends Component {
   state = {
-    businessDescription: ""
+    businessDescription: "",
+    loading: 0,
+    logoUrl: ""
   };
 
   /**
@@ -27,7 +30,9 @@ class Class extends Component {
     const formData = new FormData();
     const fileName = `${this.props.businessSlug}logo`;
     formData.append("logo", file);
-    this.props.uploadLogo(formData, fileName);
+    this.props.uploadLogo(formData, fileName, this).then(() => {
+      this.setState({ logoUrl: this.props.uploadedFile.imageUrl });
+    });
   };
 
   /**
@@ -52,6 +57,8 @@ class Class extends Component {
         updateBusinessDetails={this.updateBusinessDetails}
         changeDescription={this.handleDescriptionChange}
         handleUpload={this.uploadLogo}
+        progress={this.state.loading}
+        logoUrl={this.state.logoUrl}
       />
     );
   }

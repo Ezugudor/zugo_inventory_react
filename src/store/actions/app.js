@@ -10,8 +10,9 @@ export const startNetworkRequest = () => ({ type: START_NETWORK_REQUEST });
 export const stopNetworkRequest = () => ({ type: STOP_NETWORK_REQUEST });
 export const networkError = error => ({ type: NETWORK_ERROR, error });
 export const endNotification = () => ({ type: END_NOTIFICATION });
-export const setNotificationMessage = (message, type) => ({
+export const setNotificationMessage = (message, type, title) => ({
   type: NOTIFICATION_MESSAGE,
   nType: type,
-  message
+  message,
+  title
 });

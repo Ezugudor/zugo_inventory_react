@@ -1,6 +1,8 @@
 @value Variables: "../../../../styles/Variables.css";
 @value border-color from Variables;
-
+input[type="file"] {
+  display: none;
+}
 .imgWrapper {
   height: 8rem;
   width: 8rem;
@@ -17,4 +19,30 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+
+.pbCont {
+  border-radius: 20px;
+  cursor: pointer;
+  outline: none;
+  background-color: #ccc;
+  color: #fff;
+  width: 200px;
+  overflow: hidden;
+  position: relative;
+  height: 40px;
+  margin: 0 auto;
+}
+.placeholder {
+  position: absolute;
+  top: 6px;
+  left: 60px;
+}
+.pbInside {
+  padding: 2rem 2.9rem;
+  cursor: pointer;
+  outline: none;
+  background-color: #eb1761;
+  color: #fff;
+  width: 2%;
 }

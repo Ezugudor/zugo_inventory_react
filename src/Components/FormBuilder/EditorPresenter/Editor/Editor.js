@@ -1,3 +1,4 @@
+import Style from "./Editor.module.css";
 import { editorDefaultValue } from "../../../../utils";
 import { Editor as SlateEditor } from "slate-react";
 import Plain from "slate-plain-serializer";
@@ -11,19 +12,27 @@ class Class extends Component {
     this.editorPointer = React.createRef();
     this.childPointer = React.createRef();
     const text = this.props.element.name;
-    const children = this.props.element.children.join("\n");
+    // const children = this.props.element.children.join("\n");
+    const children = this.props.element.children;
     this.state = {
       value: text ? Plain.deserialize(text) : editorDefaultValue(),
-      childValue: children ? Plain.deserialize(children) : editorDefaultValue()
+      childValue: editorDefaultValue()
+      // childValue: children ? Plain.deserialize(children) : editorDefaultValue()
     };
   }
 
-  onChange = ({ value }) => {
+  onChange = ({ value }, parent) => {
+    console.dir("checkin the value of the on change event", value);
+    console.dir("checkin the value of the on parent", parent);
     this.setState({ value });
     const editorContent = Plain.serialize(value);
     if (this.editorPointer.current) {
       const { id } = this.editorPointer.current.props;
-      this.props.setQuestionProperty("name", id, editorContent);
+      console.log(
+        "get other thingws and not just the question ID",
+        this.editorPointer.current.props
+      );
+      this.props.setQuestionProperty("name", id, editorContent, parent);
     }
   };
 
@@ -44,11 +53,12 @@ class Class extends Component {
 
     return next();
   };
+
   // Ezugudor Addendum
-  onDeleteBtnClick = event => {
+  onDeleteBtnClick = (event, parent) => {
     event.preventDefault();
     const { id } = this.editorPointer.current.props;
-    this.props.deleteQuestion(id);
+    this.props.deleteQuestion(id, parent);
   };
 
   getChildContent = ({ value }) => {
@@ -62,6 +72,21 @@ class Class extends Component {
   onChildKeyDown = (event, change, next) => {
     if (event.key !== "Enter") return next();
     change.insertBlock("");
+  };
+
+  showDeleteButton = (element, parent) => {
+    if (!element.compactRequired) {
+      return (
+        <a
+          className={Style.removeElem}
+          onClick={e => {
+            this.onDeleteBtnClick(e, parent);
+          }}
+        >
+          <i className="fa fa-times-circle"></i>
+        </a>
+      );
+    }
   };
 
   renderPlaceholder = (props, next) => {
@@ -84,51 +109,46 @@ class Class extends Component {
     );
   };
 
-  renderEditor = type => {
+  renderEditor = (type, element, parent) => {
     switch (type) {
       case "multichoice":
       case "statement":
       case "dropdown":
         return (
           <div>
-            <a
-              className="remove-elem"
-              onClick={this.onDeleteBtnClick}
-              style={{
-                position: "absolute",
-                top: "10px",
-                right: "6px",
-                cursor: "pointer"
-              }}
-            >
-              <i className="fa fa-times-circle"></i>
-            </a>
+            {this.showDeleteButton(element, parent)}
             <SlateEditor
               id={this.props.element.id}
               type={this.props.element.type}
               value={this.state.value}
-              onChange={this.onChange}
+              onChange={e => {
+                this.onChange(e, parent);
+              }}
               placeholder="Type your question here"
               ref={this.editorPointer}
               spellCheck={true}
               onKeyDown={this.onKeyDown}
             />
-            <SlateEditor
-              id={this.props.element.id}
-              type={this.props.element.type}
-              value={this.state.childValue}
-              placeholder="- Choice"
-              onChange={this.getChildContent}
-              ref={this.childPointer}
-              onKeyDown={this.onChildKeyDown}
-              renderPlaceholder={this.renderPlaceholder}
-            />
+
+            {!element.isCompact ? (
+              <SlateEditor
+                id={this.props.element.id}
+                type={this.props.element.type}
+                value={this.state.childValue}
+                placeholder="- Choice"
+                onChange={this.getChildContent}
+                ref={this.childPointer}
+                onKeyDown={this.onChildKeyDown}
+                renderPlaceholder={this.renderPlaceholder}
+              />
+            ) : null}
           </div>
         );
-      default:
+      case "address":
+      case "branch":
         return (
           <div>
-            <a
+            {/* <a
               className="remove-elem"
               onClick={this.onDeleteBtnClick}
               style={{
@@ -139,7 +159,7 @@ class Class extends Component {
               }}
             >
               <i className="fa fa-times-circle"></i>
-            </a>
+            </a> */}
             <SlateEditor
               id={this.props.element.id}
               type={this.props.element.type}
@@ -147,7 +167,29 @@ class Class extends Component {
               placeholder="Type your question here"
               onKeyDown={this.onKeyDown}
               ref={this.editorPointer}
-              onChange={this.onChange}
+              onChange={e => {
+                this.onChange(e, parent);
+              }}
+              spellCheck={true}
+              renderPlaceholder={this.renderPlaceholder}
+            />
+          </div>
+        );
+
+      default:
+        return (
+          <div>
+            {this.showDeleteButton(element, parent)}
+            <SlateEditor
+              id={this.props.element.id}
+              type={this.props.element.type}
+              value={this.state.value}
+              placeholder="Type your question here"
+              onKeyDown={this.onKeyDown}
+              ref={this.editorPointer}
+              onChange={e => {
+                this.onChange(e, parent);
+              }}
               spellCheck={true}
               renderPlaceholder={this.renderPlaceholder}
             />
@@ -159,7 +201,11 @@ class Class extends Component {
   render() {
     return (
       <EditorView {...this.props}>
-        {this.renderEditor(this.props.element.type)}
+        {this.renderEditor(
+          this.props.element.type,
+          this.props.element,
+          this.props.parent
+        )}
       </EditorView>
     );
   }

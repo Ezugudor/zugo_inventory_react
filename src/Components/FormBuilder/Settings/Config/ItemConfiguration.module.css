@@ -57,8 +57,15 @@
 .input:checked ~ .toggleButton::after {
   left: 2.1rem;
 }
+.input:disabled ~ .toggleButton::after {
+  left: 2.1rem;
+}
 
 .input:checked ~ .toggleButton {
+  background-color: secondary-color;
+}
+
+.input:disabled ~ .toggleButton {
   background-color: secondary-color;
 }
 

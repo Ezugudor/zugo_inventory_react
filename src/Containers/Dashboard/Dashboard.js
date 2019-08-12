@@ -1,6 +1,7 @@
 import { fetchResponseByStatus, filterByDate } from "../../store/actions";
 import { DashboardView } from "../../Components/Dashboard";
 import React, { Component } from "react";
+import { getCurrentUser } from "../../store/selectors";
 import { connect } from "react-redux";
 import {
   getPartiallyProcessedResponses,
@@ -40,7 +41,7 @@ class Class extends Component {
     }
     const { businessId } = this.props;
     this.props.filterByDate(businessId, startDate, endDate);
-    this.setState({ endDate: "", startDate: "" });
+    // this.setState({ endDate: "", startDate: "" });
   };
 
   render() {
@@ -55,6 +56,7 @@ class Class extends Component {
         startDate={this.state.startDate}
         pending={this.props.pending}
         endDate={this.state.endDate}
+        currentUser={this.props.currentUser}
       />
     );
   }
@@ -64,6 +66,7 @@ const mapStateToProps = state => ({
   partiallyProcessed: getPartiallyProcessedResponses(state),
   processed: getProcessedResponses(state),
   pending: getUnreadResponses(state),
+  currentUser: getCurrentUser(state),
   businessId: getBusinessId(state)
 });
 

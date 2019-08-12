@@ -1,4 +1,9 @@
-import { ItemConfiguration, IntroConfiguration } from "./Config";
+import {
+  ItemConfiguration,
+  IntroConfiguration,
+  BranchConfiguration,
+  AddressConfiguration
+} from "./Config";
 import Style from "./Settings.module.css";
 import className from "classnames";
 import PropTypes from "prop-types";
@@ -30,6 +35,14 @@ export const Setting = props =>
           <IntroConfiguration
             addQuestionIntroChild={props.addQuestionIntroChild}
           />
+        ) : props.currentElement.type === "address" ? (
+          <AddressConfiguration
+            addCompactQuestionChild={props.addCompactQuestionChild}
+          />
+        ) : props.currentElement.type === "branch" ? (
+          <BranchConfiguration
+            addCompactQuestionChild={props.addCompactQuestionChild}
+          />
         ) : props.currentElement.type ? (
           <ItemConfiguration
             setQuestionProperty={props.setQuestionProperty}
@@ -45,6 +58,7 @@ export const Setting = props =>
 
 Setting.propTypes = {
   addQuestionIntroChild: PropTypes.func.isRequired,
+  addCompactQuestionChild: PropTypes.func.isRequired,
   settingsWindowName: PropTypes.string.isRequired,
   setQuestionProperty: PropTypes.func.isRequired,
   showSettingsWindow: PropTypes.bool.isRequired,

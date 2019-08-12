@@ -55,6 +55,8 @@ export class DropDown extends Component {
    */
   getOptions = () => {
     const filterText = this.state.value;
+    // console.log("dropdown filtertext?", filterText);
+    // console.log("children reach the dropdown?", this.props.question.children);
     const options = buildOptionFromArray(
       this.props.question.children,
       filterText

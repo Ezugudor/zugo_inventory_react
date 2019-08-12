@@ -7,5 +7,6 @@ export * from "./Responses";
 export * from "./FormType";
 export * from "./Signup";
 export * from "./Login";
+export * from "./CompleteSignup";
 export * from "./Forms";
 export * from "./Team";

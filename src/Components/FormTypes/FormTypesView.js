@@ -5,7 +5,7 @@ import { Cards } from "./Cards";
 import React from "react";
 
 export const FormTypeView = props => (
-  <AdminLayout pageName="formType">
+  <AdminLayout pageName="formType" currentUser={props.currentUser}>
     <FormTypesControls
       selectedTab={props.selectedTab}
       switchTab={props.switchTab}

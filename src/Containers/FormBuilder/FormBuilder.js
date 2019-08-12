@@ -1,12 +1,14 @@
 import {
   generateNewQuestion,
+  generateNewChildQuestion,
+  generateRequiredChildren,
   getIntroIndex,
   hasChild,
   resetPosition
 } from "../../utils";
 import { generateBankLocationQuestion, hasQuestion } from "../../utils";
 import { getNewForm, getBuilderState } from "../../store/selectors";
-import { preserveNewForm, createForm } from "../../store/actions";
+import { preserveNewForm, createForm, updateForm } from "../../store/actions";
 import { preserveFormBuilderState } from "../../store/actions";
 import { FormBuilderView } from "../../Components/FormBuilder";
 import { getNextPosition, getChildIndex } from "../../utils";
@@ -37,6 +39,11 @@ class Class extends Component {
       stateUpdates = { ...stateUpdates, ...this.props.builderState };
     }
     this.setState(stateUpdates);
+  }
+
+  componentDidUpdate() {
+    // console.log("updated Store builderState", this.props.builderState);
+    // console.log("updated Store newForm", this.props.newForm);
   }
 
   /**
@@ -71,9 +78,7 @@ class Class extends Component {
    * @param {string} type type of question to ask
    */
   addElement = type => {
-    console.dir("getting the states of the elements", this.state);
     const position = getNextPosition(this.state.formElements);
-    console.dir(this.props.branches);
     const question = generateNewQuestion(type, position, this.props.branches);
     const questions = [...this.state.formElements];
     const introIndex = getIntroIndex(questions);
@@ -86,9 +91,19 @@ class Class extends Component {
       });
     }
 
+    if (type === "address" || type === "branch") {
+      const defaultChildren = generateRequiredChildren(
+        type,
+        position,
+        this.props.branches
+      );
+      defaultChildren.forEach(elem => {
+        question.children.push(elem);
+      });
+    }
     questions.push(question);
 
-    if (type === "introduction") {
+    if (type === "introduction" || type === "address" || type === "branch") {
       return this.setState({
         settingsWindowName: "configuration",
         currentElement: question,
@@ -108,7 +123,10 @@ class Class extends Component {
    * @param {string} id id of the question whose property is to be set
    * @param {string} value the property value to set
    */
-  setQuestionProperty = (name, id, value) => {
+  setQuestionProperty = (name, id, value, parent) => {
+    if (parent) {
+      return this.setQuestionChildProperty(name, id, value, parent);
+    }
     const questions = [...this.state.formElements];
     const questionIdex = questions.findIndex(el => el.id === id);
     if (questionIdex === -1) return;
@@ -119,6 +137,30 @@ class Class extends Component {
     this.setState({
       currentElement: question,
       formElements: questions
+    });
+  };
+
+  /**
+   * Handle text changing of child questions
+   * @param {string} id id of the question whose property is to be set
+   * @param {string} value the property value to set
+   */
+  setQuestionChildProperty = (name, id, value, parent) => {
+    const childQuestions = [...parent.children];
+    const cQIndex = childQuestions.findIndex(el => el.id === id);
+    if (cQIndex === -1) return;
+    const childQuestion = childQuestions[cQIndex];
+    childQuestion[name] = value;
+    childQuestions[cQIndex] = childQuestion;
+
+    const mainQuestions = [...this.state.formElements];
+    const mQIndex = mainQuestions.findIndex(el => el.id === parent.id);
+    mainQuestions[mQIndex].children = childQuestions;
+
+    this.preserveState(parent, mainQuestions);
+    this.setState({
+      currentElement: parent,
+      formElements: mainQuestions
     });
   };
 
@@ -146,14 +188,42 @@ class Class extends Component {
     const questions = [...this.state.formElements];
     const introIndex = getIntroIndex(questions);
     const questionIntro = questions[introIndex];
-    if (hasChild(questionIntro, child.slug)) {
-      const childIndex = getChildIndex(questionIntro, child.slug);
+    if (hasChild(questionIntro, child.name)) {
+      const childIndex = getChildIndex(questionIntro, child.name);
       questionIntro.children.splice(childIndex, 1);
     } else {
       questionIntro.children.push(child);
     }
     this.setState({ formElements: questions });
     this.preserveState(questionIntro, questions);
+  };
+
+  /**
+   * Add new Compact Question child
+   * @param {object} child
+   */
+  addCompactQuestionChild = child => {
+    const { currentElement } = this.state;
+    console.log("current element log", currentElement);
+    const childPosition = currentElement.position;
+    const questions = [...this.state.formElements];
+    if (hasChild(currentElement, child.name)) {
+      const childIndex = getChildIndex(currentElement, child.name);
+      currentElement.children.splice(childIndex, 1);
+    } else {
+      const position = getNextPosition(currentElement.children);
+      const question = generateNewChildQuestion(
+        child.type,
+        position,
+        this.props.branches,
+        child,
+        currentElement.type
+      );
+      currentElement.children.push(question);
+    }
+    console.log("Check questions ", questions);
+    this.setState({ formElements: questions });
+    this.preserveState(currentElement, questions);
   };
 
   /**
@@ -190,15 +260,58 @@ class Class extends Component {
    * Delete a question from form elements
    * @param {string} questionId
    */
-  deleteQuestion = questionId => {
+  deleteQuestion = (questionId, parent) => {
+    if (parent) {
+      this.deleteCompactChildQuestion(questionId, parent);
+      return;
+    }
+    // console.log("finally parents reach", parent);
     const questions = [...this.state.formElements];
     const questionIndex = questions.findIndex(el => el.id === questionId);
-    if (questionIndex === -1) return;
+    if (questionIndex === -1) {
+      return;
+    }
+
     const question = questions.splice(questionIndex, 1);
     const resetQn = resetPosition(questions);
     this.preserveState(question, resetQn);
     this.setState({
       formElements: resetQn,
+      settingsWindowName: "build"
+    });
+  };
+
+  /**
+   * Delete a question from form elements
+   * @param {string} questionId
+   */
+  deleteCompactChildQuestion = (questionId, parent) => {
+    const questions = [...parent.children];
+
+    const questionIndex = questions.findIndex(el => el.id === questionId);
+    if (questionIndex === -1) {
+      return;
+    }
+
+    const question = questions.splice(questionIndex, 1);
+    const resetQn = resetPosition(questions);
+
+    parent.children = resetQn;
+    let originalQuestionTree = this.state.formElements;
+
+    const newFormElement = originalQuestionTree.map(el => {
+      if (el.id === parent.id) {
+        el.children = resetQn;
+        return el;
+      }
+      return el;
+    });
+    // console.log("new form elements", newFormElement);
+    originalQuestionTree = newFormElement;
+    this.preserveState(question, newFormElement);
+
+    this.setState({
+      formElements: originalQuestionTree,
       settingsWindowName: "build"
     });
   };
@@ -239,7 +352,8 @@ class Class extends Component {
     const details = {
       name: this.props.newForm.name,
       elements: questions,
-      formTypeId: id
+      formTypeId: id,
+      formId: this.props.newForm.formId
     };
     const to = `/formtypes/${slugName(parent)}/${slugName(name)}`;
     const request = {
@@ -248,7 +362,12 @@ class Class extends Component {
     };
 
     const { history } = this.props;
-    this.props.createForm(details, history, request);
+
+    if (this.props.newForm.mode == "update") {
+      this.props.updateForm(details, history, request);
+    } else {
+      this.props.createForm(details, history, request);
+    }
   };
 
   render() {
@@ -257,6 +376,7 @@ class Class extends Component {
         showSettingsWindow={this.state.showSettingsWindow}
         settingsWindowName={this.state.settingsWindowName}
         addQuestionIntroChild={this.addQuestionIntroChild}
+        addCompactQuestionChild={this.addCompactQuestionChild}
         setQuestionProperty={this.setQuestionProperty}
         changeConfigWindow={this.changeConfigWindow}
         toggleConfigWindow={this.toggleConfigWindow}
@@ -284,5 +404,5 @@ const mapStateToProps = state => ({
 
 export const FormBuilder = connect(
   mapStateToProps,
-  { preserveNewForm, createForm, preserveFormBuilderState }
+  { preserveNewForm, createForm, updateForm, preserveFormBuilderState }
 )(Class);

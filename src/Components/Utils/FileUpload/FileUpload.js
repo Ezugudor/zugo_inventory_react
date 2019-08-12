@@ -41,13 +41,14 @@ export class Class extends Component {
           className={style.dropAreaContent}
           onDrop={this.handleFileDrop}
         >
+          {/* assssssssssaaa {this.props.progress} */}
           <input
             type="file"
             id="logo"
             className={style.logo}
             onChange={({ target }) => this.props.handleUpload(target.files[0])}
           />
-          {showUploadIndicator(this.props.uploadStatus)}
+          {showUploadIndicator(this.props.uploadStatus, this)}
         </div>
       </div>
     );
@@ -60,17 +61,23 @@ const buildDropAreaStyle = state => {
   return className(style.dropArea, conditional);
 };
 
-const showUploadIndicator = uploadStatus => {
+const showUploadIndicator = (uploadStatus, _this) => {
   if (!uploadStatus)
     return (
       <div>
-        <p className={style.uploadInstruction}>Drag and drop</p>
+        <p className={style.uploadInstruction}>
+          Drag and drop to change logo or{" "}
+        </p>
         <label htmlFor="logo" className={style.inputLabel}>
-          Or Click to upload
+          Click to upload
         </label>
       </div>
     );
-  return uploadStatus === "uploaded" ? <UploadedStatus /> : <UploadingStatus />;
+  return uploadStatus === "uploaded" ? (
+    <UploadedStatus />
+  ) : (
+    <UploadingStatus progress={_this.props.progress} />
+  );
 };
 
 const mapStateToProps = state => ({

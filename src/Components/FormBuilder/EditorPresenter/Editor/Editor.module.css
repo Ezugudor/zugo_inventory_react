@@ -1,0 +1,11 @@
+@value Variables: "../../../../styles/Variables.css";
+@value typeform-border-color, small-gutter, thin-gutter from Variables;
+
+.removeElem {
+  position: absolute;
+  right: 6px;
+  top: 22px;
+  color: red;
+  cursor: pointer;
+  z-index: 2000;
+}

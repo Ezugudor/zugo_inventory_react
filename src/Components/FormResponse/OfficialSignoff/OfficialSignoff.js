@@ -8,6 +8,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 export class Class extends Component {
+  state = {
+    loading: 0
+  };
+
+  componentDidUpdate = () => {
+    console.log("new update", this.state.loading);
+  };
   /**
    * send file to be uploaded to S3 bucket
    * @param {object} file file to be uploaded
@@ -22,9 +29,11 @@ export class Class extends Component {
     )}_${responseId}_signature`;
 
     formData.append("asset", file);
-    this.props.uploadOfficialSigns(formData, bankName, fileName).then(() => {
-      this.signOff();
-    });
+    this.props
+      .uploadOfficialSigns(formData, bankName, fileName, this)
+      .then(() => {
+        this.signOff();
+      });
   };
 
   /**
@@ -39,6 +48,7 @@ export class Class extends Component {
     const details = {
       signatureUrl: this.props.uploadedFile.assetUrl
     };
+
     this.props.signOff(responseId, details, responseType).then(() => {
       this.props.toggleOfficialSectionUI();
     });
@@ -56,7 +66,10 @@ export class Class extends Component {
               Sign off by uploading your signature
             </h2>
             <div className={style.fileUploaderWrapper}>
-              <FileUpload handleUpload={this.uploadFile} />
+              <FileUpload
+                handleUpload={this.uploadFile}
+                progress={this.state.loading}
+              />
             </div>
             <div className={style.Controls}>
               <SkyBlue click={this.props.toggleOfficialSectionUI}>
