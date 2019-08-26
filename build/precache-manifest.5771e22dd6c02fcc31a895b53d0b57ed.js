@@ -1,19 +1,23 @@
 self.__precacheManifest = [
   {
-    "revision": "8d564d3625bade44f44c82bcf0d7c480",
-    "url": "/static/media/settings.8d564d36.svg"
+    "revision": "8c3f915e85d8dde855d94719a02de130",
+    "url": "/static/media/upload-done.8c3f915e.svg"
   },
   {
-    "revision": "14638a855554f5ca3891",
-    "url": "/static/css/main.97f8e727.chunk.css"
+    "revision": "e3cea19414cfd243acaf",
+    "url": "/static/css/main.bf173eb3.chunk.css"
   },
   {
-    "revision": "6305905d6b6c0c92d920",
-    "url": "/static/js/1.6305905d.chunk.js"
+    "revision": "6c75e5f1bef816648156",
+    "url": "/static/js/1.6c75e5f1.chunk.js"
   },
   {
     "revision": "229c360febb4351a89df",
     "url": "/static/js/runtime~main.229c360f.js"
+  },
+  {
+    "revision": "249a1815c85e4f5c0376d1efbc6bdad1",
+    "url": "/static/media/process.249a1815.svg"
   },
   {
     "revision": "99444402a2dee709d8d6381cb711d0fc",
@@ -28,16 +32,16 @@ self.__precacheManifest = [
     "url": "/static/media/pen.d37d9400.svg"
   },
   {
-    "revision": "0b003f65b5a19b1d64e537a82a808309",
-    "url": "/static/media/upload-up.0b003f65.svg"
+    "revision": "948c2e882f5197b36837bec0cb79b6c5",
+    "url": "/static/media/loading2.948c2e88.svg"
   },
   {
-    "revision": "8c3f915e85d8dde855d94719a02de130",
-    "url": "/static/media/upload-done.8c3f915e.svg"
+    "revision": "e3cea19414cfd243acaf",
+    "url": "/static/js/main.e3cea194.chunk.js"
   },
   {
-    "revision": "14638a855554f5ca3891",
-    "url": "/static/js/main.14638a85.chunk.js"
+    "revision": "8d564d3625bade44f44c82bcf0d7c480",
+    "url": "/static/media/settings.8d564d36.svg"
   },
   {
     "revision": "f3d0a86c3d42453a9d62f9cac291bd96",
@@ -56,10 +60,6 @@ self.__precacheManifest = [
     "url": "/static/media/notify.25dfe97b.svg"
   },
   {
-    "revision": "249a1815c85e4f5c0376d1efbc6bdad1",
-    "url": "/static/media/process.249a1815.svg"
-  },
-  {
     "revision": "7da2c3e1275ce17ffd7a0068fb8beadd",
     "url": "/static/media/add.7da2c3e1.svg"
   },
@@ -68,7 +68,11 @@ self.__precacheManifest = [
     "url": "/static/media/download.93726705.svg"
   },
   {
-    "revision": "adc8271bd62a66d3bee23c2597517da4",
+    "revision": "0b003f65b5a19b1d64e537a82a808309",
+    "url": "/static/media/upload-up.0b003f65.svg"
+  },
+  {
+    "revision": "36188c633f71d73a887f3e8ffc76ff21",
     "url": "/index.html"
   }
 ];
