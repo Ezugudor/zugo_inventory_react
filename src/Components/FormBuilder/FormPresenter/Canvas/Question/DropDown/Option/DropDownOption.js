@@ -17,7 +17,8 @@ export const Option = props => (
         <div className={style.Option}>
           <div className={style.OptionTextWrapper}>
             <div className={style.OptionBox}>
-              <div className={style.OtionText}>{props.text}</div>
+              <div className={style.OtionText}>{props.text.name}</div>
+              {console.log("popular text", props.text)}
             </div>
             <div className={getWrapperClass(props)}>
               <div className={style.optionIconBox}>

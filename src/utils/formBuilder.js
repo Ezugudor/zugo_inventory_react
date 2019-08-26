@@ -82,15 +82,17 @@ export const generateNewChildQuestion = (
   console.log("log children", children);
   console.log("log ggget states", getStates());
   console.log("log ggget Branches", branchFill(compactType, branches));
+  const { name, controlType, description } = info;
   return {
     validationRules: rules,
-    description: info.description,
+    description,
     position,
     qPosition: position,
     isCompact: true,
+    controlType,
     group: `${type}_${position}`,
     compactRequired: false,
-    name: info.name,
+    name,
     children,
     type,
     id
@@ -160,6 +162,7 @@ export const generateRequiredChildren = (type, parentIndex) => {
         qPosition: elem.position,
         name: elem.name,
         children,
+        controlType: elem.controlType,
         isCompact: true,
         compactRequired: true,
         type: elem.type,
@@ -180,6 +183,7 @@ export const generateRequiredChildren = (type, parentIndex) => {
         qPosition: elem.position,
         name: elem.name,
         children,
+        controlType: elem.controlType,
         isCompact: true,
         compactRequired: true,
         type: elem.type,

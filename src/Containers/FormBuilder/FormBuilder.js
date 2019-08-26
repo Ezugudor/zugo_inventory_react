@@ -204,9 +204,10 @@ class Class extends Component {
    */
   addCompactQuestionChild = child => {
     const { currentElement } = this.state;
-    console.log("current element log", currentElement);
+    // console.log("current element log", currentElement);
     const childPosition = currentElement.position;
     const questions = [...this.state.formElements];
+    // console.log("questions in the beginning", questions);
     if (hasChild(currentElement, child.name)) {
       const childIndex = getChildIndex(currentElement, child.name);
       currentElement.children.splice(childIndex, 1);
@@ -219,9 +220,14 @@ class Class extends Component {
         child,
         currentElement.type
       );
+      // console.log("Compact current Element", currentElement);
+      // console.log("Compact parent container", currentElement.children);
+      // console.log("Compact parent container s", currentElement.children[0]);
+      // console.log("New generated question", question);
       currentElement.children.push(question);
+      // console.log("Compact current Element after push", currentElement);
     }
-    console.log("Check questions ", questions);
+    // console.log("Check questions after push", questions);
     this.setState({ formElements: questions });
     this.preserveState(currentElement, questions);
   };
