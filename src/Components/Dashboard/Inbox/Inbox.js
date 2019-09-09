@@ -6,6 +6,9 @@ import { MDBDataTable } from "mdbreact";
 import React, { Component } from "react";
 import { data } from "../data";
 import { dataStruct } from "../tableDataStructure";
+import Style from "./Inbox.module.css";
+import { JQDatatable } from "../../../plugins";
+import { DatePicker, InboxPagination } from "../../Utils";
 export class Class extends Component {
   state = {
     showNewForm: false,
@@ -25,14 +28,13 @@ export const Inbox = props => (
       selectedTab={props.tabToShow}
       switchTab={props.switchTab}
     />
-    {showResponse(props)}
+    <div className={Style.tableCont}>{showResponse(props)}</div>
   </section>
 );
 
 const showResponse = props => {
   switch (props.tabToShow) {
     case "partiallyProcessed":
-      console.log("partially processed", props);
       const { partiallyProcessed } = props;
       const ppData = partiallyProcessed.result.map(res => {
         const { branche, id, createdAt } = res;
@@ -40,7 +42,16 @@ const showResponse = props => {
         const note = getNote(res);
         const rowData = {
           name: formName,
-          notyte: note,
+          notyte: note ? (
+            <span className={Style.commentCont}>
+              <i
+                className={`ion ion-chatbubble-working ${Style.commentIcon}`}
+              ></i>
+              <span className={Style.commentText}>{note}</span>
+            </span>
+          ) : (
+            note
+          ),
           id: id,
           branch: branche,
           date: createdAt,
@@ -50,21 +61,20 @@ const showResponse = props => {
         };
 
         return rowData;
-
-        // console.log("gather data", note, branche, id, createdAt, formName);
-        // <InboxItem
-        //   formName={res.form.name}
-        //   date={res.createdAt}
-        //   note={getNote(res)}
-        //   type="pending"
-        //   key={res.id}
-        //   id={res.id}
-        // />
       });
       const ppDataS = { ...dataStruct };
       ppDataS.rows = ppData;
-      console.log("gather data", ppDataS);
-      return <MDBDataTable hover data={ppDataS} />;
+      ppDataS.title = `<i class="${Style.tableTitleIcon} ion ion-ios-speedometer-outline"></i> Dashboard`;
+      ppDataS.newBtn = (
+        <DatePicker
+          handleDateChange={props.handleDateChange}
+          filterResponse={props.filterResponse}
+          startDate={props.startDate}
+          endDate={props.endDate}
+        />
+      );
+
+      return <JQDatatable hover data={ppDataS} />;
 
     case "processed":
       const { processed } = props;
@@ -74,7 +84,16 @@ const showResponse = props => {
         const note = getNote(res);
         const rowData = {
           name: formName,
-          notyte: note,
+          notyte: note ? (
+            <span className={Style.commentCont}>
+              <i
+                className={`ion ion-chatbubble-working ${Style.commentIcon}`}
+              ></i>
+              <span className={Style.commentText}>{note}</span>
+            </span>
+          ) : (
+            note
+          ),
           id: id,
           branch: branche,
           date: createdAt,
@@ -84,25 +103,23 @@ const showResponse = props => {
         };
 
         return rowData;
-
-        // console.log("gather data", note, branche, id, createdAt, formName);
-        // <InboxItem
-        //   formName={res.form.name}
-        //   date={res.createdAt}
-        //   note={getNote(res)}
-        //   type="pending"
-        //   key={res.id}
-        //   id={res.id}
-        // />
       });
       const prDataS = { ...dataStruct };
       prDataS.rows = prData;
-      console.log("gather data", prDataS);
-      return <MDBDataTable hover data={prDataS} />;
+      prDataS.title = `<i class="${Style.tableTitleIcon} ion ion-ios-speedometer-outline"></i> Dashboard`;
+      prDataS.newBtn = (
+        <DatePicker
+          handleDateChange={props.handleDateChange}
+          filterResponse={props.filterResponse}
+          startDate={props.startDate}
+          endDate={props.endDate}
+        />
+      );
+
+      return <JQDatatable hover data={prDataS} />;
 
     case "pending":
       const clickRow = id => {
-        console.log("row event", id);
         window.location.href = `/response/pending/${id}`;
       };
       const { pending } = props;
@@ -112,7 +129,16 @@ const showResponse = props => {
         const note = getNote(res);
         const rowData = {
           name: formName,
-          notyte: note,
+          notyte: note ? (
+            <span className={Style.commentCont}>
+              <i
+                className={`ion ion-chatbubble-working ${Style.commentIcon}`}
+              ></i>
+              <span className={Style.commentText}>{note}</span>
+            </span>
+          ) : (
+            note
+          ),
           id: id,
           branch: branche,
           date: createdAt,
@@ -125,8 +151,16 @@ const showResponse = props => {
       });
       const dataS = { ...dataStruct };
       dataS.rows = datta;
-      console.log("gather data", dataS);
-      return <MDBDataTable hover data={dataS} />;
+      dataS.title = `<i class="${Style.tableTitleIcon} ion ion-ios-speedometer-outline"></i> Dashboard`;
+      dataS.newBtn = (
+        <DatePicker
+          handleDateChange={props.handleDateChange}
+          filterResponse={props.filterResponse}
+          startDate={props.startDate}
+          endDate={props.endDate}
+        />
+      );
+      return <JQDatatable hover data={dataS} />;
 
     default:
       return null;

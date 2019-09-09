@@ -8,11 +8,15 @@
   margin-bottom: 2rem;
 }
 
+.questionText {
+  position: relative;
+  top: 4px;
+  font-family: Gilroy;
+}
 .decoration {
   display: flex;
-  flex-flow: row nowrap;
-  height: 3rem;
-  width: 5rem;
+  /* flex-flow: row nowrap; */
+  padding: 20px;
   border-radius: 3px;
   margin-right: 1rem;
   position: relative;
@@ -24,8 +28,9 @@
 }
 
 .icon {
-  width: 100%;
-  height: 100%;
+  font-size: 30px;
+  color: #eb1761;
+  margin-right: 20px;
 }
 
 .name {

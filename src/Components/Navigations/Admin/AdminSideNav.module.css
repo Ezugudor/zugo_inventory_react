@@ -1,12 +1,23 @@
 @value variables: "../../../styles/Variables.css";
 @value secondary-color, tertiary-color,tertiary-color-light, typeform-border-color from variables;
 .AdminSidebar {
-  width: 11%;
+  width: 14%;
   min-width: 15rem;
-  height: 100%;
+  position: relative;
+  height: 100vh;
   border-right: 1px solid typeform-border-color;
   background: tertiary-color-light;
-  background: #fff;
+  background: #fcfcfc;
+}
+.AdminSidebarFixed {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  height: 100vh;
+  width: 14%;
+  box-shadow: 10px 70px 10px #ccc;
+  background: #fcfcfc;
+  z-index: 1;
 }
 
 .Nav {
@@ -25,6 +36,16 @@
   color: black;
   white-space: nowrap;
   overflow: hidden;
+  font-size: 15px;
+  font-family: Gilroy;
+  font-weight: bold;
+  color: #777;
+  position: relative;
+  left: -14px;
+}
+
+.NavItem {
+  margin-bottom: 35px;
 }
 
 .NavItem:not(:last-child) {
@@ -37,8 +58,52 @@
 
 .ActiveLink:link,
 .ActiveLink:visited {
-  background-color: tertiary-color;
+  /* background-color: tertiary-color; */
   color: secondary-color;
   padding: 0.5rem 2.2rem;
   border-radius: 10rem;
+}
+
+.ActiveLink:link .sidebarIcon,
+.ActiveLink:visited .sidebarIcon {
+  color: secondary-color;
+}
+
+.sidebarIcon {
+  font-size: 40px;
+  margin-right: 14px;
+  color: #444;
+  position: relative;
+  top: 9px;
+}
+
+.LogoBox {
+  margin-top: 2rem;
+  width: 100%;
+  text-align: center;
+  margin: 2rem auto;
+  height: 7rem;
+  padding-bottom: 0.6rem;
+}
+
+.Logo {
+  height: medium-gutter;
+}
+
+.Icon {
+  height: 3rem;
+  width: 2rem;
+}
+
+.LogoutIcon {
+  margin-right: 0.3rem;
+}
+.logoRound {
+  background: #fff;
+  padding: 25px;
+  box-shadow: 0px 0px 10px #777;
+  width: 100px;
+  height: 100px;
+  margin: 0px auto;
+  border-radius: 50%;
 }

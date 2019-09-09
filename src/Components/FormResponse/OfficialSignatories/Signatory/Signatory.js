@@ -1,14 +1,14 @@
 import styles from "./Signatory.module.css";
 import PropTypes from "prop-types";
 import React from "react";
+import { Email, User, Date, Phone, Signature } from "../../../../utils";
+import { Address } from "../../../../utils";
 
 export const Signatory = props => (
   <div>
     <div className={styles.item}>
-      <div className={`${styles.decoration} ${styles.name}`}>
-        <div className={styles.iconHolder}>
-          <img className={styles.icon} src="/img/name.svg" alt="name" />
-        </div>
+      <div className={styles.iconHolder}>
+        <User style={`${styles.icon}`} />
       </div>
       <div>
         <p className={styles.questionText}>{props.name}</p>
@@ -16,10 +16,8 @@ export const Signatory = props => (
     </div>
 
     <div className={styles.item}>
-      <div className={`${styles.decoration} ${styles.email}`}>
-        <div className={styles.iconHolder}>
-          <img className={styles.icon} src="/img/email.svg" alt="email" />
-        </div>
+      <div className={styles.iconHolder}>
+        <Email style={`${styles.icon}`} />
       </div>
       <div>
         <p className={styles.questionText}>{props.email}</p>
@@ -27,10 +25,8 @@ export const Signatory = props => (
     </div>
 
     <div className={styles.item}>
-      <div className={`${styles.decoration} ${styles.date}`}>
-        <div className={styles.iconHolder}>
-          <img className={styles.icon} src="/img/date.svg" alt="date" />
-        </div>
+      <div className={styles.iconHolder}>
+        <Date style={`${styles.icon}`} />
       </div>
       <div>
         <p className={styles.questionText}>{props.date}</p>
@@ -38,14 +34,8 @@ export const Signatory = props => (
     </div>
 
     <div className={styles.item}>
-      <div className={`${styles.decoration} ${styles.sign}`}>
-        <div className={styles.iconHolder}>
-          <img
-            className={styles.icon}
-            src="/img/signature.svg"
-            alt="signature"
-          />
-        </div>
+      <div className={styles.iconHolder}>
+        <Signature style={`${styles.icon}`} />
       </div>
       <div>
         <div className={styles.signatureWrapper}>

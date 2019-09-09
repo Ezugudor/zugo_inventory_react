@@ -9,9 +9,14 @@
   position: relative;
   height: 21rem;
   width: 100%;
-  border: 4px dashed border-color;
-  border-radius: 8px;
+  /* border: 4px dashed border-color; */
+  border: 2px solid #ccc;
+  border-left: none;
+  border-radius: 0px 8px 8px 0px;
   text-align: center;
+  background: #ddd;
+  cursor: pointer;
+  padding: 20px;
 }
 
 .highlight {
@@ -26,7 +31,11 @@
 }
 
 .uploadInstruction {
-  margin-bottom: 1rem;
+  font-size: 30px;
+  color: #999;
+  line-height: 1.2em;
+  font-weight: bold;
+  font-family: "Gilroy";
 }
 
 .logo {

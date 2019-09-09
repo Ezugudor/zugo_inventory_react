@@ -1,9 +1,63 @@
 .response {
-  margin: 3rem;
+  height: 1900px;
+  width: 100%;
+  padding: 40px;
+  background: #efefdf;
 }
 
 .mainArea {
   width: 100%;
   display: flex;
   flex-flow: row nowrap;
+}
+.answerCont,
+.detailCont {
+  background: #fff;
+  box-shadow: 0 0 10px #ccc;
+  border-radius: 6px;
+  /* padding:20px; */
+  float: left;
+  /* border:1px solid red */
+}
+.answerCont {
+  padding: 40px;
+}
+.detailCont {
+  /* padding:20px; */
+}
+.answerCont {
+  margin-right: 20px;
+  width: 40%;
+}
+.detailCont {
+  width: 60%;
+}
+.commentCont,
+.signatoryCont {
+  float: left;
+  /* border:1px solid red */
+}
+.commentCont {
+  /* margin-right:10px; */
+  padding: 20px;
+  border-right: 1px solid #eee;
+  width: 50%;
+  min-height: 100%;
+}
+.signatoryCont {
+  width: 50%;
+  min-height: 100%;
+  background: #f7f7f7;
+}
+.clearfix {
+  clear: both;
+}
+.emptyMessage {
+  font-size: 20px;
+  font-family: Gilroy;
+  font-weight: bold;
+  color: #ccc;
+  text-align: center;
+  position: relative;
+  top: 40px;
 }

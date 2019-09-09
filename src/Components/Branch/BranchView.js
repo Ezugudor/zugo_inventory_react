@@ -5,22 +5,28 @@ import { NewBranch } from "./Branches/NewBranch";
 import styles from "./BranchView.module.css";
 import { Controls } from "./Controls";
 import { Branches } from "./Branches";
+import { ActionBtns } from "./Branches/ActionBtns";
+import { dataStruct } from "./tableDataStructure";
+import { JQDatatable } from "../../plugins";
 import PropTypes from "prop-types";
 import React from "react";
+import { White } from "../Utils/Buttons";
 
 export const BranchView = props => (
   <AdminLayout pageName="branch">
     <div className={styles.team}>
-      <Controls
+      {/* <Controls
         toggleCreateBranch={props.toggleCreateBranch}
         currentUser={props.currentUser}
-      />
-      <Branches
+      /> */}
+      <div className={styles.tableCont}>{showTeamMembers(props)}</div>
+      {/* <Branches
         setNewBranchDetail={props.setNewBranchDetail}
         toggleDeleteBranch={props.toggleDeleteBranch}
         setBranchToDelete={props.setBranchToDelete}
         branches={props.branches}
-      />
+      /> */}
+
       <NewBranch
         setNewBranchDetail={props.setNewBranchDetail}
         toggleCreateBranch={props.toggleCreateBranch}
@@ -47,6 +53,46 @@ export const BranchView = props => (
     </div>
   </AdminLayout>
 );
+
+const showTeamMembers = props => {
+  const { branches } = props;
+  const membersD = branches.map(branch => {
+    const { name, address, state, area } = branch;
+    const rowData = {
+      name: name.charAt(0).toUpperCase() + name.slice(1),
+      address: address.charAt(0).toUpperCase() + address.slice(1),
+      state,
+      area: area.charAt(0).toUpperCase() + area.slice(1),
+      action: (
+        <div>
+          <ActionBtns
+            setNewBranchDetail={props.setNewBranchDetail}
+            toggleDeleteBranch={props.toggleDeleteBranch}
+            setBranchToDelete={props.setBranchToDelete}
+            branch={props.branches}
+          />
+        </div>
+      )
+    };
+
+    return rowData;
+  });
+  const ppDataS = { ...dataStruct };
+  ppDataS.rows = membersD;
+  ppDataS.title = `<i class="${styles.tableTitleIcon} ion ion-ios-location-outline"></i> Branches`;
+  ppDataS.newBtn = (
+    <White
+      className={styles.btn}
+      disabled={props.currentUser.role !== "admin" ? true : false}
+      click={props.toggleCreateBranch}
+    >
+      <i className={`ion ion-ios-plus ${styles.controlIcon}`}></i>
+      <span className={styles.btnText}>New Branch</span>
+    </White>
+  );
+  console.log("gather data", ppDataS);
+  return <JQDatatable hover data={ppDataS} />;
+};
 
 BranchView.propTypes = {
   setNewBranchDetail: PropTypes.func.isRequired,

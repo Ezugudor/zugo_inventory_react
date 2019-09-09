@@ -3,14 +3,17 @@ import { FormTypesControls } from "./Controls";
 import PropTypes from "prop-types";
 import { Cards } from "./Cards";
 import React from "react";
+import Styles from "./FormTypesView.module.css";
 
 export const FormTypeView = props => (
   <AdminLayout pageName="formType" currentUser={props.currentUser}>
-    <FormTypesControls
-      selectedTab={props.selectedTab}
-      switchTab={props.switchTab}
-    />
-    <Cards formTypes={props.formTypes} viewForms={props.viewForms} />
+    <div className={Styles.formType}>
+      <FormTypesControls
+        selectedTab={props.selectedTab}
+        switchTab={props.switchTab}
+      />
+      <Cards formTypes={props.formTypes} viewForms={props.viewForms} />
+    </div>
   </AdminLayout>
 );
 

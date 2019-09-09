@@ -8,7 +8,7 @@ import React from "react";
 export const DashboardView = props => (
   <AdminLayout pageName="dashboard" currentUser={props.currentUser}>
     <div className={Style.dashboard}>
-      <DashboardControls
+      {/* <DashboardControls
         partiallyProcessed={props.partiallyProcessed}
         handleDateChange={props.handleDateChange}
         filterResponse={props.filterResponse}
@@ -17,13 +17,17 @@ export const DashboardView = props => (
         startDate={props.startDate}
         endDate={props.endDate}
         pending={props.pending}
-      />
+      /> */}
       <Inbox
         partiallyProcessed={props.partiallyProcessed}
         tabToShow={props.tabToShow}
         switchTab={props.switchTab}
         processed={props.processed}
         pending={props.pending}
+        handleDateChange={props.handleDateChange}
+        filterResponse={props.filterResponse}
+        startDate={props.startDate}
+        endDate={props.endDate}
       />
     </div>
   </AdminLayout>

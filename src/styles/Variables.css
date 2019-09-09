@@ -20,3 +20,6 @@
 
 /* Fonts  */
 @value defaultFont: 1.6rem;
+
+/* font family */
+@value fontFam-1: Gilroy;

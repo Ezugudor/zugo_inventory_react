@@ -12,31 +12,42 @@ const buildStyle = (props, tab) => {
 export const InboxHeader = props => (
   <div className={Style.inboxHeader}>
     <div
-      className={buildStyle(props, "pending")}
+      className={`${buildStyle(props, "pending")} ${Style.firstTab}`}
       onClick={() => props.switchTab("pending")}
     >
-      Pending for Initiators
-      <span className={`${Style.inboxTabIcon} ${Style.unreadIcon}`}>
-        {props.pendingCount}
-      </span>
+      <div className={Style.tabContent}>
+        Pending for Initiators
+        <span className={`${Style.inboxTabIcon} ${Style.unreadIcon}`}>
+          {props.pendingCount}
+        </span>
+      </div>
+      <div className={Style.shape}></div>
     </div>
     <div
-      className={buildStyle(props, "partiallyProcessed")}
+      className={`${buildStyle(props, "partiallyProcessed")} ${
+        Style.secondTab
+      }`}
       onClick={() => props.switchTab("partiallyProcessed")}
     >
-      Pending for Approvers
-      <span className={`${Style.inboxTabIcon} ${Style.unreadIcon}`}>
-        {props.partiallyProcessedCount}
-      </span>
+      <div className={Style.tabContent}>
+        Pending for Approvers
+        <span className={`${Style.inboxTabIcon} ${Style.unreadIcon}`}>
+          {props.partiallyProcessedCount}
+        </span>
+      </div>
+      <div className={`${Style.shape} ${Style.shape2ndTab}`}></div>
     </div>
     <div
-      className={buildStyle(props, "processed")}
+      className={`${buildStyle(props, "processed")} ${Style.thirdTab}`}
       onClick={() => props.switchTab("processed")}
     >
-      Processed
-      <span className={`${Style.inboxTabIcon} ${Style.unreadIcon}`}>
-        {props.processedCount}
-      </span>
+      <div className={Style.tabContent}>
+        Processed
+        <span className={`${Style.inboxTabIcon} ${Style.unreadIcon}`}>
+          {props.processedCount}
+        </span>
+      </div>
+      <div className={`${Style.shape} ${Style.shape3rdTab}`}></div>
     </div>
   </div>
 );

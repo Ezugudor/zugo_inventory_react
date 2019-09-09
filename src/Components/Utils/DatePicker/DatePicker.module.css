@@ -12,11 +12,12 @@
 }
 
 .dateInput {
-  height: 3rem;
-  border: 1px solid border-color;
+  height: 4rem;
+  border: 1px solid #eee;
   padding-left: 1rem;
   padding-right: 1rem;
-  border-radius: 19px;
+  border-radius: 2px;
+  box-shadow: 0px 0px 10px #eee;
   color: border-color;
   outline: none;
 }
@@ -38,4 +39,11 @@
   border-radius: 20px;
   cursor: pointer;
   outline: none;
+  box-shadow: none !important;
+}
+.filterIcon {
+  margin-right: 5px;
+}
+.filterText {
+  color: #000;
 }

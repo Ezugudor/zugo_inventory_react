@@ -8,43 +8,43 @@ export const dataStruct = {
     },
     {
       label: "Role",
-      field: "Role",
+      field: "role",
       sort: "asc",
       width: 270
     },
     {
       label: "Email",
-      field: "Email",
+      field: "email",
       sort: "asc",
       width: 270
     },
     {
       label: "Branch",
-      field: "Branch",
+      field: "branch",
       sort: "asc",
       width: 270
     },
     {
       label: "Phone",
-      field: "Phone",
+      field: "phone",
       sort: "asc",
       width: 270
     },
     {
       label: "Id",
-      field: "Id",
+      field: "id",
       sort: "asc",
       width: 270
     },
     {
       label: "Created",
-      field: "Created",
+      field: "created",
       sort: "asc",
       width: 270
     },
     {
       label: "Action",
-      field: "Action",
+      field: "action",
       sort: "asc",
       width: 270
     }

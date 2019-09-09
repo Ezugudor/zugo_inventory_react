@@ -1,6 +1,12 @@
 export const dataStruct = {
   columns: [
     {
+      label: "ID",
+      field: "id",
+      sort: "asc",
+      width: 270
+    },
+    {
       label: "Name",
       field: "name",
       sort: "asc",
@@ -8,25 +14,19 @@ export const dataStruct = {
     },
     {
       label: "Comment",
-      field: "Comment",
-      sort: "asc",
-      width: 270
-    },
-    {
-      label: "ID",
-      field: "ID",
+      field: "notyte",
       sort: "asc",
       width: 270
     },
     {
       label: "Branch",
-      field: "Branch",
+      field: "branch",
       sort: "asc",
       width: 270
     },
     {
       label: "Created",
-      field: "Created",
+      field: "date",
       sort: "asc",
       width: 270
     }

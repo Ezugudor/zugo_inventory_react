@@ -1,6 +1,6 @@
 import Style from "./DatePicker.module.css";
 import PropTypes from "prop-types";
-import { Red } from "../Buttons";
+import { WhiteSimple } from "../Buttons";
 import React from "react";
 
 export const DatePicker = props => (
@@ -24,10 +24,10 @@ export const DatePicker = props => (
       />
     </div>
     <div className={Style.dateGroup}>
-      <Red styles={Style.button} click={props.filterResponse}>
-        <i className="fas fa-filter" />
-        Filter
-      </Red>
+      <WhiteSimple styles={Style.button} click={props.filterResponse}>
+        <i className={`${Style.filterIcon} ion ion-ios-search-strong`} />
+        <span className={Style.filterText}>Filter</span>
+      </WhiteSimple>
     </div>
   </div>
 );

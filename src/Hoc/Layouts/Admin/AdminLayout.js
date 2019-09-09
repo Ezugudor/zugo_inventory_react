@@ -4,6 +4,8 @@ import Style from "./AdminLayout.module.css";
 import { PrivateHeader } from "../Headers";
 import PropTypes from "prop-types";
 import { Aux } from "../../Auxiliary";
+import { Logo } from "../../../Components/Utils";
+import logoutIcon from "../../../img/logout.svg";
 import React from "react";
 
 const getSideBar = (currentUser, props) => {
@@ -15,11 +17,12 @@ const getSideBar = (currentUser, props) => {
 };
 export const AdminLayout = props => (
   <Aux>
-    <PrivateHeader />
     <main className={Style.AdminLayout}>
-      {console.log("from componnets checking the prop value", props)}
       {getSideBar(props.currentUser, props)}
-      <div className={Style.ChildContent}>{props.children}</div>
+      <div className={Style.right}>
+        <PrivateHeader />
+        <div className={Style.ChildContent}>{props.children}</div>
+      </div>
     </main>
   </Aux>
 );

@@ -15,28 +15,18 @@ const showButton = props => {
     if (!props.response.processors.approver.role) {
       return (
         <SkyBlue styles={Style.button} click={props.toggleOfficialSectionUI}>
-          <span className={Style.buttonIcon}>
-            <img
-              className={Style.iconImage}
-              src={processingIcon}
-              alt="Sign Off"
-            />
-          </span>
+          <i className={`ion ion-android-time ${Style.iconImage}`}></i>
           Sign Off
         </SkyBlue>
       );
     } else {
       return (
-        <SkyBlue styles={Style.button}>
-          <span className={Style.buttonIcon}>
-            <img
-              className={Style.iconImage}
-              src={processingIcon}
-              alt="Already Approved"
-            />
-          </span>
+        <span className={Style.approved}>
+          <i
+            className={`ion ion-ios-checkmark-outline ${Style.approvedIcon}`}
+          ></i>
           Already Approved.
-        </SkyBlue>
+        </span>
       );
     }
   }
@@ -47,28 +37,18 @@ const showButton = props => {
     if (!props.response.processors.approver.role) {
       return (
         <SkyBlue styles={Style.button} click={props.toggleOfficialSectionUI}>
-          <span className={Style.buttonIcon}>
-            <img
-              className={Style.iconImage}
-              src={processingIcon}
-              alt="Sign Off"
-            />
-          </span>
+          <i className={`ion ion-android-time ${Style.iconImage}`}></i>
           Sign Off
         </SkyBlue>
       );
     } else {
       return (
-        <SkyBlue styles={Style.button}>
-          <span className={Style.buttonIcon}>
-            <img
-              className={Style.iconImage}
-              src={processingIcon}
-              alt="Already Signed"
-            />
-          </span>
+        <span className={Style.approved}>
+          <i
+            className={`ion ion-ios-checkmark-outline ${Style.approvedIcon}`}
+          ></i>
           Already Approved.
-        </SkyBlue>
+        </span>
       );
     }
   }
@@ -76,7 +56,7 @@ const showButton = props => {
 
 export const ResponseControls = props => (
   <section className={Style.controlSection}>
-    {console.log("reponse", props)}
+    {/* {console.log("reponse", props)}
     <div>
       <h1 className={Style.info}>
         {props.response.form.name} - #{props.response.id}
@@ -90,6 +70,32 @@ export const ResponseControls = props => (
         </span>
         Add Note
       </Red>
+    </div> */}
+
+    <div className={Style.ControlBox}>
+      <i className={`${Style.titleIcon} ion ion-ios-paper-outline`}></i>
+      <div className={Style.info}>
+        <span className={Style.Text}>Showing :</span>
+        <span className={`${Style.Text} ${Style.parent}`}>
+          {props.response.form.name}
+        </span>
+
+        <i className={`${Style.arrow} ion ion-android-remove`}></i>
+
+        <span className={`${Style.Text} ${Style.name}`}>
+          {props.response.id}
+        </span>
+      </div>
+      {/* <span className={Style.Text}>Forms </span> */}
+
+      <div className={Style.newBtn}>
+        <Red click={props.handleNewNote}>
+          <i className={`${Style.newBtnIcon} ion ion-ios-plus`}></i>
+          <span className={Style.newBtnText}>Add Note</span>
+        </Red>
+      </div>
+      <div className={Style.signBtnCont}>{showButton(props)}</div>
+      <div className={Style.clearfix}></div>
     </div>
   </section>
 );

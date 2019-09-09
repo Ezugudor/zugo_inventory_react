@@ -12,23 +12,31 @@ export const BusinessSet = props => {
   let bizDesc = props.businessDescription
     ? props.businessDescription
     : props.desc;
+  let btnStyle = {
+    fontSize: "20px",
+    borderRadius: "20px",
+    paddingLeft: "40px",
+    paddingRight: "40px",
+    fontWeight: "bold"
+  };
   return (
     <AdminLayout pageName="settings">
       <div className={Style.BusinessSettings}>
         <section className={Style.uploadSection}>
           <h3 className={Style.heading}>Upload Logo</h3>
-          <div>
+          <div className={Style.dzPrevCont}>
+            <div className={Style.prevCont}>
+              <div className={Style.prevContInside}>
+                <PreviewLogo logoUrl={props.logoUrl} />
+              </div>
+            </div>
             <div className={Style.dzCont}>
               <FileUpload
                 handleUpload={props.handleUpload}
                 progress={props.progress}
               />
             </div>
-            <div className={Style.prevCont}>
-              <div className={Style.prevContInside}>
-                <PreviewLogo logoUrl={props.logoUrl} />
-              </div>
-            </div>
+
             <div className={Style.clearfix}></div>
           </div>
           <Notification />
@@ -40,10 +48,13 @@ export const BusinessSet = props => {
             onChange={props.changeDescription}
             value={bizDesc}
             className={Style.textArea}
+            placeholder="Business Description"
           />
         </section>
-        <section className={Style.textSection}>
-          <Red click={props.updateBusinessDetails}>Submit</Red>
+        <section className={Style.footerSection}>
+          <Red click={props.updateBusinessDetails} style={btnStyle}>
+            Update Settings
+          </Red>
         </section>
       </div>
     </AdminLayout>

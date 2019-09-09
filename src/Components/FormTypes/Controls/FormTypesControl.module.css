@@ -2,16 +2,16 @@
 @value defaultFont, typeform-border-color from Variables;
 
 .control {
-  margin-top: 5rem;
+  /* margin-top: 5rem; */
 }
 
 .controlBox {
   width: 100%;
-  border-bottom: 2px solid typeform-border-color;
+  /* border-bottom: 2px solid typeform-border-color; */
   display: flex;
   flex-flow: row nowrap;
   justify-content: flex-start;
-  padding-left: 3rem;
+  /* padding-left: 3rem; */
 }
 
 .controlText {
@@ -19,17 +19,69 @@
   font-size: defaultFont;
   display: inline-block;
   transition: transform 0.2s;
-  cursor: pointer;
   outline: none;
-  opacity: 0.2;
+  /* opacity: 0.2; */
+
+  height: 6rem;
+  width: 30rem;
+  padding-top: 2rem;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  font-weight: bold;
 }
 
 .controlTextActive {
   opacity: 1;
-  background-color: aqua;
-  padding: 0.5rem 2rem;
+  /* background-color: aqua; */
+  /* padding: 0.5rem 2rem; */
 }
 
 .controlText:not(:last-child) {
   margin-right: 2rem;
+}
+.firstTab {
+  z-index: 30;
+}
+.secondTab {
+  z-index: 20;
+  position: relative;
+  left: -30px;
+}
+.thirdTab {
+  z-index: 10;
+  position: relative;
+}
+.tabContent {
+  position: relative;
+  z-index: 50;
+}
+.shape {
+  position: absolute;
+  border-radius: 8px 8px 0 0;
+  content: "";
+  border: 1px solid #dadcde;
+  top: 0px;
+  left: 0px;
+  background: #f7f7f7;
+  transform-origin: bottom left;
+  transform: perspective(20px) rotateX(2deg);
+  width: 100%;
+  height: 100%;
+  background: -webkit-linear-gradient(top, #fff, #f1f1f1);
+}
+.shape2ndTab {
+}
+.shape3rdTab {
+  left: -20px;
+}
+
+.controlTextActive {
+  /* border-bottom: 3px solid secondary-color; */
+  z-index: 40 !important;
+}
+
+.controlTextActive .shape {
+  background: #fff;
+  border-bottom: none;
 }

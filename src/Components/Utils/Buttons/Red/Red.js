@@ -15,6 +15,7 @@ export const Red = props => (
     className={getStyle(props)}
     disabled={props.disabled}
     onClick={props.click}
+    style={props.style}
   >
     {props.children}
   </button>

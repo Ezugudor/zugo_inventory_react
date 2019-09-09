@@ -11,6 +11,12 @@ export class Class extends Component {
   state = {
     dragEnter: false
   };
+  componentDidMount = () => {
+    let dropArea = document.querySelector(".llkk");
+    dropArea.addEventListener("click", e => {
+      dropArea.querySelector("#logo").click();
+    });
+  };
 
   highlightDropArea = e => {
     e.preventDefault();
@@ -33,7 +39,7 @@ export class Class extends Component {
     const { dragEnter } = this.state;
     const state = dragEnter ? dragEnter : false;
     return (
-      <div className={buildDropAreaStyle(state)}>
+      <div htmlFor="logo" className={buildDropAreaStyle(state)}>
         <div
           onDragLeave={this.unhighlightDropArea}
           onDragEnter={this.highlightDropArea}
@@ -58,7 +64,7 @@ export class Class extends Component {
 const buildDropAreaStyle = state => {
   const conditional = {};
   conditional[style.highlight] = state;
-  return className(style.dropArea, conditional);
+  return className(style.dropArea, conditional, "llkk");
 };
 
 const showUploadIndicator = (uploadStatus, _this) => {
@@ -66,11 +72,11 @@ const showUploadIndicator = (uploadStatus, _this) => {
     return (
       <div>
         <p className={style.uploadInstruction}>
-          Drag and drop to change logo or{" "}
+          Drag and drop to change logo or Click to upload
         </p>
-        <label htmlFor="logo" className={style.inputLabel}>
+        {/* <label htmlFor="logo" className={style.inputLabel}>
           Click to upload
-        </label>
+        </label> */}
       </div>
     );
   return uploadStatus === "uploaded" ? (

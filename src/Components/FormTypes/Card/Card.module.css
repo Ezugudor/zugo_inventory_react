@@ -1,9 +1,10 @@
 .Card {
-  border: 0.5px solid black;
+  /* border: 0.5px solid black; */
   height: 23vh;
   position: relative;
   border-radius: 8px;
-  opacity: 0.2;
+  box-shadow: 0 0 10px #ccc;
+  /* opacity: 0.2; */
 }
 
 .Card:hover {
@@ -27,9 +28,14 @@
 }
 
 .Image {
-  width: 100%;
+  width: 200%;
+  position: relative;
+  left: -10px;
 }
 
 .TextBox {
   text-align: center;
+  /* font-family: Gilroy; */
+  color: #f50030;
+  font-weight: bolder;
 }

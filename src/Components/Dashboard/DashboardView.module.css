@@ -1,4 +1,7 @@
 .dashboard {
-  height: 100%;
+  height: 1900px;
   width: 100%;
+  padding: 40px;
+  background: #efefdf;
+  /* background:#E0DFC0; */
 }

@@ -2,10 +2,11 @@ import { ChangeMember } from "./Members/ChangeMember";
 import { DeleteMember } from "./Members/DeleteMember";
 import { AdminLayout } from "../../Hoc/Layouts";
 import { NewMember } from "./Members/NewMember";
-import styles from "./TeamView.module.css";
+import Styles from "./TeamView.module.css";
 import { Controls } from "./Controls";
 import { ActionBtns } from "./Members/ActionBtns";
 import { MDBDataTable } from "mdbreact";
+import { JQDatatable } from "../../plugins";
 // import { data } from "../Dashboard/data";
 import { dataStruct } from "./tableDataStructure";
 import PropTypes from "prop-types";
@@ -13,15 +14,17 @@ import React from "react";
 import trashcanImage from "../../img/trash-can.svg";
 import penImage from "../../img/pen.svg";
 import { Notification } from "../Utils";
+import { White } from "../Utils/Buttons";
 
 export const TeamView = props => (
   <AdminLayout pageName="team" currentUser={props.currentUser}>
-    <div className={styles.team}>
-      <Controls
+    <div className={Styles.team}>
+      {/* <Controls
         toggleCreateMember={props.toggleCreateMember}
         currentUser={props.currentUser}
-      />
-      {showTeamMembers(props)}
+      /> */}
+      <div className={Styles.tableCont}>{showTeamMembers(props)}</div>
+
       <NewMember
         setNewMemberDetail={props.setNewMemberDetail}
         toggleCreateMember={props.toggleCreateMember}
@@ -98,8 +101,19 @@ const showTeamMembers = props => {
   });
   const ppDataS = { ...dataStruct };
   ppDataS.rows = membersD;
+  ppDataS.title = `<i class="${Styles.tableTitleIcon} ion ion-ios-people-outline"></i> Team`;
+  ppDataS.newBtn = (
+    <White
+      className={Styles.btn}
+      disabled={props.currentUser.role !== "admin" ? true : false}
+      click={props.toggleCreateMember}
+    >
+      <i className={`ion ion-ios-plus ${Styles.controlIcon}`}></i>
+      <span className={Styles.btnText}>New Member</span>
+    </White>
+  );
   console.log("gather data", ppDataS);
-  return <MDBDataTable hover data={ppDataS} />;
+  return <JQDatatable hover data={ppDataS} />;
 };
 
 TeamView.propTypes = {

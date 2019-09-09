@@ -5,6 +5,7 @@
 .Header {
   background-color: primary-color;
   color: white-color;
+  z-index: 20;
   /* height: 9vh; */
 }
 

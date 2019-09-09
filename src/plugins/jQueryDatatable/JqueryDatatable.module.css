@@ -1,0 +1,11 @@
+.id {
+  /* background:#eee; */
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: #222;
+  font-size: 14px;
+  font-family: calibri;
+  /* font-weight: bold; */
+  color: #f54800;
+  color: rgb(59, 83, 134);
+}

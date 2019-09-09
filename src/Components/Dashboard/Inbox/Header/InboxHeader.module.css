@@ -5,21 +5,65 @@
   display: flex;
   flex-flow: row nowrap;
   justify-content: flex-start;
-  border-bottom: 1px solid typeform-border-color;
-  padding-left: 10rem;
+  /* border-bottom: 1px solid typeform-border-color; */
+  padding-left: 0rem;
+}
+.firstTab {
+  z-index: 30;
+}
+.secondTab {
+  z-index: 20;
+  position: relative;
+}
+.thirdTab {
+  z-index: 10;
+  position: relative;
 }
 
 .inboxTab {
-  height: 4rem;
-  width: 20rem;
-  padding-top: 0.5rem;
+  height: 6rem;
+  width: 30rem;
+  padding-top: 2rem;
   text-align: center;
   font-size: 1.5rem;
   cursor: pointer;
+  position: relative;
+  font-weight: bold;
+  /* padding:30px; */
+}
+.tabContent {
+  position: relative;
+  z-index: 50;
+}
+.shape {
+  position: absolute;
+  border-radius: 8px 8px 0 0;
+  content: "";
+  border: 1px solid #dadcde;
+  top: 0px;
+  left: 0px;
+  background: #f7f7f7;
+  transform-origin: bottom left;
+  transform: perspective(20px) rotateX(2deg);
+  width: 100%;
+  height: 100%;
+  background: -webkit-linear-gradient(top, #fff, #f1f1f1);
+}
+.shape2ndTab {
+  left: -10px;
+}
+.shape3rdTab {
+  left: -20px;
 }
 
 .activeTab {
-  border-bottom: 3px solid secondary-color;
+  /* border-bottom: 3px solid secondary-color; */
+  z-index: 40 !important;
+}
+
+.activeTab .shape {
+  background: #fff;
+  border-bottom: none;
 }
 
 .inboxTabIcon {

@@ -8,9 +8,9 @@ import Style from "./PrivateHeader.module.css";
 import React from "react";
 export const PrivateHeader = props => (
   <header className={Style.Header}>
-    <div className={Style.LogoBox}>
+    {/* <div className={Style.LogoBox}>
       <Logo />
-    </div>
+    </div> */}
     <div className={Style.NavBox}>
       <Nav>
         <NavItem>

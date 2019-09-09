@@ -20,12 +20,27 @@ export const FormResponseView = props => (
         currentUser={props.currentUser}
       />
 
-      {props.response.notes.length ? (
-        <Notes notes={props.response.notes} currentUser={props.currentUser} />
-      ) : null}
       <div className={style.mainArea}>
-        <Answers answers={props.response.content} />
-        <OfficailSignatories processors={props.response.processors} />
+        <div className={style.answerCont}>
+          <Answers answers={props.response.content} />
+        </div>
+        <div className={style.detailCont}>
+          <div className={style.commentCont}>
+            {props.response.notes.length ? (
+              <Notes
+                notes={props.response.notes}
+                currentUser={props.currentUser}
+              />
+            ) : (
+              <div className={style.emptyMessage}>No Comment on this form.</div>
+            )}
+          </div>
+          <div className={style.signatoryCont}>
+            <OfficailSignatories processors={props.response.processors} />
+          </div>
+          <div className={style.clearfix}></div>
+        </div>
+        <div className={style.clearfix}></div>
       </div>
       <OfficialSignoff
         toggleOfficialSectionUI={props.toggleOfficialSectionUI}

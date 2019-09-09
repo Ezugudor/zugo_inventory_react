@@ -1,5 +1,5 @@
 @value Variables: "../../../styles/Variables.css";
-@value white-color from Variables;
+@value white-color, fontFam-1 from Variables;
 .answer {
   display: flex;
   flex-flow: row nowrap;
@@ -29,6 +29,8 @@
 .Icon {
   width: 100%;
   height: 100%;
+  color: #eb1761;
+  font-size: 40px;
 }
 
 .questionPosition {
@@ -37,11 +39,13 @@
 }
 
 .questionText {
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 
 .answerText {
-  font-weight: 600;
+  /* font-weight: 700; */
+  font-family: baloo;
+  font-size: 20px;
 }
 
 .imgWrapper {

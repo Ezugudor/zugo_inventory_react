@@ -5,3 +5,5 @@ export * from "./response";
 export * from "./helpers";
 export * from "./store";
 export * from "./countryStates";
+export * from "./fontIcons";
+export * from "./imgToFontIcon";

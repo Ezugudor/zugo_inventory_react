@@ -5,24 +5,27 @@ import { NewForm } from "./NewForm";
 import PropTypes from "prop-types";
 import { Cards } from "./Cards";
 import React from "react";
+import Styles from "./FormsView.module.css";
 
 export const FormsView = props => (
   <AdminLayout pageName="form" currentUser={props.currentUser}>
-    <FormsControls
-      toggleNewForm={props.toggleNewForm}
-      formType={props.formType}
-    />
-    <Cards
-      forms={chunkData(props.forms, 4)}
-      showBuilderEdit={props.showBuilderEdit}
-    />
-    <NewForm
-      toggleNewForm={props.toggleNewForm}
-      handleInput={props.handleInput}
-      showNewForm={props.showNewForm}
-      showBuilder={props.showBuilder}
-      name={props.name}
-    />
+    <div className={Styles.form}>
+      <FormsControls
+        toggleNewForm={props.toggleNewForm}
+        formType={props.formType}
+      />
+      <Cards
+        forms={chunkData(props.forms, 4)}
+        showBuilderEdit={props.showBuilderEdit}
+      />
+      <NewForm
+        toggleNewForm={props.toggleNewForm}
+        handleInput={props.handleInput}
+        showNewForm={props.showNewForm}
+        showBuilder={props.showBuilder}
+        name={props.name}
+      />
+    </div>
   </AdminLayout>
 );
 

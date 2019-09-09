@@ -1,6 +1,6 @@
 .answers {
-  width: 60%;
-  padding: 2rem 3rem;
-  box-shadow: -0.1rem -0.1rem 0.3rem rgba(14, 14, 14, 0.2);
-  overflow-y: scroll;
+  width: 100%;
+  /* padding: 2rem 3rem; */
+  /* box-shadow: -0.1rem -0.1rem 0.3rem rgba(14, 14, 14, 0.2); */
+  /* overflow-y: scroll; */
 }

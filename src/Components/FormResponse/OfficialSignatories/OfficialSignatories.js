@@ -8,7 +8,7 @@ export const OfficailSignatories = props => {
   return (
     <div className={styles.signatories}>
       <div className={styles.initiator}>
-        <h2>Initiator</h2>
+        <h2 className={styles.heading}>Initiator</h2>
         {initiator.name ? (
           <Signatory
             name={initiator.name}
@@ -17,14 +17,12 @@ export const OfficailSignatories = props => {
             signature={initiator.signatureUrl}
           />
         ) : (
-          <p>
-            <strong>Yet to sign.</strong>
-          </p>
+          <div className={styles.emptyMessage}>Yet to sign.</div>
         )}
       </div>
 
-      <div>
-        <h2>Approver</h2>
+      <div className={styles.approver}>
+        <h2 className={styles.heading}>Approver</h2>
         {approver.name ? (
           <Signatory
             name={approver.name}
@@ -33,9 +31,7 @@ export const OfficailSignatories = props => {
             signature={approver.signatureUrl}
           />
         ) : (
-          <p>
-            <strong>Yet to sign.</strong>
-          </p>
+          <div className={styles.emptyMessage}>Yet to sign.</div>
         )}
       </div>
     </div>

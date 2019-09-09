@@ -1,5 +1,31 @@
 .team {
   height: 100%;
   width: 100%;
-  background: #f9f9f9;
+  background: #efefdf;
+  /* background:#E0DFCF; */
+  padding: 40px;
+  box-shadow: 0px 0px 10px #ddd;
+}
+.tableCont {
+  box-shadow: 0px 0px 20px #ddd;
+}
+.controlIcon {
+  margin-right: 5px;
+  font-size: 24px;
+  position: relative;
+  top: 3px;
+}
+.btnText {
+  color: #000;
+  font-weight: bold;
+  position: relative;
+  top: -1px;
+}
+
+.tableTitleIcon {
+  color: #fa7a06;
+  font-size: 30px;
+  position: relative;
+  left: -10px;
+  top: 3px;
 }

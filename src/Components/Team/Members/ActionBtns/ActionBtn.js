@@ -10,11 +10,12 @@ export const ActionBtns = props => (
         onClick={() => props.setMemberToDelete(props.account)}
         className={styles.iconHolder}
       >
-        <img
+        {/* <img
           src={props.trashcanImage}
           className={styles.icon}
           alt="Delete icon"
-        />
+        /> */}
+        <i className={`ion ion-ios-trash ${styles.icon} ${styles.red}`}></i>
       </div>
     </div>
 
@@ -24,9 +25,11 @@ export const ActionBtns = props => (
         onClick={() => props.setMemberDetail("user", props.account, true)}
         className={styles.iconHolder}
       >
-        <img src={props.penImage} className={styles.icon} alt="Edit icon" />
+        {/* <img src={props.penImage} className={styles.icon} alt="Edit icon" /> */}
+        <i className={`ion ion-edit ${styles.icon}`}></i>
       </div>
     </div>
+    <div className={styles.clearfix}></div>
   </div>
 );
 
