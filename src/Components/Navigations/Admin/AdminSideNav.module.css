@@ -38,8 +38,8 @@
   overflow: hidden;
   font-size: 15px;
   font-family: Gilroy;
-  font-weight: bold;
-  color: #777;
+  /* font-weight: bold; */
+  color: #222;
   position: relative;
   left: -14px;
 }
@@ -59,22 +59,29 @@
 .ActiveLink:link,
 .ActiveLink:visited {
   /* background-color: tertiary-color; */
-  color: secondary-color;
+  /* color: secondary-color; */
+  /* color: #000; */
+  color: var(--color1);
+  font-weight: bolder;
   padding: 0.5rem 2.2rem;
   border-radius: 10rem;
 }
 
 .ActiveLink:link .sidebarIcon,
 .ActiveLink:visited .sidebarIcon {
-  color: secondary-color;
+  /* color: secondary-color; */
+  color: #000;
+  /* color: var(--color1); */
 }
 
 .sidebarIcon {
   font-size: 40px;
   margin-right: 14px;
   color: #444;
+  color: var(--color1);
   position: relative;
   top: 9px;
+  font-weight: 900;
 }
 
 .LogoBox {
@@ -84,6 +91,15 @@
   margin: 2rem auto;
   height: 7rem;
   padding-bottom: 0.6rem;
+}
+
+.left_1 {
+  position: relative;
+  left: 10px;
+}
+.left_2 {
+  position: relative;
+  left: 5px;
 }
 
 .Logo {

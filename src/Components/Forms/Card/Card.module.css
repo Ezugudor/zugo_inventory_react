@@ -1,5 +1,5 @@
 @value Variables: "../../../styles/Variables.css";
-@value defaultFont, black-color, tertiary-color from Variables;
+@value fontFam-1,defaultFont, black-color, tertiary-color from Variables;
 .Card {
   height: 26vh;
   min-height: 22rem;
@@ -11,7 +11,9 @@
   background: #fff;
   color: #000;
   font-weight: bold;
+  font-family: fontFam-1;
   border-bottom: 2px solid #eb1761;
+  border-bottom: 2px solid var(--color1);
 }
 
 .Card:hover {

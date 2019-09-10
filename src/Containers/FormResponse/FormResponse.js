@@ -1,8 +1,13 @@
-import { getResponse, getCurrentUser } from "../../store/selectors";
+import {
+  getResponse,
+  getCurrentUser,
+  getBusinessColor
+} from "../../store/selectors";
 import { FormResponseView } from "../../Components/FormResponse";
 import { createNote } from "../../store/actions";
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { themeMaker } from "../../utils";
 
 export class Class extends Component {
   state = {
@@ -10,6 +15,11 @@ export class Class extends Component {
     showNewNote: false,
     newNote: ""
   };
+
+  componentDidMount() {
+    const { businessColor } = this.props;
+    themeMaker(businessColor);
+  }
 
   /**
    * show model for a user to add note on a user
@@ -93,7 +103,8 @@ const mapStateToProps = (state, props) => {
   const { id, type } = props.match.params;
   return {
     currentUser: getCurrentUser(state),
-    response: getResponse(state, { id, type })
+    response: getResponse(state, { id, type }),
+    businessColor: getBusinessColor(state)
   };
 };
 

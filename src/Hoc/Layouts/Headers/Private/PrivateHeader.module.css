@@ -4,6 +4,7 @@
 
 .Header {
   background-color: primary-color;
+  background-color: var(--color1);
   color: white-color;
   z-index: 20;
   /* height: 9vh; */

@@ -36,7 +36,7 @@ export const AdminSideNav = props => (
               <i
                 className={`ion ion-ios-list-outline ${Style.sidebarIcon}`}
               ></i>
-              Form Types
+              <span className={Style.left_2}>Form Types</span>
             </a>
           </li>
           <li className={Style.NavItem}>
@@ -48,11 +48,11 @@ export const AdminSideNav = props => (
             </a>
           </li>
           <li className={Style.NavItem}>
-            <a className={getClassName(props, "branch")} href="/branch">
+            <a className={`${getClassName(props, "branch")} `} href="/branch">
               <i
                 className={`ion ion-ios-location-outline ${Style.sidebarIcon}`}
               ></i>
-              Branch
+              <span className={Style.left_1}>Branch</span>
             </a>
           </li>
           <li className={Style.NavItem}>

@@ -85,7 +85,7 @@ export class JQDatatable extends Component {
     return (
       <table
         ref={el => (this.el = el)}
-        className={this.props.hover ? `table-hover` : null}
+        className={`${this.props.hover ? "table-hover" : null}`}
       >
         <thead>
           <tr>{this.generateColumns()}</tr>

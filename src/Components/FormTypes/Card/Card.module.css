@@ -1,3 +1,6 @@
+@value Variables: "../../../styles/Variables.css";
+@value fontFam-1 from Variables;
+
 .Card {
   /* border: 0.5px solid black; */
   height: 23vh;
@@ -35,7 +38,8 @@
 
 .TextBox {
   text-align: center;
-  /* font-family: Gilroy; */
-  color: #f50030;
+  font-family: fontFam-1;
+  /* color: #f50030; */
+  color: var(--color1);
   font-weight: bolder;
 }

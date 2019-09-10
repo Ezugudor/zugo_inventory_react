@@ -1,5 +1,5 @@
 @value Variables: "../../../styles/Variables.css";
-@value defaultFont, typeform-border-color from Variables;
+@value fontFam-1,defaultFont, typeform-border-color from Variables;
 
 .control {
   /* margin-top: 5rem; */
@@ -33,6 +33,9 @@
 
 .controlTextActive {
   opacity: 1;
+  color: var(--color1);
+  font-weight: bold;
+  font-family: fontFam-1;
   /* background-color: aqua; */
   /* padding: 0.5rem 2rem; */
 }

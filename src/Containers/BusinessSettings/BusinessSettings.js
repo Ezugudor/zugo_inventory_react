@@ -1,11 +1,16 @@
 import { getBusinessSlug, getUploadedFileData } from "../../store/selectors";
 import { BusinessSettingsView } from "../../Components/BusinessSettings";
-import { getUploadStatus, getBusinessId } from "../../store/selectors";
+import {
+  getUploadStatus,
+  getBusinessId,
+  getBusinessColor
+} from "../../store/selectors";
 import { updateDetails } from "../../store/actions";
 import { uploadLogo } from "../../store/actions";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Loading } from "../../Components/Utils";
+import { themeMaker } from "../../utils";
 
 class Class extends Component {
   state = {
@@ -14,6 +19,10 @@ class Class extends Component {
     logoUrl: ""
   };
 
+  componentDidMount() {
+    const { businessColor } = this.props;
+    themeMaker(businessColor);
+  }
   /**
    * set value of business description
    * @param {eventObject} e
@@ -68,7 +77,8 @@ const mapStateToProps = state => ({
   uploadedFile: getUploadedFileData(state),
   businessSlug: getBusinessSlug(state),
   uploadStatus: getUploadStatus(state),
-  businessId: getBusinessId(state)
+  businessId: getBusinessId(state),
+  businessColor: getBusinessColor(state)
 });
 
 export const BusinessSettings = connect(

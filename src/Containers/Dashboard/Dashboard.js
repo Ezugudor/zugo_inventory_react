@@ -7,8 +7,10 @@ import {
   getPartiallyProcessedResponses,
   getProcessedResponses,
   getUnreadResponses,
-  getBusinessId
+  getBusinessId,
+  getBusinessColor
 } from "../../store/selectors";
+import { themeMaker } from "../../utils";
 
 class Class extends Component {
   state = {
@@ -29,7 +31,8 @@ class Class extends Component {
   };
 
   componentDidMount() {
-    const { businessId } = this.props;
+    const { businessId, businessColor } = this.props;
+    themeMaker(businessColor);
     this.props.fetchResponseByStatus(businessId);
   }
 
@@ -67,7 +70,8 @@ const mapStateToProps = state => ({
   processed: getProcessedResponses(state),
   pending: getUnreadResponses(state),
   currentUser: getCurrentUser(state),
-  businessId: getBusinessId(state)
+  businessId: getBusinessId(state),
+  businessColor: getBusinessColor(state)
 });
 
 export const Dashboard = connect(

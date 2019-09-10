@@ -36,7 +36,7 @@ export const AdminMiniSideNav = props => (
               <i
                 className={`ion ion-ios-list-outline ${Style.sidebarIcon}`}
               ></i>
-              Form Types
+              <span className={Style.left_2}>Form Types</span>
             </a>
           </li>
           {/* <li className={Style.NavItem}>

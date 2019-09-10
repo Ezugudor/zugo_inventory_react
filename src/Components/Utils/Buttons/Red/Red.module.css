@@ -3,5 +3,6 @@
 
 .red {
   background-color: secondary-color;
+  background-color: var(--color1);
   color: white-color;
 }

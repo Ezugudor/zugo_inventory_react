@@ -44,6 +44,7 @@
 
 .responseAuthor {
   color: secondary-color;
+  color: var(--color1);
   font-weight: 600;
 }
 

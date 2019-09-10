@@ -11,6 +11,7 @@
   padding: 20px 40px 10px;
   box-shadow: 0px 0px 10px #ddd;
   margin-bottom: 20px;
+  border-radius: 4px;
 }
 
 .info {
@@ -95,7 +96,8 @@
   /* font-weight: bold */
 }
 .parent {
-  color: #eb1761;
+  /* color: #eb1761; */
+  color: var(--color3);
 }
 .parent,
 .name {

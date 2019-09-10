@@ -38,11 +38,12 @@
 }
 .parent {
   color: #eb1761;
+  color: var(--color3);
 }
 .parent,
 .name {
   font-weight: bold;
-  font-size: 14px;
+  font-size: 18px;
 }
 .info {
   display: inline;

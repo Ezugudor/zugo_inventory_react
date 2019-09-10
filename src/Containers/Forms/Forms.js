@@ -7,11 +7,13 @@ import {
 import {
   getAllForms,
   getBusinessId,
-  getCurrentUser
+  getCurrentUser,
+  getBusinessColor
 } from "../../store/selectors";
 import { FormsView } from "../../Components/Forms";
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { themeMaker } from "../../utils";
 
 export class Class extends Component {
   state = {
@@ -24,8 +26,9 @@ export class Class extends Component {
   }
 
   componentDidMount() {
-    const { businessId } = this.props;
+    const { businessId, businessColor } = this.props;
     this.props.fetchForms(this.formType.id, businessId);
+    themeMaker(businessColor);
   }
 
   setNewFormName = e => {
@@ -90,6 +93,7 @@ export class Class extends Component {
 }
 const mapStateToProps = state => ({
   businessId: getBusinessId(state),
+  businessColor: getBusinessColor(state),
   currentUser: getCurrentUser(state),
   forms: getAllForms(state),
   statea: state

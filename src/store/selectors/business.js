@@ -21,3 +21,7 @@ export const getBusinessLogo = createSelector(
   business,
   biz => biz.logoUrl
 );
+export const getBusinessColor = createSelector(
+  business,
+  biz => biz.color
+);

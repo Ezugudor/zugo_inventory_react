@@ -5,6 +5,17 @@
   box-sizing: inherit;
 }
 
+:root {
+  --color1: #ccc;
+  --color2: #ccc;
+  --color3: #ccc;
+  --color4: #ccc;
+  --color5: #ccc;
+  --color6: #ccc;
+  --color7: #ccc;
+  --color8: #ccc;
+}
+
 html {
   font-size: 62.5%;
 }

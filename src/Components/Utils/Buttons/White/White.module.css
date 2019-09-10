@@ -4,4 +4,5 @@
 .White {
   background-color: white-color;
   color: secondary-color;
+  color: var(--color1);
 }

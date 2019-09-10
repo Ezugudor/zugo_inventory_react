@@ -1,3 +1,6 @@
+@value Variables: "../../styles/Variables.css";
+@value fontFam-1 from Variables;
+
 /*Table style*/
 .table-filter-cont {
   padding: 20px 20px;
@@ -39,13 +42,13 @@
   color: #253344;
   color: #222;
   margin-right: 20px;
-  font-family: "Gilroy";
+  font-family: fontFam-1;
 }
 .tfc-top .table-class {
   margin-right: 50px;
   font-weight: bold;
   color: var(--primary-color);
-  font-family: "Gilroy";
+  font-family: fontFam-1;
 }
 .tfc-top {
   /*border: 1px solid #ddd;*/
@@ -89,6 +92,9 @@ table.dataTable.no-footer {
 .tf-table table tbody tr {
   cursor: pointer;
 }
+.tf-table table tbody tr:nth-child(even) {
+  background: #f7f7f7;
+}
 .tf-table table tbody tr:active {
   background: #ccc;
 }
@@ -96,10 +102,10 @@ table.dataTable.no-footer {
 .tf-table table thead td {
   border-top: 2px solid #f7f7f7 !important;
   /*color: #666 !important;*/
-  border-bottom: none !important;
+  border-bottom: 2px solid #ddd;
   font-weight: bold;
   font-size: 15px;
-  font-family: Gilroy;
+  font-family: fontFam-1;
 }
 .tf-table table tbody td:first-child {
   /* border-right:1px solid #dedede !important; */
@@ -118,7 +124,7 @@ table.dataTable.no-footer {
 
 .tf-table table tbody td:nth-child(2) {
   font-size: 16px;
-  font-family: Gilroy;
+  font-family: fontFam-1;
 }
 
 .tf-table table tbody td:nth-child(4),
@@ -134,7 +140,7 @@ table.dataTable.no-footer {
 
 .tf-table table tbody td {
   font-size: 16px;
-  font-family: Gilroy;
+  font-family: fontFam-1;
 }
 
 .table-filter-cont input[type="text"],
@@ -287,6 +293,7 @@ select {
   right: 46px !important;
   top: 0px;
   background: #eb1761;
+  background: var(--color1);
   /*background: #ddd;*/
   padding: 3px 10px 4px;
   color: #fff;

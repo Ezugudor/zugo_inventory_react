@@ -1,10 +1,17 @@
-import { getAccounts, getBranches, getBusinessId } from "../../store/selectors";
+import {
+  getAccounts,
+  getBranches,
+  getBusinessId,
+  getBusinessColor
+} from "../../store/selectors";
 import { createNewMember, updateUser } from "../../store/actions";
 import { getCurrentUser } from "../../store/selectors";
 import { deleteMember } from "../../store/actions";
 import { TeamView } from "../../Components/Team";
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { themeMaker } from "../../utils";
+
 class Class extends Component {
   state = {
     showCreateMember: false,
@@ -36,6 +43,11 @@ class Class extends Component {
       branch: ""
     }
   };
+
+  componentDidMount() {
+    const { businessColor } = this.props;
+    themeMaker(businessColor);
+  }
 
   timer = props => {
     if (props.closeTime) {
@@ -295,6 +307,7 @@ class Class extends Component {
 const mapStateToProps = state => ({
   currentUser: getCurrentUser(state),
   businessId: getBusinessId(state),
+  businessColor: getBusinessColor(state),
   members: getAccounts(state),
   branches: getBranches(state)
 });

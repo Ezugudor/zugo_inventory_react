@@ -1,18 +1,25 @@
 import { FormTypeView } from "../../Components/FormTypes";
-import { getBusinessId, getCurrentUser } from "../../store/selectors";
+import {
+  getBusinessId,
+  getCurrentUser,
+  getBusinessColor
+} from "../../store/selectors";
 import { fetchWorkspaces } from "../../store/actions";
 import React, { Component } from "react";
 import { chunkData } from "../../utils";
 import { slugName } from "../../utils";
 import { connect } from "react-redux";
+import { themeMaker } from "../../utils";
+
 class Class extends Component {
   state = {
     tabToShow: "individual"
   };
 
   componentDidMount() {
-    const { businessId } = this.props;
+    const { businessId, businessColor } = this.props;
     this.props.fetchWorkspaces(businessId);
+    themeMaker(businessColor);
   }
 
   switchTab = text => {
@@ -52,6 +59,7 @@ const mapStateToProps = state => {
   return {
     businessId: getBusinessId(state),
     currentUser: getCurrentUser(state),
+    businessColor: getBusinessColor(state),
     loading: state.app.loading,
     all: state.workspace.all
   };

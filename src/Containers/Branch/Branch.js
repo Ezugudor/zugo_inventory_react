@@ -1,4 +1,9 @@
-import { getAccounts, getBranches, getBusinessId } from "../../store/selectors";
+import {
+  getAccounts,
+  getBranches,
+  getBusinessId,
+  getBusinessColor
+} from "../../store/selectors";
 import { createNewBranch, changeBranch } from "../../store/actions";
 import { getCurrentUser } from "../../store/selectors";
 // import { deleteBranch } from "../../store/actions";
@@ -7,6 +12,7 @@ import { BranchView } from "../../Components/Branch";
 import { countryStates } from "../../utils";
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { themeMaker } from "../../utils";
 class Class extends Component {
   state = {
     showCreateBranch: false,
@@ -27,6 +33,10 @@ class Class extends Component {
     }
   };
 
+  componentDidMount() {
+    const { businessColor } = this.props;
+    themeMaker(businessColor);
+  }
   /**
    * show create new branch modal
    */
@@ -207,6 +217,7 @@ class Class extends Component {
 const mapStateToProps = state => ({
   currentUser: getCurrentUser(state),
   businessId: getBusinessId(state),
+  businessColor: getBusinessColor(state),
   branchs: getAccounts(state),
   branches: getBranches(state)
 });
