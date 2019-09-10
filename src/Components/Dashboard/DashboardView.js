@@ -4,10 +4,7 @@ import { DashboardControls } from "./controls";
 import PropTypes from "prop-types";
 import { Inbox } from "./Inbox";
 import React from "react";
-import postcss from "postcss";
-let ps = postcss.parse("{}", { from: "../../styles/Variables.css" });
 
-console.log("log document element", ps);
 export const DashboardView = props => {
   return (
     <AdminLayout pageName="dashboard" currentUser={props.currentUser}>
