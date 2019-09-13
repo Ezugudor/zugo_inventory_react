@@ -29,7 +29,7 @@ export class FormBuilderView extends Component {
         settingsWindowName={this.props.settingsWindowName}
         formName={this.props.formName}
         save={this.props.save}
-        pageName="dashboard"
+        pageName="form_builder"
         currentUser={this.props.currentUser}
       >
         <div className={Style.layoutCont}>
