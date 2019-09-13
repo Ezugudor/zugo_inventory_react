@@ -61,6 +61,16 @@ class Class extends Component {
     this.props.deleteQuestion(id, parent);
   };
 
+  onConfigBtnClick = (event, parent) => {
+    event.preventDefault();
+    this.props.click();
+    const { id } = this.editorPointer.current.props;
+    console.log("config elem details", this.editorPointer.current.props);
+    console.log("config parent", parent);
+    console.log("config props", this.props);
+    this.props.setCurrentEditor(id, parent);
+  };
+
   getChildContent = ({ value }) => {
     const { id } = this.childPointer.current.props;
     const content = Plain.serialize(value).split("\n");
@@ -77,14 +87,40 @@ class Class extends Component {
   showDeleteButton = (element, parent) => {
     if (!element.compactRequired) {
       return (
-        <a
-          className={Style.removeElem}
-          onClick={e => {
-            this.onDeleteBtnClick(e, parent);
-          }}
-        >
-          <i className="fa fa-times-circle"></i>
-        </a>
+        <div className={Style.controlCont}>
+          <a
+            className={Style.configElem}
+            onClick={e => {
+              this.onConfigBtnClick(e, parent);
+            }}
+          >
+            <i className="ion ion-ios-settings"></i>
+          </a>
+          <a
+            className={Style.removeElem}
+            onClick={e => {
+              this.onDeleteBtnClick(e, parent);
+            }}
+          >
+            <i className="ion ion-ios-close-outline"></i>
+          </a>
+          <div className={Style.clearfix}></div>
+        </div>
+      );
+    } else {
+      return (
+        <div className={Style.controlCont}>
+          <a
+            className={Style.configElem}
+            onClick={e => {
+              this.onConfigBtnClick(e, parent);
+            }}
+          >
+            <i className="ion ion-ios-settings"></i>
+          </a>
+
+          <div className={Style.clearfix}></div>
+        </div>
       );
     }
   };
@@ -160,6 +196,7 @@ class Class extends Component {
             >
               <i className="fa fa-times-circle"></i>
             </a> */}
+
             <SlateEditor
               id={this.props.element.id}
               type={this.props.element.type}

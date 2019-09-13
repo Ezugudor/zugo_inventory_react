@@ -17,13 +17,13 @@ export const Footer = props => (
       </div>
       <div className={Styles.FooterNavigiation}>
         <button
-          className="btn btn--primary btn--navigation"
+          className={`${Styles.btn} btn btn--navigation`}
           onClick={() => props.goToNextQuestion("up")}
         >
           <i className="fa fa-angle-up" />
         </button>
         <button
-          className="btn btn--primary btn--navigation"
+          className={`${Styles.btn} btn btn--navigation`}
           onClick={() => props.goToNextQuestion("down")}
         >
           <i className="fa fa-angle-down" />

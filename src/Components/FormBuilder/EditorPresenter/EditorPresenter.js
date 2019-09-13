@@ -16,7 +16,7 @@ class Class extends Component {
   render() {
     return (
       <section className={Style.editorPresenter}>
-        <div className={Style.editorsContainer}>
+        <div className={`${Style.editorsContainer} overflow_scroll`}>
           {this.props.formElements.map(ele => {
             //  don't show an editor for introduction
             if (ele.type === "introduction") return null;
@@ -26,30 +26,48 @@ class Class extends Component {
                 <Editor
                   ref={this.editorElement}
                   setQuestionProperty={this.props.setQuestionProperty}
+                  setCurrentEditor={this.props.setCurrentEditor}
                   setElementChildren={this.props.setElementChildren}
                   deleteQuestion={this.props.deleteQuestion}
                   element={ele}
                   key={ele.id}
+                  click={this.props.toggleConfigModal}
                 />
-                <a
-                  className={Style.removeElem}
-                  onClick={() => {
-                    this.deleteCompact(ele.id);
-                  }}
-                >
-                  <i className="fa fa-times-circle"></i>
-                </a>
+
+                <div className={Style.controlCont}>
+                  <a
+                    className={Style.configElem}
+                    onClick={e => {
+                      this.props.onConfigBtnClick(e);
+                    }}
+                  >
+                    <i className="ion ion-ios-settings"></i>
+                  </a>
+
+                  <a
+                    className={Style.removeElem}
+                    onClick={() => {
+                      this.deleteCompact(ele.id);
+                    }}
+                  >
+                    <i className="ion ion-ios-close-outline"></i>
+                  </a>
+
+                  <div className={Style.clearfix}></div>
+                </div>
                 <div className={Style.compactCont}>
                   {ele.children.map(child => {
                     return (
                       <Editor
                         ref={this.editorElement}
                         setQuestionProperty={this.props.setQuestionProperty}
+                        setCurrentEditor={this.props.setCurrentEditor}
                         setElementChildren={this.props.setElementChildren}
                         deleteQuestion={this.props.deleteQuestion}
                         element={child}
                         parent={ele}
                         key={child.id}
+                        click={this.props.toggleConfigModal}
                       />
                     );
                   })}
@@ -58,10 +76,12 @@ class Class extends Component {
             ) : (
               <Editor
                 setQuestionProperty={this.props.setQuestionProperty}
+                setCurrentEditor={this.props.setCurrentEditor}
                 setElementChildren={this.props.setElementChildren}
                 deleteQuestion={this.props.deleteQuestion}
                 element={ele}
                 key={ele.id}
+                click={this.props.toggleConfigModal}
               />
             );
           })}

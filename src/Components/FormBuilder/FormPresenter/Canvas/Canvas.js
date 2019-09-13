@@ -87,7 +87,7 @@ export class Canvas extends Component {
           <Header sectionData={this.getSectionData()} />
         </section>
         <section className={Style.InterectionSection}>
-          <div className={Style.Canvas}>
+          <div className={`${Style.Canvas} overflow_scroll`}>
             <main>
               {questions.map(question =>
                 renderQuestionFor({

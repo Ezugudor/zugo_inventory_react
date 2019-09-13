@@ -1,9 +1,10 @@
 @value Variables: "../../../../styles/Variables.css";
 @value small-gutterfrom,  medium-gutter Variables;
-@value primary-color, white-color from Variables;
+@value primary-color,fontFam-1, white-color from Variables;
 
 .Header {
   background-color: primary-color;
+  background-color: var(--color1);
   color: white-color;
   height: 9vh;
 }
@@ -40,11 +41,12 @@
 
 .Text {
   position: absolute;
-  top: 17px;
-  border: 0.5px solid;
+  top: 0px;
+  /* border: 0.5px solid; */
   padding: 0.2rem 2rem;
   border-radius: 30px;
   white-space: nowrap;
+  font-family: fontFam-1;
 }
 
 .RightSide {

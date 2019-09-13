@@ -1,16 +1,13 @@
-import IconStyle from "../../../../../styles/IconBackground.module.css";
+import IconStyle from "../../../../../styles/IconColor.module.css";
 import Style from "./Block.module.css";
 import PropTypes from "prop-types";
 import React from "react";
+import { imgToFontIcon } from "../../../../../utils";
 const view = props => (
   <div className={Style.Block} onClick={() => props.addElement(props.type)}>
     <div className={`${Style.IconBox} ${IconStyle[props.type]}`}>
       <div className={Style.IconHolder}>
-        <img
-          className={Style.Icon}
-          src={`/img/${props.type}.svg`}
-          alt={props.type}
-        />
+        {imgToFontIcon(props.type, Style.Icon)}
       </div>
     </div>
     <span className={Style.Text}>{props.name}</span>

@@ -3,9 +3,13 @@
 
 .Footer {
   background-color: tertiary-color;
+  background-color: var(--color4);
   width: 100%;
 }
-
+.btn {
+  background: var(--color1);
+  color: #fff;
+}
 .FooterContent {
   margin: 0 2rem;
   width: 100%;
@@ -14,7 +18,7 @@
 
 .FooterProgress {
   width: 81%;
-  color: secondary-color;
+  color: var(--color1);
 }
 
 .FooterNavigiation {
@@ -31,7 +35,7 @@ progress[value] {
 }
 
 progress::-webkit-progress-bar {
-  background: linear-gradient(primary-color, primary-color);
+  background: linear-gradient(var(--color1), var(--color1));
   border-radius: 3rem;
 }
 progress::-webkit-progress-value {
@@ -40,7 +44,7 @@ progress::-webkit-progress-value {
 }
 
 progress::-moz-progress-bar {
-  background: linear-gradient(primary-color, primary-color);
+  background: linear-gradient(var(--color1), var(--color1));
   border-radius: 3rem;
 }
 

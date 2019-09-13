@@ -1,7 +1,9 @@
 import { Email, User, Phone, Address, Signature } from "./fontIcons";
 import { Date, People, Card, List, Gender, Number } from "./fontIcons";
 import { MultiChoice, YesorNo, Dropdown, Calender } from "./fontIcons";
-import { Picture, Video, House } from "./fontIcons";
+import { Picture, Video, House, Statement } from "./fontIcons";
+import { Section, Introduction, Telephone, Country } from "./fontIcons";
+import { State, LGA } from "./fontIcons";
 import React from "react";
 /**
  * Checks the image name and use the value to get a font
@@ -24,7 +26,6 @@ export const imgToFontIcon = (iconType, iconStyle) => {
       return <Address style={`${iconStyle}`} />;
     case "number":
     case "account":
-    case "mobile":
     case "bvn":
       return <Number style={`${iconStyle}`} />;
     case "multichoice":
@@ -34,6 +35,7 @@ export const imgToFontIcon = (iconType, iconStyle) => {
     case "dropdown":
       return <Dropdown style={`${iconStyle}`} />;
     case "dob":
+    case "date":
       return <Calender style={`${iconStyle}`} />;
     case "picture":
     case "passport":
@@ -46,5 +48,22 @@ export const imgToFontIcon = (iconType, iconStyle) => {
       return <House style={`${iconStyle}`} />;
     case "creditcards":
       return <Card style={`${iconStyle}`} />;
+    case "statement":
+      return <Statement style={`${iconStyle}`} />;
+    case "section":
+      return <Section style={`${iconStyle}`} />;
+    case "introduction":
+      return <Introduction style={`${iconStyle}`} />;
+    case "phone":
+    case "mobile":
+      return <Phone style={`${iconStyle}`} />;
+    case "tel":
+      return <Telephone style={`${iconStyle}`} />;
+    case "country":
+      return <Country style={`${iconStyle}`} />;
+    case "state":
+      return <State style={`${iconStyle}`} />;
+    case "lga":
+      return <LGA style={`${iconStyle}`} />;
   }
 };

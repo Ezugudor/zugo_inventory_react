@@ -13,6 +13,10 @@ export const Phone = props => (
   <i className={`ion ion-ios-telephone-outline ${props.style}`}></i>
 );
 
+export const Telephone = props => (
+  <i className={`ion ion-iphone ${props.style}`}></i>
+);
+
 export const Signature = props => (
   <i className={`ion ion-compose ${props.style}`}></i>
 );
@@ -30,15 +34,15 @@ export const People = props => (
 export const Card = props => <i className={`ion ion-card ${props.style}`}></i>;
 
 export const List = props => (
-  <i className={`ion ion-ios-list-outline ${props.style}`}></i>
+  <i className={`ion ion-android-list ${props.style}`}></i>
 );
 
 export const Statement = props => (
-  <i className={`ion ion-ios-list-outline ${props.style}`}></i>
+  <i className={`ion ion-android-hangout ${props.style}`}></i>
 );
 
 export const Account = props => (
-  <i className={`ion ion-pound ${props.style}`}></i>
+  <i className={`ion ion-ios-calculator ${props.style}`}></i>
 );
 
 export const Gender = props => (
@@ -62,14 +66,12 @@ export const Dob = props => (
 );
 
 export const State = props => (
-  <i className={`ion ion-ios-list-outline ${props.style}`}></i>
+  <i className={`ion ion-android-map ${props.style}`}></i>
 );
 
-export const LGA = props => (
-  <i className={`ion ion-ios-list-outline ${props.style}`}></i>
-);
+export const LGA = props => <i className={`ion ion-map ${props.style}`}></i>;
 export const Number = props => (
-  <i className={`ion ion-pound ${props.style}`}></i>
+  <i className={`ion ion-ios-calculator ${props.style}`}></i>
 );
 
 export const MultiChoice = props => (
@@ -77,11 +79,11 @@ export const MultiChoice = props => (
 );
 
 export const YesorNo = props => (
-  <i className={`ion ion-wand ${props.style}`}></i>
+  <i className={`ion ion-contrast ${props.style}`}></i>
 );
 
 export const Dropdown = props => (
-  <i className={`ion ion-ios-arrow-down ${props.style}`}></i>
+  <i className={`ion ion-android-arrow-dropdown ${props.style}`}></i>
 );
 
 export const Calender = props => (
@@ -98,4 +100,16 @@ export const Video = props => (
 
 export const House = props => (
   <i className={`ion ion-ios-home-outline ${props.style}`}></i>
+);
+
+export const Section = props => (
+  <i className={`ion ion-android-funnel ${props.style}`}></i>
+);
+
+export const Introduction = props => (
+  <i className={`ion ion-speakerphone ${props.style}`}></i>
+);
+
+export const Country = props => (
+  <i className={`ion ion-android-globe ${props.style}`}></i>
 );

@@ -58,6 +58,7 @@
   -webkit-box-align: center;
   align-items: center;
   color: rgb(79, 176, 174);
+  color: var(--color3);
   font-size: 14px;
   line-height: 20px;
   height: 100%;

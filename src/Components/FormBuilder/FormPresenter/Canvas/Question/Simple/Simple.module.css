@@ -8,6 +8,7 @@
   width: 100%;
   font-family: inherit;
   color: rgb(79, 176, 174);
+  color: var(--color3);
   -webkit-appearance: none;
   font-size: 30px;
   line-height: 38px;
@@ -30,6 +31,7 @@
 
 .Answer:not(:focus) {
   box-shadow: rgba(79, 176, 174, 0.3) 0px 1px;
+  box-shadow: var(--color4) 0px 1px;
 }
 
 .inactiveWrapper {

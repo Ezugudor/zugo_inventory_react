@@ -28,7 +28,9 @@
   min-height: 40px;
   width: 100%;
   color: rgb(79, 176, 174);
+  color: var(--color3);
   background-color: rgb(237, 247, 247);
+  background-color: var(--color4);
   box-shadow: rgba(79, 176, 174, 0.6) 0px 0px 0px 1px inset;
   cursor: pointer;
   opacity: 1;

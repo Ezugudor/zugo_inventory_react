@@ -3,12 +3,21 @@
 @value small-gutter, typeform-border-color from Variables;
 .settings {
   border-right: 2px solid typeform-border-color;
-  height: 100%;
+  background: #dfdfbf;
+  background: #f2f2f2;
+  background: var(--color4);
+  width: 100%;
 }
-
-.openSection {
+.contentWrapper {
+  height: 100vh;
+  overflow-y: scroll;
+  outline: none;
+  padding: 20px;
+  padding: 10;
+}
+/* .openSection {
   width: 248px;
-}
+} */
 
 .HeadWrapper {
   width: 100%;
@@ -56,10 +65,4 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
-
-.contentWrapper {
-  height: 88%;
-  overflow: scroll;
-  outline: none;
 }

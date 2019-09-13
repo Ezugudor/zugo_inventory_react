@@ -28,4 +28,5 @@
   margin-left: 10px;
   display: inline-block;
   white-space: nowrap;
+  color: var(--color3);
 }

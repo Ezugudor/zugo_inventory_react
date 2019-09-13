@@ -3,6 +3,7 @@
 
 .Header {
   border-bottom: 3px solid tertiary-color-light;
+  border-bottom: 3px solid var(--color3);
 }
 
 .SectionTitle {

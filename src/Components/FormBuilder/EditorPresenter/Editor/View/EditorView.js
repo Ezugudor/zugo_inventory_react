@@ -1,7 +1,8 @@
-import IconStyle from "../../../../../styles/IconBackground.module.css";
+import IconStyle from "../../../../../styles/IconColor.module.css";
 import Style from "./EditorView.module.css";
 import PropTypes from "prop-types";
 import React from "react";
+import { imgToFontIcon } from "../../../../../utils";
 
 const view = props => (
   <div className={Style.editorWrapper}>
@@ -11,13 +12,9 @@ const view = props => (
           className={`${Style.iconContents} ${IconStyle[props.element.type]}`}
         >
           <div className={Style.iconHolder}>
-            <img
-              className={Style.icon}
-              src={`/img/${props.element.type}.svg`}
-              alt="sign"
-            />
-            <div className={Style.position}>{props.element.position}</div>
+            {imgToFontIcon(props.element.type, Style.Icon)}
           </div>
+          {/* <div className={Style.iconHolder}></div> */}
         </div>
       </div>
       <div className={Style.question}>

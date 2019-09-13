@@ -7,15 +7,20 @@ import {
   resetPosition
 } from "../../utils";
 import { generateBankLocationQuestion, hasQuestion } from "../../utils";
-import { getNewForm, getBuilderState } from "../../store/selectors";
+import {
+  getNewForm,
+  getBuilderState,
+  getBusinessColor
+} from "../../store/selectors";
 import { preserveNewForm, createForm, updateForm } from "../../store/actions";
 import { preserveFormBuilderState } from "../../store/actions";
 import { FormBuilderView } from "../../Components/FormBuilder";
 import { getNextPosition, getChildIndex } from "../../utils";
-import { getBranches } from "../../store/selectors";
+import { getBranches, getCurrentUser } from "../../store/selectors";
 import React, { Component } from "react";
 import { slugName } from "../../utils";
 import { connect } from "react-redux";
+import { themeMaker } from "../../utils";
 
 class Class extends Component {
   state = {
@@ -23,6 +28,7 @@ class Class extends Component {
     showSettingsWindow: true,
     showLoading: false,
     currentElement: {},
+    showConfigModal: false,
     formElements: []
   };
 
@@ -39,6 +45,9 @@ class Class extends Component {
       stateUpdates = { ...stateUpdates, ...this.props.builderState };
     }
     this.setState(stateUpdates);
+
+    const { businessColor } = this.props;
+    themeMaker(businessColor);
   }
 
   componentDidUpdate() {
@@ -71,6 +80,15 @@ class Class extends Component {
   toggleLoading = () => {
     this.setState(prevState => ({
       showLoading: !prevState.showLoading
+    }));
+  };
+
+  /**
+   * open and close the the individual form compponent config modal ui
+   */
+  toggleConfigModal = () => {
+    this.setState(prevState => ({
+      showConfigModal: !prevState.showConfigModal
     }));
   };
   /**
@@ -123,20 +141,63 @@ class Class extends Component {
    * @param {string} id id of the question whose property is to be set
    * @param {string} value the property value to set
    */
-  setQuestionProperty = (name, id, value, parent) => {
+  setQuestionProperty = (name, id, value, parent = null) => {
+    console.log("logging element value", value);
+    let cE = { ...this.state.currentElement };
+    console.log("logging current element orig", this.state.currentElement);
+    console.log("logging current element from setQuestionProperty", cE);
+    cE[name] = value;
+    this.setState({
+      currentElement: cE
+    });
+    // if (parent) {
+    //   return this.setQuestionChildProperty(name, id, value, parent);
+    // }
+    // const questions = [...this.state.formElements];
+    // const questionIdex = questions.findIndex(el => el.id === id);
+    // if (questionIdex === -1) return;
+    // const question = questions[questionIdex];
+    // question[name] = value;
+    // questions[questionIdex] = question;
+    // this.preserveState(question, questions);
+    // this.setState({
+    //   currentElement: question,
+    //   formElements: questions
+    // });
+  };
+
+  /**
+   * Set the currentElement
+   * @param {string} id id of the question whose property is to be set
+   * @param {string} value the property value to set
+   */
+  setCurrentEditor = (id, parent) => {
+    // alert(parent);
     if (parent) {
-      return this.setQuestionChildProperty(name, id, value, parent);
+      return this.setCurrentEditorCompact(id, parent);
     }
     const questions = [...this.state.formElements];
     const questionIdex = questions.findIndex(el => el.id === id);
     if (questionIdex === -1) return;
     const question = questions[questionIdex];
-    question[name] = value;
-    questions[questionIdex] = question;
-    this.preserveState(question, questions);
+    console.log("found question object", question);
+    console.log("found qID", id);
     this.setState({
-      currentElement: question,
-      formElements: questions
+      currentElement: question
+    });
+    setTimeout(() => {
+      console.log("found currently set element", this.state.currentElement);
+    }, 10);
+  };
+
+  setCurrentEditorCompact = (id, parent) => {
+    const childQuestions = [...parent.children];
+    const cQIndex = childQuestions.findIndex(el => el.id === id);
+    if (cQIndex === -1) return;
+    const childQuestion = childQuestions[cQIndex];
+
+    this.setState({
+      currentElement: childQuestion
     });
   };
 
@@ -220,14 +281,10 @@ class Class extends Component {
         child,
         currentElement.type
       );
-      // console.log("Compact current Element", currentElement);
-      // console.log("Compact parent container", currentElement.children);
-      // console.log("Compact parent container s", currentElement.children[0]);
-      // console.log("New generated question", question);
+
       currentElement.children.push(question);
-      // console.log("Compact current Element after push", currentElement);
     }
-    // console.log("Check questions after push", questions);
+
     this.setState({ formElements: questions });
     this.preserveState(currentElement, questions);
   };
@@ -259,7 +316,10 @@ class Class extends Component {
     element.validationRules = rules;
     elements[elementIdex] = element;
     this.preserveState(element, elements);
-    this.setState({ formElements: elements });
+    this.setState({
+      currentElement: element,
+      formElements: elements
+    });
   };
 
   /**
@@ -380,6 +440,7 @@ class Class extends Component {
     return (
       <FormBuilderView
         showSettingsWindow={this.state.showSettingsWindow}
+        showConfigModal={this.state.showConfigModal}
         settingsWindowName={this.state.settingsWindowName}
         addQuestionIntroChild={this.addQuestionIntroChild}
         addCompactQuestionChild={this.addCompactQuestionChild}
@@ -397,6 +458,8 @@ class Class extends Component {
         save={this.createForm}
         showLoading={this.state.showLoading}
         toggleLoading={this.toggleLoading}
+        toggleConfigModal={this.toggleConfigModal}
+        currentUser={this.props.currentUser}
       />
     );
   }
@@ -404,11 +467,21 @@ class Class extends Component {
 
 const mapStateToProps = state => ({
   builderState: getBuilderState(state),
+  currentUser: getCurrentUser(state),
   branches: getBranches(state),
-  newForm: getNewForm(state)
+  newForm: getNewForm(state),
+  businessColor: getBusinessColor(state)
 });
 
 export const FormBuilder = connect(
   mapStateToProps,
   { preserveNewForm, createForm, updateForm, preserveFormBuilderState }
 )(Class);
+// const mapStateToProps = state => ({
+//   partiallyProcessed: getPartiallyProcessedResponses(state),
+//   processed: getProcessedResponses(state),
+//   pending: getUnreadResponses(state),
+//   currentUser: getCurrentUser(state),
+//   businessId: getBusinessId(state),
+//   businessColor: getBusinessColor(state)
+// });

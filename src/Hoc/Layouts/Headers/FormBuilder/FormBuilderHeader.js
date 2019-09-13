@@ -12,9 +12,9 @@ import React from "react";
 export const FormBuilderHeader = props => (
   <header className={Style.Header}>
     <div className={Style.LeftSide}>
-      <div className={Style.LogoBox}>
+      {/* <div className={Style.LogoBox}>
         <Logo />
-      </div>
+      </div> */}
       <div className={Style.ParentLinkBox}>
         <NavLink to="/formtypes">
           <img className={Style.LinkIcon} src={gridIcon} alt="Icon" />

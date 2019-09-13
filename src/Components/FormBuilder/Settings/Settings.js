@@ -18,7 +18,7 @@ const buildStyle = props => {
 export const Setting = props =>
   props.showSettingsWindow ? (
     <section className={buildStyle(props)}>
-      <div className={Style.HeadWrapper}>
+      {/* <div className={Style.HeadWrapper}>
         <div className={Style.Head}>
           <span className={Style.OperationName}>
             {props.settingsWindowName}
@@ -27,8 +27,8 @@ export const Setting = props =>
             <span className={Style.Close}>X</span>
           </div>
         </div>
-      </div>
-      <div className={Style.contentWrapper}>
+      </div> */}
+      <div className={`${Style.contentWrapper} overflow_scroll`}>
         {props.settingsWindowName === "build" ? (
           <Blocks {...props} />
         ) : props.currentElement.type === "introduction" ? (

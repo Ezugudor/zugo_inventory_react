@@ -1,0 +1,16 @@
+.AdminLayout {
+  display: flex;
+  height: calc(100vh - 9vh);
+  width: 100%;
+  font-family: assistant;
+}
+
+.ChildContent {
+  width: 100%;
+  /* margin-left: 3rem; */
+}
+
+.right {
+  /* width:86%; */
+  flex: 10;
+}

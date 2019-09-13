@@ -1,0 +1,112 @@
+.introduction {
+  color: #f15c90;
+}
+
+.signature {
+  color: #286107;
+}
+
+.statement {
+  color: #67e5fc;
+}
+
+.account {
+  color: #b90707;
+}
+
+.video,
+.picture {
+  color: black;
+}
+
+.gender {
+  color: #07b9b9;
+}
+
+.shorttext {
+  color: #e4c601;
+}
+
+.longtext {
+  color: #707070;
+}
+
+.address {
+  color: #4199f5;
+}
+
+.mobile {
+  color: #ada7fa;
+}
+
+.tel {
+  color: #5631e9;
+}
+
+.creditcards {
+  color: #11a089;
+}
+
+.section {
+  color: #4a1a3f;
+}
+
+.date {
+  color: #201266;
+}
+
+.dob {
+  color: #f34247;
+}
+
+.number {
+  color: #e04f78;
+}
+
+.state {
+  color: #124766;
+}
+
+.branch {
+  color: #124766;
+}
+
+.country {
+  color: #d59540;
+}
+
+.lga {
+  color: #24645a;
+}
+
+.email {
+  color: #38003c;
+}
+
+.yesorno {
+  color: #e96d31;
+}
+
+.multichoice {
+  color: #4fa9b3;
+}
+
+.dropdown {
+  color: #58457a;
+}
+
+.passport {
+  color: #409fd5;
+}
+
+.firstname {
+  color: #ee55da;
+}
+
+.bvn {
+  color: #118da0;
+}
+
+.lastname {
+  color: #6d1361;
+}

@@ -32,11 +32,14 @@
   font-weight: normal;
   line-height: 1.25;
   border-color: rgba(79, 176, 174, 0.4);
+  border-color: var(--color3);
   color: #4fb0ae;
+  color: var(--color3);
 }
 
 .Answer:not(:focus) {
   box-shadow: rgba(79, 176, 174, 0.3) 0px 1px;
+  box-shadow: var(--color4) 0px 1px;
 }
 
 .AnwerHint {
@@ -46,6 +49,7 @@
   line-height: 1;
   font-weight: 400;
   padding: 0;
+  color: var(--color3);
 }
 
 .inactiveWrapper {

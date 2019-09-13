@@ -4,33 +4,70 @@
 .editorPresenter {
   z-index: 100;
   position: relative;
-  width: 35%;
-  height: 100%;
-  border-right: 2px solid typeform-border-color;
+  width: 100%;
+  height: 100vh;
+
+  /* border-right: 2px solid typeform-border-color; */
 }
 .editorsContainer {
   max-height: 100%;
   padding-bottom: 100%;
   position: relative;
   padding-top: thin-gutter;
-  overflow: scroll;
+  overflow-y: scroll;
+  padding: 40px;
+  padding-right: 60px;
 }
-.removeElem {
-  position: absolute;
-  right: 6px;
-  top: 22px;
-  color: red;
-  cursor: pointer;
-  z-index: 2000;
-}
+
 .compactCont {
-  border: 1px solid #ccc;
-  margin: 0px 20px;
-  border-radius: 10px;
+  /* border-left: 1px solid #ccc; */
+  /* border-bottom: 1px solid #ccc; */
+  margin-left: 40px;
+  /* border-radius: 4px; */
   margin-bottom: 20px;
   position: relative;
-  background: #fff8bc;
+  background: #fafafa;
+  padding-right: 40px;
 }
 .compactAllCont {
   position: relative;
+}
+
+.controlCont {
+  position: absolute;
+  right: -18px;
+  top: 28px;
+  z-index: 2000;
+}
+
+.removeElem,
+.configElem {
+  float: left;
+  cursor: pointer;
+  border: 1px solid #eee;
+  padding: 2px 8px 0px;
+  border: 1px solid #eee;
+  box-shadow: inset 0px 0px 3px var(--color1);
+  box-shadow: 0px 0px 3px #ccc;
+  border-radius: 5px;
+  z-index: 999;
+  background: #fff;
+}
+.removeElem:hover,
+.configElem:hover {
+  box-shadow: 0px 0px 10px #ccc;
+}
+.removeElem:active,
+.configElem:active {
+  box-shadow: inset 0px 0px 3px #ccc;
+}
+.configElem {
+  margin-right: 15px;
+}
+.removeElem {
+  color: red;
+}
+
+.clearfix {
+  clear: both;
 }

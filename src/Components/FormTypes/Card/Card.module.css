@@ -41,5 +41,6 @@
   font-family: fontFam-1;
   /* color: #f50030; */
   color: var(--color1);
+  /* color: #000; */
   font-weight: bolder;
 }
