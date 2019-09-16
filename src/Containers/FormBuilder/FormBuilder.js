@@ -100,14 +100,15 @@ class Class extends Component {
     const question = generateNewQuestion(type, position, this.props.branches);
     const questions = [...this.state.formElements];
     const introIndex = getIntroIndex(questions);
-
-    if (type === "introduction" && introIndex !== -1) {
-      return this.setState({
-        settingsWindowName: "configuration",
-        currentElement: question,
-        showSettingsWindow: true
-      });
-    }
+    console.log("questions in the form element ", questions);
+    // alert(introIndex);
+    // if (type === "introduction" && introIndex !== -1) {
+    //   return this.setState({
+    //     settingsWindowName: "configuration",
+    //     currentElement: question,
+    //     showConfigModal: true
+    //   });
+    // }
 
     if (type === "address" || type === "branch") {
       const defaultChildren = generateRequiredChildren(
@@ -123,10 +124,11 @@ class Class extends Component {
 
     if (type === "introduction" || type === "address" || type === "branch") {
       return this.setState({
-        settingsWindowName: "configuration",
+        // settingsWindowName: "configuration",
         currentElement: question,
-        showSettingsWindow: true,
-        formElements: questions
+        // showSettingsWindow: true,
+        formElements: questions,
+        showConfigModal: true
       });
     }
 
@@ -326,7 +328,7 @@ class Class extends Component {
    * Delete a question from form elements
    * @param {string} questionId
    */
-  deleteQuestion = (questionId, parent) => {
+  deleteQuestion = (questionId, parent = null) => {
     if (parent) {
       this.deleteCompactChildQuestion(questionId, parent);
       return;

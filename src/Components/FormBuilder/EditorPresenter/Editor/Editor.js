@@ -118,7 +118,6 @@ class Class extends Component {
           >
             <i className="ion ion-ios-settings"></i>
           </a>
-
           <div className={Style.clearfix}></div>
         </div>
       );

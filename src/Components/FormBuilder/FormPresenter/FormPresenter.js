@@ -29,6 +29,7 @@ export class FormPresenter extends Component {
               toggleIntro={this.toggleIntro}
               formName={this.props.formName}
               questionIntro={questionIntro}
+              deleteQuestion={this.props.deleteQuestion}
             />
           </section>
         ) : (

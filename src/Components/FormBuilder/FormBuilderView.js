@@ -65,6 +65,7 @@ export class FormBuilderView extends Component {
               <FormPresenter
                 elements={this.props.formElements}
                 formName={this.props.formName}
+                deleteQuestion={this.props.deleteQuestion}
               />
             </div>
           </div>
