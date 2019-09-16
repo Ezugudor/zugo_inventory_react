@@ -130,12 +130,12 @@ export const updateUser = details => {
 export const changeBranch = details => {
   return dispatch => {
     dispatch(startNetworkRequest());
-    SwypPartnerApi.put("businesses/updatebranch", details)
+    SwypPartnerApi.put("branch/updatebranch", details)
       .then(res => {
         dispatch(stopNetworkRequest());
         dispatch(updateBusiness(res.data));
         dispatch(
-          setNotificationMessage("vBranch changed Successfully", "success")
+          setNotificationMessage("Branch updated Successfully", "success")
         );
       })
       .catch(err => handleError(err, dispatch));

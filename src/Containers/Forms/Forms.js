@@ -18,7 +18,8 @@ import { themeMaker } from "../../utils";
 export class Class extends Component {
   state = {
     showNewForm: false,
-    newFormName: ""
+    newFormName: "",
+    showNotification: false
   };
 
   componentWillMount() {
@@ -33,6 +34,23 @@ export class Class extends Component {
 
   setNewFormName = e => {
     this.setState({ newFormName: e.target.value });
+  };
+
+  popupTimer = props => {
+    if (props.closeTime) {
+      setTimeout(() => {
+        this.toggleNotification();
+      }, props.closeTime);
+    }
+  };
+
+  /**
+   * open and close the the progress ui
+   */
+  toggleNotification = () => {
+    this.setState(prevState => ({
+      showNotification: !prevState.showNotification
+    }));
   };
 
   toggleNewForm = () => {
@@ -87,6 +105,8 @@ export class Class extends Component {
         formType={this.formType}
         forms={forms}
         currentUser={this.props.currentUser}
+        showNotification={this.state.showNotification}
+        popupTimer={this.popupTimer}
       />
     );
   }

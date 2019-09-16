@@ -18,7 +18,9 @@ class Class extends Component {
     showCreateBranch: false,
     showDeleteBranch: false,
     showChangeBranch: false,
+    showNotification: false,
     branchToDelete: {},
+    branchToChange: {},
     LGA: [],
     newBranch: {
       name: "",
@@ -37,6 +39,24 @@ class Class extends Component {
     const { businessColor } = this.props;
     themeMaker(businessColor);
   }
+
+  popupTimer = props => {
+    if (props.closeTime) {
+      setTimeout(() => {
+        this.toggleNotification();
+      }, props.closeTime);
+    }
+  };
+
+  /**
+   * open and close the the progress ui
+   */
+  toggleNotification = () => {
+    this.setState(prevState => ({
+      showNotification: !prevState.showNotification
+    }));
+  };
+
   /**
    * show create new branch modal
    */
@@ -62,18 +82,45 @@ class Class extends Component {
   };
 
   /**
+   * build up edit user properties
+   * @param {string} key propterty name to set
+   * @param {string} value the value set key to
+   */
+  setEditBranchDetail = (name, value) => {
+    const newBranch = { ...this.state.branchToChange };
+
+    newBranch[name] = value;
+    this.setState({ branchToChange: newBranch });
+  };
+
+  getStateLGA = stateID => {
+    return countryStates.find(o => {
+      return o.state.id == stateID;
+    }).state.locals;
+  };
+
+  getStateName = stateID => {
+    return countryStates.find(o => {
+      return o.state.id == stateID;
+    }).state.name;
+  };
+  /**
    * set LGAs of a selected state
    * @param {string} stateId propterty name to set
    * Ezugudor addendum
    */
-  setSelectedLGA = stateId => {
-    const state = countryStates.find(o => {
-      return o.state.id == stateId;
-    }).state;
-    const LGA = state.locals;
-    const stateName = state.name;
-    this.setNewBranchDetail([{ stateId: stateId }, { state: stateName }]);
-    this.setState({ LGA });
+  setSelectedLGA = (stateId, mode = null) => {
+    const LGA = this.getStateLGA(stateId);
+    const stateName = this.getStateName(stateId);
+    if (mode) {
+      const newBranch = { ...this.state.branchToChange };
+      newBranch["state"] = stateName;
+      // newBranch["area"] = LGA;
+      this.setState({ branchToChange: newBranch, LGA });
+    } else {
+      this.setNewBranchDetail([{ stateId: stateId }, { state: stateName }]);
+      this.setState({ LGA });
+    }
   };
 
   /**
@@ -128,6 +175,17 @@ class Class extends Component {
   };
 
   /**
+   * pick the branch to edit
+   * @param {object} branch branch object to be deleted
+   */
+  setBranchToChange = branch => {
+    console.log("toggle branch dteails", branch);
+    const LGA = this.getStateLGA(branch.stateId);
+    this.setState({ branchToChange: branch, LGA });
+    this.toggleChangeBranch();
+  };
+
+  /**
    * delete a team branch
    */
   deleteBranch = () => {
@@ -172,18 +230,29 @@ class Class extends Component {
    */
   changeUserBranch = () => {
     const { currentUser } = this.props;
-    const { user, branch } = this.state.branchChangeDetails;
+    const branch = { ...this.state.branchToChange };
+    // console.log("propz.. final form info", this.state.newBranch);
+    // console.log("propz.. final form ff", this.state.branchToChange);
+    console.log("propz.. final form branchz");
+    console.log("propz.. final form branch", branch);
+    console.log("propz.. final form user", currentUser);
+    // return;
     if (currentUser.role !== "admin") {
       return alert("You don't have access to perform this operation");
     }
-    if (user.role === "admin") {
-      alert("You cannot change an admin branch", "error");
-      return this.toggleChangeBranch();
-    }
+
     if (!branch) {
-      return alert("You need to pick new branch", "error");
+      // return alert("You need to pick new branch", "error");
     }
-    const details = { userId: user.id, branch };
+
+    const origin = `${window.location.origin}/branch`;
+    const { deletedBy, _id, ...selectedDetails } = branch;
+    const details = {
+      business: this.props.businessId,
+      origin,
+      id: _id,
+      ...selectedDetails
+    };
     this.toggleChangeBranch();
     this.props.changeBranch(details);
   };
@@ -194,14 +263,19 @@ class Class extends Component {
         showChangeBranch={this.state.showChangeBranch}
         showCreateBranch={this.state.showCreateBranch}
         showDeleteBranch={this.state.showDeleteBranch}
+        showNotification={this.state.showNotification}
         setNewBranchDetail={this.setNewBranchDetail}
+        setEditBranchDetail={this.setEditBranchDetail}
         setSelectedLGA={this.setSelectedLGA}
         LGA={this.state.LGA}
+        popupTimer={this.popupTimer}
         toggleCreateBranch={this.toggleCreateBranch}
         toggleChangeBranch={this.toggleChangeBranch}
         toggleDeleteBranch={this.toggleDeleteBranch}
         setBranchToDelete={this.setBranchToDelete}
+        setBranchToChange={this.setBranchToChange}
         branchToDelete={this.state.branchToDelete}
+        branchToChange={this.state.branchToChange}
         currentUser={this.props.currentUser}
         changeBranch={this.changeUserBranch}
         deleteBranch={this.deleteBranch}

@@ -5,6 +5,7 @@ import { ResponseAside } from "./Aside";
 import { Ansewers } from "./Answers";
 import PropTypes from "prop-types";
 import { Info } from "./Info";
+import { Notification } from "../Utils";
 import React from "react";
 
 export const ResponsesView = props => (
@@ -19,6 +20,13 @@ export const ResponsesView = props => (
         </div>
       </section>
     </div>
+    <Notification
+      showNotification={props.showNotification}
+      timer={props.popupTimer}
+      toggleLoading={props.toggleNotification}
+      title={"Default Title"}
+      message={"Default Body Message"}
+    />
   </AdminLayout>
 );
 ResponsesView.propTypes = {

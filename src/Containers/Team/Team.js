@@ -49,7 +49,7 @@ class Class extends Component {
     themeMaker(businessColor);
   }
 
-  timer = props => {
+  popupTimer = props => {
     if (props.closeTime) {
       setTimeout(() => {
         this.toggleNotification();
@@ -280,7 +280,7 @@ class Class extends Component {
         showUpdateUser={this.state.showUpdateUser}
         showCreateMember={this.state.showCreateMember}
         showNotification={this.state.showNotification}
-        timer={this.timer}
+        popupTimer={this.popupTimer}
         showDeleteMember={this.state.showDeleteMember}
         setNewBranchDetail={this.setNewBranchDetail}
         setUpdateUserDetail={this.setUpdateUserDetail}

@@ -5,6 +5,7 @@ import { NewForm } from "./NewForm";
 import PropTypes from "prop-types";
 import { Cards } from "./Cards";
 import React from "react";
+import { Notification } from "../Utils";
 import Styles from "./FormsView.module.css";
 
 export const FormsView = props => (
@@ -24,6 +25,13 @@ export const FormsView = props => (
         showNewForm={props.showNewForm}
         showBuilder={props.showBuilder}
         name={props.name}
+      />
+      <Notification
+        showNotification={props.showNotification}
+        timer={props.popupTimer}
+        toggleLoading={props.toggleNotification}
+        title={"Default Title"}
+        message={"Default Body Message"}
       />
     </div>
   </AdminLayout>

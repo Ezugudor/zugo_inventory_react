@@ -50,11 +50,10 @@ export const TeamView = props => (
       />
       <Notification
         showNotification={props.showNotification}
-        timer={props.timer}
+        timer={props.popupTimer}
         toggleLoading={props.toggleNotification}
-        title={"please this title"}
-        message={"message me"}
-        // closeTime={3000}
+        title={"Default Title"}
+        message={"Default Body Message"}
       />
     </div>
   </AdminLayout>

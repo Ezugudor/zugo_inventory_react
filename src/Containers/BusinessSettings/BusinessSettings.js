@@ -16,6 +16,7 @@ class Class extends Component {
   state = {
     businessDescription: "",
     loading: 0,
+    showNotification: false,
     logoUrl: ""
   };
 
@@ -23,6 +24,23 @@ class Class extends Component {
     const { businessColor } = this.props;
     themeMaker(businessColor);
   }
+
+  popupTimer = props => {
+    if (props.closeTime) {
+      setTimeout(() => {
+        this.toggleNotification();
+      }, props.closeTime);
+    }
+  };
+
+  /**
+   * open and close the the progress ui
+   */
+  toggleNotification = () => {
+    this.setState(prevState => ({
+      showNotification: !prevState.showNotification
+    }));
+  };
   /**
    * set value of business description
    * @param {eventObject} e
@@ -68,6 +86,8 @@ class Class extends Component {
         handleUpload={this.uploadLogo}
         progress={this.state.loading}
         logoUrl={this.state.logoUrl}
+        showNotification={this.state.showNotification}
+        popupTimer={this.popupTimer}
       />
     );
   }

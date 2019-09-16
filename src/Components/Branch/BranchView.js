@@ -11,6 +11,7 @@ import { JQDatatable } from "../../plugins";
 import PropTypes from "prop-types";
 import React from "react";
 import { White } from "../Utils/Buttons";
+import { Notification } from "../Utils";
 
 export const BranchView = props => (
   <AdminLayout pageName="branch">
@@ -39,16 +40,26 @@ export const BranchView = props => (
       />
       <ChangeBranch
         setNewBranchDetail={props.setNewBranchDetail}
+        setEditBranchDetail={props.setEditBranchDetail}
         toggleChangeBranch={props.toggleChangeBranch}
         showChangeBranch={props.showChangeBranch}
+        setSelectedLGA={props.setSelectedLGA}
+        LGA={props.LGA}
         changeBranch={props.changeBranch}
         branches={props.branches}
+        branchToChange={props.branchToChange}
       />
       <DeleteBranch
         toggleDeleteBranch={props.toggleDeleteBranch}
         showDeleteBranch={props.showDeleteBranch}
         branchToDelete={props.branchToDelete}
         deleteBranch={props.deleteBranch}
+      />
+      <Notification
+        showNotification={props.showNotification}
+        timer={props.popupTimer}
+        title={"Default Title"}
+        message={"Default body message"}
       />
     </div>
   </AdminLayout>
@@ -68,8 +79,10 @@ const showTeamMembers = props => {
           <ActionBtns
             setNewBranchDetail={props.setNewBranchDetail}
             toggleDeleteBranch={props.toggleDeleteBranch}
+            toggleChangeBranch={props.toggleChangeBranch}
             setBranchToDelete={props.setBranchToDelete}
-            branch={props.branches}
+            setBranchToChange={props.setBranchToChange}
+            branch={branch}
           />
         </div>
       )

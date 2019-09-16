@@ -2,12 +2,12 @@
 @value white-color, typeform-border-color from Variables;
 
 .section {
-  height: 63vh;
-  min-height: 59rem;
   background-color: white-color;
   border-radius: 9px;
   width: 50%;
   margin: 0 auto;
+  height: 23vh;
+  min-height: 21rem;
 }
 
 .text {
@@ -29,11 +29,6 @@
   outline: none;
   font-size: 1.5rem;
   padding-left: 2rem;
-}
-
-.input::-webkit-inner-spin-button {
-  display: none;
-  -webkit-appearance: none;
 }
 
 .input::-webkit-input-placeholder {

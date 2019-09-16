@@ -9,11 +9,11 @@ export const ActionBtns = props => (
       <div className={styles.branchControls}>
         {/* <span className="branch__tooltip">Change Branch</span> */}
         <div
-          onClick={() => props.setNewBranchDetail("user", props.branch, true)}
+          onClick={() => props.setBranchToChange(props.branch)}
           className={styles.iconHolder}
         >
           {/* <img src={penImage} className={styles.icon} alt="Edit icon" /> */}
-          <i className={`ion ion-ios-trash ${styles.icon} ${styles.red}`}></i>
+          <i className={`ion ion-edit ${styles.icon} `}></i>
         </div>
       </div>
       <div className={styles.branchControls}>
@@ -23,7 +23,7 @@ export const ActionBtns = props => (
           className={styles.iconHolder}
         >
           {/* <img src={trashcanImage} className={styles.icon} alt="Delete icon" /> */}
-          <i className={`ion ion-edit ${styles.icon}`}></i>
+          <i className={`ion ion-ios-trash ${styles.icon} ${styles.red}`}></i>
         </div>
       </div>
       <div className={styles.clearFix}></div>

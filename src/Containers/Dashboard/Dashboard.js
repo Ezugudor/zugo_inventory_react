@@ -16,7 +16,8 @@ class Class extends Component {
   state = {
     endDate: "",
     startDate: "",
-    responseTabToShow: "pending"
+    responseTabToShow: "pending",
+    showNotification: false
   };
 
   switchResponseTab = tabName => {
@@ -35,6 +36,23 @@ class Class extends Component {
     themeMaker(businessColor);
     this.props.fetchResponseByStatus(businessId);
   }
+
+  popupTimer = props => {
+    if (props.closeTime) {
+      setTimeout(() => {
+        this.toggleNotification();
+      }, props.closeTime);
+    }
+  };
+
+  /**
+   * open and close the the progress ui
+   */
+  toggleNotification = () => {
+    this.setState(prevState => ({
+      showNotification: !prevState.showNotification
+    }));
+  };
 
   filterResponse = () => {
     const { startDate, endDate } = this.state;
@@ -60,6 +78,8 @@ class Class extends Component {
         pending={this.props.pending}
         endDate={this.state.endDate}
         currentUser={this.props.currentUser}
+        showNotification={this.state.showNotification}
+        popupTimer={this.popupTimer}
       />
     );
   }

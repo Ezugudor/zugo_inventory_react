@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { Cards } from "./Cards";
 import React from "react";
 import Styles from "./FormTypesView.module.css";
+import { Notification } from "../Utils";
 
 export const FormTypeView = props => (
   <AdminLayout pageName="formType" currentUser={props.currentUser}>
@@ -14,6 +15,13 @@ export const FormTypeView = props => (
       />
       <Cards formTypes={props.formTypes} viewForms={props.viewForms} />
     </div>
+    <Notification
+      showNotification={props.showNotification}
+      timer={props.popupTimer}
+      toggleLoading={props.toggleNotification}
+      title={"Default Title"}
+      message={"Default Body Message"}
+    />
   </AdminLayout>
 );
 

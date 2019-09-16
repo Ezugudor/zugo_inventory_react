@@ -8,6 +8,7 @@ import { NewNote } from "./NewNote";
 import PropTypes from "prop-types";
 import { Notes } from "./Notes";
 import React from "react";
+import { Notification } from "../Utils";
 
 export const FormResponseView = props => (
   <AdminLayout pageName="Account Opening" currentUser={props.currentUser}>
@@ -49,6 +50,13 @@ export const FormResponseView = props => (
         responseId={props.response.id}
       />
       <NewNote {...props} />
+      <Notification
+        showNotification={props.showNotification}
+        timer={props.popupTimer}
+        toggleLoading={props.toggleNotification}
+        title={"Default Title"}
+        message={"Default Body Message"}
+      />
     </div>
   </AdminLayout>
 );

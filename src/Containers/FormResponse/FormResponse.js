@@ -13,6 +13,7 @@ export class Class extends Component {
   state = {
     showOfficialSectionUI: false,
     showNewNote: false,
+    showNotification: false,
     newNote: ""
   };
 
@@ -20,6 +21,23 @@ export class Class extends Component {
     const { businessColor } = this.props;
     themeMaker(businessColor);
   }
+
+  popupTimer = props => {
+    if (props.closeTime) {
+      setTimeout(() => {
+        this.toggleNotification();
+      }, props.closeTime);
+    }
+  };
+
+  /**
+   * open and close the the progress ui
+   */
+  toggleNotification = () => {
+    this.setState(prevState => ({
+      showNotification: !prevState.showNotification
+    }));
+  };
 
   /**
    * show model for a user to add note on a user
@@ -89,6 +107,8 @@ export class Class extends Component {
         response={this.props.response}
         createNote={this.createNote}
         responseType={type}
+        showNotification={this.state.showNotification}
+        popupTimer={this.popupTimer}
       />
     );
   }

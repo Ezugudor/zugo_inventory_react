@@ -13,7 +13,8 @@ import { themeMaker } from "../../utils";
 
 class Class extends Component {
   state = {
-    tabToShow: "individual"
+    tabToShow: "individual",
+    showNotification: false
   };
 
   componentDidMount() {
@@ -22,6 +23,22 @@ class Class extends Component {
     themeMaker(businessColor);
   }
 
+  popupTimer = props => {
+    if (props.closeTime) {
+      setTimeout(() => {
+        this.toggleNotification();
+      }, props.closeTime);
+    }
+  };
+
+  /**
+   * open and close the the progress ui
+   */
+  toggleNotification = () => {
+    this.setState(prevState => ({
+      showNotification: !prevState.showNotification
+    }));
+  };
   switchTab = text => {
     text = text.replace(/\d/g, "").toLowerCase();
     this.setState({ tabToShow: text });
@@ -50,6 +67,8 @@ class Class extends Component {
         switchTab={this.switchTab}
         viewForms={this.goToForms}
         currentUser={this.props.currentUser}
+        showNotification={this.state.showNotification}
+        popupTimer={this.popupTimer}
       />
     );
   }
