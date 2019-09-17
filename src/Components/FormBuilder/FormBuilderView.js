@@ -66,6 +66,8 @@ export class FormBuilderView extends Component {
                 elements={this.props.formElements}
                 formName={this.props.formName}
                 deleteQuestion={this.props.deleteQuestion}
+                setCurrentEditor={this.props.setCurrentEditor}
+                toggleConfigModal={this.props.toggleConfigModal}
               />
             </div>
           </div>

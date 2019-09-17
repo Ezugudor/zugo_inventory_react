@@ -173,7 +173,7 @@ class Class extends Component {
    * @param {string} id id of the question whose property is to be set
    * @param {string} value the property value to set
    */
-  setCurrentEditor = (id, parent) => {
+  setCurrentEditor = (id, parent = null) => {
     // alert(parent);
     if (parent) {
       return this.setCurrentEditorCompact(id, parent);
@@ -182,8 +182,6 @@ class Class extends Component {
     const questionIdex = questions.findIndex(el => el.id === id);
     if (questionIdex === -1) return;
     const question = questions[questionIdex];
-    console.log("found question object", question);
-    console.log("found qID", id);
     this.setState({
       currentElement: question
     });
@@ -299,14 +297,14 @@ class Class extends Component {
   addValidationRule = (name, e) => {
     const { currentElement } = this.state;
     if (!currentElement.type) return; // no question to configure
-
+    console.log("validation currentElment", currentElement);
     const elements = [...this.state.formElements];
     const elementIdex = elements.findIndex(el => el.id === currentElement.id);
     if (elementIdex === -1) return;
     const element = elements[elementIdex];
     const value =
       e.target.type === "checkbox" ? e.target.checked : e.target.value;
-
+    console.log("validation type", e.target.checked);
     const rules = [...element.validationRules];
     const ruleIndex = rules.findIndex(rule => rule.name === name);
     if (ruleIndex !== -1) {
@@ -314,7 +312,7 @@ class Class extends Component {
     } else {
       rules.push({ name, value });
     }
-
+    console.log("validation rules", rules);
     element.validationRules = rules;
     elements[elementIdex] = element;
     this.preserveState(element, elements);

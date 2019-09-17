@@ -16,6 +16,7 @@ export class FormPresenter extends Component {
   };
 
   getIntro = () => {
+    console.log("view intro before", this.props.elements);
     return this.props.elements.find(el => el.type === "introduction");
   };
 
@@ -30,6 +31,9 @@ export class FormPresenter extends Component {
               formName={this.props.formName}
               questionIntro={questionIntro}
               deleteQuestion={this.props.deleteQuestion}
+              elements={this.props.elements}
+              setCurrentEditor={this.props.setCurrentEditor}
+              toggleConfigModal={this.props.toggleConfigModal}
             />
           </section>
         ) : (

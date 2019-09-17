@@ -65,9 +65,6 @@ class Class extends Component {
     event.preventDefault();
     this.props.click();
     const { id } = this.editorPointer.current.props;
-    console.log("config elem details", this.editorPointer.current.props);
-    console.log("config parent", parent);
-    console.log("config props", this.props);
     this.props.setCurrentEditor(id, parent);
   };
 

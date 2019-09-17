@@ -27,6 +27,7 @@ export class ItemConfiguration extends Component {
 
   getValidationRule = (ruleName, rules) => {
     let res = rules.find(rule => rule.name == ruleName);
+    console.log("validation result", res);
     return res ? res.value : 10;
   };
 

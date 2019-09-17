@@ -7,17 +7,27 @@ export class Intro extends Component {
     super(props);
   }
 
-  onDeleteBtnClick = (event, parent) => {
+  onDeleteBtnClick = event => {
     event.preventDefault();
     const introElemId = this.props.questionIntro.id;
-    this.props.toggleIntro();
+    // this.props.toggleIntro();
     this.props.deleteQuestion(introElemId);
+    setTimeout(() => {
+      console.log("view intro after deleting", this.props.elements);
+    }, 10);
+  };
+
+  onConfigBtnClick = event => {
+    event.preventDefault();
+    this.props.toggleConfigModal();
+    const introElemId = this.props.questionIntro.id;
+    this.props.setCurrentEditor(introElemId);
   };
 
   render() {
     return (
       <div className={Style.Intro}>
-        <a
+        {/* <a
           href="#"
           onClick={e => {
             this.onDeleteBtnClick(e);
@@ -25,7 +35,26 @@ export class Intro extends Component {
           className={Style.removeIntroBtn}
         >
           <i className={`ion ion-ios-close-outline`}></i> Remove Intro
-        </a>
+        </a> */}
+        <div className={Style.controlCont}>
+          <a
+            className={Style.configElem}
+            onClick={e => {
+              this.onConfigBtnClick(e);
+            }}
+          >
+            <i className="ion ion-ios-settings"></i>
+          </a>
+          <a
+            className={Style.removeElem}
+            onClick={e => {
+              this.onDeleteBtnClick(e);
+            }}
+          >
+            <i className="ion ion-ios-close-outline"></i>
+          </a>
+          <div className={Style.clearfix}></div>
+        </div>
         <div className={Style.Info}>
           <h1 className="heading-primary">{this.props.formName}</h1>
           {/* <p className={Style.InfoText}>
