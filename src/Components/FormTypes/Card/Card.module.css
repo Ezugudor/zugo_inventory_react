@@ -44,3 +44,14 @@
   /* color: #000; */
   font-weight: bolder;
 }
+.shape {
+  position: absolute;
+  /* background-color:var(--color1); */
+  bottom: 0px;
+  right: 0px;
+  width: 50px;
+  height: 0px;
+  border-right: 50px solid var(--color3);
+  border-top: 50px solid transparent;
+  border-radius: 0px;
+}
