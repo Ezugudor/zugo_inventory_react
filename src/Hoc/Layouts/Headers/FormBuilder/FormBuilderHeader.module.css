@@ -6,7 +6,8 @@
   background-color: primary-color;
   background-color: var(--color1);
   color: white-color;
-  height: 9vh;
+  height: 10vh;
+  border-bottom: 10px solid #fff;
 }
 
 .Header::after {
