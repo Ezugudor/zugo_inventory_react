@@ -7,7 +7,7 @@
   background-color: var(--color1);
   color: white-color;
   height: 10vh;
-  border-bottom: 10px solid #fff;
+  border-bottom: 10px solid #fcfcfc;
 }
 
 .Header::after {
