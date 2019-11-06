@@ -87,4 +87,5 @@
 .controlTextActive .shape {
   background: #fff;
   border-bottom: none;
+  border-top: 2px solid var(--color1);
 }

@@ -22,12 +22,12 @@ export const loginUser = (loginDetails, history) => {
         console.log("on login store user data", res.data);
         dispatch(storeUserData(res.data));
         dispatch(storeBusinessrData(res.data));
-        dispatch(
-          setNotificationMessage(
-            `Welcome back ${res.data.user.name}`,
-            "success"
-          )
-        );
+        // dispatch(
+        //   setNotificationMessage(
+        //     `Welcome back ${res.data.user.name}`,
+        //     "success"
+        //   )
+        // );
         history.push("/dashboard");
       })
       .catch(err => handleError(err, dispatch));

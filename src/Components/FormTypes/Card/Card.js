@@ -17,7 +17,7 @@ export const Card = props => (
         <p>{props.formType.name}</p>
       </div>
     </div>
-    <div className={Style.shape}></div>
+    {/* <div className={Style.shape}></div> */}
   </div>
 );
 
