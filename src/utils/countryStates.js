@@ -1,3 +1,4 @@
+export const popularStates = [25, 33, 15, 14]; // Lagos, Rivers, FCT,Enugu
 export const countryStates = [
   {
     state: {

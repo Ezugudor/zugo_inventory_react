@@ -2,7 +2,8 @@ import {
   getAccounts,
   getBranches,
   getBusinessId,
-  getBusinessColor
+  getBusinessColor,
+  getProgressIndicator
 } from "../../store/selectors";
 import { createNewMember, updateUser } from "../../store/actions";
 import { getCurrentUser } from "../../store/selectors";
@@ -25,7 +26,8 @@ class Class extends Component {
       lastname: "",
       email: "",
       phone: "",
-      branch: ""
+      branch: "",
+      formId: "new-member"
     },
     branchChangeDetails: {
       name: "",
@@ -40,7 +42,8 @@ class Class extends Component {
       lastname: "",
       email: "",
       phone: "",
-      branch: ""
+      branch: "",
+      formId: "edit-member"
     }
   };
 
@@ -76,16 +79,26 @@ class Class extends Component {
   };
 
   /**
+   * validate integer fields only
+   * @param {string} key propterty name to set
+   * @param {string} value the value set key to
+   */
+  validateIntegerField = (key, value) => {
+    var regex = /^[0-9]+$/;
+    if (key == "phone" && !value.match(regex) && value.length > 0) {
+      alert("Only integer values are allowed in this field.");
+      return false;
+    }
+    return true;
+  };
+  /**
    * build up new user properties
    * @param {string} key propterty name to set
    * @param {string} value the value set key to
    */
   setNewMemberDetail = (key, value, elem) => {
-    var regex = /^[0-9]+$/;
-    if (key == "phone" && !value.match(regex) && value.length > 0) {
-      alert("Only integer values are allowed in this field.");
-      return;
-    }
+    if (!this.validateIntegerField(key, value)) return;
+
     elem.classList.remove("invalid");
     const newMember = { ...this.state.newMember };
     newMember[key] = value;
@@ -95,51 +108,63 @@ class Class extends Component {
   /**
    *create new team member
    */
-  createMember = e => {
-    e.preventDefault();
-    const { currentUser } = this.props;
-    if (currentUser.role !== "admin") {
-      return alert("You don't have access to perform this operation");
-    }
+  highlightInvalidFields = state => {
     if (
-      !this.state.newMember.email ||
-      !this.state.newMember.firstname ||
-      !this.state.newMember.lastname ||
-      !this.state.newMember.branch ||
-      !this.state.newMember.phone
+      !state.email ||
+      !state.email.match(/^.+@[a-z]+\..+/) ||
+      !state.firstname ||
+      !state.lastname ||
+      !state.branch ||
+      !state.phone
     ) {
-      console.log(this.state.newMember);
-      const mInputs = this.state.newMember;
+      console.log("state from this inside", state);
+      const mInputs = state;
       for (var aa in mInputs) {
         if (mInputs[aa].length <= 0) {
-          console.log("fieldname", aa, "field value", mInputs[aa]);
-          let elem = document.querySelector("input.email");
+          let elem = document.querySelector(`#${state.formId} input.email`);
           if (aa == "email") {
-            elem = document.querySelector("input.email");
+            elem = document.querySelector(`#${state.formId} input.email`);
           } else if (aa == "firstname") {
-            elem = document.querySelector("input.firstname");
+            elem = document.querySelector(`#${state.formId} input.firstname`);
           } else if (aa == "lastname") {
-            elem = document.querySelector("input.lastname");
+            elem = document.querySelector(`#${state.formId} input.lastname`);
           } else if (aa == "phone") {
-            elem = document.querySelector("input.phone");
+            elem = document.querySelector(`#${state.formId} input.phone`);
           } else if (aa == "role") {
-            elem = document.querySelector("select.role");
+            elem = document.querySelector(`#${state.formId} select.role`);
           } else if (aa == "branch") {
-            elem = document.querySelector("select.branch");
+            elem = document.querySelector(`#${state.formId} select.branch`);
           }
 
           elem.classList.add("invalid");
         }
       }
-      return alert("Required field is not set");
+      return false;
+    }
+    return true;
+  };
+  /**
+   *create new team member
+   */
+  createMember = e => {
+    e.preventDefault();
+    const { currentUser } = this.props;
+    const { created, user, name, id, ...needed } = this.state.newMember;
+
+    if (currentUser.role !== "admin") {
+      return alert("You don't have access to perform this operation");
+    }
+    if (!this.highlightInvalidFields(needed)) {
+      alert("Required field is not set");
+      return;
     }
     const { email, phone, role, branch } = this.state.newMember;
     const { firstname, lastname } = this.state.newMember;
     const origin = `${window.location.origin}/completesignup`;
-    const name = `${firstname} ${lastname}`;
+    const namee = `${firstname} ${lastname}`;
     const details = {
       email,
-      name,
+      name: namee,
       firstname,
       lastname,
       phone,
@@ -206,26 +231,21 @@ class Class extends Component {
    * @param {boolean} toggleModal
    */
 
-  setUpdateUserDetail = (key, value, toggleModal = false) => {
-    console.log("detail to populate selected user fields", value);
-    if (key !== "user") {
-      var details = { ...this.state.userEditDetails };
-      details[key] = value;
-    } else {
-      var details = { ...value };
-      details["user"] = value;
-    }
-    console.log("detail after populstion", details);
-    const fewDetails = {
-      ...details,
-      ...{ created: undefined, name: undefined, user: undefined }
-    };
-    this.setState({ userEditDetails: fewDetails });
+  setUpdateUserDetail = (key, value, elem) => {
+    if (!this.validateIntegerField(key, value)) return;
 
-    if (toggleModal) {
-      this.toggleUpdateUser();
-    }
+    elem.classList.remove("invalid");
+    var details = { ...this.state.userEditDetails };
+    details[key] = value;
+    this.setState({ userEditDetails: details });
   };
+
+  populateUserDetail = account => {
+    var details = { ...this.state.userEditDetails, ...account };
+    this.setState({ userEditDetails: details });
+    this.toggleUpdateUser();
+  };
+
   setNewBranchDetail = (key, value, toggleModal = false) => {
     console.log("props in editelements", this.state);
     const details = { ...this.state.branchChangeDetails };
@@ -239,10 +259,19 @@ class Class extends Component {
   /**
    * change a team member branch
    */
-  validateAndUpdateUser = () => {
+  validateAndUpdateUser = e => {
+    e.preventDefault();
+    const { created, user, name, id, ...needed } = this.state.userEditDetails;
+
+    if (!this.highlightInvalidFields(needed)) {
+      alert("Required field is not set");
+      return;
+    }
     const { currentUser } = this.props;
+    if (currentUser.role !== "admin") {
+      return alert("You don't have access to perform this operation");
+    }
     const {
-      user,
       branch,
       firstname,
       lastname,
@@ -250,31 +279,25 @@ class Class extends Component {
       phone,
       role
     } = this.state.userEditDetails;
-    if (currentUser.role !== "admin") {
-      return alert("You don't have access to perform this operation");
-    }
+
     if (role === "admin") {
       alert("You cannot change an admin branch", "error");
       return this.toggleUpdateUser();
     }
-    if (
-      !branch &&
-      !firstname &&
-      !lastname &&
-      !email &&
-      !phone &&
-      role == "worker"
-    ) {
+    if (!branch && !firstname && !lastname && !email && role == "worker") {
       return alert("You have not changed anything", "error");
     }
-    const details = this.state.userEditDetails;
+    const {
+      user: U,
+      formId,
+      created: C,
+      ...others
+    } = this.state.userEditDetails;
     this.toggleUpdateUser();
-    this.props.updateUser(details);
+    this.props.updateUser(others);
   };
 
   render() {
-    console.log("check the props", this.props);
-    console.log("check the state", this.state);
     return (
       <TeamView
         showUpdateUser={this.state.showUpdateUser}
@@ -284,6 +307,7 @@ class Class extends Component {
         showDeleteMember={this.state.showDeleteMember}
         setNewBranchDetail={this.setNewBranchDetail}
         setUpdateUserDetail={this.setUpdateUserDetail}
+        populateUserDetail={this.populateUserDetail}
         setNewMemberDetail={this.setNewMemberDetail}
         toggleCreateMember={this.toggleCreateMember}
         toggleUpdateUser={this.toggleUpdateUser}
@@ -299,6 +323,9 @@ class Class extends Component {
         createMember={this.createMember}
         branches={this.props.branches}
         members={this.props.members}
+        newMemberFormId={this.state.newMember.formId}
+        editMemberFormId={this.state.userEditDetails.formId}
+        showLoading={this.props.progress}
       />
     );
   }
@@ -309,7 +336,8 @@ const mapStateToProps = state => ({
   businessId: getBusinessId(state),
   businessColor: getBusinessColor(state),
   members: getAccounts(state),
-  branches: getBranches(state)
+  branches: getBranches(state),
+  progress: getProgressIndicator(state)
 });
 
 export const Team = connect(

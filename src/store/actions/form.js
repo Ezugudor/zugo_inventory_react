@@ -69,8 +69,9 @@ export const createForm = (details, history, { to, params }) => {
         dispatch(unpreserveNewForm());
         dispatch(
           setNotificationMessage(
-            `${res.data.name} Form was created successfully`,
-            "success"
+            `${res.data.name} was created successfully`,
+            "success",
+            "Success"
           )
         );
         history.push(to, { params });

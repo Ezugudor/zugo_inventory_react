@@ -3,6 +3,7 @@ import BaseStyle from "../Base.module.css";
 import Style from "./Login.module.css";
 import PropTypes from "prop-types";
 import React from "react";
+import { Notification, Loading } from "../../Utils";
 
 export const LoginView = props => (
   <AuthLayout>
@@ -41,6 +42,8 @@ export const LoginView = props => (
         </div>
       </form>
     </div>
+    <Loading showLoading={props.showLoading} />
+    <Notification title={"Default Title"} message={"Default Body Message"} />
   </AuthLayout>
 );
 

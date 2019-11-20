@@ -37,8 +37,10 @@
   /* font-weight: bold */
 }
 .parent {
-  color: #eb1761;
   color: var(--color3);
+}
+.parent:hover {
+  text-decoration: none;
 }
 .parent,
 .name {

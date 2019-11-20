@@ -22,7 +22,7 @@ export const ActionBtns = props => (
     <div className={styles.memberControls}>
       {/* <span className="branch__tooltip">Change Branch</span> */}
       <div
-        onClick={() => props.setMemberDetail("user", props.account, true)}
+        onClick={() => props.populateUserDetail(props.account)}
         className={styles.iconHolder}
       >
         {/* <img src={props.penImage} className={styles.icon} alt="Edit icon" /> */}

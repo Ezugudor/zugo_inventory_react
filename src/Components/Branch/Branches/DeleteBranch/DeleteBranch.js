@@ -10,7 +10,7 @@ export const DeleteBranch = props => (
       <h3 className={styles.text}>Delete {props.branchToDelete.name}</h3>
       <div className={styles.controls}>
         <White click={props.toggleDeleteBranch}>Cancel</White>
-        <Red click={props.deleteBranch}>Confirm!</Red>
+        <Red click={props.deleteBranch}>Confirm</Red>
       </div>
     </section>
   </Modal>

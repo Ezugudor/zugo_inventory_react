@@ -8,7 +8,8 @@ import {
   getProcessedResponses,
   getUnreadResponses,
   getBusinessId,
-  getBusinessColor
+  getBusinessColor,
+  getProgressIndicator
 } from "../../store/selectors";
 import { themeMaker } from "../../utils";
 
@@ -17,7 +18,17 @@ class Class extends Component {
     endDate: "",
     startDate: "",
     responseTabToShow: "pending",
-    showNotification: false
+    showNotification: false,
+    showLoading: false
+  };
+
+  /**
+   * open and close the the progress ui
+   */
+  toggleLoading = () => {
+    this.setState(prevState => ({
+      showLoading: !prevState.showLoading
+    }));
   };
 
   switchResponseTab = tabName => {
@@ -25,10 +36,27 @@ class Class extends Component {
   };
 
   handleDateChange = e => {
+    console.log("changed date filter", e.target.dataset);
     const data = e.target.dataset;
     const state = { ...this.state };
-    state[data.dateType] = e.target.value;
+    const val = e.target.value;
+    console.log("value checking if empoty", val == "");
+    state[data.dateType] = val;
     this.setState(state);
+    let nonEmpty = 0;
+    const elems = document.querySelectorAll("input[type=date]");
+    elems.forEach(elem => {
+      if (elem.value !== "") {
+        nonEmpty++;
+      }
+    });
+
+    if (nonEmpty === 0) {
+      //timeout function is important important
+      setTimeout(() => {
+        this.filterResponse();
+      }, 10);
+    }
   };
 
   componentDidMount() {
@@ -56,10 +84,12 @@ class Class extends Component {
 
   filterResponse = () => {
     const { startDate, endDate } = this.state;
-    if (!startDate || !endDate || startDate > endDate) {
+    if (startDate > endDate) {
       alert("Wrong date range selected", "error");
       return;
     }
+    console.log("progress indicator", this.props.progress);
+    // this.toggleLoading();
     const { businessId } = this.props;
     this.props.filterByDate(businessId, startDate, endDate);
     // this.setState({ endDate: "", startDate: "" });
@@ -79,6 +109,7 @@ class Class extends Component {
         endDate={this.state.endDate}
         currentUser={this.props.currentUser}
         showNotification={this.state.showNotification}
+        showLoading={this.props.progress}
         popupTimer={this.popupTimer}
       />
     );
@@ -91,7 +122,8 @@ const mapStateToProps = state => ({
   pending: getUnreadResponses(state),
   currentUser: getCurrentUser(state),
   businessId: getBusinessId(state),
-  businessColor: getBusinessColor(state)
+  businessColor: getBusinessColor(state),
+  progress: getProgressIndicator(state)
 });
 
 export const Dashboard = connect(

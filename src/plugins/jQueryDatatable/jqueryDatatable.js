@@ -19,14 +19,18 @@ export class JQDatatable extends Component {
 
     this.dTOptions = {
       dom:
-        '<"table-filter-cont tfc-top" <"tresponsive" <"tf-title"> <"tf-addbtn"> <"tf-length"<"fancy-select"l>><"tf-filter"f><"bulk-action"><"clearfix">>><"tf-table"t><"table-filter-cont tfc-bottom" <"tresponsive" <"tf-info"i><"tf-paging"p><"clearfix">>>',
+        '<"table-filter-cont tfc-top" <"tresponsive" <"tf-title"><"tf-addbtn"> <"tf-filter"f>  <"bulk-action"><"clearfix">>><"tf-table"t><"table-filter-cont tfc-bottom" <"tresponsive" <"tf-info"i><"tf-length"<"fancy-select"l>> <"tf-paging"p><"clearfix">>>',
       initComplete: function() {
-        console.log("propppaa", _this.props);
         let tfTitle = `<span class="table-name"></span> <span class="table-class">${_this.props.data.title}</span> `;
         let btn = <span>{_this.props.data.newBtn}</span>;
 
         $(".tf-title").html(tfTitle);
         ReactDOM.render(btn, document.querySelector(".tf-addbtn"));
+      },
+      language: {
+        emptyTable: "No data available",
+        search: "_INPUT_",
+        searchPlaceholder: "Search records"
       },
       drawCallback: function() {}
     };
@@ -35,8 +39,6 @@ export class JQDatatable extends Component {
   }
 
   componentWillUnmount() {
-    // alert("unmounting");
-    console.log("handler", this.dataTableHandle);
     this.dataTableHandle.fnDestroy(false);
   }
 
@@ -50,19 +52,17 @@ export class JQDatatable extends Component {
   }
 
   generateColumns() {
-    console.log("data", this.props);
     const { columns } = this.props.data;
     const res = columns.map((col, index) => {
       return <th>{col.label}</th>;
     });
-    console.log("xxx columns", columns);
     return res;
   }
 
   generateRows() {
     const { rows } = this.props.data;
     const { columns } = this.props.data;
-    console.log("xxx rows", rows);
+
     const res = rows.map(row => {
       const aaa = columns.map((column, index) => {
         const currentField = column.field;
@@ -76,12 +76,11 @@ export class JQDatatable extends Component {
       });
       return <tr onClick={row.clickEvent}>{aaa}</tr>;
     });
-    console.log("res", res);
+
     return res;
   }
 
   getTable() {
-    console.log("generated row", this.generateRows());
     return (
       <table
         ref={el => (this.el = el)}
@@ -95,7 +94,6 @@ export class JQDatatable extends Component {
     );
   }
   render() {
-    console.log("output table", this.getTable());
     return this.getTable();
   }
 }

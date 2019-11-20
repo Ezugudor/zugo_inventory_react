@@ -1,4 +1,9 @@
-import { DELETE_BUSINESS_ACCOUNT, STORE_USER, STORE_BUSINESS } from "./types";
+import {
+  DELETE_BUSINESS_ACCOUNT,
+  STORE_USER,
+  STORE_BUSINESS,
+  UPDATE_BUSINESS
+} from "./types";
 import { startNetworkRequest, stopNetworkRequest } from "./app";
 import { SwypPartnerApi } from "../../core/api";
 import { setNotificationMessage } from "./app";
@@ -7,6 +12,7 @@ import { handleError } from "../../utils";
 const deleteAcount = user => ({ type: DELETE_BUSINESS_ACCOUNT, user });
 const storeBusinessrData = data => ({ type: STORE_BUSINESS, data });
 const storeUserData = data => ({ type: STORE_USER, data });
+const updateBusiness = data => ({ type: UPDATE_BUSINESS, data });
 
 /**
  * handle user login interaction with backend service
@@ -19,7 +25,6 @@ export const loginUser = (loginDetails, history) => {
     SwypPartnerApi.post("user/login", loginDetails)
       .then(res => {
         dispatch(stopNetworkRequest());
-        console.log("on login store user data", res.data);
         dispatch(storeUserData(res.data));
         dispatch(storeBusinessrData(res.data));
         // dispatch(
@@ -36,15 +41,17 @@ export const loginUser = (loginDetails, history) => {
 
 export const verifySignupToken = token => {
   return dispatch => {
-    // dispatch(startNetworkRequest());
+    dispatch(startNetworkRequest());
     SwypPartnerApi.get(`user/completesignup/${token}`)
       .then(res => {
         dispatch(stopNetworkRequest());
         if (res.data.valid) {
-          dispatch(setNotificationMessage(`Token is valid`, "success"));
+          dispatch(
+            setNotificationMessage(`Token is valid`, "success", "Success !")
+          );
           return;
         }
-        dispatch(setNotificationMessage("Token has expired", "erro"));
+        dispatch(setNotificationMessage("Token has expired", "erro", "Oops !"));
       })
       .catch(err => handleError(err, dispatch));
   };
@@ -79,8 +86,9 @@ export const completeSignup = (loginDetails, history, _this) => {
         // dispatch(storeBusinessrData(res.data));
         dispatch(
           setNotificationMessage(
-            `Welcome back ${res.data.user.name}`,
-            "success"
+            "Account created successfully.",
+            "success",
+            `Welcome, ${res.data.user.name}`
           )
         );
       })
@@ -101,13 +109,20 @@ export const deleteMember = member => {
       .then(res => {
         dispatch(stopNetworkRequest());
         dispatch(deleteAcount(member));
+        dispatch(updateBusiness(res.data));
         if (res.data.deleted) {
           dispatch(
-            setNotificationMessage(`${member.name}, Deleted`, "success")
+            setNotificationMessage(
+              `User ${member.name}, deleted`,
+              "success",
+              "Success !"
+            )
           );
           return;
         }
-        dispatch(setNotificationMessage("Unable to delete user", "erro"));
+        dispatch(
+          setNotificationMessage("Unable to delete user", "erro", "Oops !")
+        );
       })
       .catch(err => handleError(err, dispatch));
   };
@@ -119,7 +134,9 @@ export const requestPasswordReset = details => {
     SwypPartnerApi.post("user/requestpasswordreset", details)
       .then(res => {
         dispatch(stopNetworkRequest());
-        dispatch(setNotificationMessage(res.data.message, "success"));
+        dispatch(
+          setNotificationMessage(res.data.message, "success", "Success !")
+        );
       })
       .catch(err => {
         handleError(err, dispatch);
@@ -135,13 +152,17 @@ export const resetPassword = (details, history) => {
         dispatch(stopNetworkRequest());
         if (res.data.updated) {
           dispatch(
-            setNotificationMessage("Password Reset Successfully", "success")
+            setNotificationMessage(
+              "Password Reset Successfully",
+              "success",
+              "Success !"
+            )
           );
           history.push("/login");
           return;
         }
         dispatch(
-          setNotificationMessage("Oops! could not reset password", "error")
+          setNotificationMessage("could not reset password", "error", "Oops !")
         );
         history.push("requestpasswordreset");
       })

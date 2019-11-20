@@ -6,12 +6,15 @@
   border-radius: 9px;
   width: 50%;
   margin: 0 auto;
-  height: 14vh;
+  height: 24vh;
+  padding: 5px;
 }
 
 .text {
   text-align: center;
   padding-top: 1rem;
+  /* font-size: 20px; */
+  font-weight: bold;
 }
 
 .controls {

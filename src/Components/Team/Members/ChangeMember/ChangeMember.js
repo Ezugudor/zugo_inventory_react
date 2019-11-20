@@ -6,13 +6,16 @@ import React from "react";
 
 export const ChangeMember = props => (
   <Modal show={props.showUpdateUser} click={props.toggleUpdateUser}>
-    <section className={styles.section}>
+    <section id={props.editMemberFormId} className={styles.section}>
+      {console.log("is ita", props.editMemberFormId)}
       <h3 className={styles.text}>Edit User</h3>
       <div className={styles.inputBox}>
         <select
-          onChange={e => props.setUpdateUserDetail("branch", e.target.value)}
+          onChange={e =>
+            props.setUpdateUserDetail("branch", e.target.value, e.target)
+          }
           value={props.editMember.branch}
-          className={styles.input}
+          className={[styles.input, "branch"].join(" ")}
           id="branch"
         >
           <option>Select Branch</option>
@@ -30,7 +33,9 @@ export const ChangeMember = props => (
           className={[styles.input, "role"].join(" ")}
           required="required"
           value={props.editMember.role}
-          onChange={e => props.setUpdateUserDetail("role", e.target.value)}
+          onChange={e =>
+            props.setUpdateUserDetail("role", e.target.value, e.target)
+          }
         >
           <option>Select Role</option>
           <option value="initiator">Initiator</option>
@@ -41,7 +46,9 @@ export const ChangeMember = props => (
       </div>
       <div className={styles.inputBox}>
         <input
-          onChange={e => props.setUpdateUserDetail("firstname", e.target.value)}
+          onChange={e =>
+            props.setUpdateUserDetail("firstname", e.target.value, e.target)
+          }
           className={[styles.input, "firstname"].join(" ")}
           placeholder="First Name"
           value={props.editMember.firstname}
@@ -51,7 +58,9 @@ export const ChangeMember = props => (
       </div>
       <div className={styles.inputBox}>
         <input
-          onChange={e => props.setUpdateUserDetail("lastname", e.target.value)}
+          onChange={e =>
+            props.setUpdateUserDetail("lastname", e.target.value, e.target)
+          }
           className={[styles.input, "lastname"].join(" ")}
           placeholder="Last Name"
           value={props.editMember.lastname}
@@ -61,9 +70,11 @@ export const ChangeMember = props => (
       </div>
       <div className={styles.inputBox}>
         <input
-          onChange={e => props.setUpdateUserDetail("email", e.target.value)}
+          onChange={e =>
+            props.setUpdateUserDetail("email", e.target.value, e.target)
+          }
           className={[styles.input, "email"].join(" ")}
-          placeholder="Work Email"
+          placeholder="Email Address"
           required="required"
           value={props.editMember.email}
           type="email"
@@ -71,7 +82,9 @@ export const ChangeMember = props => (
       </div>
       <div className={styles.inputBox}>
         <input
-          onChange={e => props.setUpdateUserDetail("phone", e.target.value)}
+          onChange={e =>
+            props.setUpdateUserDetail("phone", e.target.value, e.target)
+          }
           className={[styles.input, "phone"].join(" ")}
           placeholder="Phone Number"
           value={props.editMember.phone}

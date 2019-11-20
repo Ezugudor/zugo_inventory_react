@@ -2,14 +2,15 @@ import {
   getAccounts,
   getBranches,
   getBusinessId,
-  getBusinessColor
+  getBusinessColor,
+  getProgressIndicator
 } from "../../store/selectors";
 import { createNewBranch, changeBranch } from "../../store/actions";
 import { getCurrentUser } from "../../store/selectors";
 // import { deleteBranch } from "../../store/actions";
 import { deleteBranch } from "../../store/actions/business";
 import { BranchView } from "../../Components/Branch";
-import { countryStates } from "../../utils";
+import { countryStates, popularStates } from "../../utils";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { themeMaker } from "../../utils";
@@ -99,10 +100,29 @@ class Class extends Component {
     }).state.locals;
   };
 
+  getArrangedState = (States = countryStates) => {
+    const popular = [];
+    const otherStates = [];
+    States.forEach(state => {
+      if (popularStates.includes(state.state.id)) {
+        popular.push(state);
+      } else {
+        otherStates.push(state);
+      }
+    });
+    return [...popular, ...otherStates];
+  };
+
   getStateName = stateID => {
-    return countryStates.find(o => {
-      return o.state.id == stateID;
-    }).state.name;
+    return countryStates
+      .find(o => {
+        return o.state.id == stateID;
+      })
+      .state.name.replace(/state|State$/, "");
+  };
+
+  stripState = stateName => {
+    return stateName.replace(/state|State$/, "");
   };
   /**
    * set LGAs of a selected state
@@ -160,6 +180,7 @@ class Class extends Component {
    * show delete a branch modal
    */
   toggleDeleteBranch = () => {
+    console.log("arranged states", this.getArrangedState(countryStates));
     this.setState(prevState => {
       return { showDeleteBranch: !prevState.showDeleteBranch };
     });
@@ -263,7 +284,6 @@ class Class extends Component {
         showChangeBranch={this.state.showChangeBranch}
         showCreateBranch={this.state.showCreateBranch}
         showDeleteBranch={this.state.showDeleteBranch}
-        showNotification={this.state.showNotification}
         setNewBranchDetail={this.setNewBranchDetail}
         setEditBranchDetail={this.setEditBranchDetail}
         setSelectedLGA={this.setSelectedLGA}
@@ -283,6 +303,9 @@ class Class extends Component {
         createBranch={this.createBranch}
         branches={this.props.branches}
         branchs={this.props.branchs}
+        stripState={this.stripState}
+        getArrangedState={this.getArrangedState}
+        showLoading={this.props.progress}
       />
     );
   }
@@ -293,7 +316,8 @@ const mapStateToProps = state => ({
   businessId: getBusinessId(state),
   businessColor: getBusinessColor(state),
   branchs: getAccounts(state),
-  branches: getBranches(state)
+  branches: getBranches(state),
+  progress: getProgressIndicator(state)
 });
 
 export const Branch = connect(

@@ -7,10 +7,39 @@
   padding: 40px;
   background: #efefdf;
 }
-.heading {
+.counter {
+  float: right;
+  color: #999;
+  font-weight: bold;
+}
+.textAreaCont {
+  border: 1px solid secondary-color;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px #aaa;
+  background: #fff;
+}
+.textAreaHeading {
+  margin: 0;
+  padding: 20px;
   font-family: Gilroy;
   font-size: 18px;
-  color: #000;
+  font-weight: normal;
+  color: #999;
+  background: #f7f7f7;
+}
+.textArea {
+  height: 28vh;
+  width: 100%;
+  border-radius: 3px;
+  padding-top: 3rem;
+  padding-left: 3rem;
+  font-family: inherit;
+  font-size: 20px;
+  font-family: Gilroy;
+  color: #333;
+  border: none;
+  resize: none;
+  outline: none;
 }
 .uploadSection {
   width: 60%;
@@ -24,23 +53,7 @@
   width: 100%;
   text-align: center;
 }
-.textArea {
-  height: 28vh;
-  width: 100%;
-  border-radius: 3px;
-  padding-top: 3rem;
-  padding-left: 3rem;
-  font-family: inherit;
-  font-size: 20px;
-  font-family: Gilroy;
-  color: #333;
-  border: 1px solid secondary-color;
-  border: 1px solid #ccc;
-  /* border:none; */
-  resize: none;
-  outline: none;
-  box-shadow: 0 0 10px #aaa;
-}
+
 .dzCont,
 .prevCont {
   float: left;

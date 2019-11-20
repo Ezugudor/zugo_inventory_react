@@ -7,7 +7,7 @@ export const Footer = props => (
     <div className={Styles.FooterContent}>
       <div className={Styles.FooterProgress}>
         <p className="progress__text">
-          {props.completedQuestion} of {props.totalQuestion} Qustions
+          {props.completedQuestion} of {props.totalQuestion} Questions
         </p>
         <progress
           value={props.completedQuestion}

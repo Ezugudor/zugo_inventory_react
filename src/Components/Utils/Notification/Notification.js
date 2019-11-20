@@ -7,11 +7,25 @@ import { endNotification } from "../../../store/actions/app";
 import loadingIcon from "../../../img/loading2.svg";
 
 class Class extends Component {
-  componentDidUpdate = dispatch => {
-    setTimeout(() => {
-      this.props.closeNotification();
-    }, 5000);
-  };
+  componentDidMount() {
+    this.timeoutNotification();
+  }
+
+  componentDidUpdate() {
+    this.timeoutNotification();
+  }
+
+  timeoutNotification() {
+    if (this.props.showNotification === true) {
+      setTimeout(
+        function() {
+          this.props.closeNotification();
+        }.bind(this),
+        this.props.notificationTimeout
+      );
+    }
+  }
+
   render() {
     return (
       <Modal
@@ -33,9 +47,9 @@ class Class extends Component {
 // };
 
 const mapStateToProps = state => {
-  console.log("hereeeee", state);
   return {
     showNotification: state.app.showNotification,
+    notificationTimeout: state.app.notificationTimeout,
     title: state.app.notificationTitle,
     message: state.app.notificationMessage
   };

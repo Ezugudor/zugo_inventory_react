@@ -42,7 +42,7 @@ input[type="file"] {
   padding: 2rem 2.9rem;
   cursor: pointer;
   outline: none;
-  background-color: #eb1761;
+  background-color: var(--color1);
   color: #fff;
   width: 2%;
 }

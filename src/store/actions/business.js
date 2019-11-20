@@ -28,7 +28,11 @@ export const registerBusiness = (details, history) => {
         dispatch(storeUserData(res.data));
         dispatch(storeBusinessrData(res.data));
         dispatch(
-          setNotificationMessage(`Your Swyp account has been setup`, "success")
+          setNotificationMessage(
+            `Your Swyp account has been setup`,
+            "success",
+            "Success !"
+          )
         );
         history.push("/settings");
       })
@@ -47,7 +51,13 @@ export const createNewMember = details => {
       .then(res => {
         dispatch(stopNetworkRequest());
         dispatch(updateBusiness(res.data));
-        dispatch(setNotificationMessage("User Added Successfully", "success"));
+        dispatch(
+          setNotificationMessage(
+            "User Added Successfully",
+            "success",
+            "Success !"
+          )
+        );
       })
       .catch(err => handleError(err, dispatch));
   };
@@ -65,7 +75,11 @@ export const createNewBranch = details => {
         dispatch(stopNetworkRequest());
         dispatch(updateBusiness(res.data));
         dispatch(
-          setNotificationMessage("Branch Added Successfully", "success")
+          setNotificationMessage(
+            "Branch Added Successfully",
+            "success",
+            "Success !"
+          )
         );
       })
       .catch(err => handleError(err, dispatch));
@@ -89,11 +103,17 @@ export const deleteBranch = branch => {
         // return;
         if (res.data.deleted) {
           dispatch(
-            setNotificationMessage(`${branch.name}, Deleted`, "success")
+            setNotificationMessage(
+              `Branch ${branch.name}, deleted`,
+              "success",
+              "Success !"
+            )
           );
           return;
         }
-        dispatch(setNotificationMessage("Unable to delete branch", "erro"));
+        dispatch(
+          setNotificationMessage("Unable to delete branch", "erro", "Oops !")
+        );
       })
       .catch(err => handleError(err, dispatch));
   };
@@ -110,13 +130,12 @@ export const updateUser = details => {
       .then(res => {
         dispatch(stopNetworkRequest());
         dispatch(updateBusiness(res.data));
-        // console.log("detail", details);
-        // console.log("res", res);
-        if (res.status == 200) {
-          alert(`user (${details.firstname}) detail changed successfuly`);
-        }
         dispatch(
-          setNotificationMessage("aBranch changed Successfully", "success")
+          setNotificationMessage(
+            "User info updated Successfully",
+            "success",
+            "Success !"
+          )
         );
       })
       .catch(err => handleError(err, dispatch));
@@ -135,7 +154,11 @@ export const changeBranch = details => {
         dispatch(stopNetworkRequest());
         dispatch(updateBusiness(res.data));
         dispatch(
-          setNotificationMessage("Branch updated Successfully", "success")
+          setNotificationMessage(
+            "Branch updated Successfully",
+            "success",
+            "Success !"
+          )
         );
       })
       .catch(err => handleError(err, dispatch));
@@ -153,8 +176,6 @@ export const updateDetails = (details, history) => {
       .then(res => {
         dispatch(stopNetworkRequest());
         dispatch(updateBusiness(details));
-
-        console.log("dispactch data", details);
         dispatch(
           setNotificationMessage(
             "Settings saved Successfully",

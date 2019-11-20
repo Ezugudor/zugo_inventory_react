@@ -3,7 +3,7 @@ import Style from "./DashboardView.module.css";
 import { DashboardControls } from "./controls";
 import PropTypes from "prop-types";
 import { Inbox } from "./Inbox";
-import { Notification } from "../Utils";
+import { Notification, Loading } from "../Utils";
 import React from "react";
 
 export const DashboardView = props => {
@@ -31,12 +31,10 @@ export const DashboardView = props => {
           startDate={props.startDate}
           endDate={props.endDate}
         />
-
+        <Loading showLoading={props.showLoading} />
         <Notification
-          showNotification={props.showNotification}
-          timer={props.popupTimer}
           title={"Default Title"}
-          message={"Default body message"}
+          message={"Default Body Message"}
         />
       </div>
     </AdminLayout>

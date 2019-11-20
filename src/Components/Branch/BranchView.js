@@ -11,7 +11,7 @@ import { JQDatatable } from "../../plugins";
 import PropTypes from "prop-types";
 import React from "react";
 import { White } from "../Utils/Buttons";
-import { Notification } from "../Utils";
+import { Notification, Loading } from "../Utils";
 
 export const BranchView = props => (
   <AdminLayout pageName="branch">
@@ -37,6 +37,8 @@ export const BranchView = props => (
         createBranch={props.createBranch}
         newBranch={props.newBranch}
         branches={props.branches}
+        stripState={props.stripState}
+        getArrangedState={props.getArrangedState}
       />
       <ChangeBranch
         setNewBranchDetail={props.setNewBranchDetail}
@@ -48,6 +50,8 @@ export const BranchView = props => (
         changeBranch={props.changeBranch}
         branches={props.branches}
         branchToChange={props.branchToChange}
+        stripState={props.stripState}
+        getArrangedState={props.getArrangedState}
       />
       <DeleteBranch
         toggleDeleteBranch={props.toggleDeleteBranch}
@@ -55,12 +59,8 @@ export const BranchView = props => (
         branchToDelete={props.branchToDelete}
         deleteBranch={props.deleteBranch}
       />
-      <Notification
-        showNotification={props.showNotification}
-        timer={props.popupTimer}
-        title={"Default Title"}
-        message={"Default body message"}
-      />
+      <Loading showLoading={props.showLoading} />
+      <Notification title={"Default Title"} message={"Default Body Message"} />
     </div>
   </AdminLayout>
 );

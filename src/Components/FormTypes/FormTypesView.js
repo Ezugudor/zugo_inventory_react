@@ -15,13 +15,7 @@ export const FormTypeView = props => (
       />
       <Cards formTypes={props.formTypes} viewForms={props.viewForms} />
     </div>
-    <Notification
-      showNotification={props.showNotification}
-      timer={props.popupTimer}
-      toggleLoading={props.toggleNotification}
-      title={"Default Title"}
-      message={"Default Body Message"}
-    />
+    <Notification title={"Default Title"} message={"Default Body Message"} />
   </AdminLayout>
 );
 

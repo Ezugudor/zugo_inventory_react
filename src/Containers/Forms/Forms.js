@@ -70,16 +70,11 @@ export class Class extends Component {
   getForm = (formId, workspace, forms) => {
     let workspaceForms = forms[workspace];
     let form = workspaceForms.find(elem => elem.id == formId);
-    // console.log("returned workspace", workspaceForms);
-    // console.log("returned form", form);
+
     return form;
   };
 
   goToFormBuilderEdit = (formId, workSpaceId) => {
-    // console.log("id", formId);
-    // console.log("workspace", workSpaceId);
-    // console.log("edit state", this.state);
-    // console.log("edit props", this.props);
     const selectedForm = this.getForm(formId, workSpaceId, this.props.forms);
     const details = {
       formType: this.formType,
@@ -87,7 +82,7 @@ export class Class extends Component {
       elements: selectedForm.elements,
       formId
     };
-    // console.log("returned details", details);
+
     this.props.editForm(details);
     this.props.history.push("/formbuilder", { params: details });
   };
@@ -105,8 +100,6 @@ export class Class extends Component {
         formType={this.formType}
         forms={forms}
         currentUser={this.props.currentUser}
-        showNotification={this.state.showNotification}
-        popupTimer={this.popupTimer}
       />
     );
   }
@@ -115,8 +108,7 @@ const mapStateToProps = state => ({
   businessId: getBusinessId(state),
   businessColor: getBusinessColor(state),
   currentUser: getCurrentUser(state),
-  forms: getAllForms(state),
-  statea: state
+  forms: getAllForms(state)
 });
 export const Form = connect(
   mapStateToProps,

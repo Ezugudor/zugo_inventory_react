@@ -2,16 +2,21 @@ import Style from "./FormsControls.module.css";
 import { Red } from "../../Utils/Buttons";
 import PropTypes from "prop-types";
 import React from "react";
-
+const getFormType = formType => {
+  console.log("dsds", formType);
+  return formType == "Individual"
+    ? "Individual Account Form"
+    : "Corporate Account Form";
+};
 export const FormsControls = props => (
   <section className={Style.Controls}>
     <div className={Style.ControlBox}>
       <i className={`${Style.titleIcon} ion ion-ios-list-outline`}></i>
       <div className={Style.info}>
         <span className={Style.Text}>Showing forms for :</span>
-        <span className={`${Style.Text} ${Style.parent}`}>
-          {props.formType.parent}
-        </span>
+        <a href="/formtypes" className={`${Style.Text} ${Style.parent}`}>
+          {getFormType(props.formType.parent)}
+        </a>
 
         <i className={`${Style.arrow} ion ion-ios-arrow-right`}></i>
 

@@ -3,7 +3,7 @@ import { PreviewLogo } from "./PreviewLogo";
 import { FileUpload } from "../Utils/FileUpload";
 import { AdminLayout } from "../../Hoc/Layouts";
 import { Red } from "../Utils/Buttons";
-import { Notification } from "../Utils/Notification";
+import { Notification, Loading } from "../Utils";
 import PropTypes from "prop-types";
 import React from "react";
 import { connect } from "react-redux";
@@ -39,17 +39,26 @@ export const BusinessSet = props => {
 
             <div className={Style.clearfix}></div>
           </div>
-          <Notification />
+          <Loading showLoading={props.showLoading} />
+          <Notification
+            title={"Default Title"}
+            message={"Default Body Message"}
+          />
         </section>
         <section className={Style.textSection}>
-          <h3 className={Style.heading}>Give a brief summary of your bank</h3>
-          <textarea
-            maxLength={200}
-            onChange={props.changeDescription}
-            value={bizDesc}
-            className={Style.textArea}
-            placeholder="Business Description"
-          />
+          <div className={Style.textAreaCont}>
+            <h3 className={Style.textAreaHeading}>
+              Give a brief summary of your bank
+              <span className={Style.counter}>{props.businessDescCounter}</span>
+            </h3>
+            <textarea
+              maxLength={200}
+              onChange={props.changeDescription}
+              value={bizDesc}
+              className={Style.textArea}
+              placeholder="Business Description"
+            />
+          </div>
         </section>
         <section className={Style.footerSection}>
           <Red click={props.updateBusinessDetails} style={btnStyle}>

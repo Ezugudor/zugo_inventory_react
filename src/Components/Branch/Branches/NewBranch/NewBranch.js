@@ -24,9 +24,9 @@ export const NewBranch = props => (
           onChange={e => props.setSelectedLGA(e.target.value)}
         >
           <option>Select State</option>
-          {countryStates.map(state => (
+          {props.getArrangedState().map(state => (
             <option value={state.state.id} key={state.state.name}>
-              {state.state.name}
+              {props.stripState(state.state.name)}
             </option>
           ))}
         </select>

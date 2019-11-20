@@ -26,13 +26,7 @@ export const FormsView = props => (
         showBuilder={props.showBuilder}
         name={props.name}
       />
-      <Notification
-        showNotification={props.showNotification}
-        timer={props.popupTimer}
-        toggleLoading={props.toggleNotification}
-        title={"Default Title"}
-        message={"Default Body Message"}
-      />
+      <Notification title={"Default Title"} message={"Default Body Message"} />
     </div>
   </AdminLayout>
 );

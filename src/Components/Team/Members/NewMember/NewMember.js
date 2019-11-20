@@ -6,7 +6,7 @@ import React from "react";
 
 export const NewMember = props => (
   <Modal show={props.showCreateMember} click={props.toggleCreateMember}>
-    <section className={styles.section}>
+    <section id={props.newMemberFormId} className={styles.section}>
       <h3 className={styles.text}>New Team Member</h3>
       <div className={styles.inputBox}>
         <input
@@ -38,7 +38,7 @@ export const NewMember = props => (
             props.setNewMemberDetail("email", e.target.value, e.target)
           }
           className={[styles.input, "email"].join(" ")}
-          placeholder="Work Email"
+          placeholder="Email Address"
           required="required"
           value={props.newMember.email}
           type="email"

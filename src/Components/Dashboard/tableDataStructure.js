@@ -1,13 +1,13 @@
 export const dataStruct = {
   columns: [
     {
-      label: "ID",
+      label: "Form Id",
       field: "id",
       sort: "asc",
       width: 270
     },
     {
-      label: "Name",
+      label: "Form Type",
       field: "name",
       sort: "asc",
       width: 150

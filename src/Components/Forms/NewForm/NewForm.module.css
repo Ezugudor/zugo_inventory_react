@@ -6,12 +6,15 @@
   border-radius: 9px;
   width: 40%;
   margin: 0 auto;
-  height: 24vh;
+  height: 34vh;
+  padding: 20px;
 }
 
 .Text {
   text-align: center;
   margin-top: 2rem;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .InputBox {

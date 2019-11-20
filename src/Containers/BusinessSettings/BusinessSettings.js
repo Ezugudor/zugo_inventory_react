@@ -3,18 +3,19 @@ import { BusinessSettingsView } from "../../Components/BusinessSettings";
 import {
   getUploadStatus,
   getBusinessId,
-  getBusinessColor
+  getBusinessColor,
+  getProgressIndicator
 } from "../../store/selectors";
 import { updateDetails } from "../../store/actions";
 import { uploadLogo } from "../../store/actions";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Loading } from "../../Components/Utils";
 import { themeMaker } from "../../utils";
 
 class Class extends Component {
   state = {
     businessDescription: "",
+    businessDescCount: 200,
     loading: 0,
     showNotification: false,
     logoUrl: ""
@@ -46,7 +47,11 @@ class Class extends Component {
    * @param {eventObject} e
    */
   handleDescriptionChange = e => {
-    this.setState({ businessDescription: e.target.value });
+    const newCount = e.target.maxLength - e.target.value.length;
+    this.setState({
+      businessDescription: e.target.value,
+      businessDescCount: newCount
+    });
   };
 
   /**
@@ -81,6 +86,7 @@ class Class extends Component {
     return (
       <BusinessSettingsView
         businessDescription={this.state.businessDescription}
+        businessDescCounter={this.state.businessDescCount}
         updateBusinessDetails={this.updateBusinessDetails}
         changeDescription={this.handleDescriptionChange}
         handleUpload={this.uploadLogo}
@@ -88,6 +94,7 @@ class Class extends Component {
         logoUrl={this.state.logoUrl}
         showNotification={this.state.showNotification}
         popupTimer={this.popupTimer}
+        showLoading={this.props.progress}
       />
     );
   }
@@ -98,7 +105,8 @@ const mapStateToProps = state => ({
   businessSlug: getBusinessSlug(state),
   uploadStatus: getUploadStatus(state),
   businessId: getBusinessId(state),
-  businessColor: getBusinessColor(state)
+  businessColor: getBusinessColor(state),
+  progress: getProgressIndicator(state)
 });
 
 export const BusinessSettings = connect(

@@ -60,13 +60,13 @@ export const SignupView = props => (
               className={BaseStyle.Input}
               type="email"
               id="email"
-              placeholder="Enter Your Work Email"
+              placeholder="Enter Your Email Address"
               value={props.email}
               onChange={props.changeInput}
               required
             />
             <label className={BaseStyle.FormLabel} htmlFor="email">
-              Enter Your Work Email
+              Enter Your Email Address
             </label>
           </div>
           <div className={BaseStyle.Group}>
@@ -80,7 +80,7 @@ export const SignupView = props => (
               required
             />
             <label className={BaseStyle.FormLabel} htmlFor="email">
-              Enter Your Work Email
+              Enter Your Email Address
             </label>
           </div>
           <div className={BaseStyle.Group}>

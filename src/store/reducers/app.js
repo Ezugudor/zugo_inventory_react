@@ -12,6 +12,7 @@ const initialState = {
   notificationMessage: "",
   showNotification: false,
   notificationType: "",
+  notificationTimeout: 0,
   errorDetails: null,
   loading: false,
   error: false
@@ -27,6 +28,7 @@ export const app = (state = initialState, action) => {
         notificationTitle: action.title,
         notificationMessage: action.message,
         notificationType: action.nType,
+        notificationTimeout: action.timeOut,
         showNotification: true
       });
 

@@ -33,13 +33,13 @@ export const ChangeBranch = props => (
           value={props.branchToChange.state}
         >
           <option>Select State</option>
-          {countryStates.map(state => (
+          {props.getArrangedState().map(state => (
             <option
               value={state.state.name}
               key={state.state.id}
               data-id={state.state.id}
             >
-              {state.state.name}
+              {props.stripState(state.state.name)}
             </option>
           ))}
         </select>
@@ -70,7 +70,7 @@ export const ChangeBranch = props => (
       </div>
       <div className={styles.controls}>
         <White click={props.toggleChangeBranch}>Cancel</White>
-        <Red click={props.changeBranch}>Change Branch</Red>
+        <Red click={props.changeBranch}>Update</Red>
       </div>
     </section>
   </Modal>

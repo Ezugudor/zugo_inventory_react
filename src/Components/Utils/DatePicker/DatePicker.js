@@ -12,6 +12,7 @@ export const DatePicker = props => (
         data-date-type="startDate"
         value={props.startDate}
         type="date"
+        placeholder="Begining"
       />
     </div>
     <div className={Style.dateGroup}>
@@ -21,6 +22,7 @@ export const DatePicker = props => (
         data-date-type="endDate"
         value={props.endDate}
         type="date"
+        placeholder="Today"
       />
     </div>
     <div className={Style.dateGroup}>

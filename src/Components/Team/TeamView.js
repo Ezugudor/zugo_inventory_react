@@ -13,7 +13,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import trashcanImage from "../../img/trash-can.svg";
 import penImage from "../../img/pen.svg";
-import { Notification } from "../Utils";
+import { Notification, Loading } from "../Utils";
 import { White } from "../Utils/Buttons";
 
 export const TeamView = props => (
@@ -32,6 +32,7 @@ export const TeamView = props => (
         createMember={props.createMember}
         newMember={props.newMember}
         branches={props.branches}
+        newMemberFormId={props.newMemberFormId}
       />
       <ChangeMember
         setUpdateUserDetail={props.setUpdateUserDetail}
@@ -41,6 +42,7 @@ export const TeamView = props => (
         branches={props.branches}
         editMember={props.editMember}
         showNotification={props.showNotification}
+        editMemberFormId={props.editMemberFormId}
       />
       <DeleteMember
         toggleDeleteMember={props.toggleDeleteMember}
@@ -48,13 +50,8 @@ export const TeamView = props => (
         memberToDelete={props.memberToDelete}
         deleteMember={props.deleteMember}
       />
-      <Notification
-        showNotification={props.showNotification}
-        timer={props.popupTimer}
-        toggleLoading={props.toggleNotification}
-        title={"Default Title"}
-        message={"Default Body Message"}
-      />
+      <Loading showLoading={props.showLoading} />
+      <Notification title={"Default Title"} message={"Default Body Message"} />
     </div>
   </AdminLayout>
 );
@@ -79,7 +76,7 @@ const showTeamMembers = props => {
             trashcanImage={trashcanImage}
             penImage={penImage}
             setMemberToDelete={props.setMemberToDelete}
-            setMemberDetail={props.setUpdateUserDetail}
+            populateUserDetail={props.populateUserDetail}
             account={account}
           />
         </div>
