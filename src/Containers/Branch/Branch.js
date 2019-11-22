@@ -82,6 +82,16 @@ class Class extends Component {
     this.setState({ newBranch });
   };
 
+  setChangeBranchDetail = info => {
+    const newBranch = { ...this.state.branchToChange };
+    info.forEach(branchInfo => {
+      let key = Object.keys(branchInfo)[0];
+      let value = Object.values(branchInfo)[0];
+      newBranch[key] = value;
+    });
+    this.setState({ branchToChange: newBranch });
+  };
+
   /**
    * build up edit user properties
    * @param {string} key propterty name to set
@@ -132,11 +142,12 @@ class Class extends Component {
   setSelectedLGA = (stateId, mode = null) => {
     const LGA = this.getStateLGA(stateId);
     const stateName = this.getStateName(stateId);
+    // alert(LGA);
+    console.log("fada 1", LGA);
+    console.log("fada 2", stateName);
     if (mode) {
-      const newBranch = { ...this.state.branchToChange };
-      newBranch["state"] = stateName;
-      // newBranch["area"] = LGA;
-      this.setState({ branchToChange: newBranch, LGA });
+      this.setChangeBranchDetail([{ stateId: stateId }, { state: stateName }]);
+      this.setState({ LGA });
     } else {
       this.setNewBranchDetail([{ stateId: stateId }, { state: stateName }]);
       this.setState({ LGA });

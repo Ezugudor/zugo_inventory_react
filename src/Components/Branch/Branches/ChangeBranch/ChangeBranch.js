@@ -24,21 +24,11 @@ export const ChangeBranch = props => (
         <select
           id="role"
           className={styles.input}
-          onChange={e => {
-            return props.setSelectedLGA(
-              e.target[e.target.selectedIndex].dataset.id,
-              "edit"
-            );
-          }}
-          value={props.branchToChange.state}
+          onChange={e => props.setSelectedLGA(e.target.value, "edit")}
         >
           <option>Select State</option>
           {props.getArrangedState().map(state => (
-            <option
-              value={state.state.name}
-              key={state.state.id}
-              data-id={state.state.id}
-            >
+            <option value={state.state.id} key={state.state.name}>
               {props.stripState(state.state.name)}
             </option>
           ))}

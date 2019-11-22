@@ -152,20 +152,20 @@ class Class extends Component {
     this.setState({
       currentElement: cE
     });
-    // if (parent) {
-    //   return this.setQuestionChildProperty(name, id, value, parent);
-    // }
-    // const questions = [...this.state.formElements];
-    // const questionIdex = questions.findIndex(el => el.id === id);
-    // if (questionIdex === -1) return;
-    // const question = questions[questionIdex];
-    // question[name] = value;
-    // questions[questionIdex] = question;
-    // this.preserveState(question, questions);
-    // this.setState({
-    //   currentElement: question,
-    //   formElements: questions
-    // });
+    if (parent) {
+      return this.setQuestionChildProperty(name, id, value, parent);
+    }
+    const questions = [...this.state.formElements];
+    const questionIdex = questions.findIndex(el => el.id === id);
+    if (questionIdex === -1) return;
+    const question = questions[questionIdex];
+    question[name] = value;
+    questions[questionIdex] = question;
+    this.preserveState(question, questions);
+    this.setState({
+      currentElement: question,
+      formElements: questions
+    });
   };
 
   /**
@@ -414,13 +414,14 @@ class Class extends Component {
     // if (!hasBeenAsked) {
     //   questions.push(branchQuestion);
     // }
-
+    console.log("first name", name);
     const details = {
       name: this.props.newForm.name,
       elements: questions,
       formTypeId: id,
       formId: this.props.newForm.formId
     };
+    console.log("first details", details);
     const to = `/formtypes/${slugName(parent)}/${slugName(name)}`;
     const request = {
       to,

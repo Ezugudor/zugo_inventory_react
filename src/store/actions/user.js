@@ -109,7 +109,7 @@ export const deleteMember = member => {
       .then(res => {
         dispatch(stopNetworkRequest());
         dispatch(deleteAcount(member));
-        dispatch(updateBusiness(res.data));
+        dispatch(updateBusiness(res.data.business));
         if (res.data.deleted) {
           dispatch(
             setNotificationMessage(

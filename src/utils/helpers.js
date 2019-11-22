@@ -5,10 +5,10 @@ export const handleError = (err, dispatch) => {
 
   if (err.response) {
     const error = err.response.data;
-    dispatch(setNotificationMessage(error.details, "error"));
+    dispatch(setNotificationMessage(error.details, "error", "Oops !"));
     return;
   }
-  dispatch(setNotificationMessage("Oops request failed", "error"));
+  dispatch(setNotificationMessage("Oops request failed", "error", "Oops !"));
 };
 
 export const calculateElementCount = formInputs => {
