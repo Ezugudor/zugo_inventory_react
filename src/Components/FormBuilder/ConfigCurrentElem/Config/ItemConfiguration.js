@@ -3,15 +3,6 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 export class ItemConfiguration extends Component {
-  constructor(props) {
-    super(props);
-    // this.state = {
-    //   min: 0,
-    //   max: 0,
-    //   required: false
-    // };
-  }
-
   // componentWillUpdate() {
   //   console.log(
   //     "checking the two way bind",
@@ -24,13 +15,28 @@ export class ItemConfiguration extends Component {
   showMinMax = props => {
     return !this.minMaxException.includes(props.currentElement.type);
   };
-
-  getValidationRule = (ruleName, rules) => {
-    let res = rules.find(rule => rule.name == ruleName);
-    console.log("validation result", res);
-    return res ? res.value : 10;
+  getMin = () => {
+    const rules = [...this.props.currentElement.validationRules];
+    const min = rules.find(rule => rule.name === "min");
+    return min.value;
   };
-
+  getValidationRule = (ruleName, rules) => {
+    console.log("rules checking for compact element", rules);
+    let res = rules.find(rule => rule.name == ruleName);
+    if (res && res.name === "max") {
+      if (res.value < this.getMin()) {
+        res.value = this.getMin();
+      }
+    }
+    return res ? res.value : ruleName === "required" ? false : 0;
+  };
+  handleChange = e =>
+    this.props.setQuestionProperty(
+      "description",
+      this.props.currentElement.id,
+      e.target.value,
+      this.props.currentElement.parent
+    );
   render() {
     return (
       <div className={Style.configuration}>
@@ -83,13 +89,7 @@ export class ItemConfiguration extends Component {
           id="description"
           className={Style.textarea}
           value={this.props.currentElement.description}
-          onChange={e =>
-            this.props.setQuestionProperty(
-              "description",
-              this.props.currentElement.id,
-              e.target.value
-            )
-          }
+          onChange={this.handleChange}
         />
       </div>
     );

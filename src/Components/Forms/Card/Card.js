@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import React from "react";
 export const Card = props => {
   let gotoEdit = () => {
-    // console.log("show workspaaaa", props);
     props.showBuilderEdit(props.formId, props.form.workspace.id);
   };
   return (

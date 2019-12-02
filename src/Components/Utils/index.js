@@ -4,6 +4,7 @@ export * from "./DatePicker";
 export * from "./AnswerUI";
 export * from "./Backdrop";
 export * from "./Modal";
+export * from "./FullScreen";
 export * from "./Loading";
 export * from "./Notification";
 export * from "./Logo";

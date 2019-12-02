@@ -70,7 +70,6 @@ export const form = (state = initialState, action) => {
       return updateState(state, { newForm: form });
 
     case EDIT_FORM:
-      // console.log("form mode", action.data);
       const eForm = { ...state.newForm };
       eForm.formType = action.data.formType;
       eForm.name = action.data.name;

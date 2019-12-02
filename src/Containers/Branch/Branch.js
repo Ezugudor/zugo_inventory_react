@@ -143,8 +143,7 @@ class Class extends Component {
     const LGA = this.getStateLGA(stateId);
     const stateName = this.getStateName(stateId);
     // alert(LGA);
-    console.log("fada 1", LGA);
-    console.log("fada 2", stateName);
+
     if (mode) {
       this.setChangeBranchDetail([{ stateId: stateId }, { state: stateName }]);
       this.setState({ LGA });
@@ -191,7 +190,6 @@ class Class extends Component {
    * show delete a branch modal
    */
   toggleDeleteBranch = () => {
-    console.log("arranged states", this.getArrangedState(countryStates));
     this.setState(prevState => {
       return { showDeleteBranch: !prevState.showDeleteBranch };
     });
@@ -211,7 +209,6 @@ class Class extends Component {
    * @param {object} branch branch object to be deleted
    */
   setBranchToChange = branch => {
-    console.log("toggle branch dteails", branch);
     const LGA = this.getStateLGA(branch.stateId);
     this.setState({ branchToChange: branch, LGA });
     this.toggleChangeBranch();
@@ -263,11 +260,7 @@ class Class extends Component {
   changeUserBranch = () => {
     const { currentUser } = this.props;
     const branch = { ...this.state.branchToChange };
-    // console.log("propz.. final form info", this.state.newBranch);
-    // console.log("propz.. final form ff", this.state.branchToChange);
-    console.log("propz.. final form branchz");
-    console.log("propz.. final form branch", branch);
-    console.log("propz.. final form user", currentUser);
+
     // return;
     if (currentUser.role !== "admin") {
       return alert("You don't have access to perform this operation");

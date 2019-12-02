@@ -6,8 +6,6 @@ import PropTypes from "prop-types";
 import React from "react";
 
 const showButton = props => {
-  console.log("my role", props.currentUser.role);
-  console.log("is approver", props.response.processors.approver.role);
   if (
     props.currentUser.role == "initiator" ||
     props.currentUser.role == "super_initiator"

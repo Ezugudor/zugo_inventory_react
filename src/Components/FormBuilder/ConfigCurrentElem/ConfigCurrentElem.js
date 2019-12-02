@@ -14,12 +14,12 @@ import loadingIcon from "../../../img/loading2.svg";
 
 class Class extends Component {
   componentDidMount = dispatch => {
-    console.log("fad this.props", this.props);
     // setTimeout(() => {
     //   this.props.closeNotification();
     // }, 5000);
   };
   render() {
+    console.log("the type", this.props.currentElement.type);
     return (
       <Modal
         show={this.props.showConfigModal}
@@ -59,7 +59,6 @@ class Class extends Component {
 // };
 
 const mapStateToProps = state => {
-  console.log("hereeeee", state);
   return {
     showNotification: state.app.showNotification,
     title: state.app.notificationTitle,

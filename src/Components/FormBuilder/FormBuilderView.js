@@ -4,7 +4,7 @@ import { EditorPresenter } from "./EditorPresenter";
 import { FormPresenter } from "./FormPresenter";
 import { Setting } from "./Settings";
 import Style from "./FormBuilderView.module.css";
-import { Loading } from "../Utils";
+import { Loading, Notification, FullScreen } from "../Utils";
 import { ConfigCurrentElem } from "./ConfigCurrentElem";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
@@ -19,8 +19,15 @@ export class FormBuilderView extends Component {
       cursorwidth: "15px",
       autohidemode: true,
       touchbehavior: false,
-      grabcursorenabled: false
+      grabcursorenabled: false,
+      spacebarenabled: false
     });
+  }
+  componentWillUnmount() {
+    //  important! hides the nicescroll bar after moving out of the formbuilder
+    $(".overflow_scroll")
+      .getNiceScroll()
+      .hide();
   }
   render() {
     return (
@@ -31,6 +38,8 @@ export class FormBuilderView extends Component {
         save={this.props.save}
         pageName="form_builder"
         currentUser={this.props.currentUser}
+        backToForms={this.props.backToForms}
+        togglePreview={this.props.togglePreview}
       >
         <div className={Style.layoutCont}>
           <div className={Style.left}>
@@ -74,10 +83,23 @@ export class FormBuilderView extends Component {
           {/* <div className={Style.clearfix}></div> */}
         </div>
 
-        <Loading
-          showLoading={this.props.showLoading}
-          toggleLoading={this.props.toggleLoading}
+        <Loading showLoading={this.props.showLoading} />
+        <Notification
+          title={"Default Title"}
+          message={"Default Body Message"}
         />
+        <FullScreen
+          show={this.props.showPreview}
+          togglePreview={this.props.togglePreview}
+        >
+          <FormPresenter
+            elements={this.props.formElements}
+            formName={this.props.formName}
+            deleteQuestion={this.props.deleteQuestion}
+            setCurrentEditor={this.props.setCurrentEditor}
+            toggleConfigModal={this.props.toggleConfigModal}
+          />
+        </FullScreen>
         <ConfigCurrentElem
           showConfigModal={this.props.showConfigModal}
           addQuestionIntroChild={this.props.addQuestionIntroChild}

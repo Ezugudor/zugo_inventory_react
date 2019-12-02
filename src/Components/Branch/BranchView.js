@@ -103,7 +103,7 @@ const showTeamMembers = props => {
       <span className={styles.btnText}>New Branch</span>
     </White>
   );
-  console.log("gather data", ppDataS);
+
   return <JQDatatable hover data={ppDataS} />;
 };
 

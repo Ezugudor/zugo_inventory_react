@@ -12,9 +12,7 @@ export class Class extends Component {
     loading: 0
   };
 
-  componentDidUpdate = () => {
-    console.log("new update", this.state.loading);
-  };
+  componentDidUpdate = () => {};
   /**
    * send file to be uploaded to S3 bucket
    * @param {object} file file to be uploaded

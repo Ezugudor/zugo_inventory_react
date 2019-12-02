@@ -63,9 +63,6 @@ const uploadFile = (url, formData, dispatch, _this) => {
       "Content-Type": "multipart/form-data"
     },
     onUploadProgress: eve => {
-      console.log("progress", eve.loaded);
-      console.log("progress event", eve);
-
       let total = eve.total;
       let loaded = eve.loaded;
       let fraction = eve.loaded / eve.total;
@@ -81,7 +78,6 @@ const uploadFile = (url, formData, dispatch, _this) => {
     }
   })
     .then(res => {
-      console.log("uploading info", res);
       dispatch(stopNetworkRequest());
       dispatch(holdFile(res.data));
       dispatch(updateUploadStatus(""));

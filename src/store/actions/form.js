@@ -87,6 +87,7 @@ export const updateForm = (details, history, { to, params }) => {
     dispatch(startNetworkRequest());
     SwypPartnerApi.put("forms", details)
       .then(res => {
+        console.log("update form dispatcher form res", res);
         dispatch(stopNetworkRequest());
         const { formTypeId } = details;
         dispatch(updateForms(res.data), formTypeId);
@@ -94,18 +95,26 @@ export const updateForm = (details, history, { to, params }) => {
         dispatch(unpreserveNewForm());
         dispatch(
           setNotificationMessage(
-            `${res.data.name} Form was created successfully`,
-            "success"
+            `${res.data.name} updated successfully`,
+            "success",
+            "Success"
           )
         );
         history.push(to, { params });
       })
       .catch(err => {
         if (err.response.status == 502) {
-          alert("Nothing Changed");
-          history.push("/formtypes");
+          dispatch(stopNetworkRequest());
+          dispatch(
+            setNotificationMessage(
+              "You have not really made any changes.",
+              "success",
+              "Nothing Changed"
+            )
+          );
+          // history.push("/formtypes");
         }
-        handleError(err, dispatch);
+        // handleError(err, dispatch);
       });
   };
 };

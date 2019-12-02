@@ -22,16 +22,10 @@ class Class extends Component {
   }
 
   onChange = ({ value }, parent) => {
-    console.dir("checkin the value of the on change event", value);
-    console.dir("checkin the value of the on parent", parent);
     this.setState({ value });
     const editorContent = Plain.serialize(value);
     if (this.editorPointer.current) {
       const { id } = this.editorPointer.current.props;
-      console.log(
-        "get other thingws and not just the question ID",
-        this.editorPointer.current.props
-      );
       this.props.setQuestionProperty("name", id, editorContent, parent);
     }
   };
@@ -54,7 +48,6 @@ class Class extends Component {
     return next();
   };
 
-  // Ezugudor Addendum
   onDeleteBtnClick = (event, parent) => {
     event.preventDefault();
     const { id } = this.editorPointer.current.props;
@@ -63,7 +56,6 @@ class Class extends Component {
 
   onConfigBtnClick = (event, parent) => {
     event.preventDefault();
-    this.props.click();
     const { id } = this.editorPointer.current.props;
     this.props.setCurrentEditor(id, parent);
   };

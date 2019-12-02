@@ -13,7 +13,6 @@ import React from "react";
 const renderCompactChildren = (question, handleClick) => {
   switch (question.type) {
     case "dropdown":
-      console.log("dropdown showings child Tree", question);
       return (
         <DropDown
           question={question}
@@ -79,7 +78,6 @@ export const renderQuestionFor = ({ question, handleClick }) => {
       );
 
     case "dropdown":
-      console.log("dropdown showings Main Tree", question);
       return (
         <DropDown
           question={question}

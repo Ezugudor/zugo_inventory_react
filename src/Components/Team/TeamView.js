@@ -57,8 +57,6 @@ export const TeamView = props => (
 );
 
 const showTeamMembers = props => {
-  console.log("show members", props);
-  console.log("partially processed", props);
   const { members } = props;
   const membersD = members.map(account => {
     const { branch, id, created, role, phone, name, email } = account;
@@ -85,7 +83,6 @@ const showTeamMembers = props => {
 
     return rowData;
 
-    // console.log("gather data", note, branche, id, createdAt, formName);
     // <InboxItem
     //   formName={res.form.name}
     //   date={res.createdAt}
@@ -108,7 +105,7 @@ const showTeamMembers = props => {
       <span className={Styles.btnText}>New Member</span>
     </White>
   );
-  console.log("gather data", ppDataS);
+
   return <JQDatatable hover data={ppDataS} />;
 };
 

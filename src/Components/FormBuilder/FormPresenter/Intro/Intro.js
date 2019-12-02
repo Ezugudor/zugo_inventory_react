@@ -12,9 +12,7 @@ export class Intro extends Component {
     const introElemId = this.props.questionIntro.id;
     // this.props.toggleIntro();
     this.props.deleteQuestion(introElemId);
-    setTimeout(() => {
-      console.log("view intro after deleting", this.props.elements);
-    }, 10);
+    setTimeout(() => {}, 10);
   };
 
   onConfigBtnClick = event => {
@@ -71,8 +69,8 @@ export class Intro extends Component {
           </span>
         </div>
         <div className={Style.Requirements}>
-          {this.props.questionIntro.children.map(child => (
-            <div className={Style.Requirement} key={child.name}>
+          {this.props.questionIntro.children.map((child, index) => (
+            <div className={Style.Requirement} key={index}>
               <div className={Style.Icon}>
                 <img
                   className={Style.IconImage}

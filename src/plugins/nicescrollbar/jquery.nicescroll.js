@@ -2315,9 +2315,7 @@
           }
 
           if (self.iframexd) {
-            if ("console" in _win)
-              console.log("NiceScroll error: policy restriced iframe");
-            return true; //cross-domain - I can't manage this
+            if ("console" in _win) return true; //cross-domain - I can't manage this
           }
 
           self.forcescreen = true;

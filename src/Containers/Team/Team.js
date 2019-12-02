@@ -117,7 +117,6 @@ class Class extends Component {
       !state.branch ||
       !state.phone
     ) {
-      console.log("state from this inside", state);
       const mInputs = state;
       for (var aa in mInputs) {
         if (mInputs[aa].length <= 0) {
@@ -247,7 +246,6 @@ class Class extends Component {
   };
 
   setNewBranchDetail = (key, value, toggleModal = false) => {
-    console.log("props in editelements", this.state);
     const details = { ...this.state.branchChangeDetails };
     details[key] = value;
     this.setState({ branchChangeDetails: details });

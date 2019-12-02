@@ -8,8 +8,8 @@ const view = props => {
     <section className={Style.Cards}>
       {props.formTypes.map((batch, index) => (
         <div className={Style.Row} key={index}>
-          {batch.map(formType => (
-            <div className={Style.Col3} key={formType.name}>
+          {batch.map((formType, indexx) => (
+            <div className={Style.Col3} key={indexx}>
               <Card formType={formType} {...props} />
             </div>
           ))}

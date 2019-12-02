@@ -36,11 +36,10 @@ class Class extends Component {
   };
 
   handleDateChange = e => {
-    console.log("changed date filter", e.target.dataset);
     const data = e.target.dataset;
     const state = { ...this.state };
     const val = e.target.value;
-    console.log("value checking if empoty", val == "");
+
     state[data.dateType] = val;
     this.setState(state);
     let nonEmpty = 0;
@@ -88,7 +87,7 @@ class Class extends Component {
       alert("Wrong date range selected", "error");
       return;
     }
-    console.log("progress indicator", this.props.progress);
+
     // this.toggleLoading();
     const { businessId } = this.props;
     this.props.filterByDate(businessId, startDate, endDate);

@@ -32,7 +32,7 @@ export const editorDefaultValue = () =>
 export const generateNewQuestion = (type, position, branches) => {
   const rules = buildValidationRule(type);
   const id = uuid4();
-  console.log("validation rules for a single form element", rules);
+
   let children = branchFill(type, branches);
 
   children =
@@ -70,18 +70,14 @@ export const generateNewChildQuestion = (
   const rules = buildValidationRule(compactType);
   const id = uuid4();
   let children = branchFill(compactType, branches);
-  console.log("log compactType", compactType);
+
   children =
     compactType == "address"
       ? getStates()
       : compactType == "branch"
       ? branchFill(compactType, branches)
       : [];
-  console.log("log type", type);
-  console.log("log info", info);
-  console.log("log children", children);
-  console.log("log ggget states", getStates());
-  console.log("log ggget Branches", branchFill(compactType, branches));
+
   const { name, controlType, description } = info;
   return {
     validationRules: rules,

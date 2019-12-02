@@ -20,7 +20,6 @@ class Class extends Component {
   componentDidMount() {
     SwypPartnerApi.get(`user/completesignup/${this.props.match.params.token}`)
       .then(res => {
-        console.log("faa", res);
         // dispatch(stopNetworkRequest());
 
         //the token is verified and user details (password) has been added successfully
@@ -112,7 +111,7 @@ class Class extends Component {
 
   render() {
     // verifySignupToken(this.props.match.params.token);
-    // console.log("verify ppties", this.props.match.params.token);
+
     return this.getComponent("expired");
   }
 }

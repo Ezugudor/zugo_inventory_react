@@ -7,7 +7,7 @@ import logoutIcon from "../../../img/logout.svg";
 
 const getClassName = (props, page) => {
   const conditionalCalss = {};
-  console.log("page nasme", props.pageName);
+
   conditionalCalss[Style.ActiveLink] = props.pageName === page;
   conditionalCalss[Style.InactiveLink] = props.pageName !== page;
   return className(Style.NavLink, conditionalCalss);

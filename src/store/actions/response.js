@@ -72,8 +72,7 @@ export const signOff = (id, details, type) => {
       .then(res => {
         dispatch(stopNetworkRequest());
         dispatch(updateResponse(res.data, type));
-        console.log("response data", res.data);
-        console.log("response type", type);
+
         return dispatch(
           setNotificationMessage("Response Processed Successfully", "success")
         );

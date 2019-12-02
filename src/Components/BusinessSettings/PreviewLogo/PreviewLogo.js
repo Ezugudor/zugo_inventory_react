@@ -26,7 +26,6 @@ export const PL = props => {
 // };
 
 const mapStateToProps = state => {
-  console.log("adaaa", state);
   return {
     logoUrll: state.business.logoUrl
   };

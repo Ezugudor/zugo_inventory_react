@@ -13,10 +13,18 @@ class Class extends Component {
     this.props.deleteQuestion(id);
   };
 
+  onConfigBtnClick = event => {
+    event.preventDefault();
+    const { id } = this.editorElement.current.props.element;
+    this.props.setCurrentEditor(id);
+  };
+
   render() {
     return (
       <section className={Style.editorPresenter}>
-        <div className={`${Style.editorsContainer} overflow_scroll`}>
+        <div
+          className={`${Style.editorsContainer} overflow_scroll auto_scroll`}
+        >
           {this.props.formElements.map(ele => {
             //  don't show an editor for introduction
             if (ele.type === "introduction") return null;
@@ -38,7 +46,7 @@ class Class extends Component {
                   <a
                     className={Style.configElem}
                     onClick={e => {
-                      this.props.onConfigBtnClick(e);
+                      this.onConfigBtnClick(e);
                     }}
                   >
                     <i className="ion ion-ios-settings"></i>
@@ -59,7 +67,7 @@ class Class extends Component {
                   {ele.children.map(child => {
                     return (
                       <Editor
-                        ref={this.editorElement}
+                        // ref={this.editorElement}
                         setQuestionProperty={this.props.setQuestionProperty}
                         setCurrentEditor={this.props.setCurrentEditor}
                         setElementChildren={this.props.setElementChildren}

@@ -19,8 +19,8 @@ export const ChangeMember = props => (
           id="branch"
         >
           <option>Select Branch</option>
-          {props.branches.map(branch => (
-            <option value={branch.name} key={branch.name}>
+          {props.branches.map((branch, index) => (
+            <option value={branch.name} key={index}>
               {branch.name}
             </option>
           ))}

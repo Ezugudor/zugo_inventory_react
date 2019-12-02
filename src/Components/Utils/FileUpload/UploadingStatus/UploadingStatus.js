@@ -7,7 +7,6 @@ export class UploadingStatus extends Component {
     this.progress = React.createRef();
   }
 
-  // console.log("uploading component", node);
   componentDidUpdate = () => {
     this.progress.current.style.width = `${this.props.progress}%`;
   };

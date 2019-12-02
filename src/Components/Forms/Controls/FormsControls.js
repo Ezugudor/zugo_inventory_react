@@ -3,7 +3,6 @@ import { Red } from "../../Utils/Buttons";
 import PropTypes from "prop-types";
 import React from "react";
 const getFormType = formType => {
-  console.log("dsds", formType);
   return formType == "Individual"
     ? "Individual Account Form"
     : "Corporate Account Form";

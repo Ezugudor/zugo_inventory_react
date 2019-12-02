@@ -18,7 +18,12 @@ const getSideBar = (currentUser, props) => {
 
 const getHeader = props => {
   return props.pageName == "form_builder" ? (
-    <FormBuilderHeader save={props.save} formName={props.formName} />
+    <FormBuilderHeader
+      save={props.save}
+      formName={props.formName}
+      backToForms={props.backToForms}
+      togglePreview={props.togglePreview}
+    />
   ) : (
     <PrivateHeader formName={props.formName} />
   );

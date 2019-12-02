@@ -10,7 +10,8 @@ import { generateBankLocationQuestion, hasQuestion } from "../../utils";
 import {
   getNewForm,
   getBuilderState,
-  getBusinessColor
+  getBusinessColor,
+  getProgressIndicator
 } from "../../store/selectors";
 import { preserveNewForm, createForm, updateForm } from "../../store/actions";
 import { preserveFormBuilderState } from "../../store/actions";
@@ -21,6 +22,9 @@ import React, { Component } from "react";
 import { slugName } from "../../utils";
 import { connect } from "react-redux";
 import { themeMaker } from "../../utils";
+import $ from "jquery";
+window.jQuery = $;
+require("../../plugins/nicescrollbar/nicescroll.js");
 
 class Class extends Component {
   state = {
@@ -29,6 +33,7 @@ class Class extends Component {
     showLoading: false,
     currentElement: {},
     showConfigModal: false,
+    showPreview: false,
     formElements: []
   };
 
@@ -50,10 +55,7 @@ class Class extends Component {
     themeMaker(businessColor);
   }
 
-  componentDidUpdate() {
-    // console.log("updated Store builderState", this.props.builderState);
-    // console.log("updated Store newForm", this.props.newForm);
-  }
+  componentDidUpdate() {}
 
   /**
    * change the setting UI from design to configuration mode
@@ -71,6 +73,14 @@ class Class extends Component {
   toggleConfigWindow = () => {
     this.setState(prevState => ({
       showSettingsWindow: !prevState.showSettingsWindow
+    }));
+  };
+  /**
+   * open and close the Preveiw UI
+   */
+  togglePreview = () => {
+    this.setState(prevState => ({
+      showPreview: !prevState.showPreview
     }));
   };
 
@@ -92,6 +102,13 @@ class Class extends Component {
     }));
   };
   /**
+   * Go back to Forms
+   */
+  backToForms = () => {
+    const { history } = this.props;
+    history.goBack();
+  };
+  /**
    * Add a new question to the list of questions for users to answer
    * @param {string} type type of question to ask
    */
@@ -100,7 +117,7 @@ class Class extends Component {
     const question = generateNewQuestion(type, position, this.props.branches);
     const questions = [...this.state.formElements];
     const introIndex = getIntroIndex(questions);
-    console.log("questions in the form element ", questions);
+
     // alert(introIndex);
     // if (type === "introduction" && introIndex !== -1) {
     //   return this.setState({
@@ -136,6 +153,8 @@ class Class extends Component {
       currentElement: question,
       formElements: questions
     });
+
+    document.querySelector(".overflow_scroll.auto_scroll").scrollBy(0, 100000);
   };
 
   /**
@@ -144,26 +163,23 @@ class Class extends Component {
    * @param {string} value the property value to set
    */
   setQuestionProperty = (name, id, value, parent = null) => {
-    console.log("logging element value", value);
     let cE = { ...this.state.currentElement };
-    console.log("logging current element orig", this.state.currentElement);
-    console.log("logging current element from setQuestionProperty", cE);
     cE[name] = value;
-    this.setState({
-      currentElement: cE
-    });
+
     if (parent) {
       return this.setQuestionChildProperty(name, id, value, parent);
     }
     const questions = [...this.state.formElements];
-    const questionIdex = questions.findIndex(el => el.id === id);
-    if (questionIdex === -1) return;
-    const question = questions[questionIdex];
+    const questionIndex = questions.findIndex(el => el.id === id);
+    if (questionIndex === -1) return;
+    const question = questions[questionIndex];
+
     question[name] = value;
-    questions[questionIdex] = question;
+    questions[questionIndex] = question;
+
     this.preserveState(question, questions);
     this.setState({
-      currentElement: question,
+      currentElement: cE,
       formElements: questions
     });
   };
@@ -182,23 +198,25 @@ class Class extends Component {
     const questionIdex = questions.findIndex(el => el.id === id);
     if (questionIdex === -1) return;
     const question = questions[questionIdex];
+    question.parent = null;
     this.setState({
       currentElement: question
     });
-    setTimeout(() => {
-      console.log("found currently set element", this.state.currentElement);
-    }, 10);
+    this.toggleConfigModal();
   };
 
   setCurrentEditorCompact = (id, parent) => {
-    const childQuestions = [...parent.children];
-    const cQIndex = childQuestions.findIndex(el => el.id === id);
-    if (cQIndex === -1) return;
-    const childQuestion = childQuestions[cQIndex];
-
+    const allQuestions = [...this.state.formElements];
+    const pQIndex = allQuestions.findIndex(el => el.id === parent.id);
+    if (pQIndex === -1) return;
+    const parentQuestion = allQuestions[pQIndex];
+    const parentChildren = [...parentQuestion.children];
+    const cQIndex = parentChildren.findIndex(el => el.id === id);
+    const childQuestion = parentChildren[cQIndex];
     this.setState({
       currentElement: childQuestion
     });
+    this.toggleConfigModal();
   };
 
   /**
@@ -207,20 +225,26 @@ class Class extends Component {
    * @param {string} value the property value to set
    */
   setQuestionChildProperty = (name, id, value, parent) => {
-    const childQuestions = [...parent.children];
-    const cQIndex = childQuestions.findIndex(el => el.id === id);
-    if (cQIndex === -1) return;
-    const childQuestion = childQuestions[cQIndex];
-    childQuestion[name] = value;
-    childQuestions[cQIndex] = childQuestion;
+    let cE = { ...this.state.currentElement };
+    cE[name] = value;
+
+    //avoid cyclic reference
+    const { parent: parentElem } = cE;
+    cE.parent = { id: parentElem.id };
 
     const mainQuestions = [...this.state.formElements];
     const mQIndex = mainQuestions.findIndex(el => el.id === parent.id);
-    mainQuestions[mQIndex].children = childQuestions;
+    const parentChildren = [...mainQuestions[mQIndex].children];
 
-    this.preserveState(parent, mainQuestions);
+    const elemIndex = parentChildren.findIndex(el => el.id === id);
+    parentChildren[elemIndex] = cE;
+    mainQuestions[mQIndex].children = parentChildren;
+    console.log("main question", mainQuestions);
+    console.log("current Element cE", cE);
+
+    this.preserveState(cE, mainQuestions);
     this.setState({
-      currentElement: parent,
+      currentElement: cE,
       formElements: mainQuestions
     });
   };
@@ -265,10 +289,10 @@ class Class extends Component {
    */
   addCompactQuestionChild = child => {
     const { currentElement } = this.state;
-    // console.log("current element log", currentElement);
+
     const childPosition = currentElement.position;
     const questions = [...this.state.formElements];
-    // console.log("questions in the beginning", questions);
+
     if (hasChild(currentElement, child.name)) {
       const childIndex = getChildIndex(currentElement, child.name);
       currentElement.children.splice(childIndex, 1);
@@ -290,34 +314,64 @@ class Class extends Component {
   };
 
   /**
+   * Actually adds the validation rules
+   * @param name // name of rule
+   * @param e // object representing user action
+   */
+  currentElementWithValidation = (name, e) => {
+    const currentElement = { ...this.state.currentElement };
+    const cERules = [...currentElement.validationRules];
+    const value =
+      e.target.type === "checkbox" ? e.target.checked : e.target.value;
+    const ruleIndex = cERules.findIndex(rule => rule.name === name);
+    if (ruleIndex !== -1) {
+      cERules[ruleIndex] = { name, value };
+    } else {
+      cERules.push({ name, value });
+    }
+    currentElement.validationRules = cERules;
+    return currentElement;
+  };
+  /**
    * Add valiation rules to a form element being build by a user
    * @param name // name of rule
    * @param e // e object representing user action
    */
   addValidationRule = (name, e) => {
-    const { currentElement } = this.state;
-    if (!currentElement.type) return; // no question to configure
-    console.log("validation currentElment", currentElement);
+    const currentElementV = this.currentElementWithValidation(name, e);
+    if (!currentElementV.type) return; // no question to configure
+
     const elements = [...this.state.formElements];
-    const elementIdex = elements.findIndex(el => el.id === currentElement.id);
-    if (elementIdex === -1) return;
-    const element = elements[elementIdex];
-    const value =
-      e.target.type === "checkbox" ? e.target.checked : e.target.value;
-    console.log("validation type", e.target.checked);
-    const rules = [...element.validationRules];
-    const ruleIndex = rules.findIndex(rule => rule.name === name);
-    if (ruleIndex !== -1) {
-      rules[ruleIndex] = { name, value };
+
+    // if (elementIdex === -1) return;
+
+    const { isCompact } = currentElementV;
+
+    if (isCompact) {
+      const elementIdex = elements.findIndex(
+        el => el.id === currentElementV.parent.id
+      );
+      const parent = elements[elementIdex];
+      const children = [...parent.children];
+      const childIndex = children.findIndex(el => el.id === currentElementV.id);
+      //rewrite the parent element to avoid cyclic reference by chosing what is needed(id)
+      const { parent: parentElem } = currentElementV;
+      currentElementV.parent = { id: parentElem.id };
+      children[childIndex] = currentElementV;
+      parent.children = children;
+
+      elements[elementIdex] = parent;
     } else {
-      rules.push({ name, value });
+      const elementIdex = elements.findIndex(
+        el => el.id === currentElementV.id
+      );
+      const { parent: undefined, ...others } = currentElementV;
+      elements[elementIdex] = others;
     }
-    console.log("validation rules", rules);
-    element.validationRules = rules;
-    elements[elementIdex] = element;
-    this.preserveState(element, elements);
+
+    this.preserveState(currentElementV, elements);
     this.setState({
-      currentElement: element,
+      currentElement: currentElementV,
       formElements: elements
     });
   };
@@ -331,7 +385,7 @@ class Class extends Component {
       this.deleteCompactChildQuestion(questionId, parent);
       return;
     }
-    // console.log("finally parents reach", parent);
+
     const questions = [...this.state.formElements];
     const questionIndex = questions.findIndex(el => el.id === questionId);
     if (questionIndex === -1) {
@@ -372,7 +426,7 @@ class Class extends Component {
       }
       return el;
     });
-    // console.log("new form elements", newFormElement);
+
     originalQuestionTree = newFormElement;
     this.preserveState(question, newFormElement);
 
@@ -401,7 +455,7 @@ class Class extends Component {
    */
   createForm = () => {
     //popup the progress indicator
-    this.toggleLoading();
+    // this.toggleLoading();
 
     const { name, parent, id } = this.props.newForm.formType;
     const questions = this.state.formElements;
@@ -414,14 +468,14 @@ class Class extends Component {
     // if (!hasBeenAsked) {
     //   questions.push(branchQuestion);
     // }
-    console.log("first name", name);
+
     const details = {
       name: this.props.newForm.name,
       elements: questions,
       formTypeId: id,
       formId: this.props.newForm.formId
     };
-    console.log("first details", details);
+
     const to = `/formtypes/${slugName(parent)}/${slugName(name)}`;
     const request = {
       to,
@@ -441,7 +495,9 @@ class Class extends Component {
     return (
       <FormBuilderView
         showSettingsWindow={this.state.showSettingsWindow}
+        backToForms={this.backToForms}
         showConfigModal={this.state.showConfigModal}
+        showPreview={this.state.showPreview}
         settingsWindowName={this.state.settingsWindowName}
         addQuestionIntroChild={this.addQuestionIntroChild}
         addCompactQuestionChild={this.addCompactQuestionChild}
@@ -457,9 +513,10 @@ class Class extends Component {
         formName={this.props.newForm.name}
         addElement={this.addElement}
         save={this.createForm}
-        showLoading={this.state.showLoading}
+        showLoading={this.props.progress}
         toggleLoading={this.toggleLoading}
         toggleConfigModal={this.toggleConfigModal}
+        togglePreview={this.togglePreview}
         currentUser={this.props.currentUser}
       />
     );
@@ -471,7 +528,8 @@ const mapStateToProps = state => ({
   currentUser: getCurrentUser(state),
   branches: getBranches(state),
   newForm: getNewForm(state),
-  businessColor: getBusinessColor(state)
+  businessColor: getBusinessColor(state),
+  progress: getProgressIndicator(state)
 });
 
 export const FormBuilder = connect(

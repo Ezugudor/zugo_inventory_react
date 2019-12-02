@@ -97,9 +97,7 @@
       }
     },
 
-    log: function(str) {
-      console.log("Flash: " + str);
-    },
+    log: function(str) {},
 
     register: function(id, client) {
       // register new client to receive events

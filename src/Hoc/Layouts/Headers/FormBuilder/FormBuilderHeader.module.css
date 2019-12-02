@@ -15,6 +15,34 @@
   display: table;
   clear: both;
 }
+.backBtnIcon {
+  margin-right: 10px;
+  font-size: 24px;
+}
+
+.backBtnName {
+  font-weight: bold;
+  position: relative;
+  top: -2px;
+  color: #000;
+}
+.previewBtn {
+  position: absolute;
+  top: 10px;
+  right: 20%;
+  cursor: pointer;
+}
+.previewIcon {
+  font-size: 30px;
+  position: relative;
+  top: 8px;
+  margin-right: 10px;
+}
+
+.previewName {
+  position: relative;
+  top: 2px;
+}
 
 .LeftSide {
   float: left;
@@ -27,8 +55,9 @@
 }
 
 .ParentLinkBox {
-  background-color: white-color;
+  /* background-color: white-color; */
   display: inline-block;
+  padding-left: 20px;
 }
 
 .LinkIcon {
