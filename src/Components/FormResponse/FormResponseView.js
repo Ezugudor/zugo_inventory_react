@@ -8,7 +8,7 @@ import { NewNote } from "./NewNote";
 import PropTypes from "prop-types";
 import { Notes } from "./Notes";
 import React from "react";
-import { Notification } from "../Utils";
+import { Notification, PopImage } from "../Utils";
 
 export const FormResponseView = props => (
   <AdminLayout pageName="Account Opening" currentUser={props.currentUser}>
@@ -57,6 +57,7 @@ export const FormResponseView = props => (
         title={"Default Title"}
         message={"Default Body Message"}
       />
+      <PopImage />
     </div>
   </AdminLayout>
 );

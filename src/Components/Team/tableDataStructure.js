@@ -1,6 +1,12 @@
 export const dataStruct = {
   columns: [
     {
+      label: "",
+      field: "avatar",
+      sort: "asc",
+      width: 150
+    },
+    {
       label: "Name",
       field: "name",
       sort: "asc",

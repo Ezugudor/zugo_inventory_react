@@ -15,6 +15,7 @@ export const OfficailSignatories = props => {
             email={initiator.email}
             date={initiator.dateOfApproval}
             signature={initiator.signatureUrl}
+            userInfo={initiator}
           />
         ) : (
           <div className={styles.emptyMessage}>Yet to sign.</div>
@@ -29,6 +30,7 @@ export const OfficailSignatories = props => {
             email={approver.email}
             date={approver.dateOfApproval}
             signature={approver.signatureUrl}
+            userInfo={approver}
           />
         ) : (
           <div className={styles.emptyMessage}>Yet to sign.</div>

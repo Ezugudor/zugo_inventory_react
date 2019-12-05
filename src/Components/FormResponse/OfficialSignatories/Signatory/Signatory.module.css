@@ -36,7 +36,31 @@
   color: var(--color1);
   margin-right: 20px;
 }
-
+.avatarCont {
+  margin-right: 10px;
+}
+.avatar {
+  width: 4rem;
+  height: 4rem;
+  margin-top: 0.4rem;
+  border-radius: 10px;
+  box-shadow: 0 0 2px var(--color1);
+  border: 2px solid #fff;
+  transition: all 0.3s ease-in;
+}
+.avatar:hover {
+  box-shadow: 0 0 5px #000;
+  cursor: pointer;
+}
+.avatar:active {
+  box-shadow: inset 0 0 10px #000;
+}
+.uname {
+  position: relative;
+  top: 14px;
+  font-weight: bold;
+  color: var(--color1);
+}
 .name {
   background-color: #67e5fc;
 }

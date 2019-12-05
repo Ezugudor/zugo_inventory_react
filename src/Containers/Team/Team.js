@@ -3,9 +3,11 @@ import {
   getBranches,
   getBusinessId,
   getBusinessColor,
-  getProgressIndicator
+  getProgressIndicator,
+  getUploadedFileData,
+  getUploadStatus
 } from "../../store/selectors";
-import { createNewMember, updateUser } from "../../store/actions";
+import { createNewMember, updateUser, uploadLogo } from "../../store/actions";
 import { getCurrentUser } from "../../store/selectors";
 import { deleteMember } from "../../store/actions";
 import { TeamView } from "../../Components/Team";
@@ -19,6 +21,7 @@ class Class extends Component {
     showDeleteMember: false,
     showUpdateUser: false,
     showNotification: false,
+    popImage: { show: false, url: "", title: "" },
     memberToDelete: {},
     newMember: {
       role: "worker",
@@ -27,6 +30,7 @@ class Class extends Component {
       email: "",
       phone: "",
       branch: "",
+      imageURL: "",
       formId: "new-member"
     },
     branchChangeDetails: {
@@ -43,6 +47,7 @@ class Class extends Component {
       email: "",
       phone: "",
       branch: "",
+      imageURL: "",
       formId: "edit-member"
     }
   };
@@ -158,7 +163,7 @@ class Class extends Component {
       return;
     }
     const { email, phone, role, branch } = this.state.newMember;
-    const { firstname, lastname } = this.state.newMember;
+    const { firstname, lastname, imageURL } = this.state.newMember;
     const origin = `${window.location.origin}/completesignup`;
     const namee = `${firstname} ${lastname}`;
     const details = {
@@ -170,6 +175,7 @@ class Class extends Component {
       role,
       origin,
       branch,
+      imageURL,
       business: this.props.businessId
     };
     this.toggleCreateMember();
@@ -183,6 +189,28 @@ class Class extends Component {
     this.setState(prevState => {
       return { showDeleteMember: !prevState.showDeleteMember };
     });
+  };
+
+  /**
+   * toggle image preview modal
+   */
+  togglePopImage = () => {
+    this.setState(prevState => {
+      const { popImage: clonePopImage } = prevState;
+      clonePopImage.show = !prevState.popImage.show;
+      return { popImage: clonePopImage };
+    });
+  };
+
+  /**
+   * prefill image preview modal and activate
+   */
+  setPopImage = ({ name, imageURL }) => {
+    const popImage = { ...this.state.popImage };
+    popImage.url = imageURL;
+    popImage.title = name;
+    this.setState({ popImage });
+    this.togglePopImage();
   };
 
   /**
@@ -241,6 +269,9 @@ class Class extends Component {
 
   populateUserDetail = account => {
     var details = { ...this.state.userEditDetails, ...account };
+    console.log("populate account", account);
+    console.log("populate defualt", this.state.userEditDetails);
+    console.log("populate detail", details);
     this.setState({ userEditDetails: details });
     this.toggleUpdateUser();
   };
@@ -252,6 +283,27 @@ class Class extends Component {
     if (toggleModal) {
       this.toggleUpdateUser();
     }
+  };
+
+  /**
+   * send file to be uploaded to S3 bucket
+   * @param {object} file file to be uploaded
+   */
+  uploadImage = (file, mode) => {
+    const formData = new FormData();
+    const fileName = `userlogo`;
+    formData.append("logo", file);
+    this.props.uploadLogo(formData, fileName, this).then(() => {
+      const { newMember, userEditDetails } = this.state;
+      console.log("checking for mode after upload", mode);
+      if (mode === "new") {
+        newMember.imageURL = this.props.uploadedFile.imageUrl;
+        this.setState({ newMember });
+      } else {
+        userEditDetails.imageURL = this.props.uploadedFile.imageUrl;
+        this.setState({ userEditDetails });
+      }
+    });
   };
 
   /**
@@ -301,6 +353,13 @@ class Class extends Component {
         showUpdateUser={this.state.showUpdateUser}
         showCreateMember={this.state.showCreateMember}
         showNotification={this.state.showNotification}
+        showPopImage={this.state.popImage.show}
+        popImageURL={this.state.popImage.url}
+        popImageTitle={this.state.popImage.title}
+        togglePopImage={this.togglePopImage}
+        setPopImage={this.setPopImage}
+        newMemberImageURL={this.state.newMember.imageURL}
+        editMemberImageURL={this.state.userEditDetails.imageURL}
         popupTimer={this.popupTimer}
         showDeleteMember={this.state.showDeleteMember}
         setNewBranchDetail={this.setNewBranchDetail}
@@ -324,12 +383,15 @@ class Class extends Component {
         newMemberFormId={this.state.newMember.formId}
         editMemberFormId={this.state.userEditDetails.formId}
         showLoading={this.props.progress}
+        handleUpload={this.uploadImage}
       />
     );
   }
 }
 
 const mapStateToProps = state => ({
+  uploadedFile: getUploadedFileData(state),
+  uploadStatus: getUploadStatus(state),
   currentUser: getCurrentUser(state),
   businessId: getBusinessId(state),
   businessColor: getBusinessColor(state),
@@ -340,5 +402,5 @@ const mapStateToProps = state => ({
 
 export const Team = connect(
   mapStateToProps,
-  { createNewMember, updateUser, deleteMember }
+  { uploadLogo, createNewMember, updateUser, deleteMember }
 )(Class);

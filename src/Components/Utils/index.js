@@ -10,3 +10,5 @@ export * from "./Notification";
 export * from "./Logo";
 export * from "./Nav";
 export * from "./MDBDatatables";
+export * from "./PreviewImage";
+export * from "./PopImage";

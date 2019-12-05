@@ -41,10 +41,13 @@ export class Class extends Component {
     if (!this.props.uploadedFile) {
       return alert("Try again when your signature is done been processed");
     }
-    const { responseType } = this.props;
+    const { responseType, currentUser } = this.props;
+    const { imageURL, shortId } = currentUser;
     const responseId = this.props.responseId;
     const details = {
-      signatureUrl: this.props.uploadedFile.assetUrl
+      signatureUrl: this.props.uploadedFile.assetUrl,
+      avatar: imageURL,
+      shortId
     };
 
     this.props.signOff(responseId, details, responseType).then(() => {

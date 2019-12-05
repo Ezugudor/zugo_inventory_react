@@ -81,7 +81,7 @@ export const ResponseControls = props => (
         <i className={`${Style.arrow} ion ion-android-remove`}></i>
 
         <span className={`${Style.Text} ${Style.name}`}>
-          {props.response.id}
+          {props.response.shortId}
         </span>
       </div>
       {/* <span className={Style.Text}>Forms </span> */}

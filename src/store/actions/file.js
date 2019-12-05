@@ -56,7 +56,7 @@ export const uploadOfficialSigns = (formData, bankName, filename, _this) => {
  * @param {reduxEventDispatcher} dispatch
  */
 const uploadFile = (url, formData, dispatch, _this) => {
-  dispatch(startNetworkRequest());
+  // dispatch(startNetworkRequest()); //disabled this for file uploads so progress bar could shine :)
   dispatch(updateUploadStatus("uploading"));
   return SwypPartnerApi.post(url, formData, {
     headers: {
@@ -78,7 +78,7 @@ const uploadFile = (url, formData, dispatch, _this) => {
     }
   })
     .then(res => {
-      dispatch(stopNetworkRequest());
+      // dispatch(stopNetworkRequest());
       dispatch(holdFile(res.data));
       dispatch(updateUploadStatus(""));
     })

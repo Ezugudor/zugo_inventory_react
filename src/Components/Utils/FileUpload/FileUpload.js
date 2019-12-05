@@ -9,12 +9,15 @@ import { connect } from "react-redux";
 
 export class Class extends Component {
   state = {
-    dragEnter: false
+    dragEnter: false,
+    id: `logo${this.props.mode}`
   };
   componentDidMount = () => {
-    let dropArea = document.querySelector(".llkk");
+    // const sel = `#${this.state.id}`;
+    // alert(sel);
+    let dropArea = document.querySelector(`.dropArea${this.state.id}`);
     dropArea.addEventListener("click", e => {
-      dropArea.querySelector("#logo").click();
+      dropArea.querySelector(`#${this.state.id}`).click();
     });
   };
 
@@ -31,15 +34,17 @@ export class Class extends Component {
   handleFileDrop = e => {
     e.preventDefault();
     const dt = e.dataTransfer;
-    this.props.handleUpload(dt.files[0]);
+    // mode is used to know the state to update , NewImageURL or editImageURL in the controller.
+    console.log("mode from inside the uploader", this.props.mode);
+    this.props.handleUpload(dt.files[0], this.props.mode);
     this.setState({ dragEnter: false });
   };
 
   render() {
     const { dragEnter } = this.state;
-    const state = dragEnter ? dragEnter : false;
+    const state = dragEnter || false;
     return (
-      <div htmlFor="logo" className={buildDropAreaStyle(state)}>
+      <div htmlFor={this.state.id} className={buildDropAreaStyle(state, this)}>
         <div
           onDragLeave={this.unhighlightDropArea}
           onDragEnter={this.highlightDropArea}
@@ -50,9 +55,11 @@ export class Class extends Component {
           {/* assssssssssaaa {this.props.progress} */}
           <input
             type="file"
-            id="logo"
+            id={this.state.id}
             className={style.logo}
-            onChange={({ target }) => this.props.handleUpload(target.files[0])}
+            onChange={({ target }) =>
+              this.props.handleUpload(target.files[0], this.props.mode)
+            }
           />
           {showUploadIndicator(this.props.uploadStatus, this)}
         </div>
@@ -61,19 +68,23 @@ export class Class extends Component {
   }
 }
 
-const buildDropAreaStyle = state => {
+const buildDropAreaStyle = (state, _this) => {
   const conditional = {};
   conditional[style.highlight] = state;
-  return className(style.dropArea, conditional, "llkk");
+  return className(style.dropArea, conditional, `dropArea${_this.state.id}`);
+};
+
+const getPlaceholder = _this => {
+  return (
+    _this.props.placeholder || "Drag and drop to change logo or Click to upload"
+  );
 };
 
 const showUploadIndicator = (uploadStatus, _this) => {
   if (!uploadStatus)
     return (
       <div>
-        <p className={style.uploadInstruction}>
-          Drag and drop to change logo or Click to upload
-        </p>
+        <p className={style.uploadInstruction}>{getPlaceholder(_this)}</p>
         {/* <label htmlFor="logo" className={style.inputLabel}>
           Click to upload
         </label> */}

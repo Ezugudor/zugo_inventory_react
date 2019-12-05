@@ -4,7 +4,9 @@ import {
   START_NETWORK_REQUEST,
   STOP_NETWORK_REQUEST,
   END_NOTIFICATION,
-  NETWORK_ERROR
+  NETWORK_ERROR,
+  PREVIEW_IMAGE,
+  END_PREVIEW_IMAGE
 } from "../actions";
 
 const initialState = {
@@ -15,7 +17,12 @@ const initialState = {
   notificationTimeout: 0,
   errorDetails: null,
   loading: false,
-  error: false
+  error: false,
+  previewImage: {
+    show: false,
+    url: "",
+    title: ""
+  }
 };
 
 export const app = (state = initialState, action) => {
@@ -30,6 +37,22 @@ export const app = (state = initialState, action) => {
         notificationType: action.nType,
         notificationTimeout: action.timeOut,
         showNotification: true
+      });
+
+    case PREVIEW_IMAGE:
+      const { previewImage } = state;
+      previewImage.title = action.title;
+      previewImage.url = action.url;
+      previewImage.show = true;
+      return updateState(state, {
+        previewImage
+      });
+
+    case END_PREVIEW_IMAGE:
+      const { previewImage: previewImage2 } = state;
+      previewImage2.show = false;
+      return updateState(state, {
+        previewImage: previewImage2
       });
 
     case START_NETWORK_REQUEST:

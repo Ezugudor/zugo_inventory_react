@@ -1,7 +1,6 @@
 import { createSelector } from "reselect";
 
 const business = state => state.business;
-const progress = state => state.app;
 
 export const getBusinessId = createSelector(
   business,
@@ -26,8 +25,4 @@ export const getBusinessLogo = createSelector(
 export const getBusinessColor = createSelector(
   business,
   biz => biz.color
-);
-export const getProgressIndicator = createSelector(
-  progress,
-  app => app.loading
 );

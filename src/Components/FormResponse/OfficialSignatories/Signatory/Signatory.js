@@ -1,17 +1,24 @@
 import styles from "./Signatory.module.css";
 import PropTypes from "prop-types";
 import React from "react";
+import { connect } from "react-redux";
+import { previewImage } from "../../../../store/actions/app";
 import { Email, User, Date, Phone, Signature } from "../../../../utils";
 import { Address } from "../../../../utils";
 
-export const Signatory = props => (
+export const Signatoryy = props => (
   <div>
     <div className={styles.item}>
       <div className={styles.iconHolder}>
-        <User style={`${styles.icon}`} />
+        <div
+          className={styles.avatarCont}
+          onClick={e => props.callPreviewImage(props.userInfo)}
+        >
+          <img src={props.userInfo.avatar} className={styles.avatar} />
+        </div>
       </div>
       <div>
-        <p className={styles.questionText}>{props.name}</p>
+        <p className={`${styles.questionText} ${styles.uname}`}>{props.name}</p>
       </div>
     </div>
 
@@ -49,6 +56,20 @@ export const Signatory = props => (
     </div>
   </div>
 );
+
+const mapDispatchToProps = dispatch => ({
+  callPreviewImage(account) {
+    const cloneAccount = { ...account };
+    cloneAccount.imageURL = account.avatar;
+    account = cloneAccount;
+    dispatch(previewImage(account));
+  }
+});
+
+export const Signatory = connect(
+  null,
+  mapDispatchToProps
+)(Signatoryy);
 
 Signatory.props = {
   signature: PropTypes.string.isRequired,

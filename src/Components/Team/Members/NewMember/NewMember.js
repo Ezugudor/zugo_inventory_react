@@ -1,4 +1,5 @@
 import { White, Red } from "../../../Utils/Buttons";
+import { FileUpload, PreviewImage } from "../../../Utils";
 import styles from "./NewMember.module.css";
 import { Modal } from "../../../Utils";
 import PropTypes from "prop-types";
@@ -88,6 +89,24 @@ export const NewMember = props => (
             </option>
           ))}
         </select>
+      </div>
+
+      <div className={styles.dzPrevCont}>
+        <div className={styles.prevCont}>
+          <div className={styles.prevContInside}>
+            <PreviewImage imageURL={props.newMemberImageURL} />
+          </div>
+        </div>
+        <div className={styles.dzCont}>
+          <FileUpload
+            handleUpload={props.handleUpload}
+            progress={props.progress}
+            placeholder={"Click to add user image or drag and drop "}
+            mode={"new"}
+          />
+        </div>
+
+        <div className={styles.clearfix}></div>
       </div>
       <div className={styles.controls}>
         <White click={props.toggleCreateMember}>Cancel</White>

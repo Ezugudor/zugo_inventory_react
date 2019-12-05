@@ -3,3 +3,4 @@ export * from "./business";
 export * from "./forms";
 export * from "./file";
 export * from "./user";
+export * from "./app";

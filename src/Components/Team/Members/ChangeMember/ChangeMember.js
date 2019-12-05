@@ -1,5 +1,6 @@
 import { White, Red } from "../../../Utils/Buttons";
 import styles from "./ChangeMember.module.css";
+import { FileUpload, PreviewImage } from "../../../Utils";
 import { Modal } from "../../../Utils";
 import PropTypes from "prop-types";
 import React from "react";
@@ -92,6 +93,23 @@ export const ChangeMember = props => (
           type="text"
           maxLength="14"
         />
+      </div>
+      <div className={styles.dzPrevCont}>
+        <div className={styles.prevCont}>
+          <div className={styles.prevContInside}>
+            <PreviewImage imageURL={props.editMemberImageURL} />
+          </div>
+        </div>
+        <div className={styles.dzCont}>
+          <FileUpload
+            handleUpload={props.handleUpload}
+            progress={props.progress}
+            placeholder={"Click to edit user image or drag and drop "}
+            mode={"edit"}
+          />
+        </div>
+
+        <div className={styles.clearfix}></div>
       </div>
       <div className={styles.controls}>
         <White click={props.toggleUpdateUser}>Cancel</White>

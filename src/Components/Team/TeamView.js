@@ -7,16 +7,17 @@ import { Controls } from "./Controls";
 import { ActionBtns } from "./Members/ActionBtns";
 import { MDBDataTable } from "mdbreact";
 import { JQDatatable } from "../../plugins";
-// import { data } from "../Dashboard/data";
+import { previewImage } from "../../store/actions/app";
 import { dataStruct } from "./tableDataStructure";
 import PropTypes from "prop-types";
 import React from "react";
+import { connect } from "react-redux";
 import trashcanImage from "../../img/trash-can.svg";
 import penImage from "../../img/pen.svg";
-import { Notification, Loading } from "../Utils";
+import { Notification, Loading, PopImage } from "../Utils";
 import { White } from "../Utils/Buttons";
-
-export const TeamView = props => (
+const moment = require("moment");
+export const TeamVieww = props => (
   <AdminLayout pageName="team" currentUser={props.currentUser}>
     <div className={Styles.team}>
       {/* <Controls
@@ -33,6 +34,8 @@ export const TeamView = props => (
         newMember={props.newMember}
         branches={props.branches}
         newMemberFormId={props.newMemberFormId}
+        handleUpload={props.handleUpload}
+        newMemberImageURL={props.newMemberImageURL}
       />
       <ChangeMember
         setUpdateUserDetail={props.setUpdateUserDetail}
@@ -43,6 +46,8 @@ export const TeamView = props => (
         editMember={props.editMember}
         showNotification={props.showNotification}
         editMemberFormId={props.editMemberFormId}
+        handleUpload={props.handleUpload}
+        editMemberImageURL={props.editMemberImageURL}
       />
       <DeleteMember
         toggleDeleteMember={props.toggleDeleteMember}
@@ -52,22 +57,45 @@ export const TeamView = props => (
       />
       <Loading showLoading={props.showLoading} />
       <Notification title={"Default Title"} message={"Default Body Message"} />
+      <PopImage />
     </div>
   </AdminLayout>
 );
-
+const formatDate = rawDate => {
+  return moment(rawDate).format("DD-MM-YYYY");
+};
 const showTeamMembers = props => {
   const { members } = props;
   const membersD = members.map(account => {
-    const { branch, id, created, role, phone, name, email } = account;
+    const {
+      branch,
+      id,
+      created,
+      role,
+      phone,
+      name,
+      email,
+      shortId,
+      imageURL
+    } = account;
     const rowData = {
+      avatar: (
+        <div
+          className={Styles.avatarCont}
+          onClick={e => {
+            props.callPreviewImage(account);
+          }}
+        >
+          <img src={imageURL}></img>
+        </div>
+      ),
       name: name.charAt(0).toUpperCase() + name.slice(1),
       role: role.charAt(0).toUpperCase() + role.slice(1),
       email,
       branch: branch.charAt(0).toUpperCase() + branch.slice(1),
       phone,
-      id,
-      created,
+      id: shortId,
+      created: formatDate(created),
       action: (
         <div>
           <ActionBtns
@@ -108,6 +136,17 @@ const showTeamMembers = props => {
 
   return <JQDatatable hover data={ppDataS} />;
 };
+
+const mapDispatchToProps = dispatch => ({
+  callPreviewImage(account) {
+    dispatch(previewImage(account));
+  }
+});
+
+export const TeamView = connect(
+  null,
+  mapDispatchToProps
+)(TeamVieww);
 
 TeamView.propTypes = {
   setNewBranchDetail: PropTypes.func.isRequired,

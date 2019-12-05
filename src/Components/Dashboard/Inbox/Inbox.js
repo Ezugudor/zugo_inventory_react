@@ -9,6 +9,7 @@ import { dataStruct } from "../tableDataStructure";
 import Style from "./Inbox.module.css";
 import { JQDatatable } from "../../../plugins";
 import { DatePicker, InboxPagination } from "../../Utils";
+const moment = require("moment");
 export class Class extends Component {
   state = {
     showNewForm: false,
@@ -31,13 +32,15 @@ export const Inbox = props => (
     <div className={Style.tableCont}>{showResponse(props)}</div>
   </section>
 );
-
+const formatDate = rawDate => {
+  return moment(rawDate).format("DD-MM-YYYY");
+};
 const showResponse = props => {
   switch (props.tabToShow) {
     case "partiallyProcessed":
       const { partiallyProcessed } = props;
       const ppData = partiallyProcessed.result.map(res => {
-        const { branche, id, createdAt } = res;
+        const { branche, id, shortId, createdAt } = res;
         const formName = res.form.name;
         const note = getNote(res);
         const rowData = {
@@ -52,9 +55,9 @@ const showResponse = props => {
           ) : (
             note
           ),
-          id: id,
+          id: shortId,
           branch: branche,
-          date: createdAt,
+          date: formatDate(createdAt),
           clickEvent: () => {
             window.location.href = `/response/partiallyProcessed/${id}`;
           }
@@ -96,7 +99,7 @@ const showResponse = props => {
           ),
           id: id,
           branch: branche,
-          date: createdAt,
+          date: formatDate(createdAt),
           clickEvent: () => {
             window.location.href = `/response/processed/${id}`;
           }
@@ -124,7 +127,7 @@ const showResponse = props => {
       };
       const { pending } = props;
       const datta = pending.result.map(res => {
-        const { branche, id, createdAt } = res;
+        const { branche, id, shortId, createdAt } = res;
         const formName = res.form.name;
         const note = getNote(res);
         const rowData = {
@@ -139,9 +142,9 @@ const showResponse = props => {
           ) : (
             note
           ),
-          id: id,
+          id: shortId,
           branch: branche,
-          date: createdAt,
+          date: formatDate(createdAt),
           clickEvent: () => {
             window.location.href = `/response/pending/${id}`;
           }

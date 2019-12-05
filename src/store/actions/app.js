@@ -5,7 +5,9 @@ import {
   END_NOTIFICATION,
   START_PROGRESS_INDICATOR,
   END_PROGRESS_INDICATOR,
-  NETWORK_ERROR
+  NETWORK_ERROR,
+  PREVIEW_IMAGE,
+  END_PREVIEW_IMAGE
 } from "./types";
 
 export const startNetworkRequest = () => ({ type: START_NETWORK_REQUEST });
@@ -27,4 +29,10 @@ export const setNotificationMessage = (
   message,
   timeOut,
   title
+});
+export const endPreviewImage = () => ({ type: END_PREVIEW_IMAGE });
+export const previewImage = ({ name, imageURL }) => ({
+  type: PREVIEW_IMAGE,
+  title: name,
+  url: imageURL
 });
