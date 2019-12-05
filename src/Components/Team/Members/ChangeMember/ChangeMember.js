@@ -43,6 +43,7 @@ export const ChangeMember = props => (
           <option value="super_initiator">Super Initiator</option>
           <option value="approver">Approver</option>
           <option value="super_approver">Super Approver</option>
+          <option value="admin">Admin</option>
         </select>
       </div>
       <div className={styles.inputBox}>

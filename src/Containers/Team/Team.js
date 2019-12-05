@@ -233,7 +233,7 @@ class Class extends Component {
       return alert("You don't have access to perform this operation");
     }
     if (user && user.role === "admin") {
-      alert("You can't not delete Admin Account");
+      alert("You cannot delete an admin account");
       return;
     } else if (user) {
       this.props.deleteMember(user);
@@ -269,9 +269,6 @@ class Class extends Component {
 
   populateUserDetail = account => {
     var details = { ...this.state.userEditDetails, ...account };
-    console.log("populate account", account);
-    console.log("populate defualt", this.state.userEditDetails);
-    console.log("populate detail", details);
     this.setState({ userEditDetails: details });
     this.toggleUpdateUser();
   };
@@ -330,8 +327,8 @@ class Class extends Component {
       role
     } = this.state.userEditDetails;
 
-    if (role === "admin") {
-      alert("You cannot change an admin branch", "error");
+    if (role === "admin" && currentUser.role !== "admin") {
+      alert("You don't have the permission to change this account", "error");
       return this.toggleUpdateUser();
     }
     if (!branch && !firstname && !lastname && !email && role == "worker") {
