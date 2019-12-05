@@ -331,7 +331,14 @@ class Class extends Component {
       alert("You don't have the permission to change this account", "error");
       return this.toggleUpdateUser();
     }
-    if (!branch && !firstname && !lastname && !email && role == "worker") {
+    if (
+      !branch &&
+      !firstname &&
+      !phone &&
+      !lastname &&
+      !email &&
+      role == "worker"
+    ) {
       return alert("You have not changed anything", "error");
     }
     const {
@@ -341,6 +348,7 @@ class Class extends Component {
       ...others
     } = this.state.userEditDetails;
     this.toggleUpdateUser();
+    others.business = this.props.businessId;
     this.props.updateUser(others);
   };
 
