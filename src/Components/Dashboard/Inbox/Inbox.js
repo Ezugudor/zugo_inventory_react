@@ -82,7 +82,7 @@ const showResponse = props => {
     case "processed":
       const { processed } = props;
       const prData = processed.result.map(res => {
-        const { branche, id, createdAt } = res;
+        const { branche, id, shortId, createdAt } = res;
         const formName = res.form.name;
         const note = getNote(res);
         const rowData = {
