@@ -97,7 +97,7 @@ const showResponse = props => {
           ) : (
             note
           ),
-          id: id,
+          id: shortId,
           branch: branche,
           date: formatDate(createdAt),
           clickEvent: () => {
