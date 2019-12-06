@@ -80,3 +80,10 @@
 .clearfix {
   clear: both;
 }
+.toggleEditMode {
+  width: 10%;
+  float: right;
+  position: relative;
+  top: 4px;
+  left: -100px;
+}

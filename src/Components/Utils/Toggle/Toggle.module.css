@@ -1,0 +1,71 @@
+@value Variables:  "../../../styles/Variables.css";
+@value secondary-color, typeform-border-color from Variables;
+
+.toggleWrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  margin-right: 0.5rem;
+  color: #000;
+}
+
+.input {
+  visibility: hidden;
+}
+.label {
+  position: relative;
+  font-size: 14px;
+  top: 0.4rem;
+}
+.inputLabel {
+  height: 1.8rem;
+  width: 3.5rem;
+  position: relative;
+  top: 0.8rem;
+  border-radius: 3.2rem;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: #bbb;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.toggleButton {
+  top: 0;
+  left: 0;
+  height: 1.8rem;
+  width: 3.5rem;
+  position: absolute;
+  border-radius: 3.2rem;
+}
+
+.toggleButton::after {
+  content: "";
+  top: 2.2px;
+  left: 2px;
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  background-color: white;
+  border-radius: 50%;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+.input:checked ~ .toggleButton::after {
+  left: 2.1rem;
+}
+.input:disabled ~ .toggleButton::after {
+  left: 2.1rem;
+}
+
+.input:checked ~ .toggleButton {
+  background-color: var(--color1);
+}
+
+.input:disabled ~ .toggleButton {
+  background-color: secondary-color;
+}

@@ -57,6 +57,30 @@ export const fetchForms = (workspaceId, businessId) => {
   };
 };
 
+export const deleteForm = (formId, details) => {
+  return dispatch => {
+    console.log("see details", details);
+    dispatch(startNetworkRequest());
+    SwypPartnerApi.delete(`forms/${formId}`, { data: details })
+      .then(res => {
+        dispatch(stopNetworkRequest());
+        console.log("response logg", res);
+        const { workspace } = details;
+        dispatch(saveForms(res.data, workspace.id));
+        dispatch(
+          setNotificationMessage(
+            `Form successfully deleted`,
+            "success",
+            "Form Deleted"
+          )
+        );
+      })
+      .catch(err => {
+        handleError(err, dispatch);
+      });
+  };
+};
+
 export const createForm = (details, history, { to, params }) => {
   return dispatch => {
     dispatch(startNetworkRequest());

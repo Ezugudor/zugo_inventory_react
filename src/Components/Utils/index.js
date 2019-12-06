@@ -12,3 +12,4 @@ export * from "./Nav";
 export * from "./MDBDatatables";
 export * from "./PreviewImage";
 export * from "./PopImage";
+export * from "./Toggle";

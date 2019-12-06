@@ -2,6 +2,7 @@ import Style from "./FormsControls.module.css";
 import { Red } from "../../Utils/Buttons";
 import PropTypes from "prop-types";
 import React from "react";
+import { Toggle } from "../../Utils";
 const getFormType = formType => {
   return formType == "Individual"
     ? "Individual Account Form"
@@ -24,11 +25,15 @@ export const FormsControls = props => (
         </span>
       </div>
       {/* <span className={Style.Text}>Forms </span> */}
+
       <div className={Style.newBtn}>
         <Red click={props.toggleNewForm}>
           <i className={`${Style.newBtnIcon} ion ion-ios-plus`}></i>
           <span className={Style.newBtnText}>Create A New Form</span>
         </Red>
+      </div>
+      <div className={Style.toggleEditMode}>
+        <Toggle label="Edit Mode" trigger={props.toggleEditMode} />
       </div>
       <div className={Style.clearfix}></div>
     </div>

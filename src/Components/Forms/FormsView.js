@@ -2,10 +2,11 @@ import { AdminLayout } from "../../Hoc/Layouts";
 import { FormsControls } from "./Controls";
 import { chunkData } from "../../utils";
 import { NewForm } from "./NewForm";
+import { DeleteForm } from "./DeleteForm";
 import PropTypes from "prop-types";
 import { Cards } from "./Cards";
 import React from "react";
-import { Notification } from "../Utils";
+import { Notification, Loading } from "../Utils";
 import Styles from "./FormsView.module.css";
 
 export const FormsView = props => (
@@ -13,11 +14,14 @@ export const FormsView = props => (
     <div className={Styles.form}>
       <FormsControls
         toggleNewForm={props.toggleNewForm}
+        toggleEditMode={props.toggleEditMode}
         formType={props.formType}
       />
       <Cards
         forms={chunkData(props.forms, 4)}
         showBuilderEdit={props.showBuilderEdit}
+        editMode={props.editMode}
+        setFormToDelete={props.setFormToDelete}
       />
       <NewForm
         toggleNewForm={props.toggleNewForm}
@@ -26,7 +30,14 @@ export const FormsView = props => (
         showBuilder={props.showBuilder}
         name={props.name}
       />
-      <Notification title={"Default Title"} message={"Default Body Message"} />
+      <DeleteForm
+        toggleDelete={props.toggleDelete}
+        showDelete={props.showDeleteModal}
+        form={props.formToDelete}
+        deleteForm={props.deleteForm}
+      />
+      <Notification />
+      <Loading showLoading={props.showLoading} />
     </div>
   </AdminLayout>
 );

@@ -14,6 +14,8 @@ export const Cards = props => (
               form={form}
               showBuilderEdit={props.showBuilderEdit}
               formId={form.id}
+              editMode={props.editMode}
+              setFormToDelete={props.setFormToDelete}
             />
           </div>
         ))}

@@ -59,3 +59,34 @@
   padding: 0.2rem 1.2rem;
   margin-top: 0.5rem;
 }
+
+.closeBtn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 2.5rem;
+  height: 2.5rem;
+  box-shadow: 0 0 5px #000;
+  text-align: center;
+  border-radius: 50%;
+}
+.closeBtnVisibility {
+  display: none;
+}
+.closeBtn:hover {
+  box-shadow: 0 0 10px #000;
+}
+
+.closeIcon {
+  color: #e61f00;
+  font-size: 25px;
+}

@@ -2,13 +2,15 @@ import {
   startNewForm,
   fetchForms,
   editForm,
-  clearFormBuilder
+  clearFormBuilder,
+  deleteForm
 } from "../../store/actions";
 import {
   getAllForms,
   getBusinessId,
   getCurrentUser,
-  getBusinessColor
+  getBusinessColor,
+  getProgressIndicator
 } from "../../store/selectors";
 import { FormsView } from "../../Components/Forms";
 import React, { Component } from "react";
@@ -18,6 +20,9 @@ import { themeMaker } from "../../utils";
 export class Class extends Component {
   state = {
     showNewForm: false,
+    showDeleteModal: false,
+    formToDelete: {},
+    editMode: false,
     newFormName: "",
     showNotification: false
   };
@@ -44,9 +49,15 @@ export class Class extends Component {
     }
   };
 
+  toggleEditMode = () => {
+    this.setState(prevState => ({
+      editMode: !prevState.editMode
+    }));
+  };
   /**
    * open and close the the progress ui
    */
+
   toggleNotification = () => {
     this.setState(prevState => ({
       showNotification: !prevState.showNotification
@@ -56,6 +67,17 @@ export class Class extends Component {
   toggleNewForm = () => {
     this.setState(prevState => ({
       showNewForm: !prevState.showNewForm
+    }));
+  };
+
+  setFormToDelete = form => {
+    this.setState({ formToDelete: form });
+    this.toggleDelete();
+  };
+
+  toggleDelete = () => {
+    this.setState(prevState => ({
+      showDeleteModal: !prevState.showDeleteModal
     }));
   };
 
@@ -72,6 +94,15 @@ export class Class extends Component {
     let form = workspaceForms.find(elem => elem.id == formId);
 
     return form;
+  };
+
+  deleteForm = () => {
+    this.toggleDelete();
+    const user = this.props.currentUser;
+    const business = this.props.businessId;
+    const { formToDelete } = this.state;
+    const { id: formId, workspace } = formToDelete;
+    this.props.deleteForm(formId, { user, business, workspace });
   };
 
   goToFormBuilderEdit = (formId, workSpaceId) => {
@@ -92,6 +123,12 @@ export class Class extends Component {
     return (
       <FormsView
         showNewForm={this.state.showNewForm}
+        editMode={this.state.editMode}
+        toggleEditMode={this.toggleEditMode}
+        toggleDelete={this.toggleDelete}
+        showDeleteModal={this.state.showDeleteModal}
+        formToDelete={this.state.formToDelete}
+        setFormToDelete={this.setFormToDelete}
         showBuilder={this.goToFormBuilder}
         showBuilderEdit={this.goToFormBuilderEdit}
         toggleNewForm={this.toggleNewForm}
@@ -100,6 +137,8 @@ export class Class extends Component {
         formType={this.formType}
         forms={forms}
         currentUser={this.props.currentUser}
+        deleteForm={this.deleteForm}
+        showLoading={this.props.progress}
       />
     );
   }
@@ -108,9 +147,10 @@ const mapStateToProps = state => ({
   businessId: getBusinessId(state),
   businessColor: getBusinessColor(state),
   currentUser: getCurrentUser(state),
-  forms: getAllForms(state)
+  forms: getAllForms(state),
+  progress: getProgressIndicator(state)
 });
 export const Form = connect(
   mapStateToProps,
-  { startNewForm, fetchForms, editForm, clearFormBuilder }
+  { startNewForm, fetchForms, editForm, deleteForm, clearFormBuilder }
 )(Class);
