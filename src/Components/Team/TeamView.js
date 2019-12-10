@@ -122,7 +122,7 @@ const showTeamMembers = props => {
   });
   const ppDataS = { ...dataStruct };
   ppDataS.rows = membersD;
-  ppDataS.title = `<i class="${Styles.tableTitleIcon} ion ion-ios-people-outline"></i> Team`;
+  ppDataS.title = `<i class="${Styles.tableTitleIcon} ion ion-ios-people"></i> Team`;
   ppDataS.newBtn = (
     <White
       className={Styles.btn}

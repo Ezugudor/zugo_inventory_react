@@ -1,15 +1,29 @@
 import { UNPRESERVE_NEW_FORM, UNPRESERVE_FORMBUILDER_STATE } from "./types";
-import { PRESERVE_FORMBUILDER_STATE, PRESERVE_NEW_FORM } from "./types";
-import { setNotificationMessage, startNetworkRequest } from "./app";
+import {
+  PRESERVE_FORMBUILDER_STATE,
+  PRESERVE_NEW_FORM,
+  TOGGLE_PUBLISHED
+} from "./types";
+import {
+  setNotificationMessage,
+  setAutoSaveNotificationMessage,
+  startNetworkRequest,
+  startAutoSaveNetworkRequest,
+  stopNetworkRequest,
+  stopAutoSaveNetworkRequest
+} from "./app";
 import { START_NEW_FORM, UPDATE_FORMS, SAVE_FORMS, EDIT_FORM } from "./types";
 import { SwypPartnerApi } from "../../core/api";
-import { stopNetworkRequest } from "./app";
 import { handleError } from "../../utils";
 
 const saveForms = (collection, id) => ({ type: SAVE_FORMS, collection, id });
 const updateForms = (form, id) => ({ type: UPDATE_FORMS, form, id });
 const unpreserveNewForm = () => ({
   type: UNPRESERVE_NEW_FORM
+});
+
+const togglePublished = () => ({
+  type: TOGGLE_PUBLISHED
 });
 
 const unpreserveFormBuilderState = () => ({
@@ -57,6 +71,36 @@ export const fetchForms = (workspaceId, businessId) => {
   };
 };
 
+export const publishForm = (formId, details) => {
+  return dispatch => {
+    console.log("publish id", formId);
+    console.log("publish details", details);
+    dispatch(startNetworkRequest());
+    SwypPartnerApi.put(`forms/publish/${formId}`, details)
+      .then(res => {
+        dispatch(stopNetworkRequest());
+        console.log("rest", res.data.updated);
+        // const { workspace } = details;
+        // dispatch(saveForms(res.data, workspace.id));
+        if (res.data.updated) {
+          dispatch(togglePublished());
+        }
+        dispatch(
+          setNotificationMessage(
+            `Action completed successfully`,
+            "success",
+            "Success"
+          )
+        );
+        return true;
+      })
+      .catch(err => {
+        handleError(err, dispatch);
+        return "sf";
+      });
+  };
+};
+
 export const deleteForm = (formId, details) => {
   return dispatch => {
     console.log("see details", details);
@@ -81,24 +125,32 @@ export const deleteForm = (formId, details) => {
   };
 };
 
-export const createForm = (details, history, { to, params }) => {
+export const createForm = (details, history) => {
   return dispatch => {
     dispatch(startNetworkRequest());
     SwypPartnerApi.post("forms", details)
       .then(res => {
         dispatch(stopNetworkRequest());
-        const { formTypeId } = details;
-        dispatch(updateForms(res.data), formTypeId);
+        const { id } = details.workspace;
+        dispatch(updateForms(res.data, id));
         dispatch(unpreserveFormBuilderState());
         dispatch(unpreserveNewForm());
         dispatch(
           setNotificationMessage(
-            `${res.data.name} was created successfully`,
+            `Switching to builder mode.`,
             "success",
-            "Success"
+            `${res.data.name} created`
           )
         );
-        history.push(to, { params });
+
+        const detail = {
+          formType: details.workspace,
+          name: res.data.name,
+          formId: res.data.id
+        };
+        dispatch(clearFormBuilder());
+        dispatch(startNewForm(detail));
+        history.push("/formbuilder");
       })
       .catch(err => {
         handleError(err, dispatch);
@@ -106,17 +158,32 @@ export const createForm = (details, history, { to, params }) => {
   };
 };
 
-export const updateForm = (details, history, { to, params }) => {
+export const updateForm = (details, history, { to, params }, autoSave) => {
   return dispatch => {
-    dispatch(startNetworkRequest());
+    autoSave
+      ? dispatch(startAutoSaveNetworkRequest())
+      : dispatch(startNetworkRequest());
+
     SwypPartnerApi.put("forms", details)
       .then(res => {
-        console.log("update form dispatcher form res", res);
+        if (autoSave) {
+          dispatch(stopAutoSaveNetworkRequest());
+          const { formTypeId } = details;
+          dispatch(updateForms(res.data, formTypeId));
+          dispatch(
+            setAutoSaveNotificationMessage(
+              `${res.data.name} saved successfully`,
+              "success",
+              "Saved"
+            )
+          );
+          return;
+        }
         dispatch(stopNetworkRequest());
-        const { formTypeId } = details;
-        dispatch(updateForms(res.data), formTypeId);
         dispatch(unpreserveFormBuilderState());
         dispatch(unpreserveNewForm());
+        const { formTypeId } = details;
+        dispatch(updateForms(res.data, formTypeId));
         dispatch(
           setNotificationMessage(
             `${res.data.name} updated successfully`,
@@ -129,13 +196,15 @@ export const updateForm = (details, history, { to, params }) => {
       .catch(err => {
         if (err.response.status == 502) {
           dispatch(stopNetworkRequest());
-          dispatch(
-            setNotificationMessage(
-              "You have not really made any changes.",
-              "success",
-              "Nothing Changed"
-            )
-          );
+          if (!autoSave) {
+            dispatch(
+              setNotificationMessage(
+                "You have not really made any changes.",
+                "success",
+                "Nothing Changed"
+              )
+            );
+          }
           // history.push("/formtypes");
         }
         // handleError(err, dispatch);

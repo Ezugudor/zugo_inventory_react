@@ -27,7 +27,7 @@ export const FormsView = props => (
         toggleNewForm={props.toggleNewForm}
         handleInput={props.handleInput}
         showNewForm={props.showNewForm}
-        showBuilder={props.showBuilder}
+        createForm={props.createForm}
         name={props.name}
       />
       <DeleteForm

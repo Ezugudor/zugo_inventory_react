@@ -11,13 +11,21 @@ import {
   getNewForm,
   getBuilderState,
   getBusinessColor,
+  getBusinessId,
   getProgressIndicator
 } from "../../store/selectors";
-import { preserveNewForm, createForm, updateForm } from "../../store/actions";
+import {
+  preserveNewForm,
+  createForm,
+  updateForm,
+  publishForm
+} from "../../store/actions";
 import { preserveFormBuilderState } from "../../store/actions";
 import { FormBuilderView } from "../../Components/FormBuilder";
 import { getNextPosition, getChildIndex } from "../../utils";
 import { getBranches, getCurrentUser } from "../../store/selectors";
+import store from "../../store";
+import watch from "redux-watch";
 import React, { Component } from "react";
 import { slugName } from "../../utils";
 import { connect } from "react-redux";
@@ -27,6 +35,10 @@ window.jQuery = $;
 require("../../plugins/nicescrollbar/nicescroll.js");
 
 class Class extends Component {
+  constructor(props) {
+    super(props);
+    this.clearAutoSaveTimeout = "";
+  }
   state = {
     settingsWindowName: "build",
     showSettingsWindow: true,
@@ -34,6 +46,8 @@ class Class extends Component {
     currentElement: {},
     showConfigModal: false,
     showPreview: false,
+    showPublish: false,
+    showUnPublish: false,
     formElements: []
   };
 
@@ -53,9 +67,31 @@ class Class extends Component {
 
     const { businessColor } = this.props;
     themeMaker(businessColor);
+
+    const w = watch(store.getState, "form.newForm");
+    const _this = this;
+    store.subscribe(
+      w((newVal, oldVal, objs) => {
+        console.log("new value", newVal);
+        console.log("old value", oldVal);
+        // if (oldVal.elements.length === newVal.elements.length) return;
+        window.clearTimeout(window.autoSaveTimeout);
+        window.autoSaveTimeout = setTimeout(function() {
+          /**
+           * @param false : Will save and PUBLISH the form but since FALSE, will Save only. i.e save as it is.
+           * @param true : Auto save
+           */
+          _this.createForm(false, true);
+        }, 3000);
+      })
+    );
   }
 
-  componentDidUpdate() {}
+  componentDidUpdate(a, b, c) {
+    // console.log("a", a);
+    // console.log("b", b);
+    // console.log("c", c);
+  }
 
   /**
    * change the setting UI from design to configuration mode
@@ -67,6 +103,7 @@ class Class extends Component {
     });
   };
 
+  // this.formType = this.props.history.location.state.params;
   /**
    * open and close the settings UI
    */
@@ -75,6 +112,56 @@ class Class extends Component {
       showSettingsWindow: !prevState.showSettingsWindow
     }));
   };
+
+  /**
+   * perform the correct publish action
+   */
+  publishAction = () => {
+    const user = this.props.currentUser;
+    const business = this.props.businessId;
+    const workspace = this.props.newForm.formType;
+    const details = { user, business, workspace, goingLive: true };
+    const formId = this.props.newForm.formId;
+
+    if (this.props.newForm.isLive) {
+      this.toggleUnPublish();
+      details.goingLive = false;
+      this.props.publishForm(formId, details);
+      return;
+    }
+    this.togglePublish();
+    this.props.publishForm(formId, details);
+  };
+
+  /**
+   * open the appropriate Publish/Unpublish modal
+   */
+  toggleLiveStatus = e => {
+    if (this.props.newForm.isLive) {
+      this.toggleUnPublish();
+      return;
+    }
+    this.togglePublish();
+  };
+
+  /**
+   * open and close the Publish/Live UI
+   */
+  togglePublish = () => {
+    this.setState(prevState => ({
+      showPublish: !prevState.showPublish
+    }));
+  };
+
+  /**
+   * open and close the Publish/Live UI
+   */
+  toggleUnPublish = () => {
+    this.setState(prevState => ({
+      showUnPublish: !prevState.showUnPublish
+    }));
+  };
+
   /**
    * open and close the Preveiw UI
    */
@@ -451,49 +538,41 @@ class Class extends Component {
   };
 
   /**
-   * send the questions user want to ask to the backend server
+   * send the data the user have filled to the backend
+   * @param publish if true , the form will be saved and PUBLISHED status set to true
    */
-  createForm = () => {
-    //popup the progress indicator
-    // this.toggleLoading();
-
+  createForm = (publish, autoSave) => {
     const { name, parent, id } = this.props.newForm.formType;
     const questions = this.state.formElements;
-
-    // const branchQuestion = generateBankLocationQuestion(
-    //   getNextPosition(this.state.formElements),
-    //   this.props.branches
-    // );
-    // const hasBeenAsked = hasQuestion(questions, branchQuestion.name);
-    // if (!hasBeenAsked) {
-    //   questions.push(branchQuestion);
-    // }
+    const live = publish || this.props.newForm.isLive;
+    console.log("live", live);
 
     const details = {
       name: this.props.newForm.name,
       elements: questions,
       formTypeId: id,
-      formId: this.props.newForm.formId
+      formId: this.props.newForm.formId,
+      publish: live
     };
-
     const to = `/formtypes/${slugName(parent)}/${slugName(name)}`;
     const request = {
       to,
       params: this.props.newForm.formType
     };
-
     const { history } = this.props;
-
-    if (this.props.newForm.mode == "update") {
-      this.props.updateForm(details, history, request);
-    } else {
-      this.props.createForm(details, history, request);
-    }
+    this.props.updateForm(details, history, request, autoSave);
   };
 
   render() {
     return (
       <FormBuilderView
+        isLive={this.props.newForm.isLive}
+        showPublish={this.state.showPublish}
+        showUnPublish={this.state.showUnPublish}
+        togglePublish={this.togglePublish}
+        toggleUnPublish={this.toggleUnPublish}
+        toggleLiveStatus={this.toggleLiveStatus}
+        publishAction={this.publishAction}
         showSettingsWindow={this.state.showSettingsWindow}
         backToForms={this.backToForms}
         showConfigModal={this.state.showConfigModal}
@@ -511,6 +590,7 @@ class Class extends Component {
         formElements={this.state.formElements}
         deleteQuestion={this.deleteQuestion}
         formName={this.props.newForm.name}
+        form={this.props.newForm}
         addElement={this.addElement}
         save={this.createForm}
         showLoading={this.props.progress}
@@ -529,12 +609,19 @@ const mapStateToProps = state => ({
   branches: getBranches(state),
   newForm: getNewForm(state),
   businessColor: getBusinessColor(state),
+  businessId: getBusinessId(state),
   progress: getProgressIndicator(state)
 });
 
 export const FormBuilder = connect(
   mapStateToProps,
-  { preserveNewForm, createForm, updateForm, preserveFormBuilderState }
+  {
+    preserveNewForm,
+    createForm,
+    updateForm,
+    preserveFormBuilderState,
+    publishForm
+  }
 )(Class);
 // const mapStateToProps = state => ({
 //   partiallyProcessed: getPartiallyProcessedResponses(state),

@@ -23,6 +23,8 @@ const getHeader = props => {
       formName={props.formName}
       backToForms={props.backToForms}
       togglePreview={props.togglePreview}
+      toggleLiveStatus={props.toggleLiveStatus}
+      isLive={props.isLive}
     />
   ) : (
     <PrivateHeader formName={props.formName} />

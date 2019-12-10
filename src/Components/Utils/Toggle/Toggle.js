@@ -10,7 +10,14 @@ export const Toggle = props => (
         type="checkbox"
         id="required"
         className={Style.input}
-        onChange={e => props.trigger()}
+        onChange={e => {
+          if (typeof props.trigger !== "undefined") props.trigger(e);
+        }}
+        onClick={e => {
+          if (typeof props.toggleBtnClicked !== "undefined")
+            props.toggleBtnClicked(e);
+        }}
+        checked={props.active}
       />
       <span className={Style.toggleButton} />
     </label>

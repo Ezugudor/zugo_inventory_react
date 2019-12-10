@@ -3,7 +3,8 @@ import {
   fetchForms,
   editForm,
   clearFormBuilder,
-  deleteForm
+  deleteForm,
+  createForm
 } from "../../store/actions";
 import {
   getAllForms,
@@ -15,7 +16,7 @@ import {
 import { FormsView } from "../../Components/Forms";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { themeMaker } from "../../utils";
+import { themeMaker, slugName } from "../../utils";
 
 export class Class extends Component {
   state = {
@@ -89,10 +90,22 @@ export class Class extends Component {
     this.props.history.push("/formbuilder", { params: details });
   };
 
+  createForm = () => {
+    this.toggleNewForm();
+    const workspace = { ...this.props.history.location.state.params };
+    const formName = this.state.newFormName;
+    const details = {
+      workspace,
+      formName,
+      currentUser: this.props.currentUser
+    };
+    const { history } = this.props;
+    this.props.createForm(details, history);
+  };
+
   getForm = (formId, workspace, forms) => {
     let workspaceForms = forms[workspace];
     let form = workspaceForms.find(elem => elem.id == formId);
-
     return form;
   };
 
@@ -110,11 +123,11 @@ export class Class extends Component {
     const details = {
       formType: this.formType,
       name: selectedForm.name,
+      isLive: selectedForm.published,
       elements: selectedForm.elements,
       formId
     };
-
-    this.props.editForm(details);
+    this.props.startNewForm(details);
     this.props.history.push("/formbuilder", { params: details });
   };
 
@@ -137,6 +150,7 @@ export class Class extends Component {
         formType={this.formType}
         forms={forms}
         currentUser={this.props.currentUser}
+        createForm={this.createForm}
         deleteForm={this.deleteForm}
         showLoading={this.props.progress}
       />
@@ -152,5 +166,12 @@ const mapStateToProps = state => ({
 });
 export const Form = connect(
   mapStateToProps,
-  { startNewForm, fetchForms, editForm, deleteForm, clearFormBuilder }
+  {
+    startNewForm,
+    fetchForms,
+    editForm,
+    deleteForm,
+    clearFormBuilder,
+    createForm
+  }
 )(Class);

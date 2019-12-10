@@ -1,4 +1,4 @@
-import { NavItem, Nav } from "../../../../Components/Utils";
+import { NavItem, Nav, Toggle } from "../../../../Components/Utils";
 import { logoutUser } from "../../../../store/actions";
 import { Logo } from "../../../../Components/Utils";
 import logoutIcon from "../../../../img/logout.svg";
@@ -40,21 +40,44 @@ export const FormBuilderHeader = props => {
       </div>
       <div className={Style.RightSide}>
         <Nav>
-          <NavItem onClick={props.togglePreview} className={Style.previewBtn}>
-            <i className={`${Style.previewIcon} ion ion-android-expand`}></i>
-            <span className={Style.previewName}>Preview</span>
-          </NavItem>
-          <NavItem onClick={props.save}>
-            <img
-              src={saveIcon}
-              className={`${Style.Icon} ${Style.LogoutIcon}`}
-              alt="save"
+          <div className={`${Style.toggleEditMode} ${Style.navItem}`}>
+            <Toggle
+              label="Live"
+              trigger={props.toggleLiveStatus}
+              active={props.isLive}
             />
-            <span>Save</span>
+          </div>
+
+          <NavItem
+            onClick={props.togglePreview}
+            className={`${Style.navLink} ${Style.navItem}`}
+          >
+            <i className={`${Style.icon} ion ion-md-open`}></i>
+            <span className={Style.listName}>Preview</span>
           </NavItem>
-          <NavItem onClick={logoutUser}>
-            <img src={logoutIcon} className={Style.Icon} alt="Logout" />
-            <span>Logout</span>
+
+          <NavItem
+            onClick={e => props.save(false)}
+            className={`${Style.navLink} ${Style.navItem}`}
+          >
+            <i className={`${Style.icon} ion ion-ios-save`}></i>
+            <span className={Style.listName}>Save</span>
+          </NavItem>
+
+          <NavItem
+            onClick={e => props.save(true)}
+            className={`${Style.navLink} ${Style.navItem}`}
+          >
+            <i className={`${Style.icon} ion ion-md-save`}></i>
+            <span className={Style.listName}>{"Save & Publish"}</span>
+          </NavItem>
+
+          <NavItem
+            onClick={logoutUser}
+            className={`${Style.navLink} ${Style.navItem}`}
+          >
+            <i className={`${Style.icon} ion ion-ios-log-out`}></i>
+            <span className={Style.listName}>Logout</span>
           </NavItem>
         </Nav>
       </div>

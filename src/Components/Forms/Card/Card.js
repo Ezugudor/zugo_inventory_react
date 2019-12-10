@@ -6,7 +6,7 @@ export const Card = props => {
   let gotoEdit = () => {
     props.showBuilderEdit(props.formId, props.form.workspace.id);
   };
-
+  console.log("formmm", props.form);
   let closeBtnStyle = () => {
     const styles = {};
     styles[Style.closeBtnVisibility] = !props.editMode;
@@ -26,7 +26,15 @@ export const Card = props => {
         <i className={`${Style.closeIcon} ion ion-close-circled`}></i>
       </a>
       <div className={Style.Body}>
-        <div className={Style.Text}>{props.form.name}</div>
+        <div className={Style.Text}>
+          <span className={Style.name}>{props.form.name}</span>
+          <br />
+          {props.form.published ? (
+            <span className={`${Style.status} ${Style.live}`}>Public</span>
+          ) : (
+            <span className={Style.status}>Private</span>
+          )}
+        </div>
       </div>
     </div>
   );

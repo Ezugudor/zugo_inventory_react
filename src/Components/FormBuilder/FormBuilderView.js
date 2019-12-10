@@ -4,8 +4,9 @@ import { EditorPresenter } from "./EditorPresenter";
 import { FormPresenter } from "./FormPresenter";
 import { Setting } from "./Settings";
 import Style from "./FormBuilderView.module.css";
-import { Loading, Notification, FullScreen } from "../Utils";
+import { Loading, Notification, NotificationCard, FullScreen } from "../Utils";
 import { ConfigCurrentElem } from "./ConfigCurrentElem";
+import { PublishForm } from "./PublishForm";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import $ from "jquery";
@@ -36,10 +37,12 @@ export class FormBuilderView extends Component {
         settingsWindowName={this.props.settingsWindowName}
         formName={this.props.formName}
         save={this.props.save}
+        isLive={this.props.isLive}
         pageName="form_builder"
         currentUser={this.props.currentUser}
         backToForms={this.props.backToForms}
         togglePreview={this.props.togglePreview}
+        toggleLiveStatus={this.props.toggleLiveStatus}
       >
         <div className={Style.layoutCont}>
           <div className={Style.left}>
@@ -87,6 +90,21 @@ export class FormBuilderView extends Component {
         <Notification
           title={"Default Title"}
           message={"Default Body Message"}
+        />
+        <NotificationCard />
+        <PublishForm
+          title="publish"
+          togglePublish={this.props.togglePublish}
+          showPublish={this.props.showPublish}
+          form={this.props.form}
+          publishAction={this.props.publishAction}
+        />
+        <PublishForm
+          title="Unpublish"
+          togglePublish={this.props.toggleUnPublish}
+          showPublish={this.props.showUnPublish}
+          form={this.props.form}
+          publishAction={this.props.publishAction}
         />
         <FullScreen
           show={this.props.showPreview}

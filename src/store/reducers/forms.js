@@ -7,7 +7,8 @@ import {
   START_NEW_FORM,
   UPDATE_FORMS,
   EDIT_FORM,
-  SAVE_FORMS
+  SAVE_FORMS,
+  TOGGLE_PUBLISHED
 } from "../actions";
 
 const initialState = {
@@ -22,12 +23,14 @@ const initialState = {
   newForm: {
     formType: { id: "", parent: "", name: "" },
     elements: [],
-    name: ""
+    name: "",
+    isLive: false
   },
   editForm: {
     formType: { id: "", parent: "", name: "" },
     elements: [],
-    name: ""
+    name: "",
+    isLive: false
   }
 };
 
@@ -67,7 +70,15 @@ export const form = (state = initialState, action) => {
       const form = { ...state.newForm };
       form.formType = action.data.formType;
       form.name = action.data.name;
+      form.elements = action.data.elements;
+      form.formId = action.data.formId;
+      form.isLive = action.data.isLive;
       return updateState(state, { newForm: form });
+
+    case TOGGLE_PUBLISHED:
+      const formm = { ...state.newForm };
+      formm.isLive = !formm.isLive;
+      return updateState(state, { newForm: formm });
 
     case EDIT_FORM:
       const eForm = { ...state.newForm };

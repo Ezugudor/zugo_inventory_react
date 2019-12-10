@@ -7,6 +7,7 @@ export * from "./Modal";
 export * from "./FullScreen";
 export * from "./Loading";
 export * from "./Notification";
+export * from "./NotificationCard";
 export * from "./Logo";
 export * from "./Nav";
 export * from "./MDBDatatables";

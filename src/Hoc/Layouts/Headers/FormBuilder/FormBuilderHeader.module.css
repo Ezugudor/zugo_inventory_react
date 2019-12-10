@@ -27,9 +27,6 @@
   color: #000;
 }
 .previewBtn {
-  position: absolute;
-  top: 10px;
-  right: 20%;
   cursor: pointer;
 }
 .previewIcon {
@@ -83,8 +80,34 @@
   float: right;
 }
 
-.Icon {
-  height: 3rem;
-  width: 2rem;
-  margin-right: 0.3rem;
+.icon {
+  margin-right: 1rem;
+  font-size: 28px;
+}
+.listName {
+  font-size: 15px;
+  position: relative;
+  top: -6px;
+}
+.navItem {
+  float: left;
+  margin-right: 5rem;
+  font-size: 15px;
+  /* font-weight: bold; */
+}
+.navLink {
+  cursor: pointer;
+}
+.navLink:hover {
+  text-shadow: 0 0 5px #000;
+}
+.navLink:active {
+  text-shadow: 0 0 5px #fff;
+  /* color:#000; */
+}
+.toggleEditMode {
+  width: 80px;
+  position: relative;
+  top: -2px;
+  /* left: -100px; */
 }
