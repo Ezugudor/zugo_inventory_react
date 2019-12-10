@@ -27,7 +27,6 @@ class Class extends Component {
   }
 
   render() {
-    console.log("objad", this.props);
     return (
       <div
         className={Style.modalCont}
@@ -49,9 +48,9 @@ class Class extends Component {
 // };
 
 const mapStateToProps = state => {
-  console.log("prop state", state);
   return {
     showNotification: state.app.showCardNotification,
+    autoSaving: state.app.autoSaving,
     notificationTimeout: state.app.cardNotificationTimeout,
     title: state.app.cardNotificationTitle,
     message: state.app.cardNotificationMessage

@@ -127,12 +127,15 @@ export class Class extends Component {
       elements: selectedForm.elements,
       formId
     };
+    console.log("details", details);
+    console.log("selectedForm", selectedForm);
     this.props.startNewForm(details);
     this.props.history.push("/formbuilder", { params: details });
   };
 
   render() {
     const forms = this.props.forms[this.formType.id];
+    console.log("formssss", this.props.forms);
     return (
       <FormsView
         showNewForm={this.state.showNewForm}

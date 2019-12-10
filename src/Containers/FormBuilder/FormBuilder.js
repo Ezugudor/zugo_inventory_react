@@ -35,10 +35,6 @@ window.jQuery = $;
 require("../../plugins/nicescrollbar/nicescroll.js");
 
 class Class extends Component {
-  constructor(props) {
-    super(props);
-    this.clearAutoSaveTimeout = "";
-  }
   state = {
     settingsWindowName: "build",
     showSettingsWindow: true,
@@ -72,9 +68,6 @@ class Class extends Component {
     const _this = this;
     store.subscribe(
       w((newVal, oldVal, objs) => {
-        console.log("new value", newVal);
-        console.log("old value", oldVal);
-        // if (oldVal.elements.length === newVal.elements.length) return;
         window.clearTimeout(window.autoSaveTimeout);
         window.autoSaveTimeout = setTimeout(function() {
           /**
@@ -85,12 +78,6 @@ class Class extends Component {
         }, 3000);
       })
     );
-  }
-
-  componentDidUpdate(a, b, c) {
-    // console.log("a", a);
-    // console.log("b", b);
-    // console.log("c", c);
   }
 
   /**

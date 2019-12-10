@@ -62,6 +62,7 @@ export const fetchForms = (workspaceId, businessId) => {
     dispatch(startNetworkRequest());
     SwypPartnerApi.get(`forms/workspaces/${workspaceId}/${businessId}`)
       .then(res => {
+        console.log("res data", res.data);
         dispatch(stopNetworkRequest());
         dispatch(saveForms(res.data, workspaceId));
       })
@@ -73,15 +74,10 @@ export const fetchForms = (workspaceId, businessId) => {
 
 export const publishForm = (formId, details) => {
   return dispatch => {
-    console.log("publish id", formId);
-    console.log("publish details", details);
     dispatch(startNetworkRequest());
     SwypPartnerApi.put(`forms/publish/${formId}`, details)
       .then(res => {
         dispatch(stopNetworkRequest());
-        console.log("rest", res.data.updated);
-        // const { workspace } = details;
-        // dispatch(saveForms(res.data, workspace.id));
         if (res.data.updated) {
           dispatch(togglePublished());
         }
@@ -103,12 +99,10 @@ export const publishForm = (formId, details) => {
 
 export const deleteForm = (formId, details) => {
   return dispatch => {
-    console.log("see details", details);
     dispatch(startNetworkRequest());
     SwypPartnerApi.delete(`forms/${formId}`, { data: details })
       .then(res => {
         dispatch(stopNetworkRequest());
-        console.log("response logg", res);
         const { workspace } = details;
         dispatch(saveForms(res.data, workspace.id));
         dispatch(
@@ -146,7 +140,9 @@ export const createForm = (details, history) => {
         const detail = {
           formType: details.workspace,
           name: res.data.name,
-          formId: res.data.id
+          formId: res.data.id,
+          isLive: false,
+          elements: []
         };
         dispatch(clearFormBuilder());
         dispatch(startNewForm(detail));
@@ -205,9 +201,7 @@ export const updateForm = (details, history, { to, params }, autoSave) => {
               )
             );
           }
-          // history.push("/formtypes");
         }
-        // handleError(err, dispatch);
       });
   };
 };

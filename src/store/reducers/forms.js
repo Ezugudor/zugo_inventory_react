@@ -73,6 +73,7 @@ export const form = (state = initialState, action) => {
       form.elements = action.data.elements;
       form.formId = action.data.formId;
       form.isLive = action.data.isLive;
+      console.log("newform from store", state.newForm);
       return updateState(state, { newForm: form });
 
     case TOGGLE_PUBLISHED:

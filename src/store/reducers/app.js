@@ -22,8 +22,8 @@ const initialState = {
   cardNotificationTitle: "Saved",
   cardNotificationMessage: "Form successfully saved",
   cardNotificationType: "",
-  showCardNotification: true,
-  cardNotificationTimeout: 0,
+  showCardNotification: false,
+  cardNotificationTimeout: 3000,
   errorDetails: null,
   loading: false,
   autoSaving: false,
@@ -54,7 +54,6 @@ export const app = (state = initialState, action) => {
         cardNotificationTitle: action.title,
         cardNotificationMessage: action.message,
         cardNotificationType: action.nType,
-        cardNotificationTimeout: action.timeOut,
         showCardNotification: true
       });
 
@@ -78,19 +77,27 @@ export const app = (state = initialState, action) => {
       return updateState(state, { loading: true });
 
     case START_AUTO_SAVE_NETWORK_REQUEST:
-      return updateState(state, { autoSaving: true });
+      return updateState(state, {
+        autoSaving: true,
+        notificationTitle: "Saving",
+        notificationMessage: "Saving changes so far...",
+        notificationType: "success"
+      });
 
     case END_NOTIFICATION:
       return updateState(state, { showNotification: false });
 
     case END_CARD_NOTIFICATION:
-      return updateState(state, { showCardNotification: false });
+      return updateState(state, {
+        showCardNotification: false,
+        autoSaving: false
+      });
 
     case STOP_NETWORK_REQUEST:
       return updateState(state, { loading: false });
 
     case STOP_AUTO_SAVE_NETWORK_REQUEST:
-      return updateState(state, { autoSaving: false });
+      return updateState(state, {});
 
     default:
       return state;
