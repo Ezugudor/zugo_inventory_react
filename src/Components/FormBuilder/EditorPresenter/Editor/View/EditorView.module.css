@@ -1,19 +1,40 @@
 .editorWrapper {
   position: relative;
+  min-height: 100px;
 }
+/* .dndDestination {
+  border: 2px solid red;
+}
+.dndTarget {
+  z-index: 9999;
+  box-shadow:0 0 10px #000;
+  padding-right: 150px !important;
+} */
 
 .editorWrapper:not(:last-child) {
   margin-bottom: 2rem;
 }
 
 .editor {
-  position: relative;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
   display: flex;
   align-items: flex-start;
 }
-
-.iconWrapper {
+.dragIconCont {
+  position: absolute;
+  top: 25px;
+  left: -10px;
   cursor: move;
+}
+.dragIcon {
+  width: 2rem;
+  height: 2rem;
+  background: url("/img/drag2.png") 50%/100% no-repeat;
+}
+.iconWrapper {
   position: relative;
   z-index: 1;
   padding: 24px 0 40px 24px;

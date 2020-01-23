@@ -47,6 +47,7 @@ export const generateNewQuestion = (type, position, branches) => {
     description: "",
     position,
     name: "",
+    parent: null,
     children: [],
     type,
     id
@@ -79,6 +80,8 @@ export const generateNewChildQuestion = (
       : [];
 
   const { name, controlType, description } = info;
+  console.log("child info", info);
+  console.log("child infott", type);
   return {
     validationRules: rules,
     description,
@@ -95,7 +98,11 @@ export const generateNewChildQuestion = (
   };
 };
 
-export const generateRequiredChildren = (type, parentIndex) => {
+export const generateRequiredChildren = (
+  type,
+  parentIndex,
+  parentId = null
+) => {
   // const rules = buildValidationRule(type);
   // const id = uuid4();
   // type here is compactType
@@ -158,6 +165,7 @@ export const generateRequiredChildren = (type, parentIndex) => {
         qPosition: elem.position,
         name: elem.name,
         children,
+        parent: parentId,
         controlType: elem.controlType,
         isCompact: true,
         compactRequired: true,
@@ -179,6 +187,7 @@ export const generateRequiredChildren = (type, parentIndex) => {
         qPosition: elem.position,
         name: elem.name,
         children,
+        parent: parentId,
         controlType: elem.controlType,
         isCompact: true,
         compactRequired: true,
@@ -331,7 +340,7 @@ export const blockTypes = [
   { name: "Last Name", type: "lastname" },
   { name: "Email", type: "email" },
 
-  { name: "Cards", type: "creditcards" },
+  { name: "Credit Cards", type: "creditcards" },
   { name: "Yes/No", type: "yesorno" },
   { name: "Gender", type: "gender" },
   { name: "Multiple Choice", type: "multichoice" },

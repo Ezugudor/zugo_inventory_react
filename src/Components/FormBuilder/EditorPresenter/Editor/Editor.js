@@ -12,6 +12,7 @@ class Class extends Component {
     this.editorPointer = React.createRef();
     this.childPointer = React.createRef();
     const text = this.props.element.name;
+    console.log("logging inside editor for parent", this.props);
     // const children = this.props.element.children.join("\n");
     const children = this.props.element.children;
     this.state = {
@@ -28,6 +29,11 @@ class Class extends Component {
       const { id } = this.editorPointer.current.props;
       this.props.setQuestionProperty("name", id, editorContent, parent);
     }
+  };
+  onClicked = parent => {
+    // console.log("closest log", parent);
+    // const { id } = this.editorPointer.current.props;
+    // this.props.setCurrentEditor(id, parent);
   };
 
   onKeyDown = (event, change, next) => {
@@ -58,6 +64,7 @@ class Class extends Component {
     event.preventDefault();
     const { id } = this.editorPointer.current.props;
     this.props.setCurrentEditor(id, parent);
+    this.props.click();
   };
 
   getChildContent = ({ value }) => {
@@ -151,6 +158,7 @@ class Class extends Component {
               placeholder="Type your question here"
               ref={this.editorPointer}
               spellCheck={true}
+              onClick={e => this.onClicked(parent)}
               onKeyDown={this.onKeyDown}
             />
 
@@ -161,6 +169,7 @@ class Class extends Component {
                 value={this.state.childValue}
                 placeholder="- Choice"
                 onChange={this.getChildContent}
+                onClick={e => this.onClicked(parent)}
                 ref={this.childPointer}
                 onKeyDown={this.onChildKeyDown}
                 renderPlaceholder={this.renderPlaceholder}
@@ -196,6 +205,7 @@ class Class extends Component {
                 this.onChange(e, parent);
               }}
               spellCheck={true}
+              onClick={e => this.onClicked(parent)}
               renderPlaceholder={this.renderPlaceholder}
             />
           </div>
@@ -215,6 +225,7 @@ class Class extends Component {
               onChange={e => {
                 this.onChange(e, parent);
               }}
+              onClick={e => this.onClicked(parent)}
               spellCheck={true}
               renderPlaceholder={this.renderPlaceholder}
             />

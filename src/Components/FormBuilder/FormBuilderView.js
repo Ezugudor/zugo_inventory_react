@@ -69,6 +69,7 @@ export class FormBuilderView extends Component {
                 addValidationRule={this.props.addValidationRule}
                 formElements={this.props.formElements}
                 toggleConfigModal={this.props.toggleConfigModal}
+                updateElementOrder={this.props.updateElementOrder}
               />
             </div>
           </div>
@@ -121,6 +122,7 @@ export class FormBuilderView extends Component {
         <ConfigCurrentElem
           showConfigModal={this.props.showConfigModal}
           addQuestionIntroChild={this.props.addQuestionIntroChild}
+          isChecked={this.props.isChecked}
           addCompactQuestionChild={this.props.addCompactQuestionChild}
           setQuestionProperty={this.props.setQuestionProperty}
           settingsWindowName={this.props.settingsWindowName}

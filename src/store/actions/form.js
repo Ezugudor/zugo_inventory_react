@@ -2,7 +2,9 @@ import { UNPRESERVE_NEW_FORM, UNPRESERVE_FORMBUILDER_STATE } from "./types";
 import {
   PRESERVE_FORMBUILDER_STATE,
   PRESERVE_NEW_FORM,
-  TOGGLE_PUBLISHED
+  TOGGLE_PUBLISHED,
+  DRAG_START,
+  DRAG_END
 } from "./types";
 import {
   setNotificationMessage,
@@ -33,6 +35,14 @@ const unpreserveFormBuilderState = () => ({
 export const preserveFormBuilderState = newState => dispatch => {
   dispatch({ type: PRESERVE_FORMBUILDER_STATE, newState });
 };
+
+export const dragStart = element => dispatch => {
+  dispatch({ type: DRAG_START, element });
+};
+
+export const dragStop = () => ({
+  type: DRAG_END
+});
 
 export const preserveNewForm = elements => dispatach =>
   dispatach({

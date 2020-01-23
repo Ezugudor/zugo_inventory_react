@@ -15,8 +15,8 @@
   position: relative;
   padding-top: thin-gutter;
   overflow-y: scroll;
-  padding: 40px;
-  padding-right: 60px;
+  padding: 40px 20px;
+  padding-right: 20px;
 }
 
 .compactCont {
@@ -26,7 +26,7 @@
   /* border-radius: 4px; */
   margin-bottom: 20px;
   position: relative;
-  background: #fafafa;
+  /* background: #fafafa; */
   padding-right: 40px;
 }
 .compactAllCont {
@@ -39,7 +39,16 @@
   top: 28px;
   z-index: 2000;
 }
-
+.draggable {
+  /* background:#fcfcfc; */
+  border-left: 4px solid var(--color4);
+  padding: 0 40px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  /* border-bottom:1px solid #f7f7f7; */
+  /* box-shadow: inset 0 -1px 0px #f9f9f9;*/
+  box-shadow: 0 0 10px #ddd;
+}
 .removeElem,
 .configElem {
   float: left;

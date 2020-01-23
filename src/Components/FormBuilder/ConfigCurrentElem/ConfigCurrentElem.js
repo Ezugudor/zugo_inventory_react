@@ -29,6 +29,8 @@ class Class extends Component {
           {this.props.currentElement.type === "introduction" ? (
             <IntroConfiguration
               addQuestionIntroChild={this.props.addQuestionIntroChild}
+              isChecked={this.props.isChecked}
+              currentElement={this.props.currentElement}
             />
           ) : this.props.currentElement.type === "address" ? (
             <AddressConfiguration

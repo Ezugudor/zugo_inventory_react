@@ -80,6 +80,13 @@ class Class extends Component {
     );
   }
 
+  handleDragStart = elem => {
+    const dnd = { ...this.state.dnd };
+    dnd.currentDraggedElement = elem;
+    this.setState({
+      dnd
+    });
+  };
   /**
    * change the setting UI from design to configuration mode
    */
@@ -192,32 +199,32 @@ class Class extends Component {
     const questions = [...this.state.formElements];
     const introIndex = getIntroIndex(questions);
 
-    // alert(introIndex);
-    // if (type === "introduction" && introIndex !== -1) {
-    //   return this.setState({
-    //     settingsWindowName: "configuration",
-    //     currentElement: question,
-    //     showConfigModal: true
-    //   });
-    // }
-
     if (type === "address" || type === "branch") {
+      const { id: parentId } = question;
       const defaultChildren = generateRequiredChildren(
         type,
         position,
-        this.props.branches
+        parentId
       );
       defaultChildren.forEach(elem => {
+        // elem.parent = parentId;
         question.children.push(elem);
       });
     }
     questions.push(question);
 
+    const introExist = questions.find(e => e.type === "introduction");
+    if (typeof introExist === "object" && type === "introduction") {
+      return this.setState({
+        currentElement: introExist,
+        formElements: questions,
+        showConfigModal: true
+      });
+    }
+
     if (type === "introduction" || type === "address" || type === "branch") {
       return this.setState({
-        // settingsWindowName: "configuration",
         currentElement: question,
-        // showSettingsWindow: true,
         formElements: questions,
         showConfigModal: true
       });
@@ -237,6 +244,10 @@ class Class extends Component {
    * @param {string} value the property value to set
    */
   setQuestionProperty = (name, id, value, parent = null) => {
+    console.log(
+      "set current element from question updater",
+      this.state.currentElement
+    );
     let cE = { ...this.state.currentElement };
     cE[name] = value;
 
@@ -264,7 +275,8 @@ class Class extends Component {
    * @param {string} value the property value to set
    */
   setCurrentEditor = (id, parent = null) => {
-    // alert(parent);
+    console.log("form builder parent", parent);
+    // console.log("form builder fE", this.state.formElements);
     if (parent) {
       return this.setCurrentEditorCompact(id, parent);
     }
@@ -276,12 +288,14 @@ class Class extends Component {
     this.setState({
       currentElement: question
     });
-    this.toggleConfigModal();
+
+    // this.toggleConfigModal();
   };
 
   setCurrentEditorCompact = (id, parent) => {
+    console.log("checkout", parent);
     const allQuestions = [...this.state.formElements];
-    const pQIndex = allQuestions.findIndex(el => el.id === parent.id);
+    const pQIndex = allQuestions.findIndex(el => el.id === parent);
     if (pQIndex === -1) return;
     const parentQuestion = allQuestions[pQIndex];
     const parentChildren = [...parentQuestion.children];
@@ -290,7 +304,7 @@ class Class extends Component {
     this.setState({
       currentElement: childQuestion
     });
-    this.toggleConfigModal();
+    // this.toggleConfigModal();
   };
 
   /**
@@ -301,20 +315,19 @@ class Class extends Component {
   setQuestionChildProperty = (name, id, value, parent) => {
     let cE = { ...this.state.currentElement };
     cE[name] = value;
+    console.log("checking CEc", cE);
 
-    //avoid cyclic reference
-    const { parent: parentElem } = cE;
-    cE.parent = { id: parentElem.id };
+    //avoid cyclic reference :Not using this again since parent flat id is now used
+    // const { parent: parentElem } = cE;
+    // cE.parent = { id: parentElem };
 
     const mainQuestions = [...this.state.formElements];
-    const mQIndex = mainQuestions.findIndex(el => el.id === parent.id);
+    const mQIndex = mainQuestions.findIndex(el => el.id === parent);
     const parentChildren = [...mainQuestions[mQIndex].children];
 
     const elemIndex = parentChildren.findIndex(el => el.id === id);
     parentChildren[elemIndex] = cE;
     mainQuestions[mQIndex].children = parentChildren;
-    console.log("main question", mainQuestions);
-    console.log("current Element cE", cE);
 
     this.preserveState(cE, mainQuestions);
     this.setState({
@@ -353,8 +366,14 @@ class Class extends Component {
     } else {
       questionIntro.children.push(child);
     }
-    this.setState({ formElements: questions });
+
+    questions[introIndex] = questionIntro;
+
     this.preserveState(questionIntro, questions);
+    this.setState(function(state, props) {
+      console.log("calling state set");
+      return { formElements: questions, currentElement: questionIntro };
+    });
   };
 
   /**
@@ -379,7 +398,7 @@ class Class extends Component {
         child,
         currentElement.type
       );
-
+      question.parent = currentElement.id;
       currentElement.children.push(question);
     }
 
@@ -423,14 +442,14 @@ class Class extends Component {
 
     if (isCompact) {
       const elementIdex = elements.findIndex(
-        el => el.id === currentElementV.parent.id
+        el => el.id === currentElementV.parent
       );
       const parent = elements[elementIdex];
       const children = [...parent.children];
       const childIndex = children.findIndex(el => el.id === currentElementV.id);
       //rewrite the parent element to avoid cyclic reference by chosing what is needed(id)
-      const { parent: parentElem } = currentElementV;
-      currentElementV.parent = { id: parentElem.id };
+      // const { parent: parentElem } = currentElementV;
+      // currentElementV.parent = { id: parentElem.id };
       children[childIndex] = currentElementV;
       parent.children = children;
 
@@ -532,8 +551,6 @@ class Class extends Component {
     const { name, parent, id } = this.props.newForm.formType;
     const questions = this.state.formElements;
     const live = publish || this.props.newForm.isLive;
-    console.log("live", live);
-
     const details = {
       name: this.props.newForm.name,
       elements: questions,
@@ -550,9 +567,43 @@ class Class extends Component {
     this.props.updateForm(details, history, request, autoSave);
   };
 
+  updateElementOrder = result => {
+    const elements = this.state.formElements;
+    const { destination, source, draggableId } = result;
+
+    const destElement = elements.find(
+      elem => elem.position === destination.index
+    );
+    const destPosition = destElement.position;
+    const destIndex = elements.findIndex(
+      elem => elem.position === destination.index
+    );
+
+    const srcElement = elements.find(elem => elem.position === source.index);
+    const srcPosition = srcElement.position;
+    const srcIndex = elements.findIndex(elem => elem.position === source.index);
+
+    destElement.position = srcPosition;
+    destElement.qPosition = srcPosition;
+    srcElement.position = destPosition;
+    srcElement.qPosition = destPosition;
+
+    // elements[destIndex] = srcElement;
+    // elements[srcIndex] = destElement;
+
+    const removeElem = elements.splice(srcIndex, 1);
+    elements.splice(destIndex, 0, srcElement);
+
+    console.log("spliced eleme", elements);
+
+    this.preserveState(srcElement, elements);
+    this.setState({ formElements: elements });
+  };
+
   render() {
     return (
       <FormBuilderView
+        updateElementOrder={this.updateElementOrder}
         isLive={this.props.newForm.isLive}
         showPublish={this.state.showPublish}
         showUnPublish={this.state.showUnPublish}
@@ -566,6 +617,7 @@ class Class extends Component {
         showPreview={this.state.showPreview}
         settingsWindowName={this.state.settingsWindowName}
         addQuestionIntroChild={this.addQuestionIntroChild}
+        isChecked={this.isChecked}
         addCompactQuestionChild={this.addCompactQuestionChild}
         setQuestionProperty={this.setQuestionProperty}
         changeConfigWindow={this.changeConfigWindow}

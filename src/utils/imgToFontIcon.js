@@ -1,9 +1,9 @@
-import { Email, User, Phone, Address, Signature } from "./fontIcons";
+import { Email, User, Phone, Address, Signature, IDCard } from "./fontIcons";
 import { Date, People, Card, List, Gender, Number } from "./fontIcons";
 import { MultiChoice, YesorNo, Dropdown, Calender } from "./fontIcons";
 import { Picture, Video, House, Statement } from "./fontIcons";
 import { Section, Introduction, Telephone, Country } from "./fontIcons";
-import { State, LGA } from "./fontIcons";
+import { State, LGA, OfficeDocument, Passport } from "./fontIcons";
 import React from "react";
 /**
  * Checks the image name and use the value to get a font
@@ -38,8 +38,9 @@ export const imgToFontIcon = (iconType, iconStyle) => {
     case "date":
       return <Calender style={`${iconStyle}`} />;
     case "picture":
-    case "passport":
       return <Picture style={`${iconStyle}`} />;
+    case "passport":
+      return <Passport style={`${iconStyle}`} />;
     case "video":
       return <Video style={`${iconStyle}`} />;
     case "signature":
@@ -65,5 +66,9 @@ export const imgToFontIcon = (iconType, iconStyle) => {
       return <State style={`${iconStyle}`} />;
     case "lga":
       return <LGA style={`${iconStyle}`} />;
+    case "idcard":
+      return <IDCard style={`${iconStyle}`} />;
+    case "document":
+      return <OfficeDocument style={`${iconStyle}`} />;
   }
 };

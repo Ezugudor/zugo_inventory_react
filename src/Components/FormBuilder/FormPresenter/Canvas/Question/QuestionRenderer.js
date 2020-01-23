@@ -61,7 +61,6 @@ export const renderQuestionFor = ({ question, handleClick }) => {
           <NormalHouse question={question} />
           <div>
             {/* dont display any field instead loop through the children and fill */}
-            {console.log("presenter question", question)}
             {question.children.map(elem => {
               return renderCompactChildren(elem, handleClick);
             })}

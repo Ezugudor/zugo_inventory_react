@@ -3,12 +3,13 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 export class ItemConfiguration extends Component {
-  // componentWillUpdate() {
-  //   console.log(
-  //     "checking the two way bind",
-  //     this.props.currentElement.validationRules
-  //   );
-  // }
+  componentWillUpdate() {
+    console.log("something have changed");
+    // console.log(
+    //   "checking the two way bind",
+    //   this.props.currentElement.validationRules
+    // );
+  }
 
   minMaxException = ["account", "tel", "bvn", "mobile", "picture"];
 
@@ -18,10 +19,10 @@ export class ItemConfiguration extends Component {
   getMin = () => {
     const rules = [...this.props.currentElement.validationRules];
     const min = rules.find(rule => rule.name === "min");
+    if (typeof min === "undefined") return 0;
     return min.value;
   };
   getValidationRule = (ruleName, rules) => {
-    console.log("rules checking for compact element", rules);
     let res = rules.find(rule => rule.name == ruleName);
     if (res && res.name === "max") {
       if (res.value < this.getMin()) {

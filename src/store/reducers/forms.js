@@ -8,7 +8,9 @@ import {
   UPDATE_FORMS,
   EDIT_FORM,
   SAVE_FORMS,
-  TOGGLE_PUBLISHED
+  TOGGLE_PUBLISHED,
+  DRAG_START,
+  DRAG_END
 } from "../actions";
 
 const initialState = {
@@ -18,7 +20,8 @@ const initialState = {
   formBuilderState: {
     showSettingsWindow: true,
     settingsWindowName: "",
-    currentElement: {}
+    currentElement: {},
+    currentDraggedElement: {}
   },
   newForm: {
     formType: { id: "", parent: "", name: "" },
@@ -54,7 +57,24 @@ export const form = (state = initialState, action) => {
       });
 
     case PRESERVE_FORMBUILDER_STATE:
-      return updateState(state, { formBuilderState: action.newState });
+      const formBuilderState = {
+        ...state.formBuilderState,
+        ...action.newState
+      };
+      return updateState(state, { formBuilderState });
+
+    case DRAG_START:
+      const fbState = { ...state.formBuilderState };
+      fbState.currentDraggedElement = action.element;
+      console.log("new dragged element", action.element);
+      console.log("current dragged element", fbState.currentDraggedElement);
+
+      return updateState(state, { formBuilderState: fbState });
+
+    case DRAG_END:
+      const fbStat = { ...state.formBuilderState };
+      fbStat.currentDraggedElement = {};
+      return updateState(state, { formBuilderState: fbStat });
 
     case SAVE_FORMS:
       all = { ...state.all };

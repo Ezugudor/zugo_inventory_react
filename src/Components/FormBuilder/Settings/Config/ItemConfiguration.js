@@ -12,10 +12,10 @@ export const ItemConfiguration = props => (
   <div className={Style.configuration}>
     <div className={Style.requiredRuleWrapper}>
       <span>Required</span>
-      <label className={Style.inputLabel} htmlFor="required">
+      <label className={Style.inputLabel} htmlFor="setRequired">
         <input
           type="checkbox"
-          id="required"
+          id="setRequired"
           className={Style.input}
           onChange={e => props.addValidationRule("required", e)}
         />

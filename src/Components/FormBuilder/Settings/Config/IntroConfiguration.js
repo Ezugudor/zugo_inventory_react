@@ -48,7 +48,7 @@ export const IntroConfiguration = props => (
           onChange={() =>
             props.addQuestionIntroChild({
               name: "passport",
-              description: "A digital/Scanned Copy of your signature"
+              description: "A digital/Scanned Copy of your passport"
             })
           }
         />

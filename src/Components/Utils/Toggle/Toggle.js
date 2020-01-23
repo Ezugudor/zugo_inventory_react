@@ -5,10 +5,10 @@ import React from "react";
 export const Toggle = props => (
   <div className={Style.toggleWrapper}>
     <span className={Style.label}>{props.label}</span>
-    <label className={Style.inputLabel} htmlFor="required">
+    <label className={Style.inputLabel} htmlFor="toggleE">
       <input
         type="checkbox"
-        id="required"
+        id="toggleE"
         className={Style.input}
         onChange={e => {
           if (typeof props.trigger !== "undefined") props.trigger(e);
@@ -23,9 +23,3 @@ export const Toggle = props => (
     </label>
   </div>
 );
-
-Toggle.propTypes = {
-  setQuestionProperty: PropTypes.func.isRequired,
-  addValidationRule: PropTypes.func.isRequired,
-  currentElement: PropTypes.object.isRequired
-};

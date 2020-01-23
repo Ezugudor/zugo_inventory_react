@@ -1,4 +1,5 @@
 import Style from "./Intro.module.css";
+import { imgToFontIcon } from "../../../../utils";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 
@@ -20,6 +21,22 @@ export class Intro extends Component {
     this.props.toggleConfigModal();
     const introElemId = this.props.questionIntro.id;
     this.props.setCurrentEditor(introElemId);
+  };
+
+  getIcon = (iconName, iconStyle) => {
+    switch (iconName) {
+      case "id-card":
+        return imgToFontIcon("idcard", Style.IconImageSvg);
+        break;
+
+      case "letter":
+        return imgToFontIcon("document", Style.IconImageSvg);
+        break;
+
+      default:
+        return imgToFontIcon(iconName, iconStyle);
+        break;
+    }
   };
 
   render() {
@@ -62,21 +79,17 @@ export class Intro extends Component {
         </div>
         <div className={Style.Instruction}>
           <span className={Style.InstructionWarning}>
-            You'll need this to complete the form
+            You'll need these to complete this form :
           </span>
-          <span className={Style.InstructionIcon}>
+          {/* <span className={Style.InstructionIcon}>
             <i className="far fa-hand-point-down" />
-          </span>
+          </span> */}
         </div>
         <div className={Style.Requirements}>
           {this.props.questionIntro.children.map((child, index) => (
             <div className={Style.Requirement} key={index}>
               <div className={Style.Icon}>
-                <img
-                  className={Style.IconImage}
-                  src={`/img/${child.name}.svg`}
-                  alt={child.name}
-                />
+                {this.getIcon(child.name, Style.IconImage)}
               </div>
               <div className={Style.RequirementTextWrapper}>
                 <h3 className={Style.RequirementText}>{child.description}</h3>
@@ -87,7 +100,7 @@ export class Intro extends Component {
         <div className={Style.Action}>
           <div className={Style.ActionBtnWrapper}>
             <button
-              className="btn btn--primary btn--action"
+              className={`btn--primary  ${Style.introGoBtn} btn btn--action`}
               onClick={this.props.toggleIntro}
             >
               I'm Ready
