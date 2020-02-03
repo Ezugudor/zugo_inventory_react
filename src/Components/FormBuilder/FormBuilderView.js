@@ -24,6 +24,17 @@ export class FormBuilderView extends Component {
       spacebarenabled: false
     });
   }
+  componentWillUpdate() {
+    $(".overflow_scroll").niceScroll({
+      cursorcolor: "var(--color3)",
+      cursorwidth: "15px",
+      autohidemode: true,
+      touchbehavior: false,
+      grabcursorenabled: false,
+      spacebarenabled: false
+    });
+  }
+
   componentWillUnmount() {
     //  important! hides the nicescroll bar after moving out of the formbuilder
     $(".overflow_scroll")

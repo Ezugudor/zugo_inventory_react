@@ -1,0 +1,14 @@
+@value variables: "../../../../../../styles/Variables.css";
+@value tertiary-color-light from variables;
+
+.Header {
+  border-bottom: 3px solid tertiary-color-light;
+  border-bottom: 3px solid var(--color3);
+}
+
+.SectionTitle {
+  padding: 1.3rem 50px;
+  font-size: 20px;
+  font-family: Gilroy;
+  font-weight: bold;
+}

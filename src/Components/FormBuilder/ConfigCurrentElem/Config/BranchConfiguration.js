@@ -2,6 +2,18 @@ import Style from "./ItemConfiguration.module.css";
 import PropTypes from "prop-types";
 import React from "react";
 
+const checker = (childType, elem) => {
+  let match = false;
+  const children = [...elem.children];
+  children.forEach(child => {
+    if (child.slug === childType) {
+      match = true;
+      return;
+    }
+  });
+  return match;
+};
+
 export const BranchConfiguration = props => (
   <div className={Style.configuration}>
     <div className={Style.requiredRuleWrapper}>
@@ -37,9 +49,11 @@ export const BranchConfiguration = props => (
               type: "dropdown",
               name: "Area / LGA",
               description: "Branch Area / LGA",
-              controlType: "lga"
+              controlType: "lga",
+              slug: "lga"
             })
           }
+          checked={checker("lga", props.currentElement)}
         />
         <span htmlFor="required" className={Style.toggleButton} />
       </label>
@@ -56,9 +70,11 @@ export const BranchConfiguration = props => (
               type: "dropdown",
               controlType: "branch",
               name: "Branch Name",
+              slug: "branch-name",
               description: "Branches within the selected region"
             })
           }
+          checked={checker("branch-name", props.currentElement)}
         />
         <span htmlFor="required" className={Style.toggleButton} />
       </label>

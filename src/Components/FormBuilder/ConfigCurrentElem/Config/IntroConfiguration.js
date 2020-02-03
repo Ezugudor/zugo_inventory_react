@@ -1,35 +1,26 @@
 import Style from "./ItemConfiguration.module.css";
 import PropTypes from "prop-types";
-import React from "react";
-import { Component } from "react";
+import React, { Component } from "react";
 
 export class IntroConfiguration extends Component {
-  componentWillUpdate() {
-    console.log(
-      "checking the two way bind2",
-      this.props.currentElement.children
-    );
-  }
+  checker = (introChildType, elem) => {
+    let match = false;
+    const introChildren = [...elem.children];
+    introChildren.forEach(child => {
+      if (child.name === introChildType) {
+        match = true;
+        return;
+      }
+    });
+    return match;
+  };
 
   render() {
-    const isChecked = (introChildType, elem) => {
-      console.log("checked action");
-      let match = false;
-      const introChildren = [...elem.children];
-      introChildren.forEach(child => {
-        if (child.name === introChildType) {
-          match = true;
-          // return;
-        }
-      });
-      return match || false;
-    };
-
     return (
       <div className={Style.configuration}>
         <div className={Style.requiredRuleWrapper}>
           <span>ID Card</span>
-          <label className={Style.inputLabel}>
+          <label className={Style.inputLabel} htmlFor="required">
             <input
               type="checkbox"
               id="required"
@@ -40,17 +31,17 @@ export class IntroConfiguration extends Component {
                   description: "A digital/Scanned Copy of your valid ID Card"
                 })
               }
-              checked={isChecked("id-card", this.props.currentElement)}
+              checked={this.checker("id-card", this.props.currentElement)}
             />
-            <span htmlFor="required" className={Style.toggleButton} />
+            <span htmlFor="requidred" className={Style.toggleButton} />
           </label>
         </div>
         <div className={Style.requiredRuleWrapper}>
           <span>Signature</span>
-          <label className={Style.inputLabel}>
+          <label htmlFor="required1" className={Style.inputLabel}>
             <input
               type="checkbox"
-              id="required"
+              id="required1"
               className={Style.input}
               onChange={() =>
                 this.props.addQuestionIntroChild({
@@ -58,17 +49,17 @@ export class IntroConfiguration extends Component {
                   description: "A digital/Scanned Copy of your signature"
                 })
               }
-              checked={isChecked("signature", this.props.currentElement)}
+              checked={this.checker("signature", this.props.currentElement)}
             />
-            <span htmlFor="required" className={Style.toggleButton} />
+            <span htmlFor="required1" className={Style.toggleButton} />
           </label>
         </div>
         <div className={Style.requiredRuleWrapper}>
           <span>Passport</span>
-          <label className={Style.inputLabel}>
+          <label className={Style.inputLabel} htmlFor="required2">
             <input
               type="checkbox"
-              id="required"
+              id="required2"
               className={Style.input}
               onChange={() =>
                 this.props.addQuestionIntroChild({
@@ -76,17 +67,17 @@ export class IntroConfiguration extends Component {
                   description: "A digital/Scanned Copy of your passport"
                 })
               }
-              checked={isChecked("passport", this.props.currentElement)}
+              checked={this.checker("passport", this.props.currentElement)}
             />
-            <span htmlFor="required" className={Style.toggleButton} />
+            <span htmlFor="requiredd2" className={Style.toggleButton} />
           </label>
         </div>
         <div className={Style.requiredRuleWrapper}>
           <span>Reference Letter</span>
-          <label className={Style.inputLabel}>
+          <label className={Style.inputLabel} htmlFor="required3">
             <input
               type="checkbox"
-              id="required"
+              id="required3"
               className={Style.input}
               onChange={() =>
                 this.props.addQuestionIntroChild({
@@ -94,9 +85,9 @@ export class IntroConfiguration extends Component {
                   description: "A Scanned Copy of a reference latter"
                 })
               }
-              checked={isChecked("letter", this.props.currentElement)}
+              checked={this.checker("letter", this.props.currentElement)}
             />
-            <span htmlFor="required" className={Style.toggleButton} />
+            <span htmlFor="requiredd3" className={Style.toggleButton} />
           </label>
         </div>
       </div>
@@ -105,5 +96,6 @@ export class IntroConfiguration extends Component {
 }
 
 IntroConfiguration.propTypes = {
-  addQuestionIntroChild: PropTypes.func.isRequired
+  addQuestionIntroChild: PropTypes.func.isRequired,
+  currentElement: PropTypes.object.isRequired
 };

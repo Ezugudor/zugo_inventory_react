@@ -7,6 +7,9 @@ import Style from "./Canvas.module.css";
 import PropTypes from "prop-types";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
+import $ from "jquery";
+window.jQuery = $;
+require("../../../../plugins/nicescrollbar/nicescroll.js");
 
 export class Canvas extends Component {
   state = {
@@ -26,6 +29,15 @@ export class Canvas extends Component {
 
   componentDidMount() {
     this.setupCanvas();
+
+    // $(".overflow_scroll").niceScroll({
+    //   cursorcolor: "var(--color3)",
+    //   cursorwidth: "15px",
+    //   autohidemode: true,
+    //   touchbehavior: false,
+    //   grabcursorenabled: false,
+    //   spacebarenabled: false
+    // });
   }
 
   componentWillUnmount() {
@@ -34,6 +46,17 @@ export class Canvas extends Component {
 
   componentDidUpdate() {
     this.setupCanvas();
+  }
+
+  componentWillUpdate() {
+    // $(".overflow_scroll").niceScroll({
+    //   cursorcolor: "var(--color3)",
+    //   cursorwidth: "15px",
+    //   autohidemode: true,
+    //   touchbehavior: false,
+    //   grabcursorenabled: false,
+    //   spacebarenabled: false
+    // });
   }
 
   handleTargetEnter = response => {
@@ -46,7 +69,10 @@ export class Canvas extends Component {
 
   handleTargetExit = response => {
     response.element.classList.remove("ActivteElement");
-    response.element.classList.add("InactiveElement");
+    // Uncommenting the below is wrong .
+    // Just bypassed for testing purposes.
+    // response.element.classList.add("InactiveElement");
+    response.element.classList.add("ActivteElement");
   };
 
   increaseCompletedQuestion = () => {
@@ -79,15 +105,16 @@ export class Canvas extends Component {
 
   render() {
     const questions = getQuestions(this.props.elements);
-
     return (
       <div>
-        <section className={Style.HeaderSection}>
+        {/* <section className={Style.HeaderSection}>
           <Header sectionData={this.getSectionData()} />
-        </section>
-        <section className={Style.InterectionSection}>
-          <div className={`${Style.Canvas} overflow_scroll`}>
-            <main>
+        </section> */}
+        <section
+          className={`${Style.InterectionSection} overflow_scroll auto_scroll`}
+        >
+          <div>
+            <main className={`${Style.Canvas}`}>
               {questions.map(question =>
                 renderQuestionFor({
                   question,

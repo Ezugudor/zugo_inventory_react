@@ -2,6 +2,18 @@ import Style from "./ItemConfiguration.module.css";
 import PropTypes from "prop-types";
 import React from "react";
 
+const checker = (childType, elem) => {
+  let match = false;
+  const children = [...elem.children];
+  children.forEach(child => {
+    if (child.slug === childType) {
+      match = true;
+      return;
+    }
+  });
+  return match;
+};
+
 export const AddressConfiguration = props => (
   <div className={Style.configuration}>
     <div className={Style.requiredRuleWrapper}>
@@ -96,9 +108,11 @@ export const AddressConfiguration = props => (
             props.addCompactQuestionChild({
               type: "shorttext",
               name: "House Name",
+              slug: "house-name",
               description: "House's popular name (if any)"
             })
           }
+          checked={checker("house-name", props.currentElement)}
         />
         <span htmlFor="required" className={Style.toggleButton} />
       </label>
@@ -115,9 +129,11 @@ export const AddressConfiguration = props => (
             props.addCompactQuestionChild({
               type: "longtext",
               name: "Landmark / Direction",
+              slug: "landmark",
               description: "How can one get to this place?"
             })
           }
+          checked={checker("landmark", props.currentElement)}
         />
         <span htmlFor="required" className={Style.toggleButton} />
       </label>

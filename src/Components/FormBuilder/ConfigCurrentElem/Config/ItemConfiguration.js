@@ -3,14 +3,6 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 export class ItemConfiguration extends Component {
-  componentWillUpdate() {
-    console.log("something have changed");
-    // console.log(
-    //   "checking the two way bind",
-    //   this.props.currentElement.validationRules
-    // );
-  }
-
   minMaxException = ["account", "tel", "bvn", "mobile", "picture"];
 
   showMinMax = props => {

@@ -14,9 +14,9 @@ class Class extends Component {
     this.props.deleteQuestion(id);
   };
 
-  onConfigBtnClick = event => {
+  onConfigBtnClick = (event, index) => {
     event.preventDefault();
-    const { id } = this.editorElement.current.props.element;
+    const { id } = this[`compactConfig${index}`].props.element;
     this.props.setCurrentEditor(id);
     setTimeout(
       function() {
@@ -35,7 +35,9 @@ class Class extends Component {
     return ele.type == "branch" || ele.type == "address" ? (
       <div className={Style.compactAllCont}>
         <Editor
-          ref={this.editorElement}
+          ref={elem => {
+            this[`compactConfig${index}`] = elem;
+          }}
           setQuestionProperty={this.props.setQuestionProperty}
           setCurrentEditor={this.props.setCurrentEditor}
           setElementChildren={this.props.setElementChildren}
@@ -52,7 +54,7 @@ class Class extends Component {
           <a
             className={Style.configElem}
             onClick={e => {
-              this.onConfigBtnClick(e);
+              this.onConfigBtnClick(e, index);
             }}
           >
             <i className="ion ion-ios-settings"></i>
@@ -73,7 +75,6 @@ class Class extends Component {
           {ele.children.map(child => {
             return (
               <Editor
-                ref={this.editorElement}
                 setQuestionProperty={this.props.setQuestionProperty}
                 setCurrentEditor={this.props.setCurrentEditor}
                 setElementChildren={this.props.setElementChildren}

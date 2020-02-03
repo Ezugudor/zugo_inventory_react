@@ -22,11 +22,13 @@ export const business = (state = initialState, action) => {
 
     case DELETE_BUSINESS_BRANCH:
       const biz = { ...state };
-
+      console.log("logging biz inside reducer", biz);
+      console.log("logging action inside reducer", action);
+      console.log("logging action data inside reducer", action.data);
       biz.branches = biz.branches.filter(
         branch => branch.name !== action.data.name
       );
-      return updateState(state, action.data);
+      return updateState(state, biz);
     default:
       return state;
   }

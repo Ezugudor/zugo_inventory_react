@@ -5,7 +5,8 @@ export const handleError = (err, dispatch) => {
 
   if (err.response) {
     const error = err.response.data;
-    dispatch(setNotificationMessage(error.details, "error", "Oops !"));
+    console.log("error details", error);
+    dispatch(setNotificationMessage(error.details, "error", "Oaops !"));
     return;
   }
   dispatch(setNotificationMessage("Oops request failed", "error", "Oops !"));

@@ -244,10 +244,6 @@ class Class extends Component {
    * @param {string} value the property value to set
    */
   setQuestionProperty = (name, id, value, parent = null) => {
-    console.log(
-      "set current element from question updater",
-      this.state.currentElement
-    );
     let cE = { ...this.state.currentElement };
     cE[name] = value;
 
@@ -275,7 +271,6 @@ class Class extends Component {
    * @param {string} value the property value to set
    */
   setCurrentEditor = (id, parent = null) => {
-    console.log("form builder parent", parent);
     // console.log("form builder fE", this.state.formElements);
     if (parent) {
       return this.setCurrentEditorCompact(id, parent);
@@ -293,7 +288,6 @@ class Class extends Component {
   };
 
   setCurrentEditorCompact = (id, parent) => {
-    console.log("checkout", parent);
     const allQuestions = [...this.state.formElements];
     const pQIndex = allQuestions.findIndex(el => el.id === parent);
     if (pQIndex === -1) return;
@@ -315,7 +309,6 @@ class Class extends Component {
   setQuestionChildProperty = (name, id, value, parent) => {
     let cE = { ...this.state.currentElement };
     cE[name] = value;
-    console.log("checking CEc", cE);
 
     //avoid cyclic reference :Not using this again since parent flat id is now used
     // const { parent: parentElem } = cE;
@@ -357,9 +350,12 @@ class Class extends Component {
    * @param {object} child
    */
   addQuestionIntroChild = child => {
+    // alert("reached");
     const questions = [...this.state.formElements];
     const introIndex = getIntroIndex(questions);
-    const questionIntro = questions[introIndex];
+    // let questionIntro = questions[introIndex];
+    const questionIntro = { ...this.state.currentElement };
+
     if (hasChild(questionIntro, child.name)) {
       const childIndex = getChildIndex(questionIntro, child.name);
       questionIntro.children.splice(childIndex, 1);
@@ -368,11 +364,11 @@ class Class extends Component {
     }
 
     questions[introIndex] = questionIntro;
-
     this.preserveState(questionIntro, questions);
-    this.setState(function(state, props) {
-      console.log("calling state set");
-      return { formElements: questions, currentElement: questionIntro };
+
+    this.setState({
+      currentElement: questionIntro,
+      formElements: questions
     });
   };
 
@@ -381,9 +377,9 @@ class Class extends Component {
    * @param {object} child
    */
   addCompactQuestionChild = child => {
-    const { currentElement } = this.state;
+    const currentElement = { ...this.state.currentElement };
 
-    const childPosition = currentElement.position;
+    // const childPosition = currentElement.position;
     const questions = [...this.state.formElements];
 
     if (hasChild(currentElement, child.name)) {
@@ -402,7 +398,7 @@ class Class extends Component {
       currentElement.children.push(question);
     }
 
-    this.setState({ formElements: questions });
+    this.setState({ formElements: questions, currentElement });
     this.preserveState(currentElement, questions);
   };
 
@@ -499,7 +495,9 @@ class Class extends Component {
    * @param {string} questionId
    */
   deleteCompactChildQuestion = (questionId, parent) => {
-    const questions = [...parent.children];
+    const mainTree = [...this.state.formElements];
+    const compactParent = mainTree.find(el => el.id === parent);
+    const questions = [...compactParent.children];
 
     const questionIndex = questions.findIndex(el => el.id === questionId);
     if (questionIndex === -1) {
@@ -509,11 +507,11 @@ class Class extends Component {
     const question = questions.splice(questionIndex, 1);
     const resetQn = resetPosition(questions);
 
-    parent.children = resetQn;
+    compactParent.children = resetQn;
     let originalQuestionTree = this.state.formElements;
 
     const newFormElement = originalQuestionTree.map(el => {
-      if (el.id === parent.id) {
+      if (el.id === parent) {
         el.children = resetQn;
         return el;
       }
@@ -593,9 +591,6 @@ class Class extends Component {
 
     const removeElem = elements.splice(srcIndex, 1);
     elements.splice(destIndex, 0, srcElement);
-
-    console.log("spliced eleme", elements);
-
     this.preserveState(srcElement, elements);
     this.setState({ formElements: elements });
   };

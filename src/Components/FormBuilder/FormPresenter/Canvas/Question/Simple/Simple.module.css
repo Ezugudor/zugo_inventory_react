@@ -8,9 +8,9 @@
   width: 100%;
   font-family: inherit;
   color: rgb(79, 176, 174);
-  color: var(--color3);
+  color: var(--color1);
   -webkit-appearance: none;
-  font-size: 30px;
+  font-size: 25px;
   line-height: 38px;
   -webkit-font-smoothing: antialiased;
   padding: 0px 0px 8px;

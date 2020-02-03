@@ -13,13 +13,7 @@ import { endNotification } from "../../../store/actions/app";
 import loadingIcon from "../../../img/loading2.svg";
 
 class Class extends Component {
-  componentDidMount = dispatch => {
-    // setTimeout(() => {
-    //   this.props.closeNotification();
-    // }, 5000);
-  };
   render() {
-    console.log("the type", this.props.currentElement.type);
     return (
       <Modal
         show={this.props.showConfigModal}
@@ -35,17 +29,21 @@ class Class extends Component {
           ) : this.props.currentElement.type === "address" ? (
             <AddressConfiguration
               addCompactQuestionChild={this.props.addCompactQuestionChild}
+              currentElement={this.props.currentElement}
             />
           ) : this.props.currentElement.type === "branch" ? (
             <BranchConfiguration
               addCompactQuestionChild={this.props.addCompactQuestionChild}
-            />
-          ) : this.props.currentElement.type ? (
-            <ItemConfiguration
-              setQuestionProperty={this.props.setQuestionProperty}
-              addValidationRule={this.props.addValidationRule}
               currentElement={this.props.currentElement}
             />
+          ) : this.props.currentElement.type ? (
+            <div>
+              <ItemConfiguration
+                setQuestionProperty={this.props.setQuestionProperty}
+                addValidationRule={this.props.addValidationRule}
+                currentElement={this.props.currentElement}
+              />
+            </div>
           ) : (
             <p>You have no question to configure</p>
           )}

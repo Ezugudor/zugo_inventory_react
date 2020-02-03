@@ -80,12 +80,11 @@ export const generateNewChildQuestion = (
       : [];
 
   const { name, controlType, description } = info;
-  console.log("child info", info);
-  console.log("child infott", type);
   return {
     validationRules: rules,
     description,
     position,
+    slug: info.slug,
     qPosition: position,
     isCompact: true,
     controlType,
@@ -290,12 +289,17 @@ export const buildOptionFromArray = (array, filterText = null) => {
  * @param {array} formInputs form elements
  */
 export const getQuestions = formInputs => {
+  let nonSectionCounter = 1;
   return formInputs
     .filter(
-      element => element.type !== "section" && element.type !== "introduction"
+      // element => element.type !== "section" && element.type !== "introduction"
+      element => element.type !== "introduction"
     )
     .map((question, index) => {
-      question.qPosition = index + 1;
+      if (question.type !== "section" && question.type !== "statement") {
+        question.qPosition = nonSectionCounter;
+        nonSectionCounter++;
+      }
       return question;
     });
 };

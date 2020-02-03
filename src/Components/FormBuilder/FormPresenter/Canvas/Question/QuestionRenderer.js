@@ -8,8 +8,12 @@ import { Gender } from "./Gender";
 import { Cards } from "./Cards";
 import { Long } from "./Long";
 import { NormalHouse } from "./Houses";
+import { Section } from "./Section";
 import React from "react";
 
+const capitalizeFirst = str => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
 const renderCompactChildren = (question, handleClick) => {
   switch (question.type) {
     case "dropdown":
@@ -44,7 +48,7 @@ export const renderQuestionFor = ({ question, handleClick }) => {
       return null;
 
     case "section":
-      return null;
+      return <Section name={question.name} />;
 
     case "multichoice":
       return (
@@ -86,20 +90,17 @@ export const renderQuestionFor = ({ question, handleClick }) => {
       );
 
     case "signature":
-      return (
-        <Picture
-          question={question}
-          handleClick={handleClick}
-          key={question.position}
-        />
-      );
-
     case "passport":
+    case "video":
+    case "picture":
       return (
         <Picture
           question={question}
           handleClick={handleClick}
           key={question.position}
+          placeholder={`Click or drag and drop to upload a ${capitalizeFirst(
+            question.type
+          )}`}
         />
       );
 

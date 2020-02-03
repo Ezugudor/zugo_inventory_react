@@ -7,7 +7,7 @@
   width: 300px;
   margin: 0px auto;
   border-radius: 20px 20px 0 0;
-  position: absolute;
+  position: fixed;
   bottom: 0px;
   right: 10px;
   box-shadow: 0 0 20px #000;

@@ -40,6 +40,7 @@ export class Picture extends Component {
           handleFileDrop={this.handleFileDrop}
           dragEnter={this.state.dragEnter}
           handleUpload={this.uploadLogo}
+          placeholder={this.props.placeholder}
         />
       </NormalHouse>
     );

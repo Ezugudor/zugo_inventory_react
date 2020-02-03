@@ -12,7 +12,6 @@ class Class extends Component {
     this.editorPointer = React.createRef();
     this.childPointer = React.createRef();
     const text = this.props.element.name;
-    console.log("logging inside editor for parent", this.props);
     // const children = this.props.element.children.join("\n");
     const children = this.props.element.children;
     this.state = {

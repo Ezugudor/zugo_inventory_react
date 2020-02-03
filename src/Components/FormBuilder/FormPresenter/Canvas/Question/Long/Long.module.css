@@ -9,7 +9,7 @@
   z-index: auto;
   position: relative;
   line-height: 37.5px;
-  font-size: 30px;
+  font-size: 25px;
   transition: none 0s ease 0s;
   background: transparent !important;
   height: 48px;
@@ -28,13 +28,13 @@
   padding: 0 0 10px;
   width: 100%;
   font-family: inherit;
-  font-size: 30px;
+  font-size: 25px;
   font-weight: normal;
   line-height: 1.25;
   border-color: rgba(79, 176, 174, 0.4);
   border-color: var(--color3);
   color: #4fb0ae;
-  color: var(--color3);
+  color: var(--color1);
 }
 
 .Answer:not(:focus) {

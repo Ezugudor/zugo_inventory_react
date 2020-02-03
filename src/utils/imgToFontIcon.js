@@ -1,4 +1,12 @@
-import { Email, User, Phone, Address, Signature, IDCard } from "./fontIcons";
+import {
+  Email,
+  User,
+  Phone,
+  Address,
+  Signature,
+  IDCard,
+  DropdownSVG
+} from "./fontIcons";
 import { Date, People, Card, List, Gender, Number } from "./fontIcons";
 import { MultiChoice, YesorNo, Dropdown, Calender } from "./fontIcons";
 import { Picture, Video, House, Statement } from "./fontIcons";
@@ -34,6 +42,7 @@ export const imgToFontIcon = (iconType, iconStyle) => {
       return <YesorNo style={`${iconStyle}`} />;
     case "dropdown":
       return <Dropdown style={`${iconStyle}`} />;
+    // return <DropdownSVG style={`${iconStyle}`} />;
     case "dob":
     case "date":
       return <Calender style={`${iconStyle}`} />;

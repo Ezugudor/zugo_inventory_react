@@ -7,8 +7,9 @@
   width: 100%;
 }
 .btn {
-  background: var(--color1);
-  color: #fff;
+  background: #fff;
+  color: var(--color1);
+  padding: 10px;
 }
 .FooterContent {
   margin: 0 2rem;
@@ -17,12 +18,12 @@
 }
 
 .FooterProgress {
-  width: 81%;
+  width: 70%;
   color: var(--color1);
 }
 
 .FooterNavigiation {
-  width: 10%;
+  width: 19%;
   display: flex;
   padding-bottom: 1rem;
 }

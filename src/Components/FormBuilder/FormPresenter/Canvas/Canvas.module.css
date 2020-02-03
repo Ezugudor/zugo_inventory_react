@@ -4,14 +4,14 @@
 }
 
 .InterectionSection {
-  height: 80vh;
-  overflow: hidden;
+  height: 100vh;
+  overflow-y: scroll;
 }
 
 .Canvas {
   height: 100%;
-  overflow: scroll;
-  padding-bottom: 500px;
+  /* overflow: scroll; */
+  padding-bottom: 50px;
   outline: none;
 }
 .Canvas::before {
