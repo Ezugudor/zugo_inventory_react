@@ -26,17 +26,9 @@ export const AdminSideNav = props => (
           <li className={Style.NavItem}>
             <a className={getClassName(props, "dashboard")} href="/dashboard">
               <i
-                className={`ion ion-ios-speedometer-outline ${Style.sidebarIcon}`}
-              ></i>
-              Dashboard
-            </a>
-          </li>
-          <li className={Style.NavItem}>
-            <a className={getClassName(props, "formType")} href="/formtypes">
-              <i
                 className={`ion ion-ios-list-outline ${Style.sidebarIcon}`}
               ></i>
-              <span className={Style.left_2}>Form Types</span>
+              Overview
             </a>
           </li>
           <li className={Style.NavItem}>
@@ -44,25 +36,17 @@ export const AdminSideNav = props => (
               <i
                 className={`ion ion-ios-people-outline ${Style.sidebarIcon}`}
               ></i>
-              Team
+              Users
             </a>
           </li>
-          <li className={Style.NavItem}>
-            <a className={`${getClassName(props, "branch")} `} href="/branch">
-              <i
-                className={`ion ion-ios-location-outline ${Style.sidebarIcon}`}
-              ></i>
-              <span className={Style.left_1}>Branch</span>
-            </a>
-          </li>
-          <li className={Style.NavItem}>
+          {/* <li className={Style.NavItem}>
             <a className={getClassName(props, "settings")} href="/settings">
               <i
                 className={`ion ion-ios-gear-outline ${Style.sidebarIcon}`}
               ></i>
               Settings
             </a>
-          </li>
+          </li> */}
         </ul>
       </nav>
     </div>

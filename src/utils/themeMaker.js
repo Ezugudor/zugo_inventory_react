@@ -6,8 +6,8 @@ export const themeMaker = hexColor => {
   let color1 = color.getColor();
   document.documentElement.style.setProperty("--color1", color1);
 
-  let color2_S = color.getSValue() - 60;
-  let color2_L = color.getLValue();
+  let color2_S = color.getSValue() - 25;
+  let color2_L = color.getLValue() + 5;
   let color2 = color.getColor(color2_S, color2_L);
   document.documentElement.style.setProperty("--color2", color2);
 

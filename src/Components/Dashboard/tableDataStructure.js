@@ -1,41 +1,77 @@
 export const dataStruct = {
   columns: [
     {
-      label: "Form Id",
-      field: "id",
+      label: "Logo",
+      field: "logo",
       sort: "asc",
       width: 270
     },
     {
-      label: "Form Type",
+      label: "Business Name",
       field: "name",
+      sort: "asc",
+      width: 270
+    },
+    {
+      label: "Business Id",
+      field: "id",
       sort: "asc",
       width: 150
     },
     {
-      label: "Comment",
-      field: "notyte",
+      label: "Forms",
+      field: "total_forms",
       sort: "asc",
       width: 270
     },
     {
-      label: "Branch",
-      field: "branch",
+      label: "Responses",
+      field: "total_responses",
       sort: "asc",
       width: 270
     },
     {
-      label: "Created",
-      field: "date",
+      label: "Subscribed",
+      field: "approved",
+      sort: "asc",
+      width: 270
+    },
+    {
+      label: "Active",
+      field: "inactive",
+      sort: "asc",
+      width: 270
+    },
+    {
+      label: "Branches",
+      field: "total_branches",
+      sort: "asc",
+      width: 270
+    },
+    {
+      label: "Accounts",
+      field: "total_users",
+      sort: "asc",
+      width: 270
+    },
+    {
+      label: "Actions",
+      field: "action_btns",
       sort: "asc",
       width: 270
     }
   ],
   rows: [
     {
-      name: "Tiger Nixon",
-      name: "Tiger Nixon",
-      date: "2011/04/25"
+      name: "Default Text",
+      name: "Default Text",
+      name: "Default Text",
+      name: "Default Text",
+      name: "Default Text",
+      name: "Default Text",
+      name: "Default Text",
+      name: "Default Text",
+      date: "Default Text"
     }
   ]
 };

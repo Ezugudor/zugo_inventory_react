@@ -12,39 +12,37 @@ const buildStyle = (props, tab) => {
 export const InboxHeader = props => (
   <div className={Style.inboxHeader}>
     <div
-      className={`${buildStyle(props, "pending")} ${Style.firstTab}`}
-      onClick={() => props.switchTab("pending")}
+      className={`${buildStyle(props, "all")} ${Style.firstTab}`}
+      onClick={() => props.switchTab("all")}
     >
       <div className={Style.tabContent}>
-        Pending for Initiators
+        All Business
         <span className={`${Style.inboxTabIcon} ${Style.unreadIcon}`}>
-          {props.pendingCount}
+          {props.allBusinessCount}
         </span>
       </div>
       <div className={Style.shape}></div>
     </div>
     <div
-      className={`${buildStyle(props, "partiallyProcessed")} ${
-        Style.secondTab
-      }`}
-      onClick={() => props.switchTab("partiallyProcessed")}
+      className={`${buildStyle(props, "approved")} ${Style.secondTab}`}
+      onClick={() => props.switchTab("approved")}
     >
       <div className={Style.tabContent}>
-        Pending for Approvers
+        Subscribed
         <span className={`${Style.inboxTabIcon} ${Style.unreadIcon}`}>
-          {props.partiallyProcessedCount}
+          {props.approvedBusinessCount}
         </span>
       </div>
       <div className={`${Style.shape} ${Style.shape2ndTab}`}></div>
     </div>
     <div
-      className={`${buildStyle(props, "processed")} ${Style.thirdTab}`}
-      onClick={() => props.switchTab("processed")}
+      className={`${buildStyle(props, "inactive")} ${Style.thirdTab}`}
+      onClick={() => props.switchTab("inactive")}
     >
       <div className={Style.tabContent}>
-        Processed
+        Inactive Business
         <span className={`${Style.inboxTabIcon} ${Style.unreadIcon}`}>
-          {props.processedCount}
+          {props.inactiveBusinessCount}
         </span>
       </div>
       <div className={`${Style.shape} ${Style.shape3rdTab}`}></div>

@@ -1,4 +1,4 @@
-export * from "./responses";
+export * from "./businesses";
 export * from "./business";
 export * from "./forms";
 export * from "./file";

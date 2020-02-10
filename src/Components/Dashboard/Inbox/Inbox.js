@@ -8,7 +8,9 @@ import { data } from "../data";
 import { dataStruct } from "../tableDataStructure";
 import Style from "./Inbox.module.css";
 import { JQDatatable } from "../../../plugins";
-import { DatePicker, InboxPagination } from "../../Utils";
+import { DatePicker, InboxPagination, Toggle } from "../../Utils";
+import { White, Red } from "../../Utils/Buttons";
+import { ActionBtns } from "./ActionBtns";
 const moment = require("moment");
 export class Class extends Component {
   state = {
@@ -23,9 +25,9 @@ export class Class extends Component {
 export const Inbox = props => (
   <section>
     <InboxHeader
-      partiallyProcessedCount={props.partiallyProcessed.count}
-      processedCount={props.processed.count}
-      pendingCount={props.pending.count}
+      allBusinessCount={props.allBusiness.count}
+      approvedBusinessCount={props.approvedBusiness.count}
+      inactiveBusinessCount={props.inactiveBusiness.count}
       selectedTab={props.tabToShow}
       switchTab={props.switchTab}
     />
@@ -35,139 +37,106 @@ export const Inbox = props => (
 const formatDate = rawDate => {
   return moment(rawDate).format("DD-MM-YYYY");
 };
+
+const getBusinessInfo = (id, businesses) => {
+  const businessInfo = businesses.find(business => id == business._id);
+  const { name, logoUrl, description, color, approved, deleted } = businessInfo;
+  return { name, logoUrl, description, color, approved, deleted };
+};
+let Bizz;
 const showResponse = props => {
   switch (props.tabToShow) {
-    case "partiallyProcessed":
-      const { partiallyProcessed } = props;
-      const ppData = partiallyProcessed.result.map(res => {
-        const { branche, id, shortId, createdAt } = res;
-        const formName = res.form.name;
-        const note = getNote(res);
-        const rowData = {
-          name: formName,
-          notyte: note ? (
-            <span className={Style.commentCont}>
-              <i
-                className={`ion ion-chatbubble-working ${Style.commentIcon}`}
-              ></i>
-              <span className={Style.commentText}>{note}</span>
-            </span>
-          ) : (
-            note
-          ),
-          id: shortId,
-          branch: branche,
-          date: formatDate(createdAt),
-          clickEvent: () => {
-            window.location.href = `/response/partiallyProcessed/${id}`;
-          }
-        };
+    case "all":
+      const { allBusiness: ab1 } = props;
+      Bizz = ab1;
+      break;
 
-        return rowData;
-      });
-      const ppDataS = { ...dataStruct };
-      ppDataS.rows = ppData;
-      ppDataS.title = `<i class="${Style.tableTitleIcon} ion ion-ios-speedometer-outline"></i> Dashboard`;
-      ppDataS.newBtn = (
-        <DatePicker
-          handleDateChange={props.handleDateChange}
-          filterResponse={props.filterResponse}
-          startDate={props.startDate}
-          endDate={props.endDate}
-        />
-      );
+    case "approved":
+      const { approvedBusiness: ab2 } = props;
+      Bizz = ab2;
+      break;
 
-      return <JQDatatable hover data={ppDataS} />;
-
-    case "processed":
-      const { processed } = props;
-      const prData = processed.result.map(res => {
-        const { branche, id, shortId, createdAt } = res;
-        const formName = res.form.name;
-        const note = getNote(res);
-        const rowData = {
-          name: formName,
-          notyte: note ? (
-            <span className={Style.commentCont}>
-              <i
-                className={`ion ion-chatbubble-working ${Style.commentIcon}`}
-              ></i>
-              <span className={Style.commentText}>{note}</span>
-            </span>
-          ) : (
-            note
-          ),
-          id: shortId,
-          branch: branche,
-          date: formatDate(createdAt),
-          clickEvent: () => {
-            window.location.href = `/response/processed/${id}`;
-          }
-        };
-
-        return rowData;
-      });
-      const prDataS = { ...dataStruct };
-      prDataS.rows = prData;
-      prDataS.title = `<i class="${Style.tableTitleIcon} ion ion-ios-speedometer-outline"></i> Dashboard`;
-      prDataS.newBtn = (
-        <DatePicker
-          handleDateChange={props.handleDateChange}
-          filterResponse={props.filterResponse}
-          startDate={props.startDate}
-          endDate={props.endDate}
-        />
-      );
-
-      return <JQDatatable hover data={prDataS} />;
-
-    case "pending":
-      const clickRow = id => {
-        window.location.href = `/response/pending/${id}`;
-      };
-      const { pending } = props;
-      const datta = pending.result.map(res => {
-        const { branche, id, shortId, createdAt } = res;
-        const formName = res.form.name;
-        const note = getNote(res);
-        const rowData = {
-          name: formName,
-          notyte: note ? (
-            <span className={Style.commentCont}>
-              <i
-                className={`ion ion-chatbubble-working ${Style.commentIcon}`}
-              ></i>
-              <span className={Style.commentText}>{note}</span>
-            </span>
-          ) : (
-            note
-          ),
-          id: shortId,
-          branch: branche,
-          date: formatDate(createdAt),
-          clickEvent: () => {
-            window.location.href = `/response/pending/${id}`;
-          }
-        };
-
-        return rowData;
-      });
-      const dataS = { ...dataStruct };
-      dataS.rows = datta;
-      dataS.title = `<i class="${Style.tableTitleIcon} ion ion-ios-speedometer-outline"></i> Dashboard`;
-      dataS.newBtn = (
-        <DatePicker
-          handleDateChange={props.handleDateChange}
-          filterResponse={props.filterResponse}
-          startDate={props.startDate}
-          endDate={props.endDate}
-        />
-      );
-      return <JQDatatable hover data={dataS} />;
+    case "inactive":
+      const { inactiveBusiness: ab3 } = props;
+      Bizz = ab3;
+      break;
 
     default:
-      return null;
+      const { allBusiness: ab4 } = props;
+      Bizz = ab4;
+      break;
   }
+
+  const ppData = Bizz.result.map((res, index) => {
+    const {
+      id,
+      name,
+      logo_url,
+      approved,
+      total_branches,
+      total_forms,
+      total_responses,
+      total_users,
+      color,
+      inactive,
+      business_info
+    } = res;
+    const rowData = {
+      name: <span style={{ color }}>{name}</span>,
+      approved: (
+        <div className={`${Style.toggleApprove}`}>
+          <Toggle
+            trigger={props.promptSelectorApprove}
+            active={approved}
+            id={id}
+            keyy={index}
+            group="approve"
+          />
+        </div>
+      ),
+      inactive: (
+        <div className={`${Style.toggleApprove}`}>
+          <Toggle
+            trigger={props.promptSelectorActivate}
+            active={!inactive}
+            id={id}
+            keyy={index}
+            group="inactive"
+          />
+        </div>
+      ),
+      id,
+      total_branches,
+      color,
+      total_forms,
+      total_responses,
+      total_users,
+      logo: <img src={logo_url} className={Style.bizLogo} />,
+      clickEvent: () => {
+        window.location.href = `/`;
+      },
+      action_btns: (
+        <ActionBtns
+          businessInfo={getBusinessInfo(id, business_info)}
+          populateEditBusiness={props.populateEditBusiness}
+          id={id}
+        />
+      )
+    };
+
+    return rowData;
+  });
+  const ppDataS = { ...dataStruct };
+  ppDataS.rows = ppData;
+  ppDataS.title = `<i class="${Style.tableTitleIcon} ion ion-ios-list-outline"></i> Businesses`;
+  ppDataS.newBtn = (
+    <Red className={Style.btn} click={props.toggleCreateBusiness}>
+      <i className={`ion ion-ios-plus ${Style.controlIcon}`}></i>
+      <span className={Style.btnText}> New Business</span>
+    </Red>
+  );
+
+  return <JQDatatable hover data={ppDataS} />;
 };
 
 Inbox.ropTypes = {

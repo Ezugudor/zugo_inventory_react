@@ -1,4 +1,4 @@
-import { responses, workspace, form, user, app, file } from "./reducers";
+import { businesses, workspace, form, user, app, file } from "./reducers";
 import { combineReducers, createStore, applyMiddleware } from "redux";
 import { saveStateToStorage, loadStateFromStorage } from "../utils";
 import thunkMiddleware from "redux-thunk";
@@ -7,7 +7,7 @@ import { business } from "./reducers";
 const reducers = combineReducers({
   uploadedFile: file,
   workspace,
-  responses,
+  businesses,
   business,
   form,
   user,

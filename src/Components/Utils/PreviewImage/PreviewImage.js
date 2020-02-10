@@ -9,8 +9,8 @@ export const PL = props => {
       {props.imageURL ? (
         <img src={props.imageURL} alt="signature" className={styles.img} />
       ) : (
-        <p>
-          <strong>No new Image yet.</strong>
+        <p className={props.styles}>
+          <strong>{props.text || "No new Image yet."}</strong>
         </p>
       )}
     </div>

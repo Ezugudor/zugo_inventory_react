@@ -1,6 +1,9 @@
-import { SAVE_PROCESSED_RESPONSES, SAVE_PENDING_RESPONSES } from "./types";
+import {
+  SAVE_ALL_BUSINESSES,
+  SAVE_APPROVED_BUSINESSES,
+  SAVE_INACTIVE_BUSINESSES
+} from "./types";
 import { setNotificationMessage, startNetworkRequest } from "./app";
-import { SAVE_PARTIALLYPROCESSED_RESPONSES } from "./types";
 import { SwypPartnerApi } from "../../core/api";
 import { UPDATE_RESPONSE_NOTE } from "./types";
 import { stopNetworkRequest } from "./app";
@@ -89,11 +92,11 @@ const multipleRequest = (urls = []) => {
   return dispatch => {
     dispatch(startNetworkRequest());
     Promise.all(urls)
-      .then(([pro, pen, partial]) => {
+      .then(([all, approved, inactive]) => {
         dispatch(stopNetworkRequest());
-        dispatch(savePartillayProcessed(partial.data));
-        dispatch(saveProcessedResponses(pro.data));
-        dispatch(savePendingResponse(pen.data));
+        dispatch(saveAllBusinesses(all.data));
+        dispatch(saveApprovedBusinesses(approved.data));
+        dispatch(saveInactiveBusinesses(inactive.data));
       })
       .catch(err => {
         handleError(err, dispatch);
@@ -101,13 +104,13 @@ const multipleRequest = (urls = []) => {
   };
 };
 
-const savePartillayProcessed = data => ({
-  type: SAVE_PARTIALLYPROCESSED_RESPONSES,
+const saveAllBusinesses = data => ({
+  type: SAVE_ALL_BUSINESSES,
   data
 });
 
-const saveProcessedResponses = data => ({
-  type: SAVE_PROCESSED_RESPONSES,
+const saveApprovedBusinesses = data => ({
+  type: SAVE_APPROVED_BUSINESSES,
   data
 });
 
@@ -117,7 +120,7 @@ const updateResponse = (data, type) => ({
   stateType: type
 });
 
-const savePendingResponse = data => ({
-  type: SAVE_PENDING_RESPONSES,
+const saveInactiveBusinesses = data => ({
+  type: SAVE_INACTIVE_BUSINESSES,
   data
 });

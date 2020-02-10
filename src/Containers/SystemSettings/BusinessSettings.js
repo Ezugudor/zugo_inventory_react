@@ -3,7 +3,6 @@ import { BusinessSettingsView } from "../../Components/BusinessSettings";
 import {
   getUploadStatus,
   getBusinessId,
-  getBusinessById,
   getBusinessColor,
   getProgressIndicator
 } from "../../store/selectors";
@@ -19,21 +18,12 @@ class Class extends Component {
     businessDescCount: 200,
     loading: 0,
     showNotification: false,
-    logoUrl: "",
-    businessDetails: {},
-    newBusinessDetails: {}
+    logoUrl: ""
   };
 
   componentDidMount() {
     const { businessColor } = this.props;
     themeMaker(businessColor);
-
-    // Hydrate editDetails
-    const details = {
-      ...this.state.businessDetails,
-      ...this.props.businessById
-    };
-    this.setState({ businessDetails: details });
   }
 
   popupTimer = props => {
@@ -73,9 +63,7 @@ class Class extends Component {
     const fileName = `${this.props.businessSlug}logo`;
     formData.append("logo", file);
     this.props.uploadLogo(formData, fileName, this).then(() => {
-      const bizDetails = { ...this.state.businessDetails };
-      bizDetails.logo_url = this.props.uploadedFile.imageUrl;
-      this.setState({ businessDetails: bizDetails });
+      this.setState({ logoUrl: this.props.uploadedFile.imageUrl });
     });
   };
 
@@ -83,31 +71,15 @@ class Class extends Component {
    * send bank logoUrl and description data to the backend server
    */
   updateBusinessDetails = () => {
-    if (!this.props.uploadedFile && this.props.uploadStatus == "uploading") {
+    if (!this.props.uploadedFile) {
       return alert("Try again when logo is done processing");
     }
-    const {
-      color,
-      description,
-      logo_url,
-      name,
-      id
-    } = this.state.businessDetails;
     const details = {
-      color,
-      description,
-      logo_url,
-      name,
-      id
+      description: this.state.businessDescription,
+      logoUrl: this.props.uploadedFile.imageUrl,
+      id: this.props.businessId
     };
     this.props.updateDetails(details, this.props.history);
-  };
-
-  handleInputChange = (e, type) => {
-    const value = e.target.value;
-    const bizDetails = { ...this.state.businessDetails };
-    bizDetails[type] = value;
-    this.setState({ businessDetails: bizDetails });
   };
 
   render() {
@@ -123,25 +95,19 @@ class Class extends Component {
         showNotification={this.state.showNotification}
         popupTimer={this.popupTimer}
         showLoading={this.props.progress}
-        businessDetails={this.state.businessDetails}
-        handleInputChange={this.handleInputChange}
       />
     );
   }
 }
 
-const mapStateToProps = (state, props) => {
-  const { id } = props.match.params;
-  return {
-    uploadedFile: getUploadedFileData(state),
-    businessSlug: getBusinessSlug(state),
-    uploadStatus: getUploadStatus(state),
-    businessId: getBusinessId(state),
-    businessById: getBusinessById(state, id),
-    businessColor: getBusinessColor(state),
-    progress: getProgressIndicator(state)
-  };
-};
+const mapStateToProps = state => ({
+  uploadedFile: getUploadedFileData(state),
+  businessSlug: getBusinessSlug(state),
+  uploadStatus: getUploadStatus(state),
+  businessId: getBusinessId(state),
+  businessColor: getBusinessColor(state),
+  progress: getProgressIndicator(state)
+});
 
 export const BusinessSettings = connect(
   mapStateToProps,

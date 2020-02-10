@@ -31,14 +31,7 @@ export const AdminMiniSideNav = props => (
               Dashboard
             </a>
           </li>
-          <li className={Style.NavItem}>
-            <a className={getClassName(props, "formType")} href="/formtypes">
-              <i
-                className={`ion ion-ios-list-outline ${Style.sidebarIcon}`}
-              ></i>
-              <span className={Style.left_2}>Form Types</span>
-            </a>
-          </li>
+
           {/* <li className={Style.NavItem}>
             <a className={getClassName(props, "team")} href="/team">
               <i

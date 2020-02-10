@@ -84,7 +84,9 @@ const showUploadIndicator = (uploadStatus, _this) => {
   if (!uploadStatus)
     return (
       <div>
-        <p className={style.uploadInstruction}>{getPlaceholder(_this)}</p>
+        <p className={`${style.uploadInstruction} ${_this.props.style}`}>
+          {getPlaceholder(_this)}
+        </p>
         {/* <label htmlFor="logo" className={style.inputLabel}>
           Click to upload
         </label> */}

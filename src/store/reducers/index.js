@@ -1,5 +1,5 @@
 export * from "./workspace";
-export * from "./responses";
+export * from "./businesses";
 export * from "./business";
 export * from "./forms";
 export * from "./user";

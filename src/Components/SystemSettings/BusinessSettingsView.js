@@ -23,35 +23,11 @@ export const BusinessSet = props => {
     <AdminLayout pageName="settings">
       <div className={Style.BusinessSettings}>
         <section className={Style.uploadSection}>
-          <div>
-            <label>Business Name</label>
-            <div>
-              <input
-                type="text"
-                placeholder="Business Name"
-                className={`form-control`}
-                value={props.businessDetails.name}
-                onChange={e => props.handleInputChange(e, "name")}
-              />
-            </div>
-          </div>
-          <div>
-            <label>Business Color</label>
-            <div>
-              <input
-                type="color"
-                placeholder="Business Color"
-                className={`form-control`}
-                value={props.businessDetails.color}
-                onChange={e => props.handleInputChange(e, "color")}
-              />
-            </div>
-          </div>
-          <label className={Style.heading}>Upload Logo</label>
+          <h3 className={Style.heading}>Upload Logo</h3>
           <div className={Style.dzPrevCont}>
             <div className={Style.prevCont}>
               <div className={Style.prevContInside}>
-                <PreviewLogo logoUrl={props.businessDetails.logo_url} />
+                <PreviewLogo logoUrl={props.logoUrl} />
               </div>
             </div>
             <div className={Style.dzCont}>
@@ -78,10 +54,9 @@ export const BusinessSet = props => {
             <textarea
               maxLength={200}
               onChange={props.changeDescription}
-              value={props.businessDetails.description}
+              value={bizDesc}
               className={Style.textArea}
               placeholder="Business Description"
-              onChange={e => props.handleInputChange(e, "description")}
             />
           </div>
         </section>

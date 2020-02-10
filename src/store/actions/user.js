@@ -22,7 +22,7 @@ const updateBusiness = data => ({ type: UPDATE_BUSINESS, data });
 export const loginUser = (loginDetails, history) => {
   return dispatch => {
     dispatch(startNetworkRequest());
-    SwypPartnerApi.post("user/login", loginDetails)
+    SwypPartnerApi.post("admin/login", loginDetails)
       .then(res => {
         dispatch(stopNetworkRequest());
         dispatch(storeUserData(res.data));

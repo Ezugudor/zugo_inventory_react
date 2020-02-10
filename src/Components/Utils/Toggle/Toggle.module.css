@@ -63,7 +63,7 @@
 }
 
 .input:checked ~ .toggleButton {
-  background-color: var(--color3);
+  background-color: var(--color2);
 }
 
 .input:disabled ~ .toggleButton {
