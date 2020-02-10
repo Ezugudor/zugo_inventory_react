@@ -76,20 +76,23 @@ export const DashboardView = props => {
           togglePrompt={props.toggleApproved}
           showPrompt={props.showApproved}
           form={"props.form"}
-          confirmAction={props.confirmPromptApprove}
+          type="approve"
+          confirmAction={props.confirmPrompt}
         />
         <Prompt
           title="Disapprove Business"
           togglePrompt={props.toggleDisapproved}
           showPrompt={props.showDisapproved}
           form={"props.form"}
-          confirmAction={props.confirmPromptApprove}
+          type="approve"
+          confirmAction={props.confirmPrompt}
         />
         <Prompt
           title="Activate this Business"
           togglePrompt={props.toggleActive}
           showPrompt={props.showActive}
           form={props.form}
+          type="activate"
           confirmAction={props.confirmPrompt}
         />
         <Prompt
@@ -97,6 +100,7 @@ export const DashboardView = props => {
           togglePrompt={props.toggleInactive}
           showPrompt={props.showInactive}
           form={props.form}
+          type="activate"
           confirmAction={props.confirmPrompt}
         />
       </div>

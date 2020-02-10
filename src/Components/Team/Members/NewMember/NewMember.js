@@ -74,22 +74,6 @@ export const NewMember = props => (
           <option value="super_approver">Super Approver</option>
         </select>
       </div>
-      <div className={styles.inputBox}>
-        <select
-          className={[styles.input, "branch"].join(" ")}
-          id="branch"
-          onChange={e =>
-            props.setNewMemberDetail("branch", e.target.value, e.target)
-          }
-        >
-          <option>Select Branch</option>
-          {props.branches.map((branch, index) => (
-            <option value={branch.name} key={index}>
-              {branch.name}
-            </option>
-          ))}
-        </select>
-      </div>
 
       <div className={styles.dzPrevCont}>
         <div className={styles.prevCont}>

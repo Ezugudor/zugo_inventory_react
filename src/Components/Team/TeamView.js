@@ -92,7 +92,6 @@ const showTeamMembers = props => {
       name: name.charAt(0).toUpperCase() + name.slice(1),
       role: role.charAt(0).toUpperCase() + role.slice(1),
       email,
-      branch: branch.charAt(0).toUpperCase() + branch.slice(1),
       phone,
       id: shortId,
       created: formatDate(created),
@@ -110,19 +109,10 @@ const showTeamMembers = props => {
     };
 
     return rowData;
-
-    // <InboxItem
-    //   formName={res.form.name}
-    //   date={res.createdAt}
-    //   note={getNote(res)}
-    //   type="pending"
-    //   key={res.id}
-    //   id={res.id}
-    // />
   });
   const ppDataS = { ...dataStruct };
   ppDataS.rows = membersD;
-  ppDataS.title = `<i class="${Styles.tableTitleIcon} ion ion-ios-people"></i> Team`;
+  ppDataS.title = `<i class="${Styles.tableTitleIcon} ion ion-ios-people"></i> <span class="${Styles.tableTitle}">Managers</span>`;
   ppDataS.newBtn = (
     <White
       className={Styles.btn}

@@ -10,23 +10,7 @@ export const ChangeMember = props => (
     <section id={props.editMemberFormId} className={styles.section}>
       {console.log("is ita", props.editMemberFormId)}
       <h3 className={styles.text}>Edit User</h3>
-      <div className={styles.inputBox}>
-        <select
-          onChange={e =>
-            props.setUpdateUserDetail("branch", e.target.value, e.target)
-          }
-          value={props.editMember.branch}
-          className={[styles.input, "branch"].join(" ")}
-          id="branch"
-        >
-          <option>Select Branch</option>
-          {props.branches.map((branch, index) => (
-            <option value={branch.name} key={index}>
-              {branch.name}
-            </option>
-          ))}
-        </select>
-      </div>
+
       <div className={styles.inputBox}>
         {console.log("checking role", props.editMember.role)}
         <select

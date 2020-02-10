@@ -97,6 +97,52 @@ export const completeSignup = (loginDetails, history, _this) => {
 };
 
 /**
+ * handle business manager's create new team member interaction with bankend service
+ * @param {object} details credentails of new user to be created
+ */
+export const createNewMember = details => {
+  return dispatch => {
+    dispatch(startNetworkRequest());
+    SwypPartnerApi.post("admin/add", details)
+      .then(res => {
+        dispatch(stopNetworkRequest());
+        dispatch(updateBusiness(res.data));
+        dispatch(
+          setNotificationMessage(
+            "User Added Successfully",
+            "success",
+            "Success !"
+          )
+        );
+      })
+      .catch(err => handleError(err, dispatch));
+  };
+};
+
+/**
+ * Handle business manage's change of user account information
+ * @param {object} details payload of info for the server
+ */
+export const updateUser = details => {
+  return dispatch => {
+    dispatch(startNetworkRequest());
+    SwypPartnerApi.put("admin/update", details)
+      .then(res => {
+        dispatch(stopNetworkRequest());
+        dispatch(updateBusiness(res.data));
+        dispatch(
+          setNotificationMessage(
+            "User info updated Successfully",
+            "success",
+            "Success !"
+          )
+        );
+      })
+      .catch(err => handleError(err, dispatch));
+  };
+};
+
+/**
  * handle business manager's delete new team member interaction with bankend service
  * @param {object} member credentails of user to be delete
  */

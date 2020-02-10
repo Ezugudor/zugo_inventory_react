@@ -25,4 +25,9 @@ export const themeMaker = hexColor => {
   let color5_L = color.getLValue() + 57;
   let color5 = color.getColor(color5_S, color5_L);
   document.documentElement.style.setProperty("--color5", color5);
+
+  let color6_S = color.getSValue() - 5;
+  let color6_L = color.getLValue() + 35;
+  let color6 = color.getColor(color6_S, color6_L);
+  document.documentElement.style.setProperty("--color6", color6);
 };

@@ -25,12 +25,6 @@ export const dataStruct = {
       width: 270
     },
     {
-      label: "Branch",
-      field: "branch",
-      sort: "asc",
-      width: 270
-    },
-    {
       label: "Phone",
       field: "phone",
       sort: "asc",

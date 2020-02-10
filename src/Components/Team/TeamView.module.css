@@ -19,12 +19,15 @@
   position: relative;
   top: -1px;
 }
+.tableTitle {
+  margin-left: 55px;
+}
 .tableTitleIcon {
-  color: #fa7a06;
-  font-size: 30px;
-  position: relative;
-  left: -10px;
-  top: 3px;
+  color: var(--color6);
+  font-size: 42px;
+  position: absolute;
+  left: 20px;
+  top: -2px;
 }
 
 input.invalid,

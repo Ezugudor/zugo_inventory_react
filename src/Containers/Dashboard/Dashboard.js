@@ -3,7 +3,8 @@ import {
   filterByDate,
   registerBusiness,
   uploadLogo,
-  approveBusiness
+  approveBusiness,
+  activateBusiness
 } from "../../store/actions";
 import { DashboardView } from "../../Components/Dashboard";
 import React, { Component } from "react";
@@ -121,9 +122,6 @@ class Class extends Component {
     themeMaker(businessColor);
     this.props.fetchBusinessByStatus();
   }
-  componentDidUpdate() {
-    console.log("updateingg");
-  }
 
   popupTimer = props => {
     if (props.closeTime) {
@@ -167,7 +165,7 @@ class Class extends Component {
   /**
    * perform the correct publish action
    */
-  confirmPromptApprove = () => {
+  confirmPrompt = type => {
     const user = this.props.currentUser;
     const { id: businessId, state } = this.state.selectedRow;
     const details = { user, state };
@@ -189,7 +187,8 @@ class Class extends Component {
       default:
         break;
     }
-    this.props.approveBusiness(businessId, details);
+    if (type == "approve") this.props.approveBusiness(businessId, details);
+    if (type == "activate") this.props.activateBusiness(businessId, details);
   };
 
   /**
@@ -545,7 +544,7 @@ class Class extends Component {
         promptSelectorApprove={this.promptSelectorApprove}
         promptSelectorActivate={this.promptSelectorActivate}
         //confirm prompt
-        confirmPromptApprove={this.confirmPromptApprove}
+        confirmPrompt={this.confirmPrompt}
       />
     );
   }
@@ -568,6 +567,7 @@ export const Dashboard = connect(
   {
     fetchBusinessByStatus,
     approveBusiness,
+    activateBusiness,
     filterByDate,
     registerBusiness,
     uploadLogo

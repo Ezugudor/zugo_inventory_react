@@ -16,7 +16,7 @@ export const Prompt = props => (
       </h3>
       <div className={styles.controls}>
         <White click={e => props.togglePrompt(props.promptState)}>Cancel</White>
-        <Red click={props.confirmAction}>Confirm</Red>
+        <Red click={e => props.confirmAction(props.type)}>Confirm</Red>
       </div>
     </section>
   </Modal>
