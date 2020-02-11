@@ -36,7 +36,7 @@ export const AdminSideNav = props => (
               <i
                 className={`ion ion-ios-people-outline ${Style.sidebarIcon}`}
               ></i>
-              Users
+              Admins
             </a>
           </li>
           {/* <li className={Style.NavItem}>

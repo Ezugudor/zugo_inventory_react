@@ -46,7 +46,6 @@ class Class extends Component {
       lastname: "",
       email: "",
       phone: "",
-      branch: "",
       imageURL: "",
       formId: "edit-member"
     }
@@ -119,7 +118,6 @@ class Class extends Component {
       !state.email.match(/^.+@[a-z]+\..+/) ||
       !state.firstname ||
       !state.lastname ||
-      !state.branch ||
       !state.phone
     ) {
       const mInputs = state;
@@ -136,10 +134,7 @@ class Class extends Component {
             elem = document.querySelector(`#${state.formId} input.phone`);
           } else if (aa == "role") {
             elem = document.querySelector(`#${state.formId} select.role`);
-          } else if (aa == "branch") {
-            elem = document.querySelector(`#${state.formId} select.branch`);
           }
-
           elem.classList.add("invalid");
         }
       }
@@ -162,21 +157,15 @@ class Class extends Component {
       alert("Required field is not set");
       return;
     }
-    const { email, phone, role, branch } = this.state.newMember;
+    const { email, phone, role } = this.state.newMember;
     const { firstname, lastname, imageURL } = this.state.newMember;
-    const origin = `${window.location.origin}/completesignup`;
-    const namee = `${firstname} ${lastname}`;
     const details = {
       email,
-      name: namee,
       firstname,
       lastname,
       phone,
       role,
-      origin,
-      branch,
-      imageURL,
-      business: this.props.businessId
+      imageURL
     };
     this.toggleCreateMember();
     this.props.createNewMember(details);
@@ -319,7 +308,6 @@ class Class extends Component {
       return alert("You don't have access to perform this operation");
     }
     const {
-      branch,
       firstname,
       lastname,
       email,
@@ -331,24 +319,19 @@ class Class extends Component {
       alert("You don't have the permission to change this account", "error");
       return this.toggleUpdateUser();
     }
-    if (
-      !branch &&
-      !firstname &&
-      !phone &&
-      !lastname &&
-      !email &&
-      role == "worker"
-    ) {
+    if (!firstname && !phone && !lastname && !email && role == "worker") {
       return alert("You have not changed anything", "error");
     }
     const {
       user: U,
       formId,
       created: C,
+      shortId,
+      name: N,
       ...others
     } = this.state.userEditDetails;
     this.toggleUpdateUser();
-    others.business = this.props.businessId;
+    // others.business = this.props.businessId;
     this.props.updateUser(others);
   };
 

@@ -149,7 +149,7 @@ export const updateUser = details => {
 export const deleteMember = member => {
   return dispatch => {
     dispatch(startNetworkRequest());
-    SwypPartnerApi.delete("user/delete", {
+    SwypPartnerApi.delete("admin/delete", {
       data: { email: member.email }
     })
       .then(res => {
@@ -177,7 +177,7 @@ export const deleteMember = member => {
 export const requestPasswordReset = details => {
   return dispatch => {
     dispatch(startNetworkRequest());
-    SwypPartnerApi.post("user/requestpasswordreset", details)
+    SwypPartnerApi.post("admin/requestpasswordreset", details)
       .then(res => {
         dispatch(stopNetworkRequest());
         dispatch(
@@ -193,7 +193,7 @@ export const requestPasswordReset = details => {
 export const resetPassword = (details, history) => {
   return dispatch => {
     dispatch(startNetworkRequest());
-    SwypPartnerApi.post("user/resetpassword", details)
+    SwypPartnerApi.post("admin/resetpassword", details)
       .then(res => {
         dispatch(stopNetworkRequest());
         if (res.data.updated) {

@@ -23,10 +23,7 @@ export const ChangeMember = props => (
           }
         >
           <option>Select Role</option>
-          <option value="initiator">Initiator</option>
-          <option value="super_initiator">Super Initiator</option>
-          <option value="approver">Approver</option>
-          <option value="super_approver">Super Approver</option>
+          <option value="moderator">Moderator</option>
           <option value="admin">Admin</option>
         </select>
       </div>
