@@ -1,0 +1,14 @@
+@value Variables: "../../../../styles/Variables.css";
+@value tertiary-color-light from Variables;
+
+.inboxItem {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  padding: 0 10rem;
+  background-color: tertiary-color-light;
+}
+
+.responseLink {
+  color: black;
+}

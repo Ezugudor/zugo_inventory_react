@@ -1,0 +1,6 @@
+@value Variables: "../../../styles/Variables.css";
+@value white-color, typeform-border-color from Variables;
+
+.StatItems {
+  margin-top: 80px;
+}

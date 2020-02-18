@@ -5,7 +5,7 @@ import React from "react";
 export const AuthHeader = props => (
   <header className={Style.Header}>
     <div className={Style.LogoBox}>
-      <img className={Style.Logo} src={Logo} alt="Swyp Logo" />
+      <a href="index" className={Style.Logo}></a>
     </div>
   </header>
 );

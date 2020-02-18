@@ -11,24 +11,43 @@ export const PrivateHeader = props => (
     {/* <div className={Style.LogoBox}>
       <Logo />
     </div> */}
-    <div className={Style.NavBox}>
-      <Nav>
-        <NavItem>
-          <img
-            src={notificationIcon}
-            className={Style.Icon}
-            alt="notification"
-          />
-        </NavItem>
-        <NavItem onClick={logoutUser}>
-          <img
-            src={logoutIcon}
-            className={`${Style.Icon} ${Style.LogoutIcon}`}
-            alt="Logout"
-          />
-          <span>Logout</span>
-        </NavItem>
-      </Nav>
+
+    <div className={`${Style.NavBox} ${Style.TopHeader}`}>
+      <div className={`${Style.PageTitle} pull-left`}>
+        {props.pageName}{" "}
+        <span className={Style.PageSubtitle}>{props.pageSubtitle}</span>
+      </div>
+      <div className={`${Style.UserMenu} pull-right`}>
+        <span className={`${Style.UserTag} bold`}>OB</span>
+        <span className={Style.UserMenuName}>
+          Obinna Nwamuo <span className={`mdi mdi-chevron-down`}></span> <br />
+          <span className={`bold`}>Admin</span>
+        </span>
+        <ul className={Style.UserMenuList}>
+          <li>
+            <a href="admin">
+              <span className={`mdi mdi-settings-outline`}></span> Settings
+            </a>
+          </li>
+          <li>
+            <a href="login" onClick={logoutUser}>
+              <span className={`mdi mdi-power`}></span> Logout
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div className={Style.HeaderBtn}>
+        <span
+          className={`${Style.PrimaryBtn} tog_modal3`}
+          onClick={e => {
+            props.toggleGeneralReport();
+          }}
+        >
+          <span className={`${Style.BtnIcon} mdi mdi-plus`}></span> Generate
+          Report
+        </span>
+      </div>
     </div>
   </header>
 );

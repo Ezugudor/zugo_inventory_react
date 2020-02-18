@@ -1,0 +1,24 @@
+.TableTitle {
+  color: red;
+}
+.TableSearch {
+  width: 60px;
+  /* float:left; */
+}
+.TableSearch input {
+  width: 60px;
+  background: blue;
+  /* float:left; */
+}
+.tf-filter {
+}
+/* .tf-filter input {
+  background: #eee !important;
+  width: 15vw !important;
+} */
+.tf-table {
+  margin: 0;
+}
+.tf-table label {
+  color: red !important;
+}

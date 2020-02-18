@@ -16,6 +16,17 @@
 }
 
 .Logo {
-  height: 4rem;
-  margin-top: small-right-gutter;
+  float: left;
+  position: fixed;
+  background-size: 50%;
+  width: 20vw;
+  height: 5em;
+  left: 0;
+  top: 0;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: white;
+  z-index: 1000000000000000;
+  box-shadow: 0 0 50px 50px white;
+  background-image: url("/images/logo/logo.png");
 }

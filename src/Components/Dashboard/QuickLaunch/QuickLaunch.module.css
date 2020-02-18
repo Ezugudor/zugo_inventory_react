@@ -1,0 +1,68 @@
+@value Variables: "../../../styles/Variables.css";
+@value white-color, typeform-border-color from Variables;
+
+/**********Quick Button**********/
+.QuickBtn {
+  position: fixed;
+  bottom: 1em;
+  right: 1em;
+  width: 3em;
+  height: 3em;
+  line-height: 3em;
+  border-radius: 50%;
+  background: var(--blue);
+  box-shadow: 0 4px 20px rgba(41, 90, 224, 0.1);
+  z-index: 10000000;
+  text-align: center;
+  font-size: 1.5em;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0, 1);
+  transform-origin: top;
+}
+
+.QuickBtn:hover {
+  box-shadow: 0 4px 20px rgba(41, 90, 224, 0.5);
+}
+
+.QuickLinks {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 0.6em;
+  line-height: 1;
+  white-space: nowrap;
+  text-align: right;
+  max-width: 8em;
+  transform: translateY(-10em);
+  padding-bottom: 2em;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0, 1);
+}
+
+.QuickBtn:hover .QuickLinks {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-12em);
+}
+
+.QuickLinks li {
+  margin-bottom: 1em;
+  display: block;
+  float: right;
+}
+
+.QuickLinks li a {
+  background: var(--blue);
+  padding: 1em;
+  border-radius: 50px;
+  float: left;
+  color: white;
+  text-transform: capitalize;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0, 1);
+}
+
+.QuickLinks li a:hover {
+  background: var(--purple);
+}

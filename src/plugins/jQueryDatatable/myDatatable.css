@@ -308,7 +308,7 @@ select {
   right: 46px !important;
   top: 0px;
   background: #eb1761;
-  background: var(--color1);
+  background: var(--blue);
   /*background: #ddd;*/
   padding: 3px 10px 4px;
   color: #fff;

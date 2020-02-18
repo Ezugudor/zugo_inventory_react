@@ -4,5 +4,6 @@
 .White {
   background-color: white-color;
   color: secondary-color;
-  color: var(--color1);
+  color: var(--blue);
+  font-weight: bold;
 }

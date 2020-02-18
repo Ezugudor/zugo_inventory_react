@@ -14,10 +14,20 @@
   --color6: #ccc;
   --color7: #ccc;
   --color8: #ccc;
+  --white: #ffffff;
+  --black: #000000;
+  --blue: #0d6eff;
+  --dark-light: #424455;
+  --red: #ff3b3f;
+  --green: #09e99d;
+  --grey: #ecedf3;
+  --purple: #320de2;
+  --yellow: #efa53f;
+  --peach: #f64b53;
 }
 
 html {
-  font-size: 62.5%;
+  /* font-size: 62.5%; */
 }
 
 body {
@@ -48,4 +58,13 @@ label {
   opacity: 0.2;
   position: relative;
   animation: none 0s ease 0s 1 normal none running;
+}
+
+.bold {
+  font-family: "Proxima Nova Bold";
+}
+
+button {
+  border: none;
+  background: transparent;
 }

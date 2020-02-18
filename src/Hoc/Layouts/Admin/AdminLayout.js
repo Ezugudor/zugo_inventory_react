@@ -20,7 +20,11 @@ export const AdminLayout = props => (
     <main className={Style.AdminLayout}>
       {getSideBar(props.currentUser, props)}
       <div className={Style.right}>
-        <PrivateHeader />
+        <PrivateHeader
+          pageName={props.pageName}
+          pageSubtitle={props.pageSubtitle}
+          toggleGeneralReport={props.toggleGeneralReport}
+        />
         <div className={Style.ChildContent}>{props.children}</div>
       </div>
     </main>

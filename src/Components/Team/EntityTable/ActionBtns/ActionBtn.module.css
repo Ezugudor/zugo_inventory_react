@@ -1,0 +1,33 @@
+.section {
+  padding: 3rem 0;
+  margin-right: 3rem;
+  margin-bottom: 2rem;
+}
+
+.memberControls {
+  float: right;
+  margin-right: 10px;
+}
+
+.controlIcon {
+  display: inline-block;
+  margin-right: 0.4rem;
+  font-size: 1.6rem;
+}
+
+.icon {
+  font-size: 1.6rem;
+}
+.iconHolder {
+  border: 1px solid #eee;
+  padding: 2px 8px;
+  border-radius: 4px;
+  display: inline-block;
+  box-shadow: 0px 0px 10px #ddd;
+}
+.red {
+  color: rgb(253, 66, 66);
+}
+.clearfix {
+  clear: both;
+}

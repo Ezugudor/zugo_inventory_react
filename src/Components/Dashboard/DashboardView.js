@@ -7,23 +7,48 @@ import { Notification, Loading, Prompt } from "../Utils";
 import React from "react";
 import { EditBusiness } from "./EditBusiness";
 import { NewBusiness } from "./NewBusiness";
-import { DeleteBusiness } from "./DeleteBusiness";
+import { PreviewSale } from "./PreviewSale";
+import { PreviewPayment } from "./PreviewPayment";
+import { GenerateReport } from "./GenerateReport";
+import { StatItems } from "./StatItems";
+import { HistorySales } from "./HistorySales";
+import { HistoryPayment } from "./HistoryPayment";
+import { QuickLaunch } from "./QuickLaunch";
 
 export const DashboardView = props => {
   return (
-    <AdminLayout pageName="Business" currentUser={props.currentUser}>
+    <AdminLayout
+      pageName="Dashboard"
+      currentUser={props.currentUser}
+      toggleGeneralReport={props.toggleGeneralReport}
+    >
       <div className={Style.dashboard}>
-        {/* <DashboardControls
-        partiallyProcessed={props.partiallyProcessed}
-        handleDateChange={props.handleDateChange}
-        filterResponse={props.filterResponse}
-        tabToShow={props.tabToShow}
-        processed={props.processed}
-        startDate={props.startDate}
-        endDate={props.endDate}
-        pending={props.pending}
-      /> */}
-        <Inbox
+        <div className={Style.StatCont}>
+          <StatItems />
+        </div>
+        <div className={Style.TablesCont}>
+          <div className={`${Style.TableSales} col-md-6`}>
+            <HistorySales togglePreviewSales={props.togglePreviewSales} />
+          </div>
+          <div className={`${Style.TablePayment} col-md-6`}>
+            <HistoryPayment togglePreviewPayment={props.togglePreviewPayment} />
+          </div>
+        </div>
+        <QuickLaunch />
+        <PreviewSale
+          showPreviewSales={props.showPreviewSales}
+          togglePreviewSales={props.togglePreviewSales}
+        />
+        <PreviewPayment
+          showPreviewPayment={props.showPreviewPayment}
+          togglePreviewPayment={props.togglePreviewPayment}
+        />
+        <GenerateReport
+          showGeneralReport={props.showGeneralReport}
+          toggleGeneralReport={props.toggleGeneralReport}
+        />
+
+        {/* <Inbox
           allBusiness={props.allBusiness}
           approvedBusiness={props.approvedBusiness}
           inactiveBusiness={props.inactiveBusiness}
@@ -37,8 +62,8 @@ export const DashboardView = props => {
           toggleCreateBusiness={props.toggleCreateBusiness}
           promptSelectorApprove={props.promptSelectorApprove}
           promptSelectorActivate={props.promptSelectorActivate}
-        />
-        <NewBusiness
+        /> */}
+        {/* <NewBusiness
           setNewBusinessDetail={props.setNewBusinessDetail}
           toggleCreateBusiness={props.toggleCreateBusiness}
           showCreateBusiness={props.showCreateBusiness}
@@ -59,19 +84,19 @@ export const DashboardView = props => {
           editBusinessFormId={props.editBusinessFormId}
           handleUpload={props.handleUpload}
           editBusinessImageURL={props.editBusinessImageURL}
-        />
+        /> */}
         {/* <DeleteBusiness
         toggleDeleteBusiness={props.toggleDeleteBusiness}
         showDeleteBusiness={props.showDeleteBusiness}
         businessToDelete={props.businessToDelete}
         deleteBusiness={props.deleteBusiness}
       /> */}
-        <Loading showLoading={props.showLoading} />
+        {/* <Loading showLoading={props.showLoading} />
         <Notification
           title={"Default Title"}
           message={"Default Body Message"}
-        />
-        <Prompt
+        /> */}
+        {/* <Prompt
           title="Approve Business"
           togglePrompt={props.toggleApproved}
           showPrompt={props.showApproved}
@@ -102,7 +127,7 @@ export const DashboardView = props => {
           form={props.form}
           type="activate"
           confirmAction={props.confirmPrompt}
-        />
+        /> */}
       </div>
     </AdminLayout>
   );

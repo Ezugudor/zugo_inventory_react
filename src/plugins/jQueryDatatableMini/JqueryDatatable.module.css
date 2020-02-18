@@ -1,0 +1,13 @@
+@value Variables: "../../styles/Variables.css";
+@value fontFam-1 from Variables;
+
+.id {
+  /* border-radius: 4px;
+  color: #222;
+  font-size: 14px;
+  font-family: fontFam-1;
+  font-weight: bold;
+  color: #f54800;
+  color: rgb(51, 88, 168);
+  color: var(--color1); */
+}

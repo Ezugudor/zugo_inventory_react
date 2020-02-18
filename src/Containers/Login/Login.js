@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { getProgressIndicator } from "../../store/selectors";
 class Class extends Component {
   state = {
-    email: "",
+    username: "",
     password: ""
   };
 
@@ -17,12 +17,12 @@ class Class extends Component {
     e.preventDefault();
 
     const details = {
-      email: this.state.email,
+      username: this.state.username,
       password: this.state.password
     };
     const history = this.props.history;
     this.props.loginUser(details, history);
-    this.setState({ email: "", password: "" });
+    this.setState({ username: "", password: "" });
   };
 
   render() {

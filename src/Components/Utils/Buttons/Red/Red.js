@@ -8,14 +8,14 @@ const getStyle = props => {
   const conditionalStyles = {};
   conditionalStyles[BaseStyle.Button] = !props.styles;
   conditionalStyles[props.styles] = props.styles;
-  return ClassName(Style.red, conditionalStyles);
+  return ClassName(Style.red, conditionalStyles, props.extStyle);
 };
 export const Red = props => (
   <button
     className={getStyle(props)}
     disabled={props.disabled}
     onClick={props.click}
-    style={props.style}
+    style={props.styles}
   >
     {props.children}
   </button>

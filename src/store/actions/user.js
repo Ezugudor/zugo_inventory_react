@@ -22,11 +22,13 @@ const updateBusiness = data => ({ type: UPDATE_BUSINESS, data });
 export const loginUser = (loginDetails, history) => {
   return dispatch => {
     dispatch(startNetworkRequest());
-    SwypPartnerApi.post("admin/login", loginDetails)
+    console.log("started the request");
+    SwypPartnerApi.post("business/login", loginDetails)
       .then(res => {
+        console.log("this is getting here");
         dispatch(stopNetworkRequest());
-        dispatch(storeUserData(res.data));
-        dispatch(storeBusinessrData(res.data));
+        // dispatch(storeUserData(res.data));
+        // dispatch(storeBusinessrData(res.data));
         // dispatch(
         //   setNotificationMessage(
         //     `Welcome back ${res.data.user.name}`,

@@ -1,55 +1,51 @@
 @value variables: "../../../styles/Variables.css";
 @value secondary-color, tertiary-color,tertiary-color-light, typeform-border-color from variables;
-.AdminSidebar {
-  width: 14%;
-  min-width: 15rem;
+.AdminSidebarRelative {
   position: relative;
-  height: 100vh;
-  border-right: 1px solid typeform-border-color;
-  background: tertiary-color-light;
-  background: #fcfcfc;
+  left: 0;
+  width: 15vw;
 }
-.AdminSidebarFixed {
+.AdminSidebar {
   position: fixed;
-  left: 0px;
-  top: 0px;
+  /* top: 5em; */
+  width: 100%;
+  left: 0;
+  width: 15vw;
   height: 100vh;
-  width: 14%;
-  box-shadow: 10px 85px 10px #ccc;
-  background: #fcfcfc;
-  z-index: 1;
+  background: #000;
+  z-index: 1001;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
 }
 
 .Nav {
-  width: 70%;
-  margin: 0 auto;
-  padding-top: 6rem;
+  /* width: 70%; */
+  /* margin: 0 auto; */
+  /* padding-top: 6rem; */
 }
 
 .NavList {
-  list-style: none;
-  width: 100%;
+  /* list-style: none; */
+  /* width: 100%; */
 }
 
 .NavLink:link,
 .NavLink:visited {
-  color: black;
+  /* color: black;
   white-space: nowrap;
   overflow: hidden;
   font-size: 15px;
   font-family: Gilroy;
-  /* font-weight: bold; */
   color: #222;
   position: relative;
-  left: -14px;
+  left: -14px; */
 }
 
 .NavItem {
-  margin-bottom: 35px;
+  /* margin-bottom: 35px; */
 }
 
 .NavItem:not(:last-child) {
-  padding-bottom: 2rem;
+  /* padding-bottom: 2rem; */
 }
 
 .InactiveLink {
@@ -61,10 +57,10 @@
   /* background-color: tertiary-color; */
   /* color: secondary-color; */
   /* color: #000; */
-  color: var(--color1);
+  /* color: var(--color1);
   font-weight: bolder;
   padding: 0.5rem 2.2rem;
-  border-radius: 10rem;
+  border-radius: 10rem; */
 }
 
 .ActiveLink:link .sidebarIcon,
@@ -75,20 +71,20 @@
 }
 
 .sidebarIcon {
-  font-size: 40px;
-  margin-right: 14px;
+  /* font-size: 40px; */
+  /* margin-right: 14px; */
   color: #444;
   color: var(--color1);
   position: relative;
-  top: 9px;
-  font-weight: 900;
+  /* top: 9px; */
+  /* font-weight: 900; */
 }
 
 .LogoBox {
-  margin-top: 2rem;
+  /* margin-top: 2rem; */
   width: 100%;
   text-align: center;
-  margin: 2rem auto;
+  /* margin: 2rem auto; */
   height: 7rem;
   padding-bottom: 0.6rem;
 }
@@ -114,12 +110,100 @@
 .LogoutIcon {
   margin-right: 0.3rem;
 }
-.logoRound {
-  background: #fff;
-  padding: 25px;
-  box-shadow: 0px 0px 10px #777;
-  width: 100px;
-  height: 100px;
-  margin: 0px auto;
-  border-radius: 50%;
+.logoCont {
+  /* padding: 25px; */
+  width: 100%;
+}
+.SideMenu {
+  top: 5em;
+  width: 100%;
+  left: 0;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+.MenuList {
+  float: left;
+  width: 100%;
+  margin-top: 2em;
+  margin-bottom: 5em;
+}
+
+.MenuList li {
+  margin-bottom: 0.5em;
+  width: 100%;
+  float: left;
+  position: relative;
+}
+
+.MenuList li a img,
+.MenuList li img {
+  width: 1.2em;
+  margin: 0 1em;
+  transform: translateY(-0.1em);
+}
+
+.MenuList li a {
+  font-family: "Proxima Nova Semibold";
+  width: 100%;
+  float: left;
+  position: relative;
+  padding: 1em 1em 1em 0;
+  color: #505050;
+  color: #ccc;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0, 1);
+  text-transform: capitalize;
+  cursor: pointer;
+}
+
+.MenuList li a.active,
+.MenuList li a:hover {
+  /*    box-shadow: 0 0 0 1px rgba(13, 110, 255, 1);*/
+  background: rgba(13, 110, 255, 0.03);
+  color: var(--blue);
+}
+
+.MenuList li a.active:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--blue);
+}
+
+.Dropdown {
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  display: block;
+  -webkit-transition: all 0.3s cubic-bezier(0.89, 0.01, 0.24, 0.88);
+  -o-transition: all 0.3s cubic-bezier(0.89, 0.01, 0.24, 0.88);
+  transition: all 0.3s cubic-bezier(0.89, 0.01, 0.24, 0.88);
+}
+
+.SubMenu {
+  display: none;
+  margin-left: 0;
+  width: 100%;
+  float: left;
+}
+
+.SubMenu li {
+  margin-bottom: 0;
+}
+
+.SubMenu li a {
+  padding: 1em 1em 1em 3em;
+  color: #707070;
+}
+
+.SubMenu li a.active {
+  background: transparent;
+}
+
+.SubMenu li a.active:before {
+  display: none;
 }

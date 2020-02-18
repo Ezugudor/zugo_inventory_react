@@ -3,7 +3,7 @@ import $ from "jquery";
 import "datatables";
 // import "./datatables/media/js/jquery.dataTables";
 import "./datatables/media/css/jquery.dataTables.css";
-import "./myDatatable.css";
+// import "./myDatatable.css";
 import Style from "./JqueryDatatable.module.css";
 import ReactDOM from "react-dom";
 
@@ -18,14 +18,16 @@ export class JQDatatable extends Component {
     const _this = this;
 
     this.dTOptions = {
-      dom:
-        '<"table-filter-cont tfc-top" <"tresponsive" <"tf-title"><"tf-addbtn"> <"tf-filter"f>  <"bulk-action"><"clearfix">>><"tf-table"t><"table-filter-cont tfc-bottom" <"tresponsive" <"tf-info"i><"tf-length"<"fancy-select"l>> <"tf-paging"p><"clearfix">>>',
+      dom: `<"table-filter-cont tfc-top" <"tresponsive" <"tf-title"><"tf-addbtn ${_this.props.tableId}"> <"tf-filter"f> <"tf-length"<"fancy-select"l>> <"bulk-action"><"clearfix">>><"tf-table"t><"table-filter-cont tfc-bottom" <"tresponsive" <"tf-info"i> <"tf-paging"p><"clearfix">>>`,
       initComplete: function() {
         let tfTitle = `<span class="table-name"></span> <span class="table-class">${_this.props.data.title}</span> `;
         let btn = <span>{_this.props.data.newBtn}</span>;
 
         $(".tf-title").html(tfTitle);
-        ReactDOM.render(btn, document.querySelector(".tf-addbtn"));
+        ReactDOM.render(
+          btn,
+          document.querySelector(`.tf-addbtn.${_this.props.tableId}`)
+        );
       },
       language: {
         emptyTable: "No data available",

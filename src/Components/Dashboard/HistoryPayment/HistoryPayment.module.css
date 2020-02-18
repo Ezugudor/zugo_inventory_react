@@ -1,0 +1,66 @@
+.tableCont {
+  background: #fff;
+  box-shadow: 0px 0px 20px #ddd;
+  border-left: 1px solid #dadcde;
+}
+.commentCont {
+  display: flex;
+}
+.commentIcon {
+  color: #fa7a06;
+  margin-right: 10px;
+}
+.commentText {
+  color: #000;
+}
+.tableTitleIcon {
+  color: var(--blue);
+  font-size: 30px;
+  position: relative;
+  left: -10px;
+  top: 3px;
+}
+.bizLogo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #fff;
+  padding: 2px;
+}
+.statusTag {
+  padding: 2px 8px;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 4px;
+}
+.statusSuccess {
+  background-color: rgb(52, 196, 141);
+  color: #fff;
+}
+.statusDanger {
+  background-color: rgb(218, 60, 81);
+  color: #fff;
+}
+.statusIcon {
+  font-size: 40px;
+  font-weight: bold;
+}
+.statusIconSuccess {
+  color: rgb(52, 196, 141);
+}
+.statusIconDanger {
+  color: rgb(230, 36, 36);
+}
+
+.toggleApprove {
+  width: 80px;
+  position: relative;
+  top: -2px;
+  /* left: -100px; */
+}
+.btn {
+  background: #fff;
+  color: var(--blue);
+  font-size: 14px;
+  font-weight: bold;
+}

@@ -1,0 +1,55 @@
+@value variables:  "../../../../styles/Variables.css";
+@value typeform-border-color, secondary-color, white-color from variables;
+
+.Bold {
+  font-size: 3em;
+  color: var(--white);
+  font-family: "Proxima Nova Bold";
+}
+/********Dashboard**********/
+.CardBody {
+  float: left;
+  width: 100%;
+  border-radius: 10px;
+  padding: 1.5em;
+  min-height: 10em;
+  margin: 1em 0;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0, 1);
+  background: var(--blue);
+}
+
+.CardBody:hover {
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
+}
+
+.CardInfo {
+  float: right;
+  width: 80%;
+  text-align: right;
+}
+
+.CardHeader {
+  font-size: 1.2em;
+  color: white;
+  margin-bottom: 1em;
+  width: 100%;
+  float: right;
+  font-family: "Proxima Nova Bold";
+}
+
+.CardInfo .SubInfo {
+  color: #f0f0f0;
+  display: block;
+}
+
+.CardIcon {
+  font-size: 4em;
+  float: left;
+  width: 20%;
+  color: white;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0.2em;
+}

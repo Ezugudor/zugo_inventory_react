@@ -1,0 +1,152 @@
+/******************Report Container*********************/
+.report_container {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  float: left;
+  padding: 1em;
+  border: 1px #808080 solid;
+  border-radius: 5px;
+}
+
+.r_head {
+  float: left;
+  width: 100%;
+  border-bottom: 1px #808080 solid;
+  padding: 1em 0;
+}
+
+.big_bold {
+  font-size: 1.2em;
+  font-family: "Proxima Nova Bold";
+}
+
+.small_txt {
+  font-size: 0.8em;
+}
+
+.company_header_info {
+  float: left;
+  margin: 1em 0 1.5em 0;
+}
+
+.company_image {
+  width: 4em;
+  height: 4em;
+  background-size: 80%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #f0f0f0;
+  float: left;
+  border-radius: 10px;
+}
+
+.company_info {
+  float: left;
+  margin: 0.5em 0 0 1em;
+}
+
+label {
+  float: left;
+  clear: both;
+}
+
+.form_field {
+  float: left;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px #f0f0f0 solid;
+  padding: 1em;
+  clear: both;
+}
+
+.form_field:focus {
+  border: 1px #303030 solid;
+}
+
+.cusUploadBtn {
+  display: inline-block;
+  padding: 1em 1.2em;
+  border-radius: 4px;
+  border: 1px dashed var(--green);
+  float: left;
+  color: var(--green);
+  width: 100%;
+  cursor: pointer;
+  white-space: nowrap;
+  max-width: 100%;
+  font-weight: 100;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.modal_footer {
+  padding: 1em 1.5em 1em 1.5em;
+  border-top: 1px solid #f0f0f0;
+  float: left;
+  width: 100%;
+}
+
+.card_tab_list {
+  float: right;
+}
+
+.card_tab_list li {
+  display: inline-block;
+  float: left;
+  margin-left: 1em;
+}
+
+.card_tab_list li:nth-child(1) {
+  line-height: 1.5;
+  font-family: "Proxima Nova Semibold";
+}
+
+.card_tab_list li a {
+  padding: 0.3em 0.5em;
+  border-radius: 10px;
+  background: var(--grey);
+  float: left;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  color: black;
+}
+
+.card_list_menu {
+  width: 10em;
+  border-radius: 5px;
+  background: #f9f9f9;
+  position: absolute;
+  bottom: -50%;
+  right: 1.5em;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0, 1);
+  opacity: 0;
+  visibility: hidden;
+  overflow: hidden;
+  transform-origin: bottom;
+  transform: translateY(50%);
+  z-index: 100000000;
+  padding-top: 1em;
+}
+
+.card_tab_list li:hover .card_list_menu {
+  visibility: visible;
+  opacity: 1;
+  bottom: -0.8em;
+}
+
+.card_list_menu li {
+  float: left;
+  width: 100%;
+  padding: 1em;
+  margin: 0;
+  display: block;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0, 1);
+  cursor: pointer;
+  font-family: "Proxima Nova Semibold";
+}
+
+.card_list_menu li:hover {
+  background: var(--grey);
+}

@@ -1,22 +1,22 @@
 export const dataStruct = {
   columns: [
     {
-      label: "",
+      label: "Pics",
       field: "avatar",
       sort: "asc",
-      width: 150
+      width: 270
     },
     {
-      label: "Name",
-      field: "name",
-      sort: "asc",
-      width: 150
-    },
-    {
-      label: "Role",
-      field: "role",
+      label: "Firstname",
+      field: "firstname",
       sort: "asc",
       width: 270
+    },
+    {
+      label: "Lastname",
+      field: "lastname",
+      sort: "asc",
+      width: 150
     },
     {
       label: "Email",
@@ -31,29 +31,41 @@ export const dataStruct = {
       width: 270
     },
     {
-      label: "Id",
-      field: "id",
+      label: "Role",
+      field: "role",
       sort: "asc",
       width: 270
     },
     {
-      label: "Created",
-      field: "created",
+      label: "Address",
+      field: "address",
       sort: "asc",
       width: 270
     },
     {
-      label: "Action",
-      field: "action",
+      label: "Date Added",
+      field: "date",
+      sort: "asc",
+      width: 270
+    },
+    {
+      label: "Actions",
+      field: "action_btns",
       sort: "asc",
       width: 270
     }
   ],
   rows: [
     {
-      name: "Tiger Nixon",
-      name: "Tiger Nixon",
-      date: "2011/04/25"
+      name: "Default Text",
+      name: "Default Text",
+      name: "Default Text",
+      name: "Default Text",
+      name: "Default Text",
+      name: "Default Text",
+      address: "Default Text",
+      date: "Default Text",
+      action_btns: "Default Text"
     }
   ]
 };

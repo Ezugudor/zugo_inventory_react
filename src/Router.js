@@ -3,13 +3,23 @@ import {
   FormResponse,
   FormBuilder,
   Dashboard,
+  Stocks,
   Responses,
-  FormTypes,
   Signup,
+  Receivings,
+  ReceivingSum,
+  Supply,
+  SupplySum,
+  Payment,
   Login,
   CompleteSignup,
   Team,
-  Form
+  Customer,
+  Outlet,
+  Form,
+  Credit,
+  CreditSum,
+  Company
 } from "./Containers";
 import { Redirect, Switch, Route } from "react-router-dom";
 import { SwypPartnerApi } from "./core";
@@ -23,7 +33,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
       const state = Store.getState();
       const token = state.user.token;
       SwypPartnerApi.defaults.headers.common["Authorization"] = token;
-      return token ? <Component {...props} /> : <Redirect to="/" />;
+      return !token ? <Component {...props} /> : <Redirect to="/" />;
     }}
   />
 );
@@ -68,11 +78,22 @@ export default () => (
       path="/business/settings/:id"
       component={BusinessSettings}
     />
-    <PrivateRoute exact path="/formbuilder" component={FormBuilder} />
-    <PrivateRoute exact path="/formtypes" component={FormTypes} />
+    <PrivateRoute exact path="/receivings" component={Receivings} />
+    <PrivateRoute exact path="/receivingsum" component={ReceivingSum} />
+    <PrivateRoute exact path="/stocks" component={Stocks} />
+    <PrivateRoute exact path="/supply" component={Supply} />
+    <PrivateRoute exact path="/supplysum" component={SupplySum} />
+    <PrivateRoute exact path="/credit" component={Credit} />
+    <PrivateRoute exact path="/creditsum" component={CreditSum} />
+    <PrivateRoute exact path="/payment" component={Payment} />
     <PrivateRoute exact path="/dashboard" component={Dashboard} />
     <GuestRoute exact path="/signup" component={Signup} />
     <ManagerRoute exact path="/team" component={Team} />
+    <PrivateRoute exact path="/users" component={Team} />
+    <PrivateRoute exact path="/admin" component={Team} />
+    <PrivateRoute exact path="/customers" component={Customer} />
+    <PrivateRoute exact path="/companies" component={Company} />
+    <PrivateRoute exact path="/outlets" component={Outlet} />
     <GuestRoute exact path="/login" component={Login} />
     <GuestRoute
       exact

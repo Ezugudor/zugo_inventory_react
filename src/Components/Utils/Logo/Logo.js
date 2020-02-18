@@ -15,7 +15,7 @@ class Class extends Component {
 
 const mapStateToProps = state => {
   return {
-    logoUrl: getBusinessLogo(state)
+    // logoUrl: getBusinessLogo(state)
   };
 };
 

@@ -36,7 +36,9 @@ class Class extends Component {
     showNotification: false,
     showLoading: false,
     showCreateBusiness: false,
-    showDeleteBusiness: false,
+    showPreviewSales: false,
+    showPreviewPayment: false,
+    showGeneralReport: false,
     showEditBusiness: false,
     popImage: { show: false, url: "", title: "" },
     memberToDelete: {},
@@ -119,8 +121,8 @@ class Class extends Component {
 
   componentDidMount() {
     const { businessId, businessColor } = this.props;
-    themeMaker(businessColor);
-    this.props.fetchBusinessByStatus();
+    // themeMaker(businessColor);
+    // this.props.fetchBusinessByStatus();
   }
 
   popupTimer = props => {
@@ -345,9 +347,20 @@ class Class extends Component {
   /**
    * show delete a member modal
    */
-  toggleDeleteBusiness = () => {
+  togglePreviewSales = () => {
     this.setState(prevState => {
-      return { showDeleteBusiness: !prevState.showDeleteBusiness };
+      return { showPreviewSales: !prevState.showPreviewSales };
+    });
+  };
+
+  togglePreviewPayment = () => {
+    this.setState(prevState => {
+      return { showPreviewPayment: !prevState.showPreviewPayment };
+    });
+  };
+  toggleGeneralReport = () => {
+    this.setState(prevState => {
+      return { showGeneralReport: !prevState.showGeneralReport };
     });
   };
 
@@ -518,14 +531,18 @@ class Class extends Component {
         showCreateBusiness={this.state.showCreateBusiness}
         showLoading={this.props.progress}
         popupTimer={this.popupTimer}
-        showDeleteBusiness={this.state.showDeleteBusiness}
+        showPreviewSales={this.state.showPreviewSales}
+        showPreviewPayment={this.state.showPreviewPayment}
+        showGeneralReport={this.state.showGeneralReport}
         setNewBranchDetail={this.setNewBranchDetail}
         setUpdateUserDetail={this.setUpdateUserDetail}
         populateEditBusiness={this.populateEditBusiness}
         setNewBusinessDetail={this.setNewBusinessDetail}
         toggleCreateBusiness={this.toggleCreateBusiness}
         toggleEditBusiness={this.toggleEditBusiness}
-        toggleDeleteBusiness={this.toggleDeleteBusiness}
+        togglePreviewSales={this.togglePreviewSales}
+        togglePreviewPayment={this.togglePreviewPayment}
+        toggleGeneralReport={this.toggleGeneralReport}
         setBusinessToDelete={this.setBusinessToDelete}
         memberToDelete={this.state.memberToDelete}
         editBusinessDetails={this.state.editBusinessDetails}
@@ -551,15 +568,15 @@ class Class extends Component {
 }
 // console.log("checking allt he biz", )
 const mapStateToProps = state => ({
-  allBusiness: getAllBusinesses(state),
-  approvedBusiness: getApprovedBusinesses(state),
-  inactiveBusiness: getInactiveBusinesses(state),
-  currentUser: getCurrentUser(state),
-  businessId: getBusinessId(state),
-  businessColor: getBusinessColor(state),
-  progress: getProgressIndicator(state),
-  uploadedFile: getUploadedFileData(state),
-  uploadStatus: getUploadStatus(state)
+  // allBusiness: getAllBusinesses(state),
+  // approvedBusiness: getApprovedBusinesses(state),
+  // inactiveBusiness: getInactiveBusinesses(state),
+  // currentUser: getCurrentUser(state),
+  // businessId: getBusinessId(state),
+  // businessColor: getBusinessColor(state),
+  // progress: getProgressIndicator(state),
+  // uploadedFile: getUploadedFileData(state),
+  // uploadStatus: getUploadStatus(state)
 });
 
 export const Dashboard = connect(
