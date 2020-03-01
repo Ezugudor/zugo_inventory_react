@@ -24,14 +24,26 @@ export const DashboardView = props => {
     >
       <div className={Style.dashboard}>
         <div className={Style.StatCont}>
-          <StatItems />
+          <StatItems
+            outlets={props.outlets}
+            customerCredit={props.customerCredit}
+            creditPayment={props.creditPayment}
+            customers={props.customers}
+          />
         </div>
         <div className={Style.TablesCont}>
           <div className={`${Style.TableSales} col-md-6`}>
-            <HistorySales togglePreviewSales={props.togglePreviewSales} />
+            <HistorySales
+              togglePreviewSales={props.togglePreviewSales}
+              outlets={props.outlets}
+              currentUser={props.currentUsers}
+            />
           </div>
           <div className={`${Style.TablePayment} col-md-6`}>
-            <HistoryPayment togglePreviewPayment={props.togglePreviewPayment} />
+            <HistoryPayment
+              creditPayment={props.creditPayment}
+              togglePreviewPayment={props.togglePreviewPayment}
+            />
           </div>
         </div>
         <QuickLaunch />
@@ -48,86 +60,11 @@ export const DashboardView = props => {
           toggleGeneralReport={props.toggleGeneralReport}
         />
 
-        {/* <Inbox
-          allBusiness={props.allBusiness}
-          approvedBusiness={props.approvedBusiness}
-          inactiveBusiness={props.inactiveBusiness}
-          tabToShow={props.tabToShow}
-          switchTab={props.switchTab}
-          handleDateChange={props.handleDateChange}
-          filterResponse={props.filterResponse}
-          startDate={props.startDate}
-          endDate={props.endDate}
-          populateEditBusiness={props.populateEditBusiness}
-          toggleCreateBusiness={props.toggleCreateBusiness}
-          promptSelectorApprove={props.promptSelectorApprove}
-          promptSelectorActivate={props.promptSelectorActivate}
-        /> */}
-        {/* <NewBusiness
-          setNewBusinessDetail={props.setNewBusinessDetail}
-          toggleCreateBusiness={props.toggleCreateBusiness}
-          showCreateBusiness={props.showCreateBusiness}
-          createBusiness={props.createBusiness}
-          newBusinessDetails={props.newBusinessDetails}
-          newBusinessFormId={props.newBusinessFormId}
-          handleUpload={props.handleUpload}
-          newBusinessImageURL={props.newBusinessImageURL}
-        />
-        <EditBusiness
-          setUpdateUserDetail={props.setUpdateUserDetail}
-          toggleEditBusiness={props.toggleEditBusiness}
-          showEditBusiness={props.showEditBusiness}
-          updateUser={props.updateUser}
-          branches={props.branches}
-          editBusinessDetails={props.editBusinessDetails}
-          showNotification={props.showNotification}
-          editBusinessFormId={props.editBusinessFormId}
-          handleUpload={props.handleUpload}
-          editBusinessImageURL={props.editBusinessImageURL}
-        /> */}
-        {/* <DeleteBusiness
-        toggleDeleteBusiness={props.toggleDeleteBusiness}
-        showDeleteBusiness={props.showDeleteBusiness}
-        businessToDelete={props.businessToDelete}
-        deleteBusiness={props.deleteBusiness}
-      /> */}
-        {/* <Loading showLoading={props.showLoading} />
+        <Loading showLoading={props.showLoading} />
         <Notification
           title={"Default Title"}
           message={"Default Body Message"}
-        /> */}
-        {/* <Prompt
-          title="Approve Business"
-          togglePrompt={props.toggleApproved}
-          showPrompt={props.showApproved}
-          form={"props.form"}
-          type="approve"
-          confirmAction={props.confirmPrompt}
         />
-        <Prompt
-          title="Disapprove Business"
-          togglePrompt={props.toggleDisapproved}
-          showPrompt={props.showDisapproved}
-          form={"props.form"}
-          type="approve"
-          confirmAction={props.confirmPrompt}
-        />
-        <Prompt
-          title="Activate this Business"
-          togglePrompt={props.toggleActive}
-          showPrompt={props.showActive}
-          form={props.form}
-          type="activate"
-          confirmAction={props.confirmPrompt}
-        />
-        <Prompt
-          title="Deactivate this Business"
-          togglePrompt={props.toggleInactive}
-          showPrompt={props.showInactive}
-          form={props.form}
-          type="activate"
-          confirmAction={props.confirmPrompt}
-        /> */}
       </div>
     </AdminLayout>
   );

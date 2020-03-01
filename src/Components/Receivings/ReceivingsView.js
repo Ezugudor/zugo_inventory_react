@@ -10,6 +10,7 @@ import { DeleteEntity } from "./DeleteEntity";
 import { EditEntity } from "./EditEntity";
 
 export const ReceivingsView = props => {
+  console.log("check my receings", props.receivings);
   return (
     <AdminLayout
       pageName="Receivings"

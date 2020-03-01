@@ -1,15 +1,16 @@
 import {
-  fetchBusinessByStatus,
   filterByDate,
   registerBusiness,
   uploadLogo,
   approveBusiness,
-  activateBusiness
+  activateBusiness,
+  updateReceivingsData
 } from "../../store/actions";
 import { ReceivingsView } from "../../Components/Receivings";
 import React, { Component } from "react";
 import {
   getCurrentUser,
+  getReceivings,
   getUploadedFileData,
   getUploadStatus
 } from "../../store/selectors";
@@ -104,8 +105,7 @@ class Class extends Component {
 
   componentDidMount() {
     const { businessId, businessColor } = this.props;
-    // themeMaker(businessColor);
-    // this.props.fetchBusinessByStatus();
+    this.props.updateReceivingsData(this.props.businessId);
   }
 
   popupTimer = props => {
@@ -462,6 +462,7 @@ class Class extends Component {
   render() {
     return (
       <ReceivingsView
+        receivings={this.props.receivings}
         currentUser={this.props.currentUser}
         currentEntity={this.state.currentEntity}
         createBusiness={this.createBusiness}
@@ -488,9 +489,9 @@ class Class extends Component {
 const mapStateToProps = state => ({
   // allBusiness: getAllBusinesses(state),
   // approvedBusiness: getApprovedBusinesses(state),
-  // inactiveBusiness: getInactiveBusinesses(state),
-  // currentUser: getCurrentUser(state),
-  // businessId: getBusinessId(state),
+  receivings: getReceivings(state),
+  currentUser: getCurrentUser(state),
+  businessId: getBusinessId(state)
   // businessColor: getBusinessColor(state),
   // progress: getProgressIndicator(state),
   // uploadedFile: getUploadedFileData(state),
@@ -500,7 +501,7 @@ const mapStateToProps = state => ({
 export const Receivings = connect(
   mapStateToProps,
   {
-    fetchBusinessByStatus,
+    updateReceivingsData,
     approveBusiness,
     activateBusiness,
     filterByDate,

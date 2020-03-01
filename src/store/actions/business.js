@@ -1,11 +1,9 @@
+import { UPDATE_BUSINESS, STORE_BUSINESS } from "./types";
 import {
-  UPDATE_BUSINESS,
-  STORE_USER,
-  STORE_BUSINESS,
-  DELETE_BUSINESS_BRANCH,
-  SAVE_ALL_BUSINESSES,
-  SAVE_APPROVED_BUSINESSES,
-  SAVE_INACTIVE_BUSINESSES
+  UPDATE_OUTLETS,
+  UPDATE_CUSTOMERS,
+  UPDATE_CREDIT,
+  UPDATE_PAYMENT
 } from "./types";
 import { startNetworkRequest, stopNetworkRequest } from "./app";
 import { SwypPartnerApi } from "../../core/api";
@@ -15,35 +13,27 @@ import { handleError } from "../../utils";
 
 const storeBusinessrData = data => ({ type: STORE_BUSINESS, data });
 const updateBusiness = data => ({ type: UPDATE_BUSINESS, data });
-const storeUserData = data => ({ type: STORE_USER, data });
-const deleteStoredBranch = data => ({ type: DELETE_BUSINESS_BRANCH, data });
-const saveAllBusinesses = data => ({
-  type: SAVE_ALL_BUSINESSES,
-  data
-});
-
-const saveApprovedBusinesses = data => ({
-  type: SAVE_APPROVED_BUSINESSES,
-  data
-});
-
-const saveInactiveBusinesses = data => ({
-  type: SAVE_INACTIVE_BUSINESSES,
-  data
-});
+const updateOutlets = data => ({ type: UPDATE_OUTLETS, data });
+const updateCustomers = data => ({ type: UPDATE_CUSTOMERS, data });
+const updateCredit = data => ({ type: UPDATE_CREDIT, data });
+const updatePayment = data => ({ type: UPDATE_PAYMENT, data });
+// const storeUserData = data => ({ type: STORE_USER, data });
 
 /**
  * Fetch form responses of a business
  * @param {string} businessId id of business whose form responses needs fetching
  */
-export const fetchBusinessByStatus = () => {
-  const allBusinessUrl = `businesses/bystatus/all`;
-  const approvedUrl = `businesses/bystatus/approved`;
-  const inactiveUrl = `businesses/bystatus/inactive`;
+export const updateBusinessDataFromServer = businessId => {
+  // const details = { businessId };
+  const outlets = `business/${businessId}/outlets`;
+  const customers = `business/${businessId}/customers`;
+  const credit = `business/${businessId}/customer-credit`;
+  const payment = `business/${businessId}/credit-payment`;
   return multipleRequest([
-    SwypPartnerApi.get(allBusinessUrl),
-    SwypPartnerApi.get(approvedUrl),
-    SwypPartnerApi.get(inactiveUrl)
+    SwypPartnerApi.get(outlets),
+    SwypPartnerApi.get(credit),
+    SwypPartnerApi.get(payment),
+    SwypPartnerApi.get(customers)
   ]);
 };
 
@@ -59,7 +49,7 @@ export const approveBusiness = (businessId, details) => {
       .then(res => {
         dispatch(stopNetworkRequest());
         if (res.data.updated) {
-          dispatch(fetchBusinessByStatus());
+          // dispatch(fetchBusinessByStatus());
         }
         dispatch(
           setNotificationMessage(
@@ -89,7 +79,7 @@ export const activateBusiness = (businessId, details) => {
       .then(res => {
         dispatch(stopNetworkRequest());
         if (res.data.updated) {
-          dispatch(fetchBusinessByStatus());
+          // dispatch(fetchBusinessByStatus());
         }
         dispatch(
           setNotificationMessage(
@@ -118,7 +108,7 @@ export const registerBusiness = (details, history) => {
     SwypPartnerApi.post("businesses", details)
       .then(res => {
         dispatch(stopNetworkRequest());
-        dispatch(storeUserData(res.data));
+        // dispatch(storeUserData(res.data));
         dispatch(storeBusinessrData(res.data));
         dispatch(
           setNotificationMessage(
@@ -171,11 +161,12 @@ const multipleRequest = (urls = []) => {
   return dispatch => {
     dispatch(startNetworkRequest());
     Promise.all(urls)
-      .then(([all, approved, inactive]) => {
+      .then(([outlets, credit, payment, customers]) => {
         dispatch(stopNetworkRequest());
-        dispatch(saveAllBusinesses(all.data));
-        dispatch(saveApprovedBusinesses(approved.data));
-        dispatch(saveInactiveBusinesses(inactive.data));
+        dispatch(updateOutlets(outlets.data));
+        dispatch(updateCredit(credit.data));
+        dispatch(updatePayment(payment.data));
+        dispatch(updateCustomers(customers.data));
       })
       .catch(err => {
         handleError(err, dispatch);

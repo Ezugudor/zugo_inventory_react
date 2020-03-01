@@ -9,6 +9,17 @@ const buildStyle = (props, tab) => {
   return className(Style.inboxTab, conditionalStyle);
 };
 
+const totalCount = props => props.creditPayment.length || 0;
+
+const totalAmount = props => {
+  let total = 0;
+  props.creditPayment.forEach(cred => {
+    total += cred.amount;
+  });
+
+  return total;
+};
+
 export const Payments = props => (
   <div class="col2">
     <a href="payment" className={Style.CardBody}>
@@ -16,10 +27,11 @@ export const Payments = props => (
       <div className={Style.CardInfo}>
         <span className={Style.CardHeader}>Today Payment</span>
         <span className={Style.SubInfo}>
-          Total: <span className={Style.Bold}>3</span>
+          Total: <span className={Style.Bold}>{totalCount(props)}</span>
         </span>
         <span className={Style.SubInfo}>
-          Amount: <span className={Style.Bold}>N300,000</span>
+          Amount:{" "}
+          <span className={`${Style.Bold} naira`}>{totalAmount(props)}</span>
         </span>
       </div>
     </a>

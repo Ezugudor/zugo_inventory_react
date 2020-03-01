@@ -1,7 +1,6 @@
 import {
   BusinessSettings,
   FormResponse,
-  FormBuilder,
   Dashboard,
   Stocks,
   Responses,
@@ -12,11 +11,9 @@ import {
   SupplySum,
   Payment,
   Login,
-  CompleteSignup,
   Team,
   Customer,
   Outlet,
-  Form,
   Credit,
   CreditSum,
   Company
@@ -31,9 +28,10 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
     {...rest}
     render={props => {
       const state = Store.getState();
+      console.log("logging the states from route", state);
       const token = state.user.token;
       SwypPartnerApi.defaults.headers.common["Authorization"] = token;
-      return !token ? <Component {...props} /> : <Redirect to="/" />;
+      return token ? <Component {...props} /> : <Redirect to="/login" />;
     }}
   />
 );
@@ -44,6 +42,7 @@ const GuestRoute = ({ component: Component, ...rest }) => (
     render={props => {
       const state = Store.getState();
       const token = state.user.token;
+      SwypPartnerApi.defaults.headers.common["Authorization"] = token;
       return token ? <Redirect to="/dashboard" /> : <Component {...props} />;
     }}
   />
@@ -71,7 +70,7 @@ export default () => (
   <Switch>
     <PrivateRoute exact path="/response/:type/:id" component={FormResponse} />
     <PrivateRoute exact path="/forms/:id/responses" component={Responses} />
-    <PrivateRoute exact path="/formtypes/:parent/:name" component={Form} />
+    {/* <PrivateRoute exact path="/formtypes/:parent/:name" component={Form} /> */}
     {/* <ManagerRoute exact path="/settings" component={BusinessSettings} /> */}
     <ManagerRoute
       exact
@@ -95,11 +94,11 @@ export default () => (
     <PrivateRoute exact path="/companies" component={Company} />
     <PrivateRoute exact path="/outlets" component={Outlet} />
     <GuestRoute exact path="/login" component={Login} />
-    <GuestRoute
+    {/* <GuestRoute
       exact
       path="/completesignup/:token"
       component={CompleteSignup}
-    />
+    /> */}
     <GuestRoute exact path="/" component={Login} />
   </Switch>
 );

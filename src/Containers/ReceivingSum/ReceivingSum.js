@@ -1,15 +1,20 @@
 import {
-  fetchBusinessByStatus,
   filterByDate,
   registerBusiness,
   uploadLogo,
-  approveBusiness,
-  activateBusiness
+  updateReceivingsData,
+  addEntity,
+  processCode
 } from "../../store/actions";
 import { ReceivingSumView } from "../../Components/ReceivingSum";
 import React, { Component } from "react";
 import {
   getCurrentUser,
+  getReceivings,
+  getCustomers,
+  getDrivers,
+  getStocks,
+  getOutlets,
   getUploadedFileData,
   getUploadStatus
 } from "../../store/selectors";
@@ -29,10 +34,25 @@ class Class extends Component {
     showNotification: false,
     showLoading: false,
     showCreateEntity: false,
+    showProcessEntity: false,
     showEditEntity: false,
+    showRowDetails: false,
     showDeleteEntity: false,
     currentEntity: { name: "default text" },
-    newEntityDetails: { imageURL: null },
+    newEntityDetails: {
+      codes: [],
+      item: "",
+      size: ""
+    },
+    processEntityDetails: {
+      is_outlet: false,
+      receiver: "",
+      mode: "mdd",
+      driver: "",
+      driver_phone: "",
+      truck_id: "",
+      source: "factory"
+    },
     editEntityDetails: {
       name: "",
       description: "",
@@ -105,7 +125,7 @@ class Class extends Component {
   componentDidMount() {
     const { businessId, businessColor } = this.props;
     // themeMaker(businessColor);
-    // this.props.fetchBusinessByStatus();
+    this.props.updateReceivingsData(this.props.businessId);
   }
 
   popupTimer = props => {
@@ -116,6 +136,58 @@ class Class extends Component {
     }
   };
 
+  /**
+   * set new entity field value
+   * @param {string} key propterty name to set
+   * @param {string} value the value set key to
+   */
+
+  setNewEntityDetail = (e, type, autoCompleteSelected = null) => {
+    const value = autoCompleteSelected || e.target.value;
+    const entityDetails = { ...this.state.newEntityDetails };
+    entityDetails[type] = value;
+    this.setState({ newEntityDetails: entityDetails });
+  };
+
+  setProcessEntityDetail = (e, type, autoCompleteSelected = null) => {
+    const value = autoCompleteSelected || e.target.value;
+    const entityDetails = { ...this.state.processEntityDetails };
+    entityDetails[type] = value;
+    this.setState({ processEntityDetails: entityDetails });
+  };
+
+  addCodeToken = (e, value, txt) => {
+    const entityDetails = { ...this.state.newEntityDetails };
+    const newCodes = [...entityDetails.codes, value];
+    entityDetails["codes"] = newCodes;
+    this.setState({ newEntityDetails: entityDetails });
+  };
+
+  removeCodeToken = (e, value, txt) => {
+    const entityDetails = { ...this.state.newEntityDetails };
+    const { codes } = entityDetails;
+    const newCodes = codes.filter(code => code !== value);
+    entityDetails["codes"] = newCodes;
+
+    this.setState({ newEntityDetails: entityDetails });
+  };
+
+  addEntity = e => {
+    e.preventDefault();
+    this.toggleCreateEntity();
+    const entity = this.state.newEntityDetails;
+    console.log("new details", entity);
+    this.props.addEntity(entity);
+    return;
+  };
+  processCode = (e, id) => {
+    e.preventDefault();
+    this.toggleProcessEntity(e);
+    const entity = this.state.processEntityDetails;
+    console.log("process details", entity);
+    this.props.processCode(entity, id);
+    return;
+  };
   /**
    * open and close the the progress ui
    */
@@ -172,8 +244,8 @@ class Class extends Component {
       default:
         break;
     }
-    if (type == "approve") this.props.approveBusiness(businessId, details);
-    if (type == "activate") this.props.activateBusiness(businessId, details);
+    // if (type == "approve") this.props.approveBusiness(businessId, details);
+    // if (type == "activate") this.props.activateBusiness(businessId, details);
   };
 
   /**
@@ -356,17 +428,41 @@ class Class extends Component {
   /**
    * show change a member's branch modal
    */
-  toggleEditEntity = (e, id) => {
+  toggleProcessEntity = (e, id = null) => {
     e.preventDefault();
     e.stopPropagation();
+    if (id) this.setCurrentRow(id);
+    this.setState(prevState => {
+      return { showProcessEntity: !prevState.showProcessEntity };
+    });
+  };
+  toggleEditEntity = (e, id = null) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (id) this.setCurrentRow(id);
     this.setState(prevState => {
       return { showEditEntity: !prevState.showEditEntity };
     });
   };
+  setCurrentRow = id => {
+    const receivings = [...this.props.receivings];
+    const current = receivings.find(elem => elem.id == id);
 
-  toggleDeleteEntity = (e, id) => {
+    this.setState({ currentEntity: current });
+  };
+  toggleRowDetails = (e, id = null) => {
     e.preventDefault();
     e.stopPropagation();
+    if (id) this.setCurrentRow(id);
+    this.setState(prevState => {
+      return { showRowDetails: !prevState.showRowDetails };
+    });
+  };
+
+  toggleDeleteEntity = (e, id = null) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (id) this.setCurrentRow(id);
     this.setState(prevState => {
       return { showDeleteEntity: !prevState.showDeleteEntity };
     });
@@ -462,20 +558,36 @@ class Class extends Component {
   render() {
     return (
       <ReceivingSumView
+        addEntity={this.addEntity}
+        processCode={this.processCode}
+        setNewEntityDetail={this.setNewEntityDetail}
+        setProcessEntityDetail={this.setProcessEntityDetail}
+        addCodeToken={this.addCodeToken}
+        removeCodeToken={this.removeCodeToken}
+        receivings={this.props.receivings}
+        customers={this.props.customers}
+        drivers={this.props.drivers}
+        stocks={this.props.stocks}
+        outlets={this.props.outlets}
         currentUser={this.props.currentUser}
         currentEntity={this.state.currentEntity}
         createBusiness={this.createBusiness}
         showNotification={this.state.showNotification}
         showDeleteEntity={this.state.showDeleteEntity}
+        showProcessEntity={this.state.showProcessEntity}
         showCreateEntity={this.state.showCreateEntity}
         showEditEntity={this.state.showEditEntity}
+        showRowDetails={this.state.showRowDetails}
         showLoading={this.props.progress}
         popupTimer={this.popupTimer}
         showPreviewSales={this.state.showPreviewSales}
         showPreviewPayment={this.state.showPreviewPayment}
+        toggleProcessEntity={this.toggleProcessEntity}
         toggleCreateEntity={this.toggleCreateEntity}
         toggleEditEntity={this.toggleEditEntity}
+        toggleRowDetails={this.toggleRowDetails}
         toggleDeleteEntity={this.toggleDeleteEntity}
+        setCurrentRow={this.setCurrentRow}
         //selector
         promptSelectorActivate={this.promptSelectorActivate}
         //confirm prompt
@@ -486,23 +598,21 @@ class Class extends Component {
 }
 // console.log("checking allt he biz", )
 const mapStateToProps = state => ({
-  // allBusiness: getAllBusinesses(state),
-  // approvedBusiness: getApprovedBusinesses(state),
-  // inactiveBusiness: getInactiveBusinesses(state),
-  // currentUser: getCurrentUser(state),
-  // businessId: getBusinessId(state),
-  // businessColor: getBusinessColor(state),
-  // progress: getProgressIndicator(state),
-  // uploadedFile: getUploadedFileData(state),
-  // uploadStatus: getUploadStatus(state)
+  drivers: getDrivers(state),
+  customers: getCustomers(state),
+  stocks: getStocks(state),
+  outlets: getOutlets(state),
+  receivings: getReceivings(state),
+  currentUser: getCurrentUser(state),
+  businessId: getBusinessId(state)
 });
 
 export const ReceivingSum = connect(
   mapStateToProps,
   {
-    fetchBusinessByStatus,
-    approveBusiness,
-    activateBusiness,
+    updateReceivingsData,
+    addEntity,
+    processCode,
     filterByDate,
     registerBusiness,
     uploadLogo

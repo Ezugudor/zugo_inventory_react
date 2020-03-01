@@ -1,5 +1,5 @@
 import {
-  fetchBusinessByStatus,
+  updateBusinessDataFromServer,
   filterByDate,
   registerBusiness,
   uploadLogo,
@@ -11,7 +11,11 @@ import React, { Component } from "react";
 import {
   getCurrentUser,
   getUploadedFileData,
-  getUploadStatus
+  getUploadStatus,
+  getOutlets,
+  getCreditPayment,
+  getCustomerCredit,
+  getCustomers
 } from "../../store/selectors";
 import { connect } from "react-redux";
 import {
@@ -121,8 +125,7 @@ class Class extends Component {
 
   componentDidMount() {
     const { businessId, businessColor } = this.props;
-    // themeMaker(businessColor);
-    // this.props.fetchBusinessByStatus();
+    this.props.updateBusinessDataFromServer(this.props.businessId);
   }
 
   popupTimer = props => {
@@ -514,7 +517,10 @@ class Class extends Component {
   render() {
     return (
       <DashboardView
-        allBusiness={this.props.allBusiness}
+        outlets={this.props.outlets}
+        creditPayment={this.props.creditPayment}
+        customerCredit={this.props.customerCredit}
+        customers={this.props.customers}
         approvedBusiness={this.props.approvedBusiness}
         inactiveBusiness={this.props.inactiveBusiness}
         handleDateChange={this.handleDateChange}
@@ -524,7 +530,7 @@ class Class extends Component {
         switchTab={this.switchResponseTab}
         startDate={this.state.startDate}
         endDate={this.state.endDate}
-        currentUser={this.props.currentUser}
+        currentUser={this.props.currentUsers}
         createBusiness={this.createBusiness}
         showNotification={this.state.showNotification}
         showEditBusiness={this.state.showEditBusiness}
@@ -571,8 +577,12 @@ const mapStateToProps = state => ({
   // allBusiness: getAllBusinesses(state),
   // approvedBusiness: getApprovedBusinesses(state),
   // inactiveBusiness: getInactiveBusinesses(state),
-  // currentUser: getCurrentUser(state),
-  // businessId: getBusinessId(state),
+  currentUsers: getCurrentUser(state),
+  outlets: getOutlets(state),
+  creditPayment: getCreditPayment(state),
+  customerCredit: getCustomerCredit(state),
+  customers: getCustomers(state),
+  businessId: getBusinessId(state)
   // businessColor: getBusinessColor(state),
   // progress: getProgressIndicator(state),
   // uploadedFile: getUploadedFileData(state),
@@ -582,7 +592,7 @@ const mapStateToProps = state => ({
 export const Dashboard = connect(
   mapStateToProps,
   {
-    fetchBusinessByStatus,
+    updateBusinessDataFromServer,
     approveBusiness,
     activateBusiness,
     filterByDate,

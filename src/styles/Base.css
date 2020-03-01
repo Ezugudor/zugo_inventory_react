@@ -18,7 +18,7 @@
   --black: #000000;
   --blue: #0d6eff;
   --dark-light: #424455;
-  --red: #ff3b3f;
+  --red: #000;
   --green: #09e99d;
   --grey: #ecedf3;
   --purple: #320de2;
@@ -45,7 +45,10 @@ label {
 #root {
   height: 100vh;
 }
-
+.naira {
+  font-family: baloo;
+  color: blue;
+}
 .ActivteElement {
   width: 100%;
   opacity: 1;

@@ -13,27 +13,30 @@ export class JQDatatable extends Component {
     this.props = props;
     this.dTOptions = "";
     this.dataTableHandle = "";
+    this.columnNo = props.columnNo || 0;
+    this.sortDir = props.sortDir || "asc";
   }
   componentDidMount() {
     const _this = this;
 
     this.dTOptions = {
-      dom: `<"table-filter-cont tfc-top" <"tresponsive" <"tf-title"><"tf-addbtn ${_this.props.tableId}"> <"tf-filter"f> <"tf-length"<"fancy-select"l>> <"bulk-action"><"clearfix">>><"tf-table"t><"table-filter-cont tfc-bottom" <"tresponsive" <"tf-info"i> <"tf-paging"p><"clearfix">>>`,
+      dom: `<"table-filter-cont tfc-top" <"tresponsive" <"tf-title"><"tf-addbtn ${this.props.tableId}"> <"tf-filter"f> <"tf-length"<"fancy-select"l>> <"bulk-action"><"clearfix">>><"tf-table"t><"table-filter-cont tfc-bottom" <"tresponsive" <"tf-info"i> <"tf-paging"p><"clearfix">>>`,
       initComplete: function() {
-        let tfTitle = `<span class="table-name"></span> <span class="table-class">${_this.props.data.title}</span> `;
-        let btn = <span>{_this.props.data.newBtn}</span>;
+        let tfTitle = `<span class="table-name"></span> <span class="table-class">${this.props.data.title}</span> `;
+        let btn = <span>{this.props.data.newBtn}</span>;
 
         $(".tf-title").html(tfTitle);
         ReactDOM.render(
           btn,
-          document.querySelector(`.tf-addbtn.${_this.props.tableId}`)
+          document.querySelector(`.tf-addbtn.${this.props.tableId}`)
         );
-      },
+      }.bind(this),
       language: {
         emptyTable: "No data available",
         search: "_INPUT_",
-        searchPlaceholder: "Search records"
+        searchPlaceholder: "Search for data within table"
       },
+      order: [[this.columnNo, this.sortDir]],
       drawCallback: function() {}
     };
     this.$el = $(this.el);

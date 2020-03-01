@@ -9,17 +9,40 @@ const buildStyle = (props, tab) => {
   return className(Style.inboxTab, conditionalStyle);
 };
 
+const totalTrans = props => {
+  let totalTrans = 0;
+  props.outlets.forEach(outlet => {
+    const { sales } = outlet;
+    totalTrans += sales.length;
+  });
+  return totalTrans;
+};
+
+const totalTransAmount = props => {
+  let totalTransAmount = 0;
+  props.outlets.forEach(outlet => {
+    const { sales } = outlet;
+    sales.forEach(cred => {
+      totalTransAmount += cred.total_price || 0;
+    });
+  });
+  return totalTransAmount;
+};
+
 export const Outlets = props => (
   <div class="col2">
     <a href="outlets" className={Style.CardBody}>
       <span className={`mdi mdi-store ${Style.CardIcon}`}></span>
       <div className={Style.CardInfo}>
-        <span className={Style.CardHeader}>Outlets</span>
+        <span className={Style.CardHeader}>Outlets Sales:</span>
         <span className={Style.SubInfo}>
-          No of Debtors: <span className={Style.Bold}>20</span>
+          No of Trans: <span className={Style.Bold}>{totalTrans(props)}</span>
         </span>
         <span className={Style.SubInfo}>
-          Trans Amount: <span className={Style.Bold}>N50,000</span>
+          Trans Amount:{" "}
+          <span className={`${Style.Bold} naira`}>
+            {totalTransAmount(props)}
+          </span>
         </span>
       </div>
     </a>

@@ -9,7 +9,8 @@ import logoutIcon from "../../../img/logout.svg";
 import React from "react";
 
 const getSideBar = (currentUser, props) => {
-  return currentUser && currentUser.role !== "admin" ? (
+  return currentUser &&
+    (currentUser.role !== "admin" && currentUser.role !== 3) ? (
     <AdminMiniSideNav pageName={props.pageName} />
   ) : (
     <AdminSideNav pageName={props.pageName} />

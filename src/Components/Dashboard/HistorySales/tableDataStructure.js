@@ -20,7 +20,7 @@ export const dataStruct = {
     },
     {
       label: "Quantity",
-      field: "quantity",
+      field: "qty",
       sort: "asc",
       width: 270
     },

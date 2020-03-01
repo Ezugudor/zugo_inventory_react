@@ -9,10 +9,10 @@ import { SwypPartnerApi } from "../../core/api";
 import { setNotificationMessage } from "./app";
 import { handleError } from "../../utils";
 
-const deleteAcount = user => ({ type: DELETE_BUSINESS_ACCOUNT, user });
 const storeBusinessrData = data => ({ type: STORE_BUSINESS, data });
 const storeUserData = data => ({ type: STORE_USER, data });
 const updateBusiness = data => ({ type: UPDATE_BUSINESS, data });
+const deleteAcount = user => ({ type: DELETE_BUSINESS_ACCOUNT, user });
 
 /**
  * handle user login interaction with backend service
@@ -25,74 +25,18 @@ export const loginUser = (loginDetails, history) => {
     console.log("started the request");
     SwypPartnerApi.post("business/login", loginDetails)
       .then(res => {
-        console.log("this is getting here");
+        console.log();
+        console.log("this is getting here", res.data.data);
         dispatch(stopNetworkRequest());
-        // dispatch(storeUserData(res.data));
-        // dispatch(storeBusinessrData(res.data));
-        // dispatch(
-        //   setNotificationMessage(
-        //     `Welcome back ${res.data.user.name}`,
-        //     "success"
-        //   )
-        // );
-        history.push("/dashboard");
-      })
-      .catch(err => handleError(err, dispatch));
-  };
-};
-
-export const verifySignupToken = token => {
-  return dispatch => {
-    dispatch(startNetworkRequest());
-    SwypPartnerApi.get(`user/completesignup/${token}`)
-      .then(res => {
-        dispatch(stopNetworkRequest());
-        if (res.data.valid) {
-          dispatch(
-            setNotificationMessage(`Token is valid`, "success", "Success !")
-          );
-          return;
-        }
-        dispatch(setNotificationMessage("Token has expired", "erro", "Oops !"));
-      })
-      .catch(err => handleError(err, dispatch));
-  };
-};
-
-/**
- * handle user signup verification interaction with backend service
- * @param {object} loginDetails user credentails(password and confirm password)
- * @param {object} history react router object
- */
-export const completeSignup = (loginDetails, history, _this) => {
-  return dispatch => {
-    dispatch(startNetworkRequest());
-    SwypPartnerApi.post(
-      `user/completesignup/${loginDetails.token}`,
-      loginDetails
-    )
-      .then(res => {
-        dispatch(stopNetworkRequest());
-
-        _this.setState({
-          currentComponent: "success"
-        });
-
-        //give some time margin so user can read the success message before redirecting to login
-        setTimeout(function() {
-          // window.location.href = "/login";
-          history.push("/login");
-        }, 5000);
-
-        // dispatch(storeUserData(res.data));
-        // dispatch(storeBusinessrData(res.data));
+        dispatch(storeUserData(res.data.data));
+        dispatch(storeBusinessrData(res.data.data));
         dispatch(
           setNotificationMessage(
-            "Account created successfully.",
-            "success",
-            `Welcome, ${res.data.user.name}`
+            `Welcome back ${res.data.data.current_user.surname}`,
+            "success"
           )
         );
+        history.push("/dashboard");
       })
       .catch(err => handleError(err, dispatch));
   };

@@ -1,2 +1,3 @@
 #skipping jQuery NiceScrollbar
 /src/plugins/nicescrollbar/*.js
+/src/plugins/jQueryAutoComplete/jQueryautoComplete/*.js

@@ -8,6 +8,7 @@ import React from "react";
 
 export const EditEntity = props => (
   <Modal show={props.showEditEntity} click={props.toggleEditEntity}>
+    {console.log("currnenting data", props.currentEntity)}
     <div class="modal_body half">
       <div class="card_main_header">
         <div class="company_header_info">
@@ -39,10 +40,28 @@ export const EditEntity = props => (
       </div>
 
       <div class="scroll_body2">
-        <div class="col-md-6">
+        <div class="col-md-5">
           <div class="col2">
-            <label>SKU</label>
-            <input type="text" class="form_field" placeholder="e.g SKU236504" />
+            <label>SKU Code</label>
+            <input
+              type="text"
+              class="form_field"
+              value={props.currentEntity.supply_code}
+              placeholder="e.g SKU236504"
+              disabled
+            />
+          </div>
+        </div>
+        <div class="col-md-7">
+          <div class="col2">
+            <label>Product Name</label>
+            <input
+              type="text"
+              class="form_field"
+              value={props.currentEntity.product_name}
+              placeholder="e.g Dangote"
+              disabled
+            />
           </div>
         </div>
 
@@ -50,59 +69,71 @@ export const EditEntity = props => (
           <div class="col2">
             <label>Mode</label>
             <div class="clearfix"></div>
-            <select class="form_field">
+            <select class="form_field" disabled>
               <option value="mdd">MDD (Modified Direct Delivery)</option>
               <option value="dd">DD (Direct Delivery)</option>
             </select>
-          </div>
-        </div>
-        <div class="col-md-12">
-          <div class="col2">
-            <label>Amount</label>
-            <input type="text" class="form_field" placeholder="e.g 800 bags" />
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="col2">
-            <label>Qty</label>
-            <input type="text" class="form_field" placeholder="e.g 800 bags" />
           </div>
         </div>
 
         <div class="col-md-6">
           <div class="col2">
             <label>Driver</label>
-            <input type="text" class="form_field" placeholder="e.g Jonathan" />
+            <input
+              type="text"
+              value={
+                props.currentEntity.driver_firstname ||
+                props.currentEntity.driver_lastname
+              }
+              class="form_field"
+              placeholder="e.g Jonathan"
+              disabled
+            />
           </div>
         </div>
         <div class="col-md-6">
           <div class="col2">
             <label>Truck Id</label>
-            <input type="text" class="form_field" placeholder="e.g ABJ345KL" />
+            <input
+              type="text"
+              value={props.currentEntity.truck_id}
+              class="form_field"
+              placeholder="e.g ABJ345KL"
+              disabled
+            />
           </div>
         </div>
 
         <div class="col-md-6">
           <div class="col2">
             <label>Size</label>
-            <input type="text" class="form_field" placeholder="e.g 40 Tons" />
+            <input
+              type="text"
+              value={props.currentEntity.size}
+              class="form_field"
+              placeholder="e.g 40 Tons"
+              disabled
+            />
           </div>
         </div>
 
         <div class="col-md-6">
           <div class="col2">
-            <label>Company</label>
-            <select class="form_field">
-              <option value="Dangote">Dangote</option>
-              <option value="Dangote">Lafarge</option>
-            </select>
+            <label>Qty</label>
+            <input
+              value={props.currentEntity.qty}
+              type="text"
+              class="form_field"
+              placeholder="e.g 800 bags"
+              disabled
+            />
           </div>
         </div>
 
         <div class="col-md-6">
           <div class="col2">
             <label>Source</label>
-            <select class="form_field">
+            <select class="form_field" disabled>
               <option value="Dangote">Factory</option>
               <option value="Dangote">Depot</option>
             </select>
@@ -114,7 +145,7 @@ export const EditEntity = props => (
         <div className={styles.controls}>
           <White click={props.toggleEditEntity}>Cancel</White>
           <Red click={props.editEntity} extStyle={styles.CreateBtn}>
-            Create Receivings
+            Update Receivings
           </Red>
         </div>
       </div>

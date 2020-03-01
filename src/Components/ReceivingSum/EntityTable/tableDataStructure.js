@@ -2,7 +2,7 @@ export const dataStruct = {
   columns: [
     {
       label: "Sn",
-      field: "sn",
+      field: "id",
       sort: "asc",
       width: 270
     },
@@ -13,61 +13,47 @@ export const dataStruct = {
       width: 270
     },
     {
+      label: "Status",
+      field: "status",
+      sort: "asc",
+      width: 270
+    },
+    {
+      label: "Items",
+      field: "item",
+      sort: "asc",
+      width: 270
+    },
+    {
       label: "Size",
       field: "size",
       sort: "asc",
       width: 150
     },
+
     {
-      label: "Total Qty",
-      field: "qty",
-      sort: "asc",
-      width: 150
-    },
-    {
-      label: "Total Amount",
-      field: "amount",
+      label: "Supplied To",
+      field: "supplied_to",
       sort: "asc",
       width: 270
     },
-    {
-      label: "Supplier",
-      field: "supplier",
-      sort: "asc",
-      width: 270
-    },
+
     {
       label: "Driver",
       field: "driver",
       sort: "asc",
       width: 270
     },
-    {
-      label: "Driver Phone",
-      field: "driver_phone",
-      sort: "asc",
-      width: 270
-    },
-    {
-      label: "Truck ID",
-      field: "truck",
-      sort: "asc",
-      width: 270
-    },
+
     {
       label: "Mode",
       field: "mode",
       sort: "asc",
       width: 270
     },
+
     {
-      label: "Source",
-      field: "source",
-      sort: "asc",
-      width: 270
-    },
-    {
-      label: "Date Received",
+      label: "Date",
       field: "date",
       sort: "asc",
       width: 270
@@ -85,7 +71,6 @@ export const dataStruct = {
       code: "5948394949434",
       size: "40 Tons",
       qty: "900",
-      amount: "N2,200,000",
       supplier: "Dangote",
       driver: "Ebubechukwu",
       driver_phone: "08059552555",
@@ -93,14 +78,14 @@ export const dataStruct = {
       mode: "MDD",
       source: "Depot",
       date: "Today, 9:11am",
-      action_btns: "Default Text"
+      action_btns: "Default Text",
+      processed: true
     },
     {
       sn: 2,
       code: "892224455494",
       size: "45 Tons",
       qty: "1000",
-      amount: "N3,100,000",
       supplier: "Lafarge",
       driver: "2pac Anayao",
       driver_phone: "09065852255",
@@ -108,14 +93,14 @@ export const dataStruct = {
       mode: "DD",
       source: "Factory",
       date: "12th Jan, 2020",
-      action_btns: "Default Text"
+      action_btns: "Default Text",
+      processed: false
     },
     {
       sn: 3,
       code: "594839494943",
       size: "40 Tons",
       qty: "900",
-      amount: "N2,200,000",
       supplier: "Dangote",
       driver: "Ebubechukwu",
       driver_phone: "08059552555",
@@ -123,14 +108,14 @@ export const dataStruct = {
       mode: "MDD",
       source: "Depot",
       date: "12th Nov, 2010",
-      action_btns: "Default Text"
+      action_btns: "Default Text",
+      processed: true
     },
     {
       sn: 4,
       code: "59483949494",
       size: "40 Tons",
       qty: "900",
-      amount: "N2,200,000",
       supplier: "Dangote",
       driver: "Ebubechukwu",
       driver_phone: "08059552555",
@@ -138,14 +123,14 @@ export const dataStruct = {
       mode: "MDD",
       source: "Depot",
       date: "12th Nov, 2010",
-      action_btns: "Default Text"
+      action_btns: "Default Text",
+      processed: false
     },
     {
       sn: 5,
       code: "59483949494",
       size: "40 Tons",
       qty: "900",
-      amount: "N2,200,000",
       supplier: "Dangote",
       driver: "Ebubechukwu",
       driver_phone: "08059552555",
@@ -153,14 +138,14 @@ export const dataStruct = {
       mode: "MDD",
       source: "Depot",
       date: "12th Nov, 2010",
-      action_btns: "Default Text"
+      action_btns: "Default Text",
+      processed: false
     },
     {
       sn: 6,
       code: "59483949494",
       size: "40 Tons",
       qty: "900",
-      amount: "N2,200,000",
       supplier: "Dangote",
       driver: "Ebubechukwu",
       driver_phone: "08059552555",
@@ -168,14 +153,14 @@ export const dataStruct = {
       mode: "MDD",
       source: "Depot",
       date: "12th Nov, 2010",
-      action_btns: "Default Text"
+      action_btns: "Default Text",
+      processed: true
     },
     {
       sn: 7,
       code: "59483949494",
       size: "40 Tons",
       qty: "900",
-      amount: "N2,200,000",
       supplier: "Dangote",
       driver: "Ebubechukwu",
       driver_phone: "08059552555",
@@ -183,7 +168,8 @@ export const dataStruct = {
       mode: "MDD",
       source: "Depot",
       date: "12th Nov, 2010",
-      action_btns: "Default Text"
+      action_btns: "Default Text",
+      processed: false
     }
   ]
 };

@@ -1,5 +1,4 @@
 import {
-  fetchBusinessByStatus,
   filterByDate,
   registerBusiness,
   uploadLogo,
@@ -500,7 +499,6 @@ const mapStateToProps = state => ({
 export const CreditSum = connect(
   mapStateToProps,
   {
-    fetchBusinessByStatus,
     approveBusiness,
     activateBusiness,
     filterByDate,

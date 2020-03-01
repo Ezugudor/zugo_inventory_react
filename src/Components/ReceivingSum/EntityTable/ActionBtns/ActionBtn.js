@@ -1,6 +1,15 @@
 import styles from "./ActionBtn.module.css";
 import PropTypes from "prop-types";
 import React from "react";
+import className from "classnames";
+
+// const getClassName = (props, page) => {
+//   const conditionalCalss = {};
+
+//   conditionalCalss[Style.ProcessBtn] = props.used === true;
+//   conditionalCalss[Style.InactiveLink] = props.pageName !== page;
+//   return className(Style.NavLink, conditionalCalss);
+// };
 
 const gotoSettings = (e, id) => {
   e.stopPropagation();
@@ -22,11 +31,12 @@ export const ActionBtns = props => (
       <div
         onClick={e => props.toggleEditEntity(e, props.id)}
         // onClick={e => props.populateEditBusiness(e, props.businessInfo)}
-        className={styles.iconHolder}
+        className={`${styles.iconHolder}`}
       >
         <i className={`ion ion-ios-settings-strong ${styles.icon}`}></i>
       </div>
     </div>
+
     <div className={styles.clearfix}></div>
   </div>
 );

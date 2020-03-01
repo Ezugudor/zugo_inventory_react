@@ -10,8 +10,8 @@ export const user = (state = initialState, action) => {
   switch (action.type) {
     case STORE_USER:
       return updateState(state, {
-        token: action.data.token,
-        currentUser: action.data.user
+        token: `Bearer ${action.data.token}`,
+        currentUser: action.data.current_user
       });
     default:
       return state;

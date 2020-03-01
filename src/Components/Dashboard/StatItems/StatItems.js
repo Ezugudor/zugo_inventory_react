@@ -9,19 +9,19 @@ import React from "react";
 export const StatItems = props => (
   <section className={styles.StatItems}>
     <div class="col-md-3">
-      <Debts />
+      <Debts outlets={props.outlets} />
     </div>
 
     <div class="col-md-3">
-      <Payments />
+      <Payments creditPayment={props.creditPayment} />
     </div>
 
     <div class="col-md-3">
-      <Outlets />
+      <Outlets outlets={props.outlets} />
     </div>
 
     <div class="col-md-3">
-      <Customers />
+      <Customers customers={props.customers} />
     </div>
   </section>
 );

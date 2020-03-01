@@ -129,20 +129,27 @@ table.dataTable.no-footer {
 
 .tf-table table tbody td:not(:first-child),
 .tf-table table tbody td:not(:nth-child(2)) {
-  font-size: 16px;
-  font-family: Assistant;
+  font-size: 12px;
+  font-family: Gilroy;
   text-align: center;
-}
-
-.tf-table table tbody td:nth-child(2) {
-  font-size: 16px;
-  /* font-family: fontFam-1; */
+  color: #007f95;
 }
 
 .tf-table table tbody td:nth-child(4),
 .tf-table table tbody td:nth-child(2) {
+  color: rgb(243, 163, 16);
+  font-weight: bold;
+}
+
+.tf-table table tbody td:nth-child(7) {
+  color: rgb(172, 68, 68);
+  font-weight: bold;
+}
+.tf-table table tbody td:nth-child(2) {
+  font-size: 12px;
   color: #000;
-  /* font-weight: bold; */
+  font-weight: bold;
+  /* font-family: fontFam-1; */
 }
 
 .tf-table table tbody td:nth-child(3) {

@@ -9,7 +9,7 @@ import loadingIcon from "../../../img/loading2.svg";
 class Class extends Component {
   render() {
     return (
-      <Modal show={this.props.showLoading}>
+      <Modal show={this.props.showLoadings}>
         <div className={Style.modalCont}>
           <h3 className={Style.modalHead}>Processing...</h3>
           <img src={loadingIcon} alt="processing..." className={Style.img} />
@@ -19,7 +19,11 @@ class Class extends Component {
     );
   }
 }
-
+const mapStateToProps = state => {
+  return {
+    showLoadings: state.app.loading
+  };
+};
 const mapDispatchToProps = dispatch => ({
   closeNotification() {
     dispatch(endNotification());
@@ -27,7 +31,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export const Loading = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Class);
 

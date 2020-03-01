@@ -15,7 +15,9 @@ export const Customers = props => (
       <span className={`mdi mdi-account-group ${Style.CardIcon}`}></span>
       <div className={Style.CardInfo}>
         <span className={Style.CardHeader}>Customers</span>
-        <span className={Style.Bold}>30</span>
+        <span className={Style.Bold}>
+          {props.customers ? props.customers.length : 0}
+        </span>
       </div>
     </a>
   </div>

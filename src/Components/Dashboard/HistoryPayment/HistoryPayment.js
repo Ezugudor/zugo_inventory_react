@@ -38,14 +38,15 @@ const getBusinessInfo = (id, businesses) => {
 };
 let Bizz;
 const showResponse = props => {
-  const ppData = dataStruct.rows.map((res, index) => {
-    const { id, outlet, customer, price, date } = res;
+  // const ppData = dataStruct.rows.map((res, index) => {
+  const ppData = props.creditPayment.map((res, index) => {
+    const { id, outlet, customer, amount, created_at } = res;
     const rowData = {
       id,
       outlet,
       customer,
-      price,
-      date,
+      price: <span className="naira">{amount}</span>,
+      date: created_at,
       clickEvent: () => {
         props.togglePreviewPayment();
       }

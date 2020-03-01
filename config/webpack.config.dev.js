@@ -139,7 +139,8 @@ module.exports = {
     alias: {
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
-      "react-native": "react-native-web"
+      "react-native": "react-native-web",
+      modules: path.resolve("node_modules")
     },
     plugins: [
       // Adds support for installing with Plug'n'Play, leading to faster installs and adding
@@ -366,13 +367,11 @@ module.exports = {
       publicPath: publicPath
     }),
     new webpack.DefinePlugin({
-            'process.env': {
-                'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-            }
-        })
+      "process.env": {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+      }
+    })
   ],
-
-
 
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.

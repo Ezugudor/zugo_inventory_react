@@ -9,6 +9,28 @@ const buildStyle = (props, tab) => {
   return className(Style.inboxTab, conditionalStyle);
 };
 
+const totalDept = props => {
+  let totalDept = 0;
+  props.outlets.forEach(outlet => {
+    const { credits } = outlet;
+    credits.forEach(cred => {
+      totalDept++;
+    });
+  });
+  return totalDept;
+};
+
+const totalDeptAmount = props => {
+  let totalDeptAmount = 0;
+  props.outlets.forEach(outlet => {
+    const { credits } = outlet;
+    credits.forEach(cred => {
+      totalDeptAmount += cred.total_amount;
+    });
+  });
+  return totalDeptAmount;
+};
+
 export const Debts = props => (
   <div class="col2">
     <a href="creditsum" className={Style.CardBody}>
@@ -16,10 +38,13 @@ export const Debts = props => (
       <div className={Style.CardInfo}>
         <span className={Style.CardHeader}>Pending Debts</span>
         <span className={Style.SubInfo}>
-          No of Debtors: <span className={Style.Bold}>20</span>
+          No of Debtors: <span className={Style.Bold}>{totalDept(props)}</span>
         </span>
         <span className={Style.SubInfo}>
-          Total Amount: <span className={Style.Bold}>N50,000</span>
+          Total Amount:{" "}
+          <span className={`${Style.Bold} naira`}>
+            {totalDeptAmount(props)}
+          </span>
         </span>
       </div>
     </a>

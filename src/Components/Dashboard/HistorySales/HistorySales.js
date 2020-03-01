@@ -37,23 +37,30 @@ const getBusinessInfo = (id, businesses) => {
 };
 let Bizz;
 const showResponse = props => {
-  const ppData = dataStruct.rows.map((res, index) => {
-    const { id, outlet, customer, quantity, price } = res;
-    const rowData = {
-      id,
-      outlet,
-      customer,
-      quantity,
-      price,
-      clickEvent: () => {
-        props.togglePreviewSales();
-      }
-    };
+  const tableData = props.outlets;
+  // const ppData = dataStruct.rows.map((res, index) => {
+  let arr = [];
+  const ppData = tableData.forEach((res, index) => {
+    const rows = res.sales.map(dt => {
+      const { id, customer, admin, price, qty } = dt;
+      const rowData = {
+        id,
+        customer,
+        qty,
+        price: <span className="naira">{price}</span>,
+        outlet: res.info.name,
+        clickEvent: () => {
+          props.togglePreviewSales();
+        }
+      };
 
-    return rowData;
+      return rowData;
+    });
+    const newData = [...arr, ...rows];
+    arr = newData;
   });
   const ppDataS = { ...dataStruct };
-  ppDataS.rows = ppData;
+  ppDataS.rows = arr;
   ppDataS.title = `<i class="${Style.tableTitleIcon} ion ion-ios-home"></i> Outlet Sales`;
   ppDataS.newBtn = (
     <Red

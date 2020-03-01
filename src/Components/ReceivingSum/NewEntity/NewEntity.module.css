@@ -110,3 +110,10 @@
 .CreateBtn {
   background: var(--blue);
 }
+.TokenField {
+  position: relative;
+  top: 32px;
+  margin-bottom: 50px;
+}
+.AutoCompleteField {
+}

@@ -2,9 +2,13 @@ import { White, Red } from "../../Utils/Buttons";
 import { FileUpload, PreviewImage } from "../../Utils";
 import styles from "./NewEntity.module.css";
 import "./NewEntityClassic.css";
+import $ from "jquery";
 import { Modal } from "../../Utils";
 import PropTypes from "prop-types";
 import React from "react";
+import { Tokenize } from "../../../plugins";
+import { JQAutoComplete } from "../../../plugins";
+import uuid from "uuid4";
 
 const gotoRegister = (e, id) => {
   e.stopPropagation();
@@ -44,73 +48,61 @@ export const NewEntity = props => (
       </div>
 
       <div class="scroll_body2">
-        <div class="col-md-6">
+        <div class="col-md-12">
           <div class="col2">
             <label>SKU</label>
-            <input type="text" class="form_field" placeholder="e.g SKU236504" />
+            <div className={styles.TokenField}>
+              <Tokenize
+                extStyle={styles.TokenComp}
+                placeholder="e.g SKU236504"
+                addCodeToken={props.addCodeToken}
+                removeCodeToken={props.removeCodeToken}
+              />
+            </div>
+            {/* <input type="text" class="form_field" placeholder="e.g SKU236504" /> */}
           </div>
         </div>
 
-        <div class="col-md-6">
-          <div class="col2">
-            <label>Mode</label>
-            <div class="clearfix"></div>
-            <select class="form_field">
-              <option value="mdd">MDD (Modified Direct Delivery)</option>
-              <option value="dd">DD (Direct Delivery)</option>
-            </select>
-          </div>
-        </div>
         <div class="col-md-12">
           <div class="col2">
-            <label>Amount</label>
-            <input type="text" class="form_field" placeholder="e.g 800 bags" />
+            <label>Item(product)</label>
+            <JQAutoComplete
+              name="item"
+              id={uuid()}
+              data={props.stocks}
+              lookout="product_name"
+              extStyle={styles.AutoCompleteField}
+              setNewEntityDetail={props.setNewEntityDetail}
+              placeholder="e.g Unicem"
+            />
+            {/* <input
+              type="text"
+              class="form_field"
+              placeholder="e.g Unicem"
+              onChange={e => props.setNewEntityDetail(e, "item")}
+            /> */}
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="col2">
+            <label>Size</label>
+            <input
+              type="text"
+              class="form_field"
+              placeholder="e.g 40 Tons"
+              onChange={e => props.setNewEntityDetail(e, "size")}
+            />
           </div>
         </div>
         <div class="col-md-6">
           <div class="col2">
             <label>Qty</label>
-            <input type="text" class="form_field" placeholder="e.g 800 bags" />
-          </div>
-        </div>
-
-        <div class="col-md-6">
-          <div class="col2">
-            <label>Driver</label>
-            <input type="text" class="form_field" placeholder="e.g Jonathan" />
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="col2">
-            <label>Truck Id</label>
-            <input type="text" class="form_field" placeholder="e.g ABJ345KL" />
-          </div>
-        </div>
-
-        <div class="col-md-6">
-          <div class="col2">
-            <label>Size</label>
-            <input type="text" class="form_field" placeholder="e.g 40 Tons" />
-          </div>
-        </div>
-
-        <div class="col-md-6">
-          <div class="col2">
-            <label>Company</label>
-            <select class="form_field">
-              <option value="Dangote">Dangote</option>
-              <option value="Dangote">Lafarge</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="col-md-6">
-          <div class="col2">
-            <label>Source</label>
-            <select class="form_field">
-              <option value="Dangote">Factory</option>
-              <option value="Dangote">Depot</option>
-            </select>
+            <input
+              type="text"
+              class="form_field"
+              placeholder="e.g 800 bags"
+              readOnly
+            />
           </div>
         </div>
       </div>
@@ -118,7 +110,7 @@ export const NewEntity = props => (
       <div class="modal_footer">
         <div className={styles.controls}>
           <White click={props.toggleCreateEntity}>Cancel</White>
-          <Red click={e => gotoRegister(e)} extStyle={styles.CreateBtn}>
+          <Red click={e => props.addEntity(e)} extStyle={styles.CreateBtn}>
             Proceed
           </Red>
         </div>

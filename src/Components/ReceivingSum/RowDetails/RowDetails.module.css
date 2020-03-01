@@ -1,0 +1,88 @@
+@value Variables: "../../../styles/Variables.css";
+@value white-color, typeform-border-color from Variables;
+
+.section {
+  height: 63vh;
+  min-height: 49rem;
+  background-color: white-color;
+  border-radius: 9px;
+  width: 50%;
+  margin: 0 auto;
+  overflow-y: scroll;
+}
+
+.header {
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  border-bottom: 1px solid #ddd;
+  padding: 20px;
+  color: var(--color1);
+  font-family: Gilroy;
+}
+.sectionHeader {
+  padding-left: 30px;
+  margin: 0;
+  margin-bottom: 10px;
+  font-family: Gilroy;
+}
+.HeaderInfo {
+  position: relative;
+  left: 10px;
+}
+.HeaderInfoItemCont {
+  font-family: Assistant;
+  margin-right: 70px;
+}
+
+.HeaderInfoItemCont .hLabel {
+  color: #888;
+  margin-right: 20px;
+  font-weight: bold;
+  font-size: 20px;
+}
+.HeaderInfoItemCont .hValue {
+  color: #000;
+  font-size: 20px;
+}
+.InfoItemCont {
+  text-align: center;
+}
+.Label {
+  font-family: Gilroy;
+  font-weight: bold;
+  color: rgb(34, 94, 224);
+}
+
+.Value {
+  font-family: Gilroy;
+  font-weight: bold;
+  color: rgb(13, 18, 26);
+  font-size: 20px;
+}
+.em {
+  font-family: baloo;
+  font-size: 30px !important;
+}
+.emp {
+  color: rgb(247, 192, 15) !important;
+  font-family: Gilroy;
+  font-weight: bold;
+}
+.emp2 {
+  color: rgb(32, 62, 161) !important;
+  font-family: Gilroy;
+  font-size: 15px !important;
+  font-weight: bold;
+}
+.danger {
+  color: red !important;
+  font-family: baloo;
+}
+.success {
+  color: rgb(54, 179, 70) !important;
+  font-family: baloo;
+}
+.Col {
+  margin-top: 40px;
+}
