@@ -39,10 +39,15 @@ export const NewStock = props => (
       </div>
 
       <div class="scroll_body2">
-        <div class="col-md-6">
+        <div class="col-md-12">
           <div class="col2">
             <label>Stock Name</label>
-            <input type="text" class="form_field" placeholder="e.g SKU236504" />
+            <input
+              type="text"
+              class="form_field"
+              placeholder="e.g SKU236504"
+              onChange={e => props.setNewEntityDetail(e, "name")}
+            />
           </div>
         </div>
 
@@ -50,31 +55,49 @@ export const NewStock = props => (
           <div class="col2">
             <label>Product Type</label>
             <div class="clearfix"></div>
-            <select class="form_field">
+            <select
+              class="form_field"
+              onChange={e => props.setNewEntityDetail(e, "type")}
+            >
               <option value="mdd">Cements</option>
               <option value="dd">Rods</option>
             </select>
           </div>
         </div>
 
-        <div class="col-md-12">
+        <div class="col-md-6">
           <div class="col2">
             <label>Price</label>
-            <input type="text" class="form_field" placeholder="e.g Jonathan" />
+            <input
+              type="text"
+              class="form_field"
+              placeholder="e.g N2000"
+              onChange={e => props.setNewEntityDetail(e, "price")}
+            />
           </div>
         </div>
 
         <div class="col-md-6">
           <div class="col2">
             <label>Cost Price</label>
-            <input type="text" class="form_field" placeholder="e.g N10,000" />
+            <input
+              type="text"
+              class="form_field"
+              placeholder="e.g N10,000"
+              onChange={e => props.setNewEntityDetail(e, "cp")}
+            />
           </div>
         </div>
 
         <div class="col-md-6">
           <div class="col2">
             <label>Qty</label>
-            <input type="text" class="form_field" placeholder="e.g 800 bags" />
+            <input
+              type="text"
+              class="form_field"
+              placeholder="e.g 800 bags"
+              onChange={e => props.setNewEntityDetail(e, "qty")}
+            />
           </div>
         </div>
 
@@ -85,6 +108,7 @@ export const NewStock = props => (
               type="text"
               class="form_field"
               placeholder="e.g 12/21/2020 10:10pm"
+              onChange={e => props.setNewEntityDetail(e, "expiry")}
             />
           </div>
         </div>

@@ -1,6 +1,6 @@
 import axios from "axios";
 
 export const SwypPartnerApi = axios.create({
-  // baseURL: "https://business-backend-service.herokuapp.com/api/v1/"
-  baseURL: "http://inventory-api/api/"
+  baseURL: "http://api.zugostock.com/api/"
+  // baseURL: "http://inventory-api/api/"
 });

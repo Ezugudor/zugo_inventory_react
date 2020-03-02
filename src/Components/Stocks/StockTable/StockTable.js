@@ -4,6 +4,7 @@ import { dataStruct } from "./tableDataStructure";
 import Style from "./StockTable.module.css";
 // import SharedStyle from "../Tables.module.css";
 import { JQDatatable } from "../../../plugins";
+import { Money } from "../../../plugins";
 import { White, Red } from "../../Utils/Buttons";
 import { ActionBtns } from "./ActionBtns";
 const moment = require("moment");
@@ -19,6 +20,7 @@ export class Class extends Component {
 }
 export const StockTable = props => (
   <section>
+    {console.log("logging stocks ", props.stocks)}
     <div className={Style.tableCont}>{showResponse(props)}</div>
   </section>
 );
@@ -33,44 +35,38 @@ const getBusinessInfo = (id, businesses) => {
 };
 let Bizz;
 const showResponse = props => {
-  const ppData = dataStruct.rows.map((res, index) => {
+  const ppData = props.stocks.map((res, index) => {
     const {
-      sn,
       id,
-      name,
-      type,
-      size,
-      qty,
+      product_name,
+      product_type,
       cp,
-      sp,
-      total_cp,
-      total_sp,
+      price,
+      stock_qty,
       expiry,
-      author,
-      date
+      admin_surname,
+      admin_firstname,
+      created_at
     } = res;
     const rowData = {
-      sn,
       id,
-      name,
-      type,
-      size,
-      qty,
-      cp,
-      sp,
-      total_cp,
-      total_sp,
+      product_name,
+      product_type,
+      cp: <Money extStyle={Style.Money}>{cp}</Money>,
+      price: <Money extStyle={Style.Money}>{price}</Money>,
+      stock_qty,
       expiry,
-      author,
-      date,
+      created_by: admin_surname || admin_firstname,
+      created_at,
       action_btns: (
         <ActionBtns
           toggleDeleteEntity={props.toggleDeleteEntity}
           toggleEditEntity={props.toggleEditEntity}
+          id={id}
         />
       ),
-      clickEvent: () => {
-        props.toggleEditEntity();
+      clickEvent: e => {
+        props.toggleEditEntity(e, id);
       }
     };
 
@@ -90,7 +86,15 @@ const showResponse = props => {
     </Red>
   );
 
-  return <JQDatatable tableId="sales" hover data={ppDataS} />;
+  return (
+    <JQDatatable
+      tableId="sales"
+      hover
+      data={ppDataS}
+      sortByColumn={7}
+      sortDir={"desc"}
+    />
+  );
 };
 
 StockTable.propTypes = {

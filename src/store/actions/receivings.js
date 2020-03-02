@@ -40,19 +40,18 @@ export const updateReceivingsData = businessId => {
   ]);
 };
 
-export const deleteForm = (formId, details) => {
+export const deleteReceivings = elem => {
   return dispatch => {
     dispatch(startNetworkRequest());
-    SwypPartnerApi.delete(`forms/${formId}`, { data: details })
+    SwypPartnerApi.delete(`business/receivings/${elem.id}`)
       .then(res => {
         dispatch(stopNetworkRequest());
-        const { workspace } = details;
-        // dispatch(saveForms(res.data, workspace.id));
+        dispatch(updateRxData(res.data.data));
         dispatch(
           setNotificationMessage(
-            `Form successfully deleted`,
+            `Receivings successfully deleted`,
             "success",
-            "Form Deleted"
+            "Success"
           )
         );
       })

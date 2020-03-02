@@ -2,61 +2,31 @@ export const dataStruct = {
   columns: [
     {
       label: "Sn",
-      field: "sn",
-      sort: "asc",
-      width: 270
-    },
-    {
-      label: "Product Id",
       field: "id",
       sort: "asc",
       width: 270
     },
     {
       label: "Product Name",
-      field: "name",
+      field: "product_name",
       sort: "asc",
       width: 150
-    },
-    {
-      label: "Type",
-      field: "type",
-      sort: "asc",
-      width: 150
-    },
-    {
-      label: "Size",
-      field: "size",
-      sort: "asc",
-      width: 150
-    },
-    {
-      label: "Qty in Stock",
-      field: "qty",
-      sort: "asc",
-      width: 270
     },
     {
       label: "Cost Price",
       field: "cp",
       sort: "asc",
-      width: 270
+      width: 150
     },
     {
-      label: "Sell Price",
-      field: "sp",
+      label: "Selling Price",
+      field: "price",
       sort: "asc",
       width: 270
     },
     {
-      label: "Total CP",
-      field: "total_cp",
-      sort: "asc",
-      width: 270
-    },
-    {
-      label: "Total SP",
-      field: "total_sp",
+      label: "Qty",
+      field: "stock_qty",
       sort: "asc",
       width: 270
     },
@@ -68,13 +38,13 @@ export const dataStruct = {
     },
     {
       label: "Added By",
-      field: "author",
+      field: "created_by",
       sort: "asc",
       width: 270
     },
     {
       label: "Date Added",
-      field: "date",
+      field: "created_at",
       sort: "asc",
       width: 270
     },

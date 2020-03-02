@@ -65,6 +65,7 @@ export const ReceivingSumView = props => {
           showDeleteEntity={props.showDeleteEntity}
           toggleDeleteEntity={props.toggleDeleteEntity}
           currentEntity={props.currentEntity}
+          deleteEntity={props.deleteEntity}
         />
 
         <Loading showLoading={props.showLoading} />

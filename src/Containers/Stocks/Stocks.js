@@ -3,23 +3,19 @@ import {
   registerBusiness,
   uploadLogo,
   approveBusiness,
-  activateBusiness
+  activateBusiness,
+  addStock,
+  updateStock,
+  deleteStock,
+  updateStocksData
 } from "../../store/actions";
 import { StocksView } from "../../Components/Stocks";
 import React, { Component } from "react";
-import {
-  getCurrentUser,
-  getUploadedFileData,
-  getUploadStatus
-} from "../../store/selectors";
 import { connect } from "react-redux";
 import {
-  getAllBusinesses,
-  getApprovedBusinesses,
-  getInactiveBusinesses,
+  getCurrentUser,
   getBusinessId,
-  getBusinessColor,
-  getProgressIndicator
+  getStocks
 } from "../../store/selectors";
 import { themeMaker } from "../../utils";
 
@@ -31,15 +27,21 @@ class Class extends Component {
     showEditEntity: false,
     showDeleteEntity: false,
     currentEntity: { name: "default text" },
-    newEntityDetails: { imageURL: null },
-    editEntityDetails: {
+    newEntityDetails: {
+      qty: "",
       name: "",
-      description: "",
-      color: "",
-      approved: "",
-      deleted: "",
-      logoUrl: "",
-      formId: "edit-business"
+      expiry: "",
+      type: "cement",
+      price: "",
+      cp: ""
+    },
+    editEntityDetails: {
+      qty: "",
+      name: "",
+      expiry: "",
+      type: "cement",
+      price: "",
+      cp: ""
     }
     // prompts: {
     //   approve: {
@@ -65,6 +67,58 @@ class Class extends Component {
     // }
   };
 
+  /**
+   * set new entity field value
+   * @param {string} key propterty name to set
+   * @param {string} value the value set key to
+   */
+
+  setNewEntityDetail = (e, type, autoCompleteSelected = null) => {
+    const value = autoCompleteSelected || e.target.value;
+    const entityDetails = { ...this.state.newEntityDetails };
+    entityDetails[type] = value;
+    this.setState({ newEntityDetails: entityDetails });
+  };
+
+  setEditEntityDetail = (e, type, autoCompleteSelected = null) => {
+    const value = autoCompleteSelected || e.target.value;
+    const entityDetails = { ...this.state.editEntityDetails };
+    entityDetails[type] = value;
+    this.setState({ editEntityDetails: entityDetails });
+  };
+
+  addEntity = e => {
+    e.preventDefault();
+    this.toggleCreateEntity();
+    const entity = this.state.newEntityDetails;
+    console.log("new details", entity);
+    this.props.addStock(entity);
+    return;
+  };
+  updateEntity = e => {
+    e.preventDefault();
+    this.toggleEditEntity(e);
+    const entity = this.state.editEntityDetails;
+    console.log("edit details", entity);
+    // console.log("edit details", this.state.currentEntity.id);
+    this.props.updateStock(this.state.currentEntity.id, entity);
+    return;
+  };
+  /**
+   * delete a entity
+   */
+
+  deleteEntity = e => {
+    e.preventDefault();
+    this.toggleDeleteEntity(e);
+    const entity = this.state.currentEntity;
+    const { currentUser } = this.props;
+    if (currentUser.role !== 3) {
+      return alert("You don't have access to perform this operation");
+    }
+    this.props.deleteEntity(entity);
+    return;
+  };
   /**
    * open and close the the progress ui
    */
@@ -103,8 +157,7 @@ class Class extends Component {
 
   componentDidMount() {
     const { businessId, businessColor } = this.props;
-    // themeMaker(businessColor);
-    // this.props.fetchBusinessByStatus();
+    this.props.updateStocksData(businessId);
   }
 
   popupTimer = props => {
@@ -338,34 +391,42 @@ class Class extends Component {
   };
 
   /**
-   * delete a team member
-   */
-  deleteBusiness = () => {
-    this.toggleDeleteEntity();
-    const entity = this.state.currentEntity;
-    const { currentUser } = this.props;
-    if (currentUser.role !== "admin") {
-      return alert("You don't have access to perform this operation");
-    }
-
-    this.props.deleteEntity(entity);
-    return;
-  };
-
-  /**
    * show change a member's branch modal
    */
-  toggleEditEntity = (e, id) => {
+  toggleEditEntity = (e, id = null) => {
     e.preventDefault();
     e.stopPropagation();
+    if (id) this.setCurrentRow(id);
     this.setState(prevState => {
       return { showEditEntity: !prevState.showEditEntity };
     });
   };
 
+  setCurrentRow = id => {
+    const stocks = [...this.props.stocks];
+    const current = stocks.find(elem => elem.id == id);
+    const {
+      product_name,
+      product_type,
+      expiry,
+      price,
+      cp,
+      stock_qty
+    } = current;
+    const editDetail = { ...this.state.editEntityDetails };
+    editDetail.name = product_name;
+    editDetail.type = product_type;
+    editDetail.expiry = expiry;
+    editDetail.price = price;
+    editDetail.cp = cp;
+    editDetail.qty = stock_qty;
+    this.setState({ currentEntity: current, editEntityDetails: editDetail });
+  };
+
   toggleDeleteEntity = (e, id) => {
     e.preventDefault();
     e.stopPropagation();
+    if (id) this.setCurrentRow(id);
     this.setState(prevState => {
       return { showDeleteEntity: !prevState.showDeleteEntity };
     });
@@ -462,8 +523,14 @@ class Class extends Component {
     return (
       <StocksView
         currentUser={this.props.currentUser}
+        editEntityDetails={this.state.editEntityDetails}
+        setNewEntityDetail={this.setNewEntityDetail}
+        setEditEntityDetail={this.setEditEntityDetail}
         currentEntity={this.state.currentEntity}
-        createBusiness={this.createBusiness}
+        stocks={this.props.stocks}
+        addEntity={this.addEntity}
+        updateEntity={this.updateEntity}
+        deleteEntity={this.deleteEntity}
         showNotification={this.state.showNotification}
         showDeleteEntity={this.state.showDeleteEntity}
         showCreateEntity={this.state.showCreateEntity}
@@ -485,20 +552,18 @@ class Class extends Component {
 }
 // console.log("checking allt he biz", )
 const mapStateToProps = state => ({
-  // allBusiness: getAllBusinesses(state),
-  // approvedBusiness: getApprovedBusinesses(state),
-  // inactiveBusiness: getInactiveBusinesses(state),
-  // currentUser: getCurrentUser(state),
-  // businessId: getBusinessId(state),
-  // businessColor: getBusinessColor(state),
-  // progress: getProgressIndicator(state),
-  // uploadedFile: getUploadedFileData(state),
-  // uploadStatus: getUploadStatus(state)
+  currentUser: getCurrentUser(state),
+  businessId: getBusinessId(state),
+  stocks: getStocks(state)
 });
 
 export const Stocks = connect(
   mapStateToProps,
   {
+    addStock,
+    updateStock,
+    deleteEntity: deleteStock,
+    updateStocksData,
     approveBusiness,
     activateBusiness,
     filterByDate,

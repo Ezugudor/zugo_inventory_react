@@ -5,7 +5,11 @@ import "./EditStockClassic.css";
 import { Modal } from "../../Utils";
 import PropTypes from "prop-types";
 import React from "react";
-
+const selected = (props, type) => {
+  return props.editEntityDetails.type.toLowerCase() == type.toLowerCase()
+    ? "selected"
+    : "";
+};
 export const EditStock = props => (
   <Modal show={props.showEditEntity} click={props.toggleEditEntity}>
     <div class="modal_body half">
@@ -37,12 +41,17 @@ export const EditStock = props => (
           </li>
         </ul>
       </div>
-
       <div class="scroll_body2">
-        <div class="col-md-6">
+        <div class="col-md-12">
           <div class="col2">
             <label>Stock Name</label>
-            <input type="text" class="form_field" placeholder="e.g SKU236504" />
+            <input
+              type="text"
+              value={props.editEntityDetails.name}
+              class="form_field"
+              placeholder="e.g SKU236504"
+              onChange={e => props.setEditEntityDetail(e, "name")}
+            />
           </div>
         </div>
 
@@ -50,31 +59,56 @@ export const EditStock = props => (
           <div class="col2">
             <label>Product Type</label>
             <div class="clearfix"></div>
-            <select class="form_field">
-              <option value="mdd">Cements</option>
-              <option value="dd">Rods</option>
+            <select
+              class="form_field"
+              onChange={e => props.setEditEntityDetail(e, "type")}
+            >
+              <option value="cement" {...selected(props, "cement")}>
+                Cements
+              </option>
+              <option value="rods" {...selected(props, "rods")}>
+                Rods
+              </option>
             </select>
           </div>
         </div>
 
-        <div class="col-md-12">
+        <div class="col-md-6">
           <div class="col2">
             <label>Price</label>
-            <input type="text" class="form_field" placeholder="e.g Jonathan" />
+            <input
+              type="text"
+              value={props.editEntityDetails.price}
+              class="form_field"
+              placeholder="e.g N2000"
+              onChange={e => props.setEditEntityDetail(e, "price")}
+            />
           </div>
         </div>
 
         <div class="col-md-6">
           <div class="col2">
             <label>Cost Price</label>
-            <input type="text" class="form_field" placeholder="e.g N10,000" />
+            <input
+              type="text"
+              value={props.editEntityDetails.cp}
+              class="form_field"
+              placeholder="e.g N10,000"
+              onChange={e => props.setEditEntityDetail(e, "cp")}
+            />
           </div>
         </div>
 
         <div class="col-md-6">
           <div class="col2">
             <label>Qty</label>
-            <input type="text" class="form_field" placeholder="e.g 800 bags" />
+            <input
+              type="text"
+              value={props.editEntityDetails.qty}
+              class="form_field"
+              placeholder="e.g 800 bags"
+              onChange={e => props.setEditEntityDetail(e, "qty")}
+            />
           </div>
         </div>
 
@@ -83,8 +117,10 @@ export const EditStock = props => (
             <label>Expiry</label>
             <input
               type="text"
+              value={props.editEntityDetails.expiry}
               class="form_field"
               placeholder="e.g 12/21/2020 10:10pm"
+              onChange={e => props.setEditEntityDetail(e, "expiry")}
             />
           </div>
         </div>
@@ -93,7 +129,7 @@ export const EditStock = props => (
       <div class="modal_footer">
         <div className={styles.controls}>
           <White click={props.toggleEditEntity}>Cancel</White>
-          <Red click={props.editEntity} extStyle={styles.CreateBtn}>
+          <Red click={props.updateEntity} extStyle={styles.CreateBtn}>
             Change Stock
           </Red>
         </div>

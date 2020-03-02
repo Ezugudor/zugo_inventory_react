@@ -7,7 +7,7 @@ import React from "react";
 export const DeleteStock = props => (
   <Modal show={props.showDeleteEntity} click={props.toggleDeleteEntity}>
     <section className={styles.section}>
-      <h3 className={styles.text}>Delete {props.currentEntity.name}</h3>
+      <h3 className={styles.text}>Delete {props.currentEntity.product_name}</h3>
       <div className={styles.controls}>
         <White click={props.toggleDeleteEntity}>Cancel</White>
         <Red click={props.deleteEntity} extStyle={styles}>

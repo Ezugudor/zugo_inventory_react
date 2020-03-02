@@ -4,6 +4,7 @@ import {
   uploadLogo,
   updateReceivingsData,
   addEntity,
+  deleteReceivings,
   processCode
 } from "../../store/actions";
 import { ReceivingSumView } from "../../Components/ReceivingSum";
@@ -180,6 +181,19 @@ class Class extends Component {
     this.props.addEntity(entity);
     return;
   };
+
+  deleteEntity = e => {
+    e.preventDefault();
+    this.toggleDeleteEntity(e);
+    const entity = this.state.currentEntity;
+    const { currentUser } = this.props;
+    if (currentUser.role !== 3) {
+      return alert("You don't have access to perform this operation");
+    }
+    this.props.deleteEntity(entity);
+    return;
+  };
+
   processCode = (e, id) => {
     e.preventDefault();
     this.toggleProcessEntity(e);
@@ -559,6 +573,7 @@ class Class extends Component {
     return (
       <ReceivingSumView
         addEntity={this.addEntity}
+        deleteEntity={this.deleteEntity}
         processCode={this.processCode}
         setNewEntityDetail={this.setNewEntityDetail}
         setProcessEntityDetail={this.setProcessEntityDetail}
@@ -612,6 +627,7 @@ export const ReceivingSum = connect(
   {
     updateReceivingsData,
     addEntity,
+    deleteEntity: deleteReceivings,
     processCode,
     filterByDate,
     registerBusiness,

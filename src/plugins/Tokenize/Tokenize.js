@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import $ from "jquery";
 import "tokenize2";
-import "modules/tokenize2/dist/tokenize2.min.css";
+// import "modules/tokenize2/dist/tokenize2.min.css";
+import "./tokenize/tokenize2.min.css";
 import "./Tokenize.css";
 // import "./datatables/media/js/jquery.dataTables";
 // import "./datatables/media/css/jquery.dataTables.css";
