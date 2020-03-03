@@ -2,6 +2,10 @@ import {
   filterByDate,
   registerBusiness,
   uploadLogo,
+  addCustomer,
+  updateCustomer,
+  deleteCustomer,
+  updateCustomersData,
   approveBusiness,
   activateBusiness
 } from "../../store/actions";
@@ -9,6 +13,7 @@ import { CustomerView } from "../../Components/Customer";
 import React, { Component } from "react";
 import {
   getCurrentUser,
+  getCustomers,
   getUploadedFileData,
   getUploadStatus
 } from "../../store/selectors";
@@ -31,38 +36,22 @@ class Class extends Component {
     showEditEntity: false,
     showDeleteEntity: false,
     currentEntity: { name: "default text" },
-    newEntityDetails: { imageURL: null },
+    newEntityDetails: {
+      surname: "",
+      firstname: "",
+      phone: "",
+      email: "",
+      address: "",
+      avatar: ""
+    },
     editEntityDetails: {
-      name: "",
-      description: "",
-      color: "",
-      approved: "",
-      deleted: "",
-      logoUrl: "",
-      formId: "edit-business"
+      surname: "",
+      firstname: "",
+      phone: "",
+      email: "",
+      address: "",
+      avatar: ""
     }
-    // prompts: {
-    //   approve: {
-    //     activating: {
-    //       title: "Approve Business",
-    //       visible: false
-    //     },
-    //     deactivating: {
-    //       title: "Disapprove Business",
-    //       visible: false
-    //     }
-    //   },
-    //   inactive: {
-    //     activating: {
-    //       title: "Activate this Business",
-    //       visible: false
-    //     },
-    //     deactivating: {
-    //       title: "Deactivate this Business",
-    //       visible: false
-    //     }
-    //   }
-    // }
   };
 
   /**
@@ -103,8 +92,7 @@ class Class extends Component {
 
   componentDidMount() {
     const { businessId, businessColor } = this.props;
-    // themeMaker(businessColor);
-    // this.props.fetchBusinessByStatus();
+    this.props.updateCustomersData();
   }
 
   popupTimer = props => {
@@ -352,20 +340,36 @@ class Class extends Component {
     return;
   };
 
+  setCurrentRow = id => {
+    const entity = [...this.props.customers];
+    const current = entity.find(elem => elem.id == id);
+    const { surname, firstname, phone, address, email, avatar } = current;
+    const editDetail = { ...this.state.editEntityDetails };
+    editDetail.surname = surname;
+    editDetail.firstname = firstname;
+    editDetail.phone = phone;
+    editDetail.email = email;
+    editDetail.address = address;
+    editDetail.avatar = avatar;
+    this.setState({ currentEntity: current, editEntityDetails: editDetail });
+  };
+
   /**
    * show change a member's branch modal
    */
-  toggleEditEntity = (e, id) => {
+  toggleEditEntity = (e, id = null) => {
     e.preventDefault();
     e.stopPropagation();
+    if (id) this.setCurrentRow(id);
     this.setState(prevState => {
       return { showEditEntity: !prevState.showEditEntity };
     });
   };
 
-  toggleDeleteEntity = (e, id) => {
+  toggleDeleteEntity = (e, id = null) => {
     e.preventDefault();
     e.stopPropagation();
+    if (id) this.setCurrentRow(id);
     this.setState(prevState => {
       return { showDeleteEntity: !prevState.showDeleteEntity };
     });
@@ -424,85 +428,91 @@ class Class extends Component {
     });
   };
 
+  setNewEntityDetail = (e, type, autoCompleteSelected = null) => {
+    const value = autoCompleteSelected || e.target.value;
+    const entityDetails = { ...this.state.newEntityDetails };
+    entityDetails[type] = value;
+    this.setState({ newEntityDetails: entityDetails });
+  };
+
+  setEditEntityDetail = (e, type, autoCompleteSelected = null) => {
+    const value = autoCompleteSelected || e.target.value;
+    const entityDetails = { ...this.state.editEntityDetails };
+    entityDetails[type] = value;
+    this.setState({ editEntityDetails: entityDetails });
+  };
+
+  addEntity = e => {
+    e.preventDefault();
+    this.toggleCreateEntity();
+    const entity = this.state.newEntityDetails;
+    console.log("new details", entity);
+    this.props.addEntity(entity);
+    return;
+  };
+  updateEntity = e => {
+    e.preventDefault();
+    this.toggleEditEntity(e);
+    const entity = this.state.editEntityDetails;
+    console.log("edit details", entity);
+    // console.log("edit details", this.state.currentEntity.id);
+    this.props.updateEntity(this.state.currentEntity.id, entity);
+    return;
+  };
   /**
-   *create new business
+   * delete a entity
    */
-  createBusiness = e => {
-    console.log("seeing");
-    const newBizDetails = { ...this.state.newBusinessDetails };
 
-    // if (currentUser.role !== "admin") {
-    //   return alert("You don't have access to perform this operation");
-    // }
-    // if (!this.highlightInvalidFields(needed)) {
-    //   alert("Required field is not set");
-    //   return;
-    // }
-    // const origin = `${window.location.origin}/completesignup`;
-    const history = this.props.history;
-
-    const details = {
-      account: {
-        branch: "HQ",
-        role: "admin",
-        firstname: newBizDetails.firstname,
-        lastname: newBizDetails.lastname,
-        email: newBizDetails.email,
-        phone: newBizDetails.phone,
-        password: newBizDetails.password,
-        imageURL: newBizDetails.imageURL
-      },
-      name: newBizDetails.business_name
-    };
-    this.toggleCreateBusiness();
-    this.props.registerBusiness(details, history);
+  deleteEntity = e => {
+    e.preventDefault();
+    this.toggleDeleteEntity(e);
+    const entity = this.state.currentEntity;
+    const { currentUser } = this.props;
+    if (currentUser.role !== 3) {
+      return alert("You don't have access to perform this operation");
+    }
+    this.props.deleteEntity(entity);
+    return;
   };
 
   render() {
     return (
       <CustomerView
+        customers={this.props.customers}
         currentUser={this.props.currentUser}
         currentEntity={this.state.currentEntity}
-        createBusiness={this.createBusiness}
+        addEntity={this.addEntity}
+        updateEntity={this.updateEntity}
+        deleteEntity={this.deleteEntity}
+        editEntityDetails={this.state.editEntityDetails}
+        setNewEntityDetail={this.setNewEntityDetail}
+        setEditEntityDetail={this.setEditEntityDetail}
         showNotification={this.state.showNotification}
         showDeleteEntity={this.state.showDeleteEntity}
         showCreateEntity={this.state.showCreateEntity}
         showEditEntity={this.state.showEditEntity}
         showLoading={this.props.progress}
-        popupTimer={this.popupTimer}
-        showPreviewSales={this.state.showPreviewSales}
-        showPreviewPayment={this.state.showPreviewPayment}
         toggleCreateEntity={this.toggleCreateEntity}
         toggleEditEntity={this.toggleEditEntity}
         toggleDeleteEntity={this.toggleDeleteEntity}
-        //selector
-        promptSelectorActivate={this.promptSelectorActivate}
-        //confirm prompt
-        confirmPrompt={this.confirmPrompt}
       />
     );
   }
 }
 // console.log("checking allt he biz", )
 const mapStateToProps = state => ({
-  // allBusiness: getAllBusinesses(state),
-  // approvedBusiness: getApprovedBusinesses(state),
-  // inactiveBusiness: getInactiveBusinesses(state),
-  // currentUser: getCurrentUser(state),
-  // businessId: getBusinessId(state),
-  // businessColor: getBusinessColor(state),
-  // progress: getProgressIndicator(state),
-  // uploadedFile: getUploadedFileData(state),
-  // uploadStatus: getUploadStatus(state)
+  currentUser: getCurrentUser(state),
+  businessId: getBusinessId(state),
+  customers: getCustomers(state)
 });
 
 export const Customer = connect(
   mapStateToProps,
   {
-    approveBusiness,
-    activateBusiness,
-    filterByDate,
-    registerBusiness,
+    addEntity: addCustomer,
+    updateEntity: updateCustomer,
+    deleteEntity: deleteCustomer,
+    updateCustomersData,
     uploadLogo
   }
 )(Class);

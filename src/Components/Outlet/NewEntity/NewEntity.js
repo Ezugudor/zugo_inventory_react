@@ -51,6 +51,7 @@ export const NewEntity = props => (
               type="text"
               class="form_field"
               placeholder="e.g Gariki Shop 1"
+              onChange={e => props.setNewEntityDetail(e, "name")}
             />
           </div>
         </div>
@@ -62,6 +63,7 @@ export const NewEntity = props => (
               type="text"
               class="form_field"
               placeholder="e.g 123 Gariki Road, Enugu State."
+              onChange={e => props.setNewEntityDetail(e, "address")}
             />
           </div>
         </div>
@@ -73,14 +75,20 @@ export const NewEntity = props => (
               type="text"
               class="form_field"
               placeholder="e.g 09039300393"
+              onChange={e => props.setNewEntityDetail(e, "phone")}
             />
           </div>
         </div>
 
         <div class="col-md-6">
           <div class="col2">
-            <label>Manager</label>
-            <input type="text" class="form_field" placeholder="e.g Ngozi" />
+            <label>Email</label>
+            <input
+              type="text"
+              class="form_field"
+              placeholder="e.g Garikishop1@gmail.com"
+              onChange={e => props.setNewEntityDetail(e, "email")}
+            />
           </div>
         </div>
       </div>
@@ -88,7 +96,7 @@ export const NewEntity = props => (
       <div class="modal_footer">
         <div className={styles.controls}>
           <White click={props.toggleCreateEntity}>Cancel</White>
-          <Red click={e => gotoRegister(e)} extStyle={styles.CreateBtn}>
+          <Red click={e => props.addEntity(e)} extStyle={styles.CreateBtn}>
             Add Outlet
           </Red>
         </div>

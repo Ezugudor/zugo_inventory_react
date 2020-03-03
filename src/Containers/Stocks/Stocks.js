@@ -43,28 +43,6 @@ class Class extends Component {
       price: "",
       cp: ""
     }
-    // prompts: {
-    //   approve: {
-    //     activating: {
-    //       title: "Approve Business",
-    //       visible: false
-    //     },
-    //     deactivating: {
-    //       title: "Disapprove Business",
-    //       visible: false
-    //     }
-    //   },
-    //   inactive: {
-    //     activating: {
-    //       title: "Activate this Business",
-    //       visible: false
-    //     },
-    //     deactivating: {
-    //       title: "Deactivate this Business",
-    //       visible: false
-    //     }
-    //   }
-    // }
   };
 
   /**

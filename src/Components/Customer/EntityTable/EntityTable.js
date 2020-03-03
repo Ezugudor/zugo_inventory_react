@@ -32,37 +32,39 @@ const getBusinessInfo = (id, businesses) => {
   return { name, logoUrl, description, color, approved, deleted };
 };
 let Bizz;
+
 const showResponse = props => {
-  const ppData = dataStruct.rows.map((res, index) => {
+  const ppData = props.customers.map((res, index) => {
     const {
       sn,
       id,
       avatar,
       firstname,
-      lastname,
+      surname,
       email,
       phone,
       address,
-      date
+      created_at
     } = res;
     const rowData = {
       sn,
       id,
-      avatar,
-      firstname,
-      lastname,
-      email,
-      phone,
-      address,
-      date,
+      avatar: avatar || "-",
+      firstname: firstname || "-",
+      surname: surname || "-",
+      email: email || "-",
+      phone: phone || "-",
+      address: address || "-",
+      date: created_at,
       action_btns: (
         <ActionBtns
           toggleDeleteEntity={props.toggleDeleteEntity}
           toggleEditEntity={props.toggleEditEntity}
+          id={id}
         />
       ),
-      clickEvent: () => {
-        props.toggleEditEntity();
+      clickEvent: e => {
+        props.toggleEditEntity(e, id);
       }
     };
 
@@ -82,7 +84,15 @@ const showResponse = props => {
     </Red>
   );
 
-  return <JQDatatable tableId="sales" hover data={ppDataS} />;
+  return (
+    <JQDatatable
+      sortByColumn={7}
+      sortDir="DESC"
+      tableId="customers"
+      hover
+      data={ppDataS}
+    />
+  );
 };
 
 EntityTable.propTypes = {

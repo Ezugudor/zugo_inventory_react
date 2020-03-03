@@ -1,9 +1,8 @@
 import {
-  filterByDate,
-  registerBusiness,
-  uploadLogo,
-  approveBusiness,
-  activateBusiness
+  addOutlet,
+  updateOutlet,
+  deleteOutlet,
+  updateOutletsData
 } from "../../store/actions";
 import { OutletView } from "../../Components/Outlet";
 import React, { Component } from "react";
@@ -18,6 +17,7 @@ import {
   getApprovedBusinesses,
   getInactiveBusinesses,
   getBusinessId,
+  getOutlets,
   getBusinessColor,
   getProgressIndicator
 } from "../../store/selectors";
@@ -31,38 +31,18 @@ class Class extends Component {
     showEditEntity: false,
     showDeleteEntity: false,
     currentEntity: { name: "default text" },
-    newEntityDetails: { imageURL: null },
+    newEntityDetails: {
+      name: "",
+      address: "",
+      phone: "",
+      email: ""
+    },
     editEntityDetails: {
       name: "",
-      description: "",
-      color: "",
-      approved: "",
-      deleted: "",
-      logoUrl: "",
-      formId: "edit-business"
+      address: "",
+      phone: "",
+      email: ""
     }
-    // prompts: {
-    //   approve: {
-    //     activating: {
-    //       title: "Approve Business",
-    //       visible: false
-    //     },
-    //     deactivating: {
-    //       title: "Disapprove Business",
-    //       visible: false
-    //     }
-    //   },
-    //   inactive: {
-    //     activating: {
-    //       title: "Activate this Business",
-    //       visible: false
-    //     },
-    //     deactivating: {
-    //       title: "Deactivate this Business",
-    //       visible: false
-    //     }
-    //   }
-    // }
   };
 
   /**
@@ -103,8 +83,7 @@ class Class extends Component {
 
   componentDidMount() {
     const { businessId, businessColor } = this.props;
-    // themeMaker(businessColor);
-    // this.props.fetchBusinessByStatus();
+    this.props.updateOutletsData();
   }
 
   popupTimer = props => {
@@ -355,115 +334,96 @@ class Class extends Component {
   /**
    * show change a member's branch modal
    */
-  toggleEditEntity = (e, id) => {
+
+  setCurrentRow = id => {
+    const entity = [...this.props.outlets];
+    const current = entity.find(elem => elem.id == id);
+    const { name, address, phone, email } = current;
+    const editDetail = { ...this.state.editEntityDetails };
+    editDetail.name = name;
+    editDetail.phone = phone;
+    editDetail.email = email;
+    editDetail.address = address;
+    this.setState({ currentEntity: current, editEntityDetails: editDetail });
+  };
+
+  toggleEditEntity = (e, id = null) => {
     e.preventDefault();
     e.stopPropagation();
+    if (id) this.setCurrentRow(id);
     this.setState(prevState => {
       return { showEditEntity: !prevState.showEditEntity };
     });
   };
 
-  toggleDeleteEntity = (e, id) => {
+  toggleDeleteEntity = (e, id = null) => {
     e.preventDefault();
     e.stopPropagation();
+    if (id) this.setCurrentRow(id);
     this.setState(prevState => {
       return { showDeleteEntity: !prevState.showDeleteEntity };
     });
   };
 
-  /**
-   * Record details of the user whose branch need to be changed
-   * @param {string} key
-   * @param {string} value
-   * @param {boolean} toggleModal
-   */
-
-  setUpdateUserDetail = (key, value, elem) => {
-    if (!this.validateIntegerField(key, value)) return;
-
-    elem.classList.remove("invalid");
-    var details = { ...this.state.editBusinessDetails };
-    details[key] = value;
-    this.setState({ editBusinessDetails: details });
+  setNewEntityDetail = (e, type, autoCompleteSelected = null) => {
+    const value = autoCompleteSelected || e.target.value;
+    const entityDetails = { ...this.state.newEntityDetails };
+    entityDetails[type] = value;
+    this.setState({ newEntityDetails: entityDetails });
   };
 
-  populateEditBusiness = (e, business) => {
+  setEditEntityDetail = (e, type, autoCompleteSelected = null) => {
+    const value = autoCompleteSelected || e.target.value;
+    const entityDetails = { ...this.state.editEntityDetails };
+    entityDetails[type] = value;
+    this.setState({ editEntityDetails: entityDetails });
+  };
+
+  addEntity = e => {
     e.preventDefault();
-    e.stopPropagation();
-    var details = { ...this.state.editBusinessDetails, ...business };
-    this.setState({ editBusinessDetails: details });
-    this.toggleEditBusiness();
+    this.toggleCreateEntity();
+    const entity = this.state.newEntityDetails;
+    console.log("new details", entity);
+    this.props.addEntity(entity);
+    return;
   };
+  updateEntity = e => {
+    e.preventDefault();
+    this.toggleEditEntity(e);
+    const entity = this.state.editEntityDetails;
+    console.log("edit details", entity);
+    // console.log("edit details", this.state.currentEntity.id);
+    this.props.updateEntity(this.state.currentEntity.id, entity);
+    return;
+  };
+  /**
+   * delete a entity
+   */
 
-  setNewBranchDetail = (key, value, toggleModal = false) => {
-    const details = { ...this.state.branchChangeDetails };
-    details[key] = value;
-    this.setState({ branchChangeDetails: details });
-    if (toggleModal) {
-      this.toggleEditBusiness();
+  deleteEntity = e => {
+    e.preventDefault();
+    this.toggleDeleteEntity(e);
+    const entity = this.state.currentEntity;
+    const { currentUser } = this.props;
+    if (currentUser.role !== 3) {
+      return alert("You don't have access to perform this operation");
     }
-  };
-
-  /**
-   * send file to be uploaded to S3 bucket
-   * @param {object} file file to be uploaded
-   */
-  uploadImage = (file, mode) => {
-    const formData = new FormData();
-    const fileName = `userlogo`;
-    formData.append("logo", file);
-    this.props.uploadLogo(formData, fileName, this).then(() => {
-      const { newBusinessDetails, editBusinessDetails } = this.state;
-      if (mode === "new") {
-        newBusinessDetails.imageURL = this.props.uploadedFile.imageUrl;
-        this.setState({ newBusinessDetails });
-      } else {
-        editBusinessDetails.imageURL = this.props.uploadedFile.imageUrl;
-        this.setState({ editBusinessDetails });
-      }
-    });
-  };
-
-  /**
-   *create new business
-   */
-  createBusiness = e => {
-    console.log("seeing");
-    const newBizDetails = { ...this.state.newBusinessDetails };
-
-    // if (currentUser.role !== "admin") {
-    //   return alert("You don't have access to perform this operation");
-    // }
-    // if (!this.highlightInvalidFields(needed)) {
-    //   alert("Required field is not set");
-    //   return;
-    // }
-    // const origin = `${window.location.origin}/completesignup`;
-    const history = this.props.history;
-
-    const details = {
-      account: {
-        branch: "HQ",
-        role: "admin",
-        firstname: newBizDetails.firstname,
-        lastname: newBizDetails.lastname,
-        email: newBizDetails.email,
-        phone: newBizDetails.phone,
-        password: newBizDetails.password,
-        imageURL: newBizDetails.imageURL
-      },
-      name: newBizDetails.business_name
-    };
-    this.toggleCreateBusiness();
-    this.props.registerBusiness(details, history);
+    this.props.deleteEntity(entity);
+    return;
   };
 
   render() {
     return (
       <OutletView
+        outlets={this.props.outlets}
         currentUser={this.props.currentUser}
         currentEntity={this.state.currentEntity}
-        createBusiness={this.createBusiness}
+        addEntity={this.addEntity}
+        updateEntity={this.updateEntity}
+        deleteEntity={this.deleteEntity}
+        editEntityDetails={this.state.editEntityDetails}
+        setNewEntityDetail={this.setNewEntityDetail}
+        setEditEntityDetail={this.setEditEntityDetail}
         showNotification={this.state.showNotification}
         showDeleteEntity={this.state.showDeleteEntity}
         showCreateEntity={this.state.showCreateEntity}
@@ -485,24 +445,17 @@ class Class extends Component {
 }
 // console.log("checking allt he biz", )
 const mapStateToProps = state => ({
-  // allBusiness: getAllBusinesses(state),
-  // approvedBusiness: getApprovedBusinesses(state),
-  // inactiveBusiness: getInactiveBusinesses(state),
-  // currentUser: getCurrentUser(state),
-  // businessId: getBusinessId(state),
-  // businessColor: getBusinessColor(state),
-  // progress: getProgressIndicator(state),
-  // uploadedFile: getUploadedFileData(state),
-  // uploadStatus: getUploadStatus(state)
+  currentUser: getCurrentUser(state),
+  businessId: getBusinessId(state),
+  outlets: getOutlets(state)
 });
 
 export const Outlet = connect(
   mapStateToProps,
   {
-    approveBusiness,
-    activateBusiness,
-    filterByDate,
-    registerBusiness,
-    uploadLogo
+    addEntity: addOutlet,
+    updateEntity: updateOutlet,
+    deleteEntity: deleteOutlet,
+    updateOutletsData
   }
 )(Class);

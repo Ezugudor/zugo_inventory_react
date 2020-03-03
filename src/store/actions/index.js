@@ -4,6 +4,8 @@ export * from "./business";
 export * from "./types";
 export * from "./receivings";
 export * from "./stocks";
+export * from "./customers";
+export * from "./outlets";
 export * from "./user";
 export * from "./file";
 export * from "./app";

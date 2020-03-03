@@ -1,23 +1,17 @@
 export const dataStruct = {
   columns: [
     {
-      label: "Sn",
-      field: "sn",
-      sort: "asc",
-      width: 270
-    },
-    {
       label: "Id",
       field: "id",
       sort: "asc",
       width: 270
     },
-    {
-      label: "Pics",
-      field: "avatar",
-      sort: "asc",
-      width: 270
-    },
+    // {
+    //   label: "Pics",
+    //   field: "avatar",
+    //   sort: "asc",
+    //   width: 270
+    // },
     {
       label: "Firstname",
       field: "firstname",
@@ -26,7 +20,7 @@ export const dataStruct = {
     },
     {
       label: "Lastname",
-      field: "lastname",
+      field: "surname",
       sort: "asc",
       width: 150
     },

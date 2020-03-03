@@ -2,12 +2,6 @@ export const dataStruct = {
   columns: [
     {
       label: "Sn",
-      field: "sn",
-      sort: "asc",
-      width: 270
-    },
-    {
-      label: "Outlet Id",
       field: "id",
       sort: "asc",
       width: 270
@@ -31,14 +25,14 @@ export const dataStruct = {
       width: 270
     },
     {
-      label: "Manager",
-      field: "manager",
+      label: "Email",
+      field: "email",
       sort: "asc",
       width: 270
     },
     {
       label: "Date Added",
-      field: "date",
+      field: "created_at",
       sort: "asc",
       width: 270
     },

@@ -33,24 +33,24 @@ const getBusinessInfo = (id, businesses) => {
 };
 let Bizz;
 const showResponse = props => {
-  const ppData = dataStruct.rows.map((res, index) => {
-    const { sn, id, name, address, phone, manager, date } = res;
+  const ppData = props.outlets.map((res, index) => {
+    const { id, name, address, phone, email, created_at } = res;
     const rowData = {
-      sn,
       id,
       name,
       address,
       phone,
-      manager,
-      date,
+      email,
+      created_at,
       action_btns: (
         <ActionBtns
           toggleDeleteEntity={props.toggleDeleteEntity}
           toggleEditEntity={props.toggleEditEntity}
+          id={id}
         />
       ),
-      clickEvent: () => {
-        props.toggleEditEntity();
+      clickEvent: e => {
+        props.toggleEditEntity(e, id);
       }
     };
 
@@ -70,7 +70,15 @@ const showResponse = props => {
     </Red>
   );
 
-  return <JQDatatable tableId="sales" hover data={ppDataS} />;
+  return (
+    <JQDatatable
+      tableId="outlets"
+      hover
+      data={ppDataS}
+      sortByColumn={2}
+      sortDir="DESC"
+    />
+  );
 };
 
 EntityTable.propTypes = {

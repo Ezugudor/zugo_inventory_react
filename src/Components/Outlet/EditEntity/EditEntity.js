@@ -46,6 +46,8 @@ export const EditEntity = props => (
               type="text"
               class="form_field"
               placeholder="e.g Gariki Shop 1"
+              value={props.editEntityDetails.name}
+              onChange={e => props.setEditEntityDetail(e, "name")}
             />
           </div>
         </div>
@@ -57,6 +59,8 @@ export const EditEntity = props => (
               type="text"
               class="form_field"
               placeholder="e.g 123 Gariki Road, Enugu State."
+              value={props.editEntityDetails.address}
+              onChange={e => props.setEditEntityDetail(e, "address")}
             />
           </div>
         </div>
@@ -68,21 +72,29 @@ export const EditEntity = props => (
               type="text"
               class="form_field"
               placeholder="e.g 09039300393"
+              value={props.editEntityDetails.phone}
+              onChange={e => props.setEditEntityDetail(e, "phone")}
             />
           </div>
         </div>
 
         <div class="col-md-6">
           <div class="col2">
-            <label>Manager</label>
-            <input type="text" class="form_field" placeholder="e.g Ngozi" />
+            <label>Email</label>
+            <input
+              type="text"
+              class="form_field"
+              placeholder="e.g Garikishop1@gmail.com"
+              value={props.editEntityDetails.manager}
+              onChange={e => props.setEditEntityDetail(e, "email")}
+            />
           </div>
         </div>
       </div>
       <div class="modal_footer">
         <div className={styles.controls}>
           <White click={props.toggleEditEntity}>Cancel</White>
-          <Red click={props.editEntity} extStyle={styles.CreateBtn}>
+          <Red click={props.updateEntity} extStyle={styles.CreateBtn}>
             Update Outlet
           </Red>
         </div>

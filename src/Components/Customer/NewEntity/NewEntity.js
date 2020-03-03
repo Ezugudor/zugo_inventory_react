@@ -5,6 +5,7 @@ import "./NewEntityClassic.css";
 import { Modal } from "../../Utils";
 import PropTypes from "prop-types";
 import React from "react";
+import { addEntity } from "../../../store/actions";
 
 const gotoRegister = (e, id) => {
   e.stopPropagation();
@@ -51,6 +52,7 @@ export const NewEntity = props => (
               name="firstname"
               class="form_field"
               placeholder="e.g Emeka"
+              onChange={e => props.setNewEntityDetail(e, "firstname")}
             />
           </div>
         </div>
@@ -63,6 +65,7 @@ export const NewEntity = props => (
               name="firstname"
               class="form_field"
               placeholder="e.g Emeka"
+              onChange={e => props.setNewEntityDetail(e, "surname")}
             />
           </div>
         </div>
@@ -75,6 +78,7 @@ export const NewEntity = props => (
               name="firstname"
               class="form_field"
               placeholder="e.g Emeka"
+              onChange={e => props.setNewEntityDetail(e, "email")}
             />
           </div>
         </div>
@@ -87,6 +91,7 @@ export const NewEntity = props => (
               name="phone"
               class="form_field"
               placeholder="e.g 08105251281"
+              onChange={e => props.setNewEntityDetail(e, "phone")}
             />
           </div>
         </div>
@@ -99,6 +104,7 @@ export const NewEntity = props => (
               name="address"
               class="form_field"
               placeholder="e.g 123 Agbani Road , Enugu"
+              onChange={e => props.setNewEntityDetail(e, "address")}
             />
           </div>
         </div>
@@ -107,7 +113,7 @@ export const NewEntity = props => (
       <div class="modal_footer">
         <div className={styles.controls}>
           <White click={props.toggleCreateEntity}>Cancel</White>
-          <Red click={e => gotoRegister(e)} extStyle={styles.CreateBtn}>
+          <Red click={e => props.addEntity(e)} extStyle={styles.CreateBtn}>
             Add Customer
           </Red>
         </div>

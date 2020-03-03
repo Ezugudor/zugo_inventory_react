@@ -24,20 +24,32 @@ export const CustomerView = props => {
             toggleCreateEntity={props.toggleCreateEntity}
             toggleDeleteEntity={props.toggleDeleteEntity}
             toggleEditEntity={props.toggleEditEntity}
+            customers={props.customers}
           />
         </div>
         <NewEntity
           showCreateEntity={props.showCreateEntity}
           toggleCreateEntity={props.toggleCreateEntity}
+          setNewEntityDetail={props.setNewEntityDetail}
+          addEntity={props.addEntity}
         />
         <EditEntity
           showEditEntity={props.showEditEntity}
           toggleEditEntity={props.toggleEditEntity}
+          setEditEntityDetail={props.setEditEntityDetail}
+          updateEntity={props.updateEntity}
+          editEntityDetails={props.editEntityDetails}
         />
         <DeleteEntity
           showDeleteEntity={props.showDeleteEntity}
           toggleDeleteEntity={props.toggleDeleteEntity}
           currentEntity={props.currentEntity}
+          deleteEntity={props.deleteEntity}
+        />
+        <Loading showLoading={props.showLoading} />
+        <Notification
+          title={"Default Title"}
+          message={"Default Body Message"}
         />
       </div>
     </AdminLayout>

@@ -44,8 +44,10 @@ export const EditEntity = props => (
             <input
               type="text"
               name="firstname"
+              value={props.editEntityDetails.firstname}
               class="form_field"
               placeholder="e.g Emeka"
+              onChange={e => props.setEditEntityDetail(e, "firstname")}
             />
           </div>
         </div>
@@ -55,9 +57,11 @@ export const EditEntity = props => (
             <label>Lastname</label>
             <input
               type="text"
-              name="firstname"
+              name="lastname"
+              value={props.editEntityDetails.surname}
               class="form_field"
               placeholder="e.g Emeka"
+              onChange={e => props.setEditEntityDetail(e, "surname")}
             />
           </div>
         </div>
@@ -67,9 +71,11 @@ export const EditEntity = props => (
             <label>Email</label>
             <input
               type="text"
-              name="firstname"
+              name="email"
+              value={props.editEntityDetails.email}
               class="form_field"
               placeholder="e.g Emeka"
+              onChange={e => props.setEditEntityDetail(e, "email")}
             />
           </div>
         </div>
@@ -80,8 +86,10 @@ export const EditEntity = props => (
             <input
               type="text"
               name="phone"
+              value={props.editEntityDetails.phone}
               class="form_field"
               placeholder="e.g 08105251281"
+              onChange={e => props.setEditEntityDetail(e, "phone")}
             />
           </div>
         </div>
@@ -92,8 +100,10 @@ export const EditEntity = props => (
             <input
               type="text"
               name="address"
+              value={props.editEntityDetails.address}
               class="form_field"
               placeholder="e.g 123 Agbani Road , Enugu"
+              onChange={e => props.setEditEntityDetail(e, "address")}
             />
           </div>
         </div>
@@ -102,7 +112,7 @@ export const EditEntity = props => (
       <div class="modal_footer">
         <div className={styles.controls}>
           <White click={props.toggleEditEntity}>Cancel</White>
-          <Red click={props.editEntity} extStyle={styles.CreateBtn}>
+          <Red click={props.updateEntity} extStyle={styles.CreateBtn}>
             Update Company
           </Red>
         </div>
