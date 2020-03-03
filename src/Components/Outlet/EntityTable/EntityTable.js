@@ -75,7 +75,7 @@ const showResponse = props => {
       tableId="outlets"
       hover
       data={ppDataS}
-      sortByColumn={2}
+      sortByColumn={5}
       sortDir="DESC"
     />
   );

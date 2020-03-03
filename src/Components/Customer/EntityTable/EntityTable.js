@@ -86,7 +86,7 @@ const showResponse = props => {
 
   return (
     <JQDatatable
-      sortByColumn={7}
+      sortByColumn={6}
       sortDir="DESC"
       tableId="customers"
       hover
