@@ -142,7 +142,7 @@
 .card_list_menu li:hover {
   background: var(--grey);
 }
-.col2{
+.col2 {
   /* background:blue; */
-  min-height:100px;
+  min-height: 100px;
 }
