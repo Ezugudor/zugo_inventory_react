@@ -28,6 +28,7 @@ export const ReceivingSumView = props => {
             toggleDeleteEntity={props.toggleDeleteEntity}
             toggleRowDetails={props.toggleRowDetails}
             setCurrentRow={props.setCurrentRow}
+            setCode={props.setCode}
             toggleEditEntity={props.toggleEditEntity}
             receivings={props.receivings}
           />

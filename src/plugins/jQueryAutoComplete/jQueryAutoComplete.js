@@ -60,7 +60,7 @@ export class JQAutoComplete extends Component {
         /**
          * use the default input field value first incase user didnt select from the dropdown
          **/
-        this.props.setNewEntityDetail(null, this.props.name, term);
+        this.props.setNewEntityDetail(null, this.props.item_name, term);
 
         //then start check for match
         let match;
@@ -79,7 +79,8 @@ export class JQAutoComplete extends Component {
         } else {
           id = this.getIDSimple(term);
         }
-        this.props.setNewEntityDetail(e, this.props.name, id);
+        this.props.setNewEntityDetail(e, this.props.item_name, term);
+        this.props.setNewEntityDetail(e, this.props.item_id, id);
       }.bind(this)
     });
   }

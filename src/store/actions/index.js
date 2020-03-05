@@ -3,6 +3,7 @@ export * from "./response";
 export * from "./business";
 export * from "./types";
 export * from "./receivings";
+export * from "./supply";
 export * from "./stocks";
 export * from "./customers";
 export * from "./outlets";

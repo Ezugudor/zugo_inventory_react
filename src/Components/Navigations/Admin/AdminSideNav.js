@@ -80,7 +80,7 @@ export class AdminSideNav extends Component {
                   Receivings
                 </a>
               </li>
-              <li className={Style.NavItem}>
+              {/* <li className={Style.NavItem}>
                 <a
                   className={this.getClassName(this.props, "sales")}
                   href="/supplysum"
@@ -91,7 +91,7 @@ export class AdminSideNav extends Component {
                   />
                   Supply
                 </a>
-              </li>
+              </li> */}
               <li className={Style.NavItem}>
                 <a
                   className={this.getClassName(this.props, "credit")}
@@ -153,7 +153,7 @@ export class AdminSideNav extends Component {
                   Outlets
                 </a>
               </li>
-              <li className={Style.NavItem}>
+              {/* <li className={Style.NavItem}>
                 <a
                   className={this.getClassName(this.props, "companies")}
                   href="/companies"
@@ -164,7 +164,7 @@ export class AdminSideNav extends Component {
                   />
                   Companies
                 </a>
-              </li>
+              </li> */}
               {/* <li className={Style.NavItem}>
             <a className={getClassName(props, "settings")} href="/settings">
               <i

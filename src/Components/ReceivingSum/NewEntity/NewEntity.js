@@ -67,7 +67,7 @@ export const NewEntity = props => (
           <div class="col2">
             <label>Item(product)</label>
             <JQAutoComplete
-              name="item"
+              item_id="item"
               id={uuid()}
               data={props.stocks}
               lookout="product_name"

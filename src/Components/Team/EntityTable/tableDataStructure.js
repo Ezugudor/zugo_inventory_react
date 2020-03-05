@@ -68,70 +68,70 @@ export const dataStruct = {
     }
   ],
   rows: [
-    {
-      sn: "1",
-      id: "x434jrnndf",
-      avatar: "Default Text",
-      firstname: "Default Text",
-      lastname: "Default Text",
-      email: "Default Text",
-      phone: "Default Text",
-      role: "Default Text",
-      address: "Default Text",
-      date: "Default Text",
-      action_btns: "Default Text"
-    },
-    {
-      sn: "1",
-      id: "x434jrnndf",
-      avatar: "Default Text",
-      firstname: "Default Text",
-      lastname: "Default Text",
-      email: "Default Text",
-      phone: "Default Text",
-      role: "Default Text",
-      address: "Default Text",
-      date: "Default Text",
-      action_btns: "Default Text"
-    },
-    {
-      sn: "1",
-      id: "x434jrnndf",
-      avatar: "Default Text",
-      firstname: "Default Text",
-      lastname: "Default Text",
-      email: "Default Text",
-      phone: "Default Text",
-      role: "Default Text",
-      address: "Default Text",
-      date: "Default Text",
-      action_btns: "Default Text"
-    },
-    {
-      sn: "1",
-      id: "x434jrnndf",
-      avatar: "Default Text",
-      firstname: "Default Text",
-      lastname: "Default Text",
-      email: "Default Text",
-      phone: "Default Text",
-      role: "Default Text",
-      address: "Default Text",
-      date: "Default Text",
-      action_btns: "Default Text"
-    },
-    {
-      sn: "1",
-      id: "x434jrnndf",
-      avatar: "Default Text",
-      firstname: "Default Text",
-      lastname: "Default Text",
-      email: "Default Text",
-      phone: "Default Text",
-      role: "Default Text",
-      address: "Default Text",
-      date: "Default Text",
-      action_btns: "Default Text"
-    }
+    // {
+    //   sn: "1",
+    //   id: "x434jrnndf",
+    //   avatar: "Default Text",
+    //   firstname: "Default Text",
+    //   lastname: "Default Text",
+    //   email: "Default Text",
+    //   phone: "Default Text",
+    //   role: "Default Text",
+    //   address: "Default Text",
+    //   date: "Default Text",
+    //   action_btns: "Default Text"
+    // },
+    // {
+    //   sn: "1",
+    //   id: "x434jrnndf",
+    //   avatar: "Default Text",
+    //   firstname: "Default Text",
+    //   lastname: "Default Text",
+    //   email: "Default Text",
+    //   phone: "Default Text",
+    //   role: "Default Text",
+    //   address: "Default Text",
+    //   date: "Default Text",
+    //   action_btns: "Default Text"
+    // },
+    // {
+    //   sn: "1",
+    //   id: "x434jrnndf",
+    //   avatar: "Default Text",
+    //   firstname: "Default Text",
+    //   lastname: "Default Text",
+    //   email: "Default Text",
+    //   phone: "Default Text",
+    //   role: "Default Text",
+    //   address: "Default Text",
+    //   date: "Default Text",
+    //   action_btns: "Default Text"
+    // },
+    // {
+    //   sn: "1",
+    //   id: "x434jrnndf",
+    //   avatar: "Default Text",
+    //   firstname: "Default Text",
+    //   lastname: "Default Text",
+    //   email: "Default Text",
+    //   phone: "Default Text",
+    //   role: "Default Text",
+    //   address: "Default Text",
+    //   date: "Default Text",
+    //   action_btns: "Default Text"
+    // },
+    // {
+    //   sn: "1",
+    //   id: "x434jrnndf",
+    //   avatar: "Default Text",
+    //   firstname: "Default Text",
+    //   lastname: "Default Text",
+    //   email: "Default Text",
+    //   phone: "Default Text",
+    //   role: "Default Text",
+    //   address: "Default Text",
+    //   date: "Default Text",
+    //   action_btns: "Default Text"
+    // }
   ]
 };

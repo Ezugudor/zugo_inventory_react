@@ -1,7 +1,7 @@
 export const dataStruct = {
   columns: [
     {
-      label: "Sn",
+      label: "",
       field: "id",
       sort: "asc",
       width: 270
@@ -25,41 +25,20 @@ export const dataStruct = {
       width: 270
     },
     {
-      label: "Size",
-      field: "size",
+      label: "Date Used",
+      field: "date_used",
       sort: "asc",
       width: 150
     },
 
     {
-      label: "Supplied To",
-      field: "supplied_to",
-      sort: "asc",
-      width: 270
-    },
-
-    {
-      label: "Driver",
-      field: "driver",
-      sort: "asc",
-      width: 270
-    },
-
-    {
-      label: "Mode",
-      field: "mode",
-      sort: "asc",
-      width: 270
-    },
-
-    {
-      label: "Date",
+      label: "Date Added",
       field: "date",
       sort: "asc",
       width: 270
     },
     {
-      label: "Actions",
+      label: "",
       field: "action_btns",
       sort: "asc",
       width: 270

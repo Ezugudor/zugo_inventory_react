@@ -5,7 +5,9 @@ import {
   updateReceivingsData,
   addEntity,
   deleteReceivings,
-  processCode
+  processCode,
+  updateCode,
+  updateCurrentSupplyData
 } from "../../store/actions";
 import { ReceivingSumView } from "../../Components/ReceivingSum";
 import React, { Component } from "react";
@@ -464,13 +466,27 @@ class Class extends Component {
 
     this.setState({ currentEntity: current });
   };
-  toggleRowDetails = (e, id = null) => {
+
+  setCode = (e, id) => {
     e.preventDefault();
     e.stopPropagation();
-    if (id) this.setCurrentRow(id);
-    this.setState(prevState => {
-      return { showRowDetails: !prevState.showRowDetails };
-    });
+    this.props.updateCode(id);
+    this.props.history.push("/distribute");
+  };
+
+  // toggleRowDetails = (e, id = null) => {
+  //   e.preventDefault();
+  //   e.stopPropagation();
+  //   if (id) this.setCurrentRow(id);
+  //   this.setState(prevState => {
+  //     return { showRowDetails: !prevState.showRowDetails };
+  //   });
+  // };
+  toggleRowDetails = (e, code) => {
+    e.preventDefault();
+    e.stopPropagation();
+    // hydrate current details
+    this.props.updateCurrentSupplyData(code);
   };
 
   toggleDeleteEntity = (e, id = null) => {
@@ -576,6 +592,7 @@ class Class extends Component {
         deleteEntity={this.deleteEntity}
         processCode={this.processCode}
         setNewEntityDetail={this.setNewEntityDetail}
+        setCode={this.setCode}
         setProcessEntityDetail={this.setProcessEntityDetail}
         addCodeToken={this.addCodeToken}
         removeCodeToken={this.removeCodeToken}
@@ -626,9 +643,11 @@ export const ReceivingSum = connect(
   mapStateToProps,
   {
     updateReceivingsData,
+    updateCurrentSupplyData,
     addEntity,
     deleteEntity: deleteReceivings,
     processCode,
+    updateCode,
     filterByDate,
     registerBusiness,
     uploadLogo

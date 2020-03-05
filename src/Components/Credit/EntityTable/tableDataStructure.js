@@ -62,77 +62,77 @@ export const dataStruct = {
     }
   ],
   rows: [
-    {
-      sn: 1,
-      id: "2344355",
-      name: "Dangote Cement",
-      size: "40 Tons",
-      qty: "800 bags",
-      price: "N2000",
-      discount: "-",
-      author: "Uche",
-      date: "14th Feb, 2020",
-      action_btns: "Default Text"
-    },
-    {
-      sn: 2,
-      id: "9024355",
-      name: "Lafarge Cement",
-      size: "45 Tons",
-      qty: "900 bags",
-      price: "N1900",
-      discount: "N1,000",
-      author: "Uche",
-      date: "14th Feb, 2020",
-      action_btns: "Default Text"
-    },
-    {
-      sn: 3,
-      id: "1114355",
-      name: "Rods",
-      size: "43 Inches",
-      qty: "100 Pieces",
-      price: "N3000",
-      discount: "-",
-      author: "Uche",
-      date: "14th Feb, 2020",
-      action_btns: "Default Text"
-    },
-    {
-      sn: 4,
-      id: "6544355",
-      name: "Dangote Cement",
-      size: "40 Tons",
-      qty: "800 bags",
-      price: "N2000",
-      discount: "N10,500",
-      author: "Uche",
-      date: "14th Feb, 2020",
-      action_btns: "Default Text"
-    },
-    {
-      sn: 5,
-      id: "2344355",
-      name: "Dangote Cement",
-      size: "40 Tons",
-      qty: "800 bags",
-      price: "N2000",
-      discount: "N1,500",
-      author: "Uche",
-      date: "14th Feb, 2020",
-      action_btns: "Default Text"
-    },
-    {
-      sn: 6,
-      id: "2344355",
-      name: "Dangote Cement",
-      size: "40 Tons",
-      qty: "800 bags",
-      price: "N2000",
-      discount: "N1,500",
-      author: "Uche",
-      date: "14th Feb, 2020",
-      action_btns: "Default Text"
-    }
+    // {
+    //   sn: 1,
+    //   id: "2344355",
+    //   name: "Dangote Cement",
+    //   size: "40 Tons",
+    //   qty: "800 bags",
+    //   price: "N2000",
+    //   discount: "-",
+    //   author: "Uche",
+    //   date: "14th Feb, 2020",
+    //   action_btns: "Default Text"
+    // },
+    // {
+    //   sn: 2,
+    //   id: "9024355",
+    //   name: "Lafarge Cement",
+    //   size: "45 Tons",
+    //   qty: "900 bags",
+    //   price: "N1900",
+    //   discount: "N1,000",
+    //   author: "Uche",
+    //   date: "14th Feb, 2020",
+    //   action_btns: "Default Text"
+    // },
+    // {
+    //   sn: 3,
+    //   id: "1114355",
+    //   name: "Rods",
+    //   size: "43 Inches",
+    //   qty: "100 Pieces",
+    //   price: "N3000",
+    //   discount: "-",
+    //   author: "Uche",
+    //   date: "14th Feb, 2020",
+    //   action_btns: "Default Text"
+    // },
+    // {
+    //   sn: 4,
+    //   id: "6544355",
+    //   name: "Dangote Cement",
+    //   size: "40 Tons",
+    //   qty: "800 bags",
+    //   price: "N2000",
+    //   discount: "N10,500",
+    //   author: "Uche",
+    //   date: "14th Feb, 2020",
+    //   action_btns: "Default Text"
+    // },
+    // {
+    //   sn: 5,
+    //   id: "2344355",
+    //   name: "Dangote Cement",
+    //   size: "40 Tons",
+    //   qty: "800 bags",
+    //   price: "N2000",
+    //   discount: "N1,500",
+    //   author: "Uche",
+    //   date: "14th Feb, 2020",
+    //   action_btns: "Default Text"
+    // },
+    // {
+    //   sn: 6,
+    //   id: "2344355",
+    //   name: "Dangote Cement",
+    //   size: "40 Tons",
+    //   qty: "800 bags",
+    //   price: "N2000",
+    //   discount: "N1,500",
+    //   author: "Uche",
+    //   date: "14th Feb, 2020",
+    //   action_btns: "Default Text"
+    // }
   ]
 };

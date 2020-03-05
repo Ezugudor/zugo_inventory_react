@@ -5,6 +5,8 @@ export * from "./Stocks";
 export * from "./Receivings";
 export * from "./ReceivingSum";
 export * from "./Supply";
+export * from "./SupplyDistribute";
+export * from "./SupplyPreview";
 export * from "./SupplySum";
 export * from "./Credit";
 export * from "./CreditSum";

@@ -9,6 +9,8 @@ import {
   ReceivingSum,
   Supply,
   SupplySum,
+  SupplyDistribute,
+  SupplyPreview,
   Payment,
   Login,
   Team,
@@ -82,6 +84,8 @@ export default () => (
     <PrivateRoute exact path="/stocks" component={Stocks} />
     <PrivateRoute exact path="/supply" component={Supply} />
     <PrivateRoute exact path="/supplysum" component={SupplySum} />
+    <PrivateRoute exact path="/distribute" component={SupplyDistribute} />
+    <PrivateRoute exact path="/previewcode/:id" component={SupplyPreview} />
     <PrivateRoute exact path="/credit" component={Credit} />
     <PrivateRoute exact path="/creditsum" component={CreditSum} />
     <PrivateRoute exact path="/payment" component={Payment} />

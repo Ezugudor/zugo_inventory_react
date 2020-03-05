@@ -1,0 +1,230 @@
+/**************Modal Styles***************/
+.modal_container,
+.modal_container2,
+.modal_container3 {
+  z-index: 100000000000000000000;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0, 1);
+}
+
+.modal_container.open,
+.modal_container2.open,
+.modal_container3.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal_body {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border-radius: 10px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0, 1);
+}
+
+.half {
+  width: 50vw;
+}
+
+.full {
+  width: 70vw;
+}
+
+.modal_container.open .modal_body,
+.modal_container2.open .modal_body,
+.modal_container3.open .modal_body {
+  opacity: 1;
+  visibility: visible;
+  top: 50%;
+  transition-delay: 0.1s;
+}
+
+.close_modal {
+  font-size: 1.4em;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  right: 1em;
+  padding: 0.5em;
+  transform: translateY(-50%);
+}
+
+.scroll_body,
+.scroll_body2 {
+  float: left;
+  width: 100%;
+  /*    overflow-x: scroll;*/
+  padding: 0 1.5em;
+  position: relative;
+}
+
+.scroll_body2 {
+  padding: 1em 1em 2em 1em;
+  max-height: 65vh;
+  overflow-y: scroll;
+  margin-bottom: 2em;
+}
+.table-wrapper {
+  width: 100%;
+  float: left;
+}
+
+.fl-table {
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: normal;
+  border: none;
+  border-collapse: separate;
+  border-spacing: 0 1.5em;
+  width: 100%;
+  max-width: 100%;
+  white-space: nowrap;
+}
+
+.fl-table td,
+.fl-table th {
+  text-align: left;
+  padding: 0.8em 1em;
+  position: relative;
+  background: white;
+}
+
+.fl-table tr {
+  position: relative;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+}
+
+.fl-table tbody td {
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0, 1);
+  background: white;
+}
+
+.fl-table tbody td:nth-child(1) {
+  padding-left: 1em;
+}
+
+.fl-table tbody tr:hover {
+  color: var(--blue);
+}
+
+.fl-table tr:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(13, 110, 255, 0.05);
+  box-shadow: 0 0 0 1px var(--blue);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0, 1);
+  border-radius: 10px;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.fl-table tbody tr:hover:before {
+  opacity: 1;
+}
+.fl-table th:nth-child(1),
+.fl-table td:nth-child(1) {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  padding-left: 1em;
+}
+
+.fl-table th:nth-last-child(1),
+.fl-table td:nth-last-child(1) {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.fl-table td {
+  border-right: none;
+  font-size: 1.1em;
+  padding: 1.5em 1em;
+}
+
+.fl-table thead th {
+  color: #000;
+  font-size: 1.1em;
+  font-weight: 100;
+  font-family: "Proxima Nova Semibold";
+}
+
+.table_btn {
+  width: 3em;
+  height: 3em;
+  float: right;
+  line-height: 3em;
+  font-size: 1em;
+  text-align: center;
+  border-radius: 10px;
+  background: var(--grey);
+  border: none;
+}
+
+.card_main_header {
+  padding: 1em 1.5em 0 1.5em;
+  border-bottom: 1px solid #f0f0f0;
+  float: left;
+  width: 100%;
+  position: relative;
+}
+
+.tab_header {
+  float: left;
+  font-family: "Proxima Nova Semibold";
+  color: black;
+  font-size: 1.2em;
+  padding: 0.5em 0 1em 0;
+  text-transform: capitalize;
+}
+
+.card_tab_list {
+  float: right;
+}
+
+.card_tab_list li {
+  display: inline-block;
+  float: left;
+  margin-left: 1em;
+}
+
+.card_tab_list li:nth-child(1) {
+  line-height: 1.5;
+  font-family: "Proxima Nova Semibold";
+}
+
+.card_tab_list li a {
+  padding: 0.3em 0.5em;
+  border-radius: 10px;
+  background: var(--grey);
+  float: left;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  color: black;
+}
+
+.modal_footer {
+  padding: 1em 1.5em 1em 1.5em;
+  border-top: 1px solid #f0f0f0;
+  float: left;
+  width: 100%;
+}
+
+.primary_btn,
+.add_btn {
+  padding: 1em 2em;
+  float: left;
+  text-transform: capitalize;
+  color: white;
+  background: var(--blue);
+  border-radius: 10px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0, 1);
+  cursor: pointer;
+  font-family: "Proxima Nova Semibold";
+}

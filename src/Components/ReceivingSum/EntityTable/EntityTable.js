@@ -41,7 +41,8 @@ const getStatus = (props, id, status) => {
         </div>
       ) : (
         <div
-          onClick={e => props.toggleProcessEntity(e, id)}
+          // onClick={e => props.toggleProcessEntity(e, id)}
+          onClick={e => props.setCode(e, id)}
           className={`${Style.iconHolder} ${Style.bgSuccess}`}
         >
           <i className={`ion ion-android-checkmark-circle ${Style.icon}`}></i>{" "}
@@ -94,8 +95,9 @@ const showResponse = props => {
       supplied_to: outlet || customer_firstname || customer_lastname || "-",
       mode: mode || "-",
       source,
+      date_used: date_used || "Not Used Yet",
       date: created_at,
-      status: getStatus(props, id, used),
+      status: getStatus(props, supply_code, used),
       action_btns: (
         <ActionBtns
           toggleDeleteEntity={props.toggleDeleteEntity}
@@ -106,7 +108,8 @@ const showResponse = props => {
         />
       ),
       clickEvent: e => {
-        props.toggleRowDetails(e, id);
+        // props.toggleRowDetails(e, id);
+        props.toggleRowDetails(e, supply_code);
       }
     };
 
@@ -131,7 +134,7 @@ const showResponse = props => {
       tableId="sales"
       hover
       data={ppDataS}
-      sortByColumn={8}
+      sortByColumn={5}
       sortDir={"desc"}
     />
   );

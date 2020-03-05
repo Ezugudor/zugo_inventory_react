@@ -21,6 +21,12 @@ export const updateOutletsData = businessId => {
     SwypPartnerApi.get(`business/outlets`)
       .then(res => {
         dispatch(stopNetworkRequest());
+        /**
+         * TODO: before you uncomment the line below, fix the returned json to
+         * include INFO,SALES,CREDITS,PAYMENTS as it was during login so as not
+         * to throw error going back to the dashboard
+         **/
+        console.log("outlet data", res.data);
         dispatch(updateEntity(res.data));
       })
       .catch(err => {

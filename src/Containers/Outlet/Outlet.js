@@ -337,14 +337,17 @@ class Class extends Component {
 
   setCurrentRow = id => {
     const entity = [...this.props.outlets];
-    const current = entity.find(elem => elem.id == id);
-    const { name, address, phone, email } = current;
+    const current = entity.find(elem => elem.info.id == id);
+    const { name, address, phone, email } = current.info;
     const editDetail = { ...this.state.editEntityDetails };
     editDetail.name = name;
     editDetail.phone = phone;
     editDetail.email = email;
     editDetail.address = address;
-    this.setState({ currentEntity: current, editEntityDetails: editDetail });
+    this.setState({
+      currentEntity: current.info,
+      editEntityDetails: editDetail
+    });
   };
 
   toggleEditEntity = (e, id = null) => {

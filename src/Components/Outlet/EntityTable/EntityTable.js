@@ -34,7 +34,7 @@ const getBusinessInfo = (id, businesses) => {
 let Bizz;
 const showResponse = props => {
   const ppData = props.outlets.map((res, index) => {
-    const { id, name, address, phone, email, created_at } = res;
+    const { id, name, address, phone, email, created_at } = res.info;
     const rowData = {
       id,
       name,

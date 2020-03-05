@@ -1,0 +1,24 @@
+.dashboard {
+  height: 1000px;
+  width: 100%;
+  padding: 20px;
+  background: #efefdf;
+  padding-top: 100px;
+  /* background:#E0DFC0; */
+}
+
+.StatCont {
+  margin-bottom: 2em;
+}
+.SubTitle {
+  position: relative;
+  left: 20px;
+}
+.SubTitle1 {
+  color: red;
+  margin-right: 20px;
+  font-family: baloo;
+}
+.SubTitle2 {
+  color: rgb(132, 183, 214);
+}

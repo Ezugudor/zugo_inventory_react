@@ -2,7 +2,8 @@ import {
   UPDATE_RECEIVINGS,
   UPDATE_STOCKS,
   UPDATE_DRIVERS,
-  UPDATE_CUSTOMERS
+  UPDATE_CUSTOMERS,
+  SELECTED_CODE
 } from "./types";
 
 import {
@@ -20,6 +21,7 @@ const updateRxData = (data, id) => ({ type: UPDATE_RECEIVINGS, data, id });
 const updateStocks = data => ({ type: UPDATE_STOCKS, data });
 const updateCustomers = data => ({ type: UPDATE_CUSTOMERS, data });
 const updateDrivers = data => ({ type: UPDATE_DRIVERS, data });
+const updateCurrentCode = data => ({ type: SELECTED_CODE, data });
 // const storeUserData = data => ({ type: STORE_USER, data });
 
 /**
@@ -38,6 +40,13 @@ export const updateReceivingsData = businessId => {
     SwypPartnerApi.get(receivings),
     SwypPartnerApi.get(customers)
   ]);
+};
+
+export const updateCode = data => {
+  console.log("action d", data);
+  return dispatch => {
+    dispatch(updateCurrentCode(data));
+  };
 };
 
 export const deleteReceivings = elem => {
