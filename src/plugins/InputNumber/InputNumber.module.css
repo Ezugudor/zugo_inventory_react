@@ -1,0 +1,10 @@
+.Input {
+  width: 100%;
+  border-radius: 5px;
+  border: 1px #f0f0f0 solid;
+  padding: 1em;
+  clear: both;
+  font-family: gilroy;
+  color: #000;
+  font-weight: bold;
+}

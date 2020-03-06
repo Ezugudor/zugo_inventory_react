@@ -11,6 +11,7 @@ export * from "./SupplySum";
 export * from "./Credit";
 export * from "./CreditSum";
 export * from "./Customer";
+export * from "./Driver";
 export * from "./Outlet";
 export * from "./Company";
 export * from "./Payment";

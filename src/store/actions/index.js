@@ -6,6 +6,7 @@ export * from "./receivings";
 export * from "./supply";
 export * from "./stocks";
 export * from "./customers";
+export * from "./drivers";
 export * from "./outlets";
 export * from "./user";
 export * from "./file";

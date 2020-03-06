@@ -153,6 +153,18 @@ export class AdminSideNav extends Component {
                   Outlets
                 </a>
               </li>
+              <li className={Style.NavItem}>
+                <a
+                  className={this.getClassName(this.props, "drivers")}
+                  href="/drivers"
+                >
+                  <img
+                    className={Style.sidebarIcon}
+                    src="/images/icons/supply.webp"
+                  />
+                  Drivers
+                </a>
+              </li>
               {/* <li className={Style.NavItem}>
                 <a
                   className={this.getClassName(this.props, "companies")}

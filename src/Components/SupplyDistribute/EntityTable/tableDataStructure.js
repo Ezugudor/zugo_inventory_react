@@ -19,8 +19,20 @@ export const dataStruct = {
       width: 150
     },
     {
+      label: "Qty",
+      field: "qty",
+      sort: "asc",
+      width: 150
+    },
+    {
       label: "Amount",
       field: "amount",
+      sort: "asc",
+      width: 270
+    },
+    {
+      label: "Deposit",
+      field: "deposit",
       sort: "asc",
       width: 270
     },
@@ -60,12 +72,7 @@ export const dataStruct = {
       sort: "asc",
       width: 270
     },
-    {
-      label: "Deposit",
-      field: "deposit",
-      sort: "asc",
-      width: 270
-    },
+
     {
       label: "Comment",
       field: "comment",

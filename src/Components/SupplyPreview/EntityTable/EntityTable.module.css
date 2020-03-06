@@ -66,3 +66,9 @@
   font-weight: bold;
   float: right;
 }
+.Money {
+  font-family: Montserrat;
+  font-weight: bold;
+  color: rgba(71, 192, 23, 0.589);
+  text-shadow: 0 0 0px #000;
+}

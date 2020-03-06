@@ -28,20 +28,13 @@ class Class extends Component {
     showDeleteEntity: false,
     currentEntity: { name: "default text" },
     newEntityDetails: {
-      qty: "",
       name: "",
-      expiry: "",
-      type: "cement",
-      price: "",
-      cp: ""
+      type: "cement"
     },
     editEntityDetails: {
-      qty: "",
+      id: "",
       name: "",
-      expiry: "",
-      type: "cement",
-      price: "",
-      cp: ""
+      type: "cement"
     }
   };
 
@@ -383,21 +376,11 @@ class Class extends Component {
   setCurrentRow = id => {
     const stocks = [...this.props.stocks];
     const current = stocks.find(elem => elem.id == id);
-    const {
-      product_name,
-      product_type,
-      expiry,
-      price,
-      cp,
-      stock_qty
-    } = current;
+    const { id: entityID, product_name, product_type } = current;
     const editDetail = { ...this.state.editEntityDetails };
     editDetail.name = product_name;
     editDetail.type = product_type;
-    editDetail.expiry = expiry;
-    editDetail.price = price;
-    editDetail.cp = cp;
-    editDetail.qty = stock_qty;
+    editDetail.id = entityID;
     this.setState({ currentEntity: current, editEntityDetails: editDetail });
   };
 

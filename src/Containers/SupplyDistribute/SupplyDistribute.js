@@ -38,8 +38,10 @@ class Class extends Component {
       driver_name: "",
       driver_phone: "",
       truck_id: "",
+      qty: "",
       source: "factory",
       payment_method: "full",
+      amount: "",
       deposit: "",
       comment: ""
     },
@@ -76,6 +78,14 @@ class Class extends Component {
     const value = autoCompleteSelected || e.target.value;
     const entityDetails = { ...this.state.newEntityDetails };
     entityDetails[type] = value;
+    //prefill drivers info
+    if (type === "driver_id") {
+      const driver = this.props.drivers.find(
+        dr => dr.id == autoCompleteSelected
+      );
+      entityDetails.driver_phone = driver.phone;
+      entityDetails.truck_id = driver.truck_id;
+    }
     this.setState({ newEntityDetails: entityDetails });
   };
 

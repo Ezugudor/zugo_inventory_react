@@ -4,3 +4,6 @@ export * from "./jQueryDatatableMini";
 export * from "./Tokenize";
 export * from "./jQueryAutoComplete";
 export * from "./Money";
+export * from "./Number";
+export * from "./InputMoney";
+export * from "./InputNumber";

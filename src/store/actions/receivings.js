@@ -30,7 +30,7 @@ const updateCurrentCode = data => ({ type: SELECTED_CODE, data });
  */
 export const updateReceivingsData = businessId => {
   // const details = { businessId };
-  const drivers = `business/${businessId}/drivers`;
+  const drivers = `business/drivers`;
   const customers = `business/${businessId}/customers`;
   const stocks = `business/${businessId}/stocks`;
   const receivings = `business/${businessId}/receivings`;

@@ -72,7 +72,7 @@ export const EditStock = props => (
             </select>
           </div>
         </div>
-
+        {/* 
         <div class="col-md-6">
           <div class="col2">
             <label>Price</label>
@@ -123,7 +123,7 @@ export const EditStock = props => (
               onChange={e => props.setEditEntityDetail(e, "expiry")}
             />
           </div>
-        </div>
+        </div> */}
       </div>
 
       <div class="modal_footer">

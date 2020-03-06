@@ -8,6 +8,7 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { Tokenize } from "../../../plugins";
 import { JQAutoComplete } from "../../../plugins";
+import { InputMoney, InputNumber } from "../../../plugins";
 import uuid from "uuid4";
 
 // const gotoRegister = (e, id) => {
@@ -54,7 +55,7 @@ export class NewEntity extends Component {
                 </select>
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-8">
               {this.state.defaultCustomer ? (
                 <div class="col2">
                   <label>Customer Name:</label>
@@ -87,7 +88,24 @@ export class NewEntity extends Component {
                 </div>
               )}
             </div>
-
+            <div class="col-md-4">
+              <div class="col2">
+                <label>Qty</label>
+                {/* <input
+                  type="text"
+                  class="form_field"
+                  placeholder="e.g 400"
+                  onChange={e => this.props.setNewEntityDetail(e, "qty")}
+                /> */}
+                <InputNumber
+                  key={1}
+                  class="form_field"
+                  placeholder="e.g 400"
+                  name="qty"
+                  setNewEntityDetail={this.props.setNewEntityDetail}
+                />
+              </div>
+            </div>
             <div class="col-md-4">
               <div class="col2">
                 <label>Driver:</label>
@@ -103,7 +121,7 @@ export class NewEntity extends Component {
                 />
               </div>
             </div>
-            <div class="col-md-4">
+            {/* <div class="col-md-4">
               <div class="col2">
                 <label>Driver Phone</label>
                 <input
@@ -115,8 +133,8 @@ export class NewEntity extends Component {
                   }
                 />
               </div>
-            </div>
-            <div class="col-md-4">
+            </div> */}
+            {/* <div class="col-md-4">
               <div class="col2">
                 <label>Truck Id</label>
                 <input
@@ -127,7 +145,7 @@ export class NewEntity extends Component {
                   onChange={e => this.props.setNewEntityDetail(e, "truck_id")}
                 />
               </div>
-            </div>
+            </div> */}
 
             <div class="col-md-4">
               <div class="col2">
@@ -150,12 +168,19 @@ export class NewEntity extends Component {
               <div class="col2">
                 <label>Amount Deposited</label>
                 {this.state.showDeposit === "part" ? (
-                  <input
-                    type="text"
+                  // <input
+                  //   type="text"
+                  //   key={1}
+                  //   class="form_field"
+                  //   placeholder="e.g 12000"
+                  //   onChange={e => this.props.setNewEntityDetail(e, "deposit")}
+                  // />
+                  <InputMoney
                     key={1}
                     class="form_field"
                     placeholder="e.g 12000"
-                    onChange={e => this.props.setNewEntityDetail(e, "deposit")}
+                    name="deposit"
+                    setNewEntityDetail={this.props.setNewEntityDetail}
                   />
                 ) : this.state.showDeposit === "full" ? (
                   <input
@@ -209,11 +234,18 @@ export class NewEntity extends Component {
             <div class="col-md-12">
               <div class="col2">
                 <label>Amount (Goods Amount)</label>
-                <input
+                {/* <input
                   type="text"
                   class="form_field"
                   placeholder="e.g 20000"
                   onChange={e => this.props.setNewEntityDetail(e, "amount")}
+                /> */}
+                <InputMoney
+                  key={90}
+                  class="form_field"
+                  placeholder="e.g 20000"
+                  name="amount"
+                  setNewEntityDetail={this.props.setNewEntityDetail}
                 />
               </div>
             </div>

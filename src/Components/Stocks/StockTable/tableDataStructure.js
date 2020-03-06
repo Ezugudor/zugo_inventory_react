@@ -1,7 +1,7 @@
 export const dataStruct = {
   columns: [
     {
-      label: "Sn",
+      label: "S/n",
       field: "id",
       sort: "asc",
       width: 270
@@ -12,30 +12,14 @@ export const dataStruct = {
       sort: "asc",
       width: 150
     },
+
     {
-      label: "Cost Price",
-      field: "cp",
+      label: "Product Type",
+      field: "product_type",
       sort: "asc",
       width: 150
     },
-    {
-      label: "Selling Price",
-      field: "price",
-      sort: "asc",
-      width: 270
-    },
-    {
-      label: "Qty",
-      field: "stock_qty",
-      sort: "asc",
-      width: 270
-    },
-    {
-      label: "Expiry",
-      field: "expiry",
-      sort: "asc",
-      width: 270
-    },
+
     {
       label: "Added By",
       field: "created_by",

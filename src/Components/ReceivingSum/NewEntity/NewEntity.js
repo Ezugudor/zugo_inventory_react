@@ -7,7 +7,7 @@ import { Modal } from "../../Utils";
 import PropTypes from "prop-types";
 import React from "react";
 import { Tokenize } from "../../../plugins";
-import { JQAutoComplete } from "../../../plugins";
+import { JQAutoComplete, InputMoney, InputNumber } from "../../../plugins";
 import uuid from "uuid4";
 
 const gotoRegister = (e, id) => {
@@ -50,7 +50,7 @@ export const NewEntity = props => (
       <div class="scroll_body2">
         <div class="col-md-12">
           <div class="col2">
-            <label>SKU</label>
+            <label>SKU Code</label>
             <div className={styles.TokenField}>
               <Tokenize
                 extStyle={styles.TokenComp}
@@ -85,12 +85,19 @@ export const NewEntity = props => (
         </div>
         <div class="col-md-6">
           <div class="col2">
-            <label>Size</label>
-            <input
+            <label>Size (Tons)</label>
+            {/* <input
               type="text"
               class="form_field"
               placeholder="e.g 40 Tons"
               onChange={e => props.setNewEntityDetail(e, "size")}
+            /> */}
+            <InputNumber
+              key={1}
+              class="form_field"
+              placeholder="e.g 40"
+              name="size"
+              setNewEntityDetail={props.setNewEntityDetail}
             />
           </div>
         </div>

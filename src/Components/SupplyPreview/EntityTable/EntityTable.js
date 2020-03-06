@@ -5,6 +5,8 @@ import Style from "./EntityTable.module.css";
 // import SharedStyle from "../Tables.module.css";
 import { Table } from "../../../plugins";
 import { White, Red } from "../../Utils/Buttons";
+import { Money } from "../../../plugins";
+
 import { ActionBtns } from "./ActionBtns";
 const moment = require("moment");
 export class Class extends Component {
@@ -56,13 +58,13 @@ const showResponse = props => {
       index: index + 1,
       outlet: outlet_name || "-",
       customer: customer_firstname || customer_surname || "-",
-      amount,
+      amount: <Money extStyle={Style.Money}>{amount}</Money>,
+      deposit: <Money extStyle={Style.Money}>{deposit}</Money>,
       driver_name: driver_surname || driver_firstname || "-",
       driver_phone: driver_phone || "-",
       source,
       mode,
       payment_method,
-      deposit,
       created_at,
       comment,
       action_btns: (

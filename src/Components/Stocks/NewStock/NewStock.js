@@ -64,7 +64,7 @@ export const NewStock = props => (
             </select>
           </div>
         </div>
-
+        {/* 
         <div class="col-md-6">
           <div class="col2">
             <label>Price</label>
@@ -111,7 +111,7 @@ export const NewStock = props => (
               onChange={e => props.setNewEntityDetail(e, "expiry")}
             />
           </div>
-        </div>
+        </div> */}
       </div>
 
       <div class="modal_footer">

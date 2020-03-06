@@ -53,7 +53,7 @@ export const updateCurrentSupplyData = code => {
 };
 export const updateSupplyData = businessId => {
   // const details = { businessId };
-  const drivers = `business/${businessId}/drivers`;
+  const drivers = `business/drivers`;
   const customers = `business/${businessId}/customers`;
   const stocks = `business/${businessId}/stocks`;
   const receivings = `business/${businessId}/receivings`;

@@ -15,6 +15,7 @@ import {
   Login,
   Team,
   Customer,
+  Driver,
   Outlet,
   Credit,
   CreditSum,
@@ -95,6 +96,7 @@ export default () => (
     <PrivateRoute exact path="/users" component={Team} />
     <PrivateRoute exact path="/admin" component={Team} />
     <PrivateRoute exact path="/customers" component={Customer} />
+    <PrivateRoute exact path="/drivers" component={Driver} />
     <PrivateRoute exact path="/companies" component={Company} />
     <PrivateRoute exact path="/outlets" component={Outlet} />
     <GuestRoute exact path="/login" component={Login} />
