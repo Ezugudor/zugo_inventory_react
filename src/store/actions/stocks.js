@@ -21,7 +21,7 @@ export const updateStocksData = businessId => {
   // const details = { businessId };
   return dispatch => {
     dispatch(startNetworkRequest());
-    SwypPartnerApi.get(`business/${businessId}/stocks`)
+    SwypPartnerApi.get(`business/stocks`)
       .then(res => {
         dispatch(stopNetworkRequest());
         dispatch(updateStocks(res.data));

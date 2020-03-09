@@ -60,7 +60,9 @@ const ManagerRoute = ({ component: Component, ...rest }) => (
       const token = state.user.token;
       SwypPartnerApi.defaults.headers.common["Authorization"] = token;
       return currentUser &&
-        (currentUser.role === "manager" || currentUser.role === "admin") ? (
+        (currentUser.role === "manager" ||
+          currentUser.role === "admin" ||
+          currentUser.role === 3) ? (
         <Component {...props} />
       ) : (
         <Redirect to="/dashboard" />
@@ -92,6 +94,7 @@ export default () => (
     <PrivateRoute exact path="/payment" component={Payment} />
     <PrivateRoute exact path="/dashboard" component={Dashboard} />
     <GuestRoute exact path="/signup" component={Signup} />
+    <ManagerRoute exact path="/outlet_manager" component={Team} />
     <ManagerRoute exact path="/team" component={Team} />
     <PrivateRoute exact path="/users" component={Team} />
     <PrivateRoute exact path="/admin" component={Team} />

@@ -145,7 +145,7 @@ export class AdminSideNav extends Component {
                     </a>
                   </li>
                   <li>
-                    <a href="manager" class="">
+                    <a href="outlet_manager" class="">
                       Outlet Managers
                     </a>
                   </li>

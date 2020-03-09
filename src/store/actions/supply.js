@@ -54,9 +54,9 @@ export const updateCurrentSupplyData = code => {
 export const updateSupplyData = businessId => {
   // const details = { businessId };
   const drivers = `business/drivers`;
-  const customers = `business/${businessId}/customers`;
-  const stocks = `business/${businessId}/stocks`;
-  const receivings = `business/${businessId}/receivings`;
+  const customers = `business/customers`;
+  const stocks = `business/stocks`;
+  const receivings = `business/receivings`;
   return multipleRequest([
     SwypPartnerApi.get(drivers),
     SwypPartnerApi.get(stocks),

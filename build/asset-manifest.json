@@ -1,9 +1,9 @@
 {
-  "main.css": "/static/css/main.7e71365e.chunk.css",
-  "main.js": "/static/js/main.140c23ee.chunk.js",
-  "main.js.map": "/static/js/main.140c23ee.chunk.js.map",
-  "static/js/1.cb2fc158.chunk.js": "/static/js/1.cb2fc158.chunk.js",
-  "static/js/1.cb2fc158.chunk.js.map": "/static/js/1.cb2fc158.chunk.js.map",
+  "main.css": "/static/css/main.6884aad1.chunk.css",
+  "main.js": "/static/js/main.2d65c3db.chunk.js",
+  "main.js.map": "/static/js/main.2d65c3db.chunk.js.map",
+  "static/js/1.957c08e0.chunk.js": "/static/js/1.957c08e0.chunk.js",
+  "static/js/1.957c08e0.chunk.js.map": "/static/js/1.957c08e0.chunk.js.map",
   "runtime~main.js": "/static/js/runtime~main.229c360f.js",
   "runtime~main.js.map": "/static/js/runtime~main.229c360f.js.map",
   "static/media/add.svg": "/static/media/add.7da2c3e1.svg",
@@ -18,8 +18,8 @@
   "static/media/notify.svg": "/static/media/notify.25dfe97b.svg",
   "static/media/process.svg": "/static/media/process.249a1815.svg",
   "static/media/loading2.svg": "/static/media/loading2.1422b514.svg",
-  "static/css/main.7e71365e.chunk.css.map": "/static/css/main.7e71365e.chunk.css.map",
+  "static/css/main.6884aad1.chunk.css.map": "/static/css/main.6884aad1.chunk.css.map",
   "index.html": "/index.html",
-  "precache-manifest.bda39e97785da0ecf32b62cbebfad735.js": "/precache-manifest.bda39e97785da0ecf32b62cbebfad735.js",
+  "precache-manifest.a6875e04fd5e6f64bb0e48dccb89ddd3.js": "/precache-manifest.a6875e04fd5e6f64bb0e48dccb89ddd3.js",
   "service-worker.js": "/service-worker.js"
 }
