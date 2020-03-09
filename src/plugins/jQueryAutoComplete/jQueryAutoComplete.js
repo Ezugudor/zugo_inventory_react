@@ -60,7 +60,11 @@ export class JQAutoComplete extends Component {
         /**
          * use the default input field value first incase user didnt select from the dropdown
          **/
-        this.props.setNewEntityDetail(null, this.props.item_name, term);
+        if (this.props.setNewEntityDetail) {
+          this.props.setNewEntityDetail(null, this.props.item_name, term);
+        } else {
+          this.props.setEditEntityDetail(null, this.props.item_name, term);
+        }
 
         //then start check for match
         let match;
@@ -79,14 +83,30 @@ export class JQAutoComplete extends Component {
         } else {
           id = this.getIDSimple(term);
         }
-        this.props.setNewEntityDetail(e, this.props.item_name, term);
-        this.props.setNewEntityDetail(e, this.props.item_id, id);
+
+        if (this.props.setNewEntityDetail) {
+          this.props.setNewEntityDetail(e, this.props.item_name, term);
+          this.props.setNewEntityDetail(e, this.props.item_id, id);
+        } else {
+          this.props.setEditEntityDetail(e, this.props.item_name, term);
+          this.props.setEditEntityDetail(e, this.props.item_id, id);
+        }
       }.bind(this)
     });
   }
 
   render() {
-    return (
+    return this.props.value ? (
+      <input
+        type="text"
+        name={`${this.props.id}autocomplete`}
+        id={this.props.id}
+        value={this.props.value}
+        // key={this.props.id}
+        className={`${this.props.extStyle} form_field`}
+        placeholder={this.props.placeholder}
+      />
+    ) : (
       <input
         type="text"
         name={`${this.props.id}autocomplete`}

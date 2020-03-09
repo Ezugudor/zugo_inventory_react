@@ -25,10 +25,10 @@ const updatePayment = data => ({ type: UPDATE_PAYMENT, data });
  */
 export const updateBusinessDataFromServer = businessId => {
   // const details = { businessId };
-  const outlets = `business/${businessId}/outlets`;
-  const customers = `business/${businessId}/customers`;
-  const credit = `business/${businessId}/customer-credit`;
-  const payment = `business/${businessId}/credit-payment`;
+  const outlets = `business/outlets`;
+  const customers = `business/customers`;
+  const credit = `business/customer-credit`;
+  const payment = `business/credit-payment`;
   return multipleRequest([
     SwypPartnerApi.get(outlets),
     SwypPartnerApi.get(credit),

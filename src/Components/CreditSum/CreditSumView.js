@@ -8,12 +8,13 @@ import { EntityTable } from "./EntityTable";
 import { NewEntity } from "./NewEntity";
 import { DeleteEntity } from "./DeleteEntity";
 import { EditEntity } from "./EditEntity";
+import { Deposit } from "./Deposit";
 
 export const CreditSumView = props => {
   return (
     <AdminLayout
       pageName="Credit Book"
-      pageSubtitle="Aggregate"
+      pageSubtitle="Keeps record of debts."
       currentUser={props.currentUser}
       toggleGeneralReport={props.toggleGeneralReport}
     >
@@ -22,22 +23,49 @@ export const CreditSumView = props => {
         <div className={Style.TablesCont}>
           <EntityTable
             toggleCreateEntity={props.toggleCreateEntity}
+            chooseToProcess={props.chooseToProcess}
             toggleDeleteEntity={props.toggleDeleteEntity}
             toggleEditEntity={props.toggleEditEntity}
+            credits={props.credits}
           />
         </div>
         <NewEntity
           showCreateEntity={props.showCreateEntity}
           toggleCreateEntity={props.toggleCreateEntity}
+          setNewEntityDetail={props.setNewEntityDetail}
+          addEntity={props.addEntity}
+          customers={props.customers}
+          outlets={props.outlets}
         />
         <EditEntity
           showEditEntity={props.showEditEntity}
           toggleEditEntity={props.toggleEditEntity}
+          setEditEntityDetail={props.setEditEntityDetail}
+          updateEntity={props.updateEntity}
+          editEntityDetails={props.editEntityDetails}
+          currentEntity={props.currentEntity}
+          customers={props.customers}
+          outlets={props.outlets}
+          defaultCustomer={props.defaultCustomer}
+          toggleReceiver={props.toggleReceiver}
         />
         <DeleteEntity
           showDeleteEntity={props.showDeleteEntity}
           toggleDeleteEntity={props.toggleDeleteEntity}
           currentEntity={props.currentEntity}
+          deleteEntity={props.deleteEntity}
+        />
+        <Deposit
+          showProcessEntity={props.showProcessEntity}
+          toggleProcessEntity={props.toggleProcessEntity}
+          currentEntity={props.currentEntity}
+          setProcessEntityDetail={props.setProcessEntityDetail}
+          processEntity={props.processEntity}
+        />
+        <Loading showLoading={props.showLoading} />
+        <Notification
+          title={"Default Title"}
+          message={"Default Body Message"}
         />
       </div>
     </AdminLayout>

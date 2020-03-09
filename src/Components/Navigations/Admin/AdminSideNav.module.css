@@ -143,7 +143,8 @@
   transform: translateY(-0.1em);
 }
 
-.MenuList li a {
+.MenuList li a,
+.MenuList li label {
   font-family: "Proxima Nova Semibold";
   width: 100%;
   float: left;
@@ -157,13 +158,16 @@
 }
 
 .MenuList li a.active,
-.MenuList li a:hover {
+.MenuList li a:hover,
+.MenuList li label.active,
+.MenuList li label:hover {
   /*    box-shadow: 0 0 0 1px rgba(13, 110, 255, 1);*/
   background: rgba(13, 110, 255, 0.03);
   color: var(--blue);
 }
 
-.MenuList li a.active:before {
+.MenuList li a.active:before,
+.MenuList li label.active:before {
   content: "";
   position: absolute;
   top: 0;
@@ -173,7 +177,7 @@
   background: var(--blue);
 }
 
-.Dropdown {
+/* .Dropdown {
   position: relative;
   width: 100%;
   height: auto;
@@ -182,13 +186,16 @@
   -webkit-transition: all 0.3s cubic-bezier(0.89, 0.01, 0.24, 0.88);
   -o-transition: all 0.3s cubic-bezier(0.89, 0.01, 0.24, 0.88);
   transition: all 0.3s cubic-bezier(0.89, 0.01, 0.24, 0.88);
-}
+} */
 
 .SubMenu {
-  display: none;
-  margin-left: 0;
+  /* display: none; */
   width: 100%;
-  float: left;
+  height: 0;
+  overflow: hidden;
+  -webkit-transition: all 0.3s cubic-bezier(0.89, 0.01, 0.24, 0.88);
+  -o-transition: all 0.3s cubic-bezier(0.89, 0.01, 0.24, 0.88);
+  transition: all 0.3s cubic-bezier(0.89, 0.01, 0.24, 0.88);
 }
 
 .SubMenu li {
@@ -206,4 +213,10 @@
 
 .SubMenu li a.active:before {
   display: none;
+}
+.UserDropdownCheck {
+  display: none;
+}
+.UserDropdownCheck:checked ~ .SubMenu {
+  height: 220px;
 }

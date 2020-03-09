@@ -18,8 +18,12 @@ export class InputMoney extends Component {
               .val()
               .replace(/[^0-9]/g, "")
           ) || 0;
+        if (_this.props.setNewEntityDetail) {
+          _this.props.setNewEntityDetail(e, _this.props.name, realVal);
+        } else {
+          _this.props.setEditEntityDetail(e, _this.props.name, realVal);
+        }
 
-        _this.props.setNewEntityDetail(e, _this.props.name, realVal);
         // $('input[name="value-main"]').val(realVal);
         var symb = $("<span/>")
           .html("&#8358; ")
@@ -54,12 +58,22 @@ export class InputMoney extends Component {
   render() {
     return (
       <div>
-        <input
-          type="text"
-          name={`value-fancy_${this.props.name}`}
-          placeholder={this.props.placeholder}
-          className={`${Style.Input} ${this.props.extStyle}`}
-        />
+        {this.props.value ? (
+          <input
+            type="text"
+            value={this.props.value}
+            name={`value-fancy_${this.props.name}`}
+            placeholder={this.props.placeholder}
+            className={`${Style.Input} ${this.props.extStyle}`}
+          />
+        ) : (
+          <input
+            type="text"
+            name={`value-fancy_${this.props.name}`}
+            placeholder={this.props.placeholder}
+            className={`${Style.Input} ${this.props.extStyle}`}
+          />
+        )}
         <input type="hidden" name="value-main" />
       </div>
     );

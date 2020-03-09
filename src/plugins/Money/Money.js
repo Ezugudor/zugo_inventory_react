@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Style from "./Money.module.css";
 import accounting from "accounting-js";
 import $ from "jquery";
 
@@ -62,7 +63,9 @@ export class Money extends Component {
 
   render() {
     return (
-      <span className={`zugo3434xceeg535 ${this.props.extStyle}`}>
+      <span
+        className={`zugo3434xceeg535 ${Style.style} ${this.props.extStyle}`}
+      >
         {this.props.children}
       </span>
     );

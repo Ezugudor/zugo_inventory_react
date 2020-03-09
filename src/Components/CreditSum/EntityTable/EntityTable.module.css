@@ -65,3 +65,19 @@
   font-size: 17px;
   font-weight: bold;
 }
+.defaultText {
+  color: #ccc;
+  text-transform: capitalize;
+}
+.depositBtn {
+  background: var(--green);
+  color: #fff;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 4px 6px;
+  border-radius: 2px;
+}
+.complete {
+  color: #999;
+  font-weight: bold;
+}

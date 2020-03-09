@@ -1,0 +1,144 @@
+/**************Modal Styles***************/
+.modal_container,
+.modal_container2,
+.modal_container3 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 100000000000000000000;
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0, 1);
+}
+
+.modal_container.open,
+.modal_container2.open,
+.modal_container3.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal_body {
+  background: #fff;
+  border-radius: 10px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0, 1);
+}
+
+.half {
+  width: 50vw;
+}
+
+.full {
+  width: 70vw;
+}
+
+.modal_container.open .modal_body,
+.modal_container2.open .modal_body,
+.modal_container3.open .modal_body {
+  opacity: 1;
+  visibility: visible;
+  top: 50%;
+  transition-delay: 0.1s;
+}
+
+.close_modal {
+  font-size: 1.4em;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  right: 1em;
+  padding: 0.5em;
+  transform: translateY(-50%);
+}
+/* Card and Table Styles */
+.card_tab {
+  float: left;
+  position: relative;
+  background: white;
+  border-radius: 10px;
+  width: 100%;
+  overflow: hidden;
+  max-height: 40em;
+}
+
+.card_main_header {
+  padding: 1em 1.5em 0 1.5em;
+  border-bottom: 1px solid #f0f0f0;
+  float: left;
+  width: 100%;
+  position: relative;
+}
+
+.tab_header {
+  float: left;
+  font-family: "Proxima Nova Semibold";
+  color: black;
+  font-size: 1.2em;
+  padding: 0.5em 0 1em 0;
+  text-transform: capitalize;
+}
+
+.card_tab_list {
+  float: right;
+}
+
+.card_tab_list li {
+  display: inline-block;
+  float: left;
+  margin-left: 1em;
+}
+
+.card_tab_list li:nth-child(1) {
+  line-height: 1.5;
+  font-family: "Proxima Nova Semibold";
+}
+
+.card_tab_list li a {
+  padding: 0.3em 0.5em;
+  border-radius: 10px;
+  background: var(--grey);
+  float: left;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  color: black;
+}
+
+.card_list_menu {
+  width: 10em;
+  border-radius: 5px;
+  background: #f9f9f9;
+  position: absolute;
+  bottom: -50%;
+  right: 1.5em;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0, 1);
+  opacity: 0;
+  visibility: hidden;
+  overflow: hidden;
+  transform-origin: bottom;
+  transform: translateY(50%);
+  z-index: 100000000;
+  padding-top: 1em;
+}
+
+.card_tab_list li:hover .card_list_menu {
+  visibility: visible;
+  opacity: 1;
+  bottom: -0.8em;
+}
+
+.card_list_menu li {
+  float: left;
+  width: 100%;
+  padding: 1em;
+  margin: 0;
+  display: block;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0, 1);
+  cursor: pointer;
+  font-family: "Proxima Nova Semibold";
+}
+
+.card_list_menu li:hover {
+  background: var(--grey);
+}

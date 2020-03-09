@@ -13,6 +13,8 @@ export class JQDatatableMini extends Component {
     this.props = props;
     this.dTOptions = "";
     this.dataTableHandle = "";
+    this.sortByColumn = props.sortByColumn || 0;
+    this.sortDir = props.sortDir || "asc";
   }
   componentDidMount() {
     const _this = this;
@@ -34,6 +36,7 @@ export class JQDatatableMini extends Component {
         search: "_INPUT_",
         searchPlaceholder: "Search records"
       },
+      order: [[this.sortByColumn, this.sortDir]],
       drawCallback: function() {}
     };
     this.$el = $(this.el);

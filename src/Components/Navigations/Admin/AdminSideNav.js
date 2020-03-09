@@ -117,9 +117,14 @@ export class AdminSideNav extends Component {
                 </a>
               </li>
               <li className={`${Style.NavItem} ${Style.Dropdown}`}>
-                <a
-                  className={this.getClassName(this.props, "users")}
-                  href="/users"
+                <label
+                  for="toggleUser"
+                  className={this.getClassName(
+                    this.props,
+                    "users",
+                    Style.toggleUser
+                  )}
+                  href="#"
                 >
                   <img
                     className={Style.sidebarIcon}
@@ -127,16 +132,34 @@ export class AdminSideNav extends Component {
                   />
                   Users
                   <span className={`pull-right mdi mdi-chevron-down`}></span>
-                </a>
-                <ul className={Style.SubMenu} style={{ display: "block" }}>
+                </label>
+                <input
+                  id="toggleUser"
+                  type="checkbox"
+                  className={Style.UserDropdownCheck}
+                />
+                <ul className={Style.SubMenu}>
                   <li>
                     <a href="admin" class="">
                       Admin
                     </a>
                   </li>
                   <li>
+                    <a href="manager" class="">
+                      Outlet Managers
+                    </a>
+                  </li>
+                  <li>
                     <a href="customers" class="">
                       Customers
+                    </a>
+                  </li>
+                  <li className={Style.NavItem}>
+                    <a
+                      className={this.getClassName(this.props, "drivers")}
+                      href="/drivers"
+                    >
+                      Drivers
                     </a>
                   </li>
                 </ul>
@@ -153,18 +176,7 @@ export class AdminSideNav extends Component {
                   Outlets
                 </a>
               </li>
-              <li className={Style.NavItem}>
-                <a
-                  className={this.getClassName(this.props, "drivers")}
-                  href="/drivers"
-                >
-                  <img
-                    className={Style.sidebarIcon}
-                    src="/images/icons/supply.webp"
-                  />
-                  Drivers
-                </a>
-              </li>
+
               {/* <li className={Style.NavItem}>
                 <a
                   className={this.getClassName(this.props, "companies")}

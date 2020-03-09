@@ -6,6 +6,8 @@ import Style from "./EntityTable.module.css";
 import { JQDatatable } from "../../../plugins";
 import { White, Red } from "../../Utils/Buttons";
 import { ActionBtns } from "./ActionBtns";
+import { Money } from "../../../plugins";
+
 const moment = require("moment");
 export class Class extends Component {
   state = {
@@ -25,6 +27,19 @@ export const EntityTable = props => (
 const formatDate = rawDate => {
   return moment(rawDate).format("DD-MM-YYYY");
 };
+const getStatus = (id, balance, props) => {
+  return balance > 0 ? (
+    <a
+      href="#"
+      className={Style.depositBtn}
+      onClick={e => props.chooseToProcess(e, id)}
+    >
+      Deposit
+    </a>
+  ) : (
+    <span className={Style.complete}>Completed</span>
+  );
+};
 
 const getBusinessInfo = (id, businesses) => {
   const businessInfo = businesses.find(business => id == business._id);
@@ -33,40 +48,44 @@ const getBusinessInfo = (id, businesses) => {
 };
 let Bizz;
 const showResponse = props => {
-  const ppData = dataStruct.rows.map((res, index) => {
+  const ppData = props.credits.map((res, index) => {
     const {
-      sn,
       id,
-      customer,
-      outlet,
-      items,
-      amount,
-      deposit,
+      customer_surname,
+      customer_firstname,
+      is_outlet,
+      outlet_name,
+      total_amount,
       balance,
-      method,
+      sku_code,
+      is_auto_generated,
+      author,
       comment,
-      date
+      created_at
     } = res;
     const rowData = {
-      sn,
       id,
-      customer,
-      outlet,
-      items,
-      amount,
-      deposit,
-      balance,
-      method,
+      customer: is_outlet == 0 ? customer_surname || customer_firstname : "-",
+      outlet: is_outlet == 1 ? outlet_name : "-",
+      amount: <Money extStyle={Style.Money}>{total_amount}</Money>,
+      balance: <Money extStyle={Style.Money}>{balance}</Money>,
+      sku_code: sku_code || "-",
+      author,
       comment,
-      date,
-      action_btns: (
-        <ActionBtns
-          toggleDeleteEntity={props.toggleDeleteEntity}
-          toggleEditEntity={props.toggleEditEntity}
-        />
-      ),
-      clickEvent: () => {
-        props.toggleEditEntity();
+      status: getStatus(id, balance, props),
+      created_at,
+      action_btns:
+        is_auto_generated !== "1" ? (
+          <ActionBtns
+            toggleDeleteEntity={props.toggleDeleteEntity}
+            toggleEditEntity={props.toggleEditEntity}
+            id={id}
+          />
+        ) : (
+          <span className={Style.defaultText}>auto</span>
+        ),
+      clickEvent: e => {
+        // return is_auto_generated !== "1" ? props.toggleEditEntity(e, id) : null;
       }
     };
 
@@ -86,7 +105,15 @@ const showResponse = props => {
     </Red>
   );
 
-  return <JQDatatable tableId="sales" hover data={ppDataS} />;
+  return (
+    <JQDatatable
+      tableId="sales"
+      hover
+      data={ppDataS}
+      sortByColumn={7}
+      sortDir="DESC"
+    />
+  );
 };
 
 EntityTable.propTypes = {

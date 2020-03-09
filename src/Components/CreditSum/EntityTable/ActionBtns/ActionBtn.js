@@ -20,7 +20,9 @@ export const ActionBtns = props => (
 
     <div className={styles.memberControls}>
       <div
-        onClick={e => props.toggleEditEntity(e, props.id)}
+        onClick={e => {
+          // props.toggleEditEntity(e, props.id)
+        }}
         // onClick={e => props.populateEditBusiness(e, props.businessInfo)}
         className={styles.iconHolder}
       >

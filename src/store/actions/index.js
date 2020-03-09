@@ -7,6 +7,8 @@ export * from "./supply";
 export * from "./stocks";
 export * from "./customers";
 export * from "./drivers";
+export * from "./credits";
+export * from "./payments";
 export * from "./outlets";
 export * from "./user";
 export * from "./file";

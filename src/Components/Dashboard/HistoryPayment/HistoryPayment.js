@@ -43,8 +43,8 @@ const showResponse = props => {
     const { id, outlet, customer, amount, created_at } = res;
     const rowData = {
       id,
-      outlet,
-      customer,
+      outlet: outlet || "-",
+      customer: customer || "-",
       price: <span className="naira">{amount}</span>,
       date: created_at,
       clickEvent: () => {
@@ -68,7 +68,15 @@ const showResponse = props => {
     </Red>
   );
 
-  return <JQDatatable tableId="pay" hover data={ppDataS} />;
+  return (
+    <JQDatatable
+      tableId="pay"
+      hover
+      data={ppDataS}
+      sortByColumn={4}
+      sortDir="DESC"
+    />
+  );
 };
 
 HistoryPayment.propTypes = {

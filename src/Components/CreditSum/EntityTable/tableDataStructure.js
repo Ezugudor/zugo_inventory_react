@@ -2,55 +2,44 @@ export const dataStruct = {
   columns: [
     {
       label: "Sn",
-      field: "sn",
-      sort: "asc",
-      width: 270
-    },
-    {
-      label: "Id",
       field: "id",
       sort: "asc",
       width: 270
     },
     {
-      label: "Customer Name",
+      label: "Trans",
+      field: "sku_code",
+      sort: "asc",
+      width: 270
+    },
+    {
+      label: "Customer",
       field: "customer",
       sort: "asc",
       width: 150
     },
     {
-      label: "Outlet Name",
+      label: "Outlet",
       field: "outlet",
       sort: "asc",
       width: 150
     },
+
+    // {
+    //   label: "Principal",
+    //   field: "amount",
+    //   sort: "asc",
+    //   width: 270
+    // },
     {
-      label: "Total Items",
-      field: "items",
-      sort: "asc",
-      width: 270
-    },
-    {
-      label: "Total Amount",
-      field: "amount",
-      sort: "asc",
-      width: 270
-    },
-    {
-      label: "Deposit",
-      field: "deposit",
-      sort: "asc",
-      width: 270
-    },
-    {
-      label: "Balance",
+      label: "Amount",
       field: "balance",
       sort: "asc",
       width: 270
     },
     {
-      label: "Payment Method",
-      field: "method",
+      label: "Status",
+      field: "status",
       sort: "asc",
       width: 270
     },
@@ -62,8 +51,8 @@ export const dataStruct = {
     },
 
     {
-      label: "Date Supplied",
-      field: "date",
+      label: "Date",
+      field: "created_at",
       sort: "asc",
       width: 270
     },
