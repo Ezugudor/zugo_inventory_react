@@ -6,7 +6,9 @@ import Style from "./EntityTable.module.css";
 import { JQDatatable } from "../../../plugins";
 import { White, Red } from "../../Utils/Buttons";
 import { ActionBtns } from "./ActionBtns";
+import { Money } from "../../../plugins";
 const moment = require("moment");
+
 export class Class extends Component {
   state = {
     showNewForm: false,
@@ -23,7 +25,7 @@ export const EntityTable = props => (
   </section>
 );
 const formatDate = rawDate => {
-  return moment(rawDate).format("DD-MM-YYYY");
+  return moment(rawDate).format("h:ma/Do-MMM-YY");
 };
 
 const getBusinessInfo = (id, businesses) => {
@@ -33,7 +35,7 @@ const getBusinessInfo = (id, businesses) => {
 };
 let Bizz;
 const showResponse = props => {
-  const ppData = dataStruct.rows.map((res, index) => {
+  const ppData = props.payments.map((res, index) => {
     const {
       sn,
       id,
@@ -41,22 +43,22 @@ const showResponse = props => {
       outlet,
       amount,
       payment_type,
-      desc,
+      payment_desc,
       receipt,
       author,
-      date
+      created_at
     } = res;
     const rowData = {
       sn,
       id,
-      customer,
-      outlet,
-      amount,
+      customer: customer || "-",
+      outlet: outlet || "-",
+      amount: <Money>{amount}</Money>,
       payment_type,
-      desc,
+      desc: payment_desc || "-",
       receipt,
       author,
-      date,
+      date: formatDate(created_at),
       action_btns: (
         <ActionBtns
           toggleDeleteEntity={props.toggleDeleteEntity}
@@ -64,27 +66,36 @@ const showResponse = props => {
         />
       ),
       clickEvent: () => {
-        props.toggleEditEntity();
+        // props.toggleEditEntity();
       }
     };
 
     return rowData;
-  });
+  }, this);
   const ppDataS = { ...dataStruct };
   ppDataS.rows = ppData;
   ppDataS.title = `<i class="${Style.tableTitleIcon} ion ion-ios-home"></i> Payment History`;
-  ppDataS.newBtn = (
-    <Red
-      className={Style.btn}
-      extStyle={Style.btn}
-      click={props.toggleCreateEntity}
-    >
-      <i className={`ion ion-android-add ${Style.controlIcon}`}></i>
-      <span className={Style.btnText}> Add Payment </span>
-    </Red>
-  );
+  ppDataS.newBtn = "";
+  // ppDataS.newBtn = (
+  //   <Red
+  //     className={Style.btn}
+  //     extStyle={Style.btn}
+  //     click={props.toggleCreateEntity}
+  //   >
+  //     <i className={`ion ion-android-add ${Style.controlIcon}`}></i>
+  //     <span className={Style.btnText}> Add Payment </span>
+  //   </Red>
+  // );
 
-  return <JQDatatable tableId="sales" hover data={ppDataS} />;
+  return (
+    <JQDatatable
+      tableId="sales"
+      hover
+      data={ppDataS}
+      sortByColumn={0}
+      sortDir="DESC"
+    />
+  );
 };
 
 EntityTable.propTypes = {

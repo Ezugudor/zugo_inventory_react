@@ -13,7 +13,7 @@ export class Deposit extends Component {
   constructor(props) {
     super();
   }
-  state = { defaultCustomer: true, showDeposit: "full" };
+  state = { defaultCustomer: true, showDeposit: "cash" };
   toggleReceiver(e) {
     e.preventDefault();
     this.setState(prevState => ({
@@ -97,6 +97,68 @@ export class Deposit extends Component {
                   name="amount"
                   setNewEntityDetail={this.props.setProcessEntityDetail}
                 />
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="col2">
+                <label>Payment Method</label>
+                <select
+                  class="form_field"
+                  onChange={e => {
+                    this.props.setProcessEntityDetail(e, "payment_method");
+                    this.toggleDeposit(e);
+                  }}
+                >
+                  <option value="cash">Cash Payment</option>
+                  <option value="transfer">Bank Transfer</option>
+                  <option value="cheque">Cheque</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="col2">
+                {this.state.showDeposit === "transfer" ? (
+                  <div>
+                    <label>Transaction ID</label>
+                    <input
+                      type="text"
+                      key={1}
+                      class="form_field"
+                      placeholder="Transaction ID"
+                      name="receipt_id"
+                      onChange={e =>
+                        this.props.setProcessEntityDetail(e, "receipt_id")
+                      }
+                    />
+                  </div>
+                ) : this.state.showDeposit === "cheque" ? (
+                  <div>
+                    <label>cheque ID</label>
+                    <input
+                      type="text"
+                      key={2}
+                      class="form_field"
+                      placeholder="cheque ID"
+                      name="receipt_id"
+                      onChange={e =>
+                        this.props.setProcessEntityDetail(e, "receipt_id")
+                      }
+                    />
+                  </div>
+                ) : (
+                  <div>
+                    <label>Cash Payment</label>
+                    <input
+                      type="text"
+                      key={3}
+                      class="form_field"
+                      placeholder="Cash Payment"
+                      disabled
+                    />
+                  </div>
+                )}
               </div>
             </div>
 

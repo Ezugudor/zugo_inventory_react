@@ -57,6 +57,8 @@ class Class extends Component {
     },
     processEntityDetails: {
       is_outlet: false,
+      receipt_id: null,
+      payment_method: "cash",
       amount: "",
       comment: ""
     }

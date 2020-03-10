@@ -12,8 +12,8 @@ import { EditEntity } from "./EditEntity";
 export const PaymentView = props => {
   return (
     <AdminLayout
-      pageName="Payment"
-      pageSubtitle="History"
+      pageName="Payments"
+      pageSubtitle="View history of payments"
       currentUser={props.currentUser}
       toggleGeneralReport={props.toggleGeneralReport}
     >
@@ -24,6 +24,7 @@ export const PaymentView = props => {
             toggleCreateEntity={props.toggleCreateEntity}
             toggleDeleteEntity={props.toggleDeleteEntity}
             toggleEditEntity={props.toggleEditEntity}
+            payments={props.payments}
           />
         </div>
         <NewEntity

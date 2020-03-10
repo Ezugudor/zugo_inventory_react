@@ -1,25 +1,19 @@
 export const dataStruct = {
   columns: [
     {
-      label: "Sn",
-      field: "sn",
-      sort: "asc",
-      width: 270
-    },
-    {
-      label: "Id",
+      label: "S/n",
       field: "id",
       sort: "asc",
       width: 270
     },
     {
-      label: "Customer Name",
+      label: "Customer",
       field: "customer",
       sort: "asc",
       width: 150
     },
     {
-      label: "Outlet Name",
+      label: "Outlet",
       field: "outlet",
       sort: "asc",
       width: 150
@@ -37,34 +31,21 @@ export const dataStruct = {
       width: 270
     },
     {
-      label: "Description",
-      field: "desc",
-      sort: "asc",
-      width: 270
-    },
-    {
-      label: "Receipt Id",
-      field: "receipt",
-      sort: "asc",
-      width: 270
-    },
-
-    {
       label: "Date Paid",
       field: "date",
       sort: "asc",
       width: 270
     },
     {
-      label: "Added By",
-      field: "author",
+      label: "Comment",
+      field: "desc",
       sort: "asc",
       width: 270
     },
 
     {
-      label: "Actions",
-      field: "action_btns",
+      label: "Added By",
+      field: "author",
       sort: "asc",
       width: 270
     }

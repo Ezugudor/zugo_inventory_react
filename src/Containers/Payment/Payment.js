@@ -3,6 +3,7 @@ import {
   registerBusiness,
   uploadLogo,
   approveBusiness,
+  updatePaymentsData,
   activateBusiness
 } from "../../store/actions";
 import { PaymentView } from "../../Components/Payment";
@@ -10,7 +11,8 @@ import React, { Component } from "react";
 import {
   getCurrentUser,
   getUploadedFileData,
-  getUploadStatus
+  getUploadStatus,
+  getCreditPayment
 } from "../../store/selectors";
 import { connect } from "react-redux";
 import {
@@ -41,28 +43,6 @@ class Class extends Component {
       logoUrl: "",
       formId: "edit-business"
     }
-    // prompts: {
-    //   approve: {
-    //     activating: {
-    //       title: "Approve Business",
-    //       visible: false
-    //     },
-    //     deactivating: {
-    //       title: "Disapprove Business",
-    //       visible: false
-    //     }
-    //   },
-    //   inactive: {
-    //     activating: {
-    //       title: "Activate this Business",
-    //       visible: false
-    //     },
-    //     deactivating: {
-    //       title: "Deactivate this Business",
-    //       visible: false
-    //     }
-    //   }
-    // }
   };
 
   /**
@@ -104,7 +84,7 @@ class Class extends Component {
   componentDidMount() {
     const { businessId, businessColor } = this.props;
     // themeMaker(businessColor);
-    // this.props.fetchBusinessByStatus();
+    this.props.updatePaymentsData();
   }
 
   popupTimer = props => {
@@ -461,6 +441,7 @@ class Class extends Component {
   render() {
     return (
       <PaymentView
+        payments={this.props.payments}
         currentUser={this.props.currentUser}
         currentEntity={this.state.currentEntity}
         createBusiness={this.createBusiness}
@@ -488,7 +469,7 @@ const mapStateToProps = state => ({
   // allBusiness: getAllBusinesses(state),
   // approvedBusiness: getApprovedBusinesses(state),
   // inactiveBusiness: getInactiveBusinesses(state),
-  // currentUser: getCurrentUser(state),
+  payments: getCreditPayment(state)
   // businessId: getBusinessId(state),
   // businessColor: getBusinessColor(state),
   // progress: getProgressIndicator(state),
@@ -503,6 +484,7 @@ export const Payment = connect(
     activateBusiness,
     filterByDate,
     registerBusiness,
-    uploadLogo
+    uploadLogo,
+    updatePaymentsData
   }
 )(Class);
