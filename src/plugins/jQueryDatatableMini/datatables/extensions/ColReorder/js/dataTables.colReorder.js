@@ -515,7 +515,7 @@
      */
     fnGetCurrentOrder: function() {
       return this.fnOrder();
-    }
+    },
     /**
      * Set the order of the columns, from the positions identified in the
      * ordering array given. Note that ColReorder takes a brute force approach
@@ -541,9 +541,7 @@
      *    $.fn.dataTable.ColReorder( '#example' ).fnOrder(
      *      $.fn.dataTable.ColReorder( '#example' ).fnOrder().reverse()
      *    );
-     */,
-
-    /**
+     */ /**
      * Get the current order of the columns, as an array. Note that the values
      * given in the array are unique identifiers for each column. Currently
      * these are the original ordering of the columns that was detected on
