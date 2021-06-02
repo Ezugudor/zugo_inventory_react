@@ -5,8 +5,8 @@ import { connect } from "react-redux";
 import { getProgressIndicator } from "../../store/selectors";
 class Class extends Component {
   state = {
-    username: "",
-    password: ""
+    username: "resume@ezugudor.com",
+    password: "resume"
   };
 
   handleInputChange = e => {
@@ -31,7 +31,7 @@ class Class extends Component {
         changeInput={this.handleInputChange}
         password={this.state.password}
         login={this.handleLogin}
-        email={this.state.email}
+        email={this.state.username}
         showLoading={this.props.progress}
       />
     );

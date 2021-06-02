@@ -18,9 +18,7 @@
   right: 0;
   width: 58%;
   height: 100vh;
-  background-image: url("/images/bg/1.jpg");
-  background-size: cover;
-  background-position: center;
+  background: url("/images/bg/stock2.jpeg") center/contain no-repeat;
 }
 .LoginBody {
   float: left;
